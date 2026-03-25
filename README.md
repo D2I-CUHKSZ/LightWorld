@@ -196,8 +196,8 @@ graph TD
 
 ```bash
 # 1) Access the Matrix
-git clone https://github.com/your-username/lightworld.git
-cd lightworld
+git clone https://github.com/JayLZhou/LightWorld.git
+cd LightWorld
 
 # 2) Install cybernetic implants
 pip install -r requirements.txt
@@ -254,4 +254,3 @@ python engine.py --mode matrix \
 <div align="center">
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:050505,100:00ffcc&height=120&section=footer" width="100%" />
 </div>
-
