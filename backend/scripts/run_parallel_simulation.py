@@ -750,6 +750,8 @@ def _enrich_action_context(
                 if post_info:
                     action_args['post_content'] = post_info.get('content', '')
                     action_args['post_author_name'] = post_info.get('author_name', '')
+                    if post_info.get('agent_id') is not None:
+                        action_args['post_author_agent_id'] = post_info.get('agent_id')
         
         # 转发帖子：补充原帖内容和作者
         elif action_type == 'REPOST':
@@ -766,6 +768,8 @@ def _enrich_action_context(
                     if original_info:
                         action_args['original_content'] = original_info.get('content', '')
                         action_args['original_author_name'] = original_info.get('author_name', '')
+                        if original_info.get('agent_id') is not None:
+                            action_args['original_author_agent_id'] = original_info.get('agent_id')
         
         # 引用帖子：补充原帖内容、作者和引用评论
         elif action_type == 'QUOTE_POST':
@@ -777,6 +781,8 @@ def _enrich_action_context(
                 if original_info:
                     action_args['original_content'] = original_info.get('content', '')
                     action_args['original_author_name'] = original_info.get('author_name', '')
+                    if original_info.get('agent_id') is not None:
+                        action_args['original_author_agent_id'] = original_info.get('agent_id')
             
             # 获取引用帖子的评论内容（quote_content）
             if new_post_id:
@@ -798,18 +804,24 @@ def _enrich_action_context(
                 row = cursor.fetchone()
                 if row:
                     followee_id = row[0]
-                    target_name = _get_user_name(cursor, followee_id, agent_names)
-                    if target_name:
-                        action_args['target_user_name'] = target_name
+                    target_info = _get_user_info(cursor, followee_id, agent_names)
+                    if target_info:
+                        if target_info.get('name'):
+                            action_args['target_user_name'] = target_info['name']
+                        if target_info.get('agent_id') is not None:
+                            action_args['target_agent_id'] = target_info['agent_id']
         
         # 屏蔽用户：补充被屏蔽用户的名称
         elif action_type == 'MUTE':
             # 从 action_args 中获取 user_id 或 target_id
             target_id = action_args.get('user_id') or action_args.get('target_id')
             if target_id:
-                target_name = _get_user_name(cursor, target_id, agent_names)
-                if target_name:
-                    action_args['target_user_name'] = target_name
+                target_info = _get_user_info(cursor, target_id, agent_names)
+                if target_info:
+                    if target_info.get('name'):
+                        action_args['target_user_name'] = target_info['name']
+                    if target_info.get('agent_id') is not None:
+                        action_args['target_agent_id'] = target_info['agent_id']
         
         # 点赞/踩评论：补充评论内容和作者
         elif action_type in ('LIKE_COMMENT', 'DISLIKE_COMMENT'):
@@ -819,6 +831,8 @@ def _enrich_action_context(
                 if comment_info:
                     action_args['comment_content'] = comment_info.get('content', '')
                     action_args['comment_author_name'] = comment_info.get('author_name', '')
+                    if comment_info.get('agent_id') is not None:
+                        action_args['comment_author_agent_id'] = comment_info.get('agent_id')
         
         # 发表评论：补充所评论的帖子信息
         elif action_type == 'CREATE_COMMENT':
@@ -828,6 +842,8 @@ def _enrich_action_context(
                 if post_info:
                     action_args['post_content'] = post_info.get('content', '')
                     action_args['post_author_name'] = post_info.get('author_name', '')
+                    if post_info.get('agent_id') is not None:
+                        action_args['post_author_agent_id'] = post_info.get('agent_id')
     
     except Exception as e:
         # 补充上下文失败不影响主流程
@@ -838,7 +854,7 @@ def _get_post_info(
     cursor,
     post_id: int,
     agent_names: Dict[int, str]
-) -> Optional[Dict[str, str]]:
+) -> Optional[Dict[str, Any]]:
     """
     获取帖子信息
     
@@ -874,17 +890,17 @@ def _get_post_info(
                 if user_row:
                     author_name = user_row[0] or user_row[1] or ''
             
-            return {'content': content, 'author_name': author_name}
+            return {'content': content, 'author_name': author_name, 'agent_id': agent_id}
     except Exception:
         pass
     return None
 
 
-def _get_user_name(
+def _get_user_info(
     cursor,
     user_id: int,
     agent_names: Dict[int, str]
-) -> Optional[str]:
+) -> Optional[Dict[str, Any]]:
     """
     获取用户名称
     
@@ -894,7 +910,7 @@ def _get_user_name(
         agent_names: agent_id -> agent_name 映射
         
     Returns:
-        用户名称，或 None
+        {"name": 用户名称, "agent_id": AgentID} 或 None
     """
     try:
         cursor.execute("""
@@ -907,19 +923,37 @@ def _get_user_name(
             user_name = row[2]
             
             # 优先使用 agent_names 中的名称
+            resolved_name = ''
             if agent_id is not None and agent_id in agent_names:
-                return agent_names[agent_id]
-            return name or user_name or ''
+                resolved_name = agent_names[agent_id]
+            else:
+                resolved_name = name or user_name or ''
+
+            return {
+                "name": resolved_name,
+                "agent_id": int(agent_id) if agent_id is not None else None,
+            }
     except Exception:
         pass
     return None
+
+
+def _get_user_name(
+    cursor,
+    user_id: int,
+    agent_names: Dict[int, str]
+) -> Optional[str]:
+    user = _get_user_info(cursor, user_id, agent_names)
+    if not user:
+        return None
+    return user.get("name") or None
 
 
 def _get_comment_info(
     cursor,
     comment_id: int,
     agent_names: Dict[int, str]
-) -> Optional[Dict[str, str]]:
+) -> Optional[Dict[str, Any]]:
     """
     获取评论信息
     
@@ -955,7 +989,7 @@ def _get_comment_info(
                 if user_row:
                     author_name = user_row[0] or user_row[1] or ''
             
-            return {'content': content, 'author_name': author_name}
+            return {'content': content, 'author_name': author_name, 'agent_id': agent_id}
     except Exception:
         pass
     return None

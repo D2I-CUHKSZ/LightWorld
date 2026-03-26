@@ -50,6 +50,11 @@ This repository is now backend-only.
 - Parallel simulation:
   - `cd backend && uv run mirofish-parallel-sim --config <path>`
 
+## Runtime Config Template
+
+- Full simulation config template (topology-aware + simplemem + light-mode):
+  - `backend/scripts/config_templates/simulation_config.full.template.json`
+
 ## Compatibility Wrappers
 
 - `backend/run.py` and `backend/scripts/run_local_pipeline.py` are kept as legacy wrappers.

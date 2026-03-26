@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import os
 import random
+import sqlite3
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Callable, Dict, List, Optional, Tuple
@@ -180,6 +181,374 @@ def _append_initial_action(
         initial_actions[agent] = action
 
 
+def _extract_platform_config(config: Dict[str, Any], platform_name: str) -> Dict[str, Any]:
+    raw = config.get(f"{platform_name}_config")
+    if isinstance(raw, dict):
+        return dict(raw)
+    return {}
+
+
+def _set_attr_if_exists(obj: Any, candidates: List[str], value: Any) -> Optional[str]:
+    for name in candidates:
+        if not hasattr(obj, name):
+            continue
+        try:
+            setattr(obj, name, value)
+            return name
+        except Exception:
+            continue
+    return None
+
+
+def _apply_platform_config_best_effort(env: Any, platform_cfg: Dict[str, Any], log_info: Callable[[str], None]) -> int:
+    if not platform_cfg:
+        return 0
+
+    roots = [env]
+    for attr in ["platform", "rec", "recommender", "recommendation", "recommendation_system"]:
+        try:
+            node = getattr(env, attr)
+            if node is not None:
+                roots.append(node)
+        except Exception:
+            continue
+
+    key_map = {
+        "recency_weight": ["recency_weight", "time_weight", "recency"],
+        "popularity_weight": ["popularity_weight", "hotness_weight", "pop_weight"],
+        "relevance_weight": ["relevance_weight", "semantic_weight", "interest_weight"],
+        "viral_threshold": ["viral_threshold", "virality_threshold", "viral_trigger_threshold"],
+        "echo_chamber_strength": ["echo_chamber_strength", "echo_strength", "homophily_strength"],
+    }
+
+    applied = 0
+    for cfg_key, attr_candidates in key_map.items():
+        if cfg_key not in platform_cfg:
+            continue
+        value = platform_cfg[cfg_key]
+        for root in roots:
+            attr = _set_attr_if_exists(root, attr_candidates, value)
+            if attr:
+                applied += 1
+                break
+
+    # 若对象支持配置方法，尝试一次方法调用
+    method_candidates = [
+        ("set_recommendation_weights", {
+            "recency_weight": platform_cfg.get("recency_weight"),
+            "popularity_weight": platform_cfg.get("popularity_weight"),
+            "relevance_weight": platform_cfg.get("relevance_weight"),
+        }),
+        ("update_recommendation_config", platform_cfg),
+        ("set_recommendation_config", platform_cfg),
+    ]
+    for root in roots:
+        for method_name, payload in method_candidates:
+            method = getattr(root, method_name, None)
+            if not callable(method):
+                continue
+            try:
+                if isinstance(payload, dict) and method_name == "set_recommendation_weights":
+                    kwargs = {k: v for k, v in payload.items() if v is not None}
+                    if kwargs:
+                        method(**kwargs)
+                        applied += len(kwargs)
+                else:
+                    method(payload)
+                    applied += len(platform_cfg)
+                break
+            except Exception:
+                continue
+
+    if applied > 0:
+        log_info(f"已接通平台配置（best-effort）: applied={applied}")
+    else:
+        log_info("平台配置未能映射到OASIS对象属性，继续使用平台默认参数")
+    return applied
+
+
+def _create_env(
+    spec: PlatformSpec,
+    agent_graph: Any,
+    db_path: str,
+    platform_cfg: Dict[str, Any],
+    log_info: Callable[[str], None],
+) -> Any:
+    kwargs = {
+        "agent_graph": agent_graph,
+        "platform": spec.oasis_platform,
+        "database_path": db_path,
+        "semaphore": 30,
+    }
+
+    env = None
+    if platform_cfg:
+        try:
+            env = oasis.make(**kwargs, platform_config=platform_cfg)
+            log_info("已通过 oasis.make(platform_config=...) 传入平台配置")
+        except TypeError:
+            env = oasis.make(**kwargs)
+            _apply_platform_config_best_effort(env, platform_cfg, log_info)
+        except Exception as e:
+            log_info(f"通过 make 注入平台配置失败，回退默认创建: {e}")
+            env = oasis.make(**kwargs)
+            _apply_platform_config_best_effort(env, platform_cfg, log_info)
+    else:
+        env = oasis.make(**kwargs)
+    return env
+
+
+def _load_user_id_mapping(db_path: str) -> Tuple[Dict[int, int], Dict[int, int]]:
+    agent_to_user: Dict[int, int] = {}
+    user_to_agent: Dict[int, int] = {}
+    if not os.path.exists(db_path):
+        return agent_to_user, user_to_agent
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+        cursor.execute("SELECT agent_id, user_id FROM user")
+        for aid, uid in cursor.fetchall():
+            if aid is None or uid is None:
+                continue
+            agent_to_user[int(aid)] = int(uid)
+            user_to_agent[int(uid)] = int(aid)
+        conn.close()
+    except Exception:
+        pass
+    return agent_to_user, user_to_agent
+
+
+def _detect_follow_columns(cursor: Any) -> Tuple[Optional[str], Optional[str], List[str]]:
+    follower_col = None
+    followee_col = None
+    columns: List[str] = []
+    try:
+        cursor.execute("PRAGMA table_info(follow)")
+        rows = cursor.fetchall()
+    except Exception:
+        return follower_col, followee_col, columns
+
+    for row in rows:
+        if len(row) < 2:
+            continue
+        name = str(row[1])
+        columns.append(name)
+
+    lower_to_raw = {c.lower(): c for c in columns}
+    for key, raw in lower_to_raw.items():
+        if "followee" in key or "target_user" in key:
+            followee_col = raw
+            break
+
+    follower_candidates = [
+        "follower_id",
+        "user_id",
+        "source_user_id",
+        "source_id",
+        "from_user_id",
+    ]
+    for cand in follower_candidates:
+        if cand in lower_to_raw:
+            follower_col = lower_to_raw[cand]
+            break
+
+    return follower_col, followee_col, columns
+
+
+def _get_existing_follow_pairs(db_path: str, user_to_agent: Dict[int, int]) -> List[Tuple[int, int]]:
+    if not os.path.exists(db_path):
+        return []
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+        follower_col, followee_col, _ = _detect_follow_columns(cursor)
+        if not follower_col or not followee_col:
+            conn.close()
+            return []
+
+        cursor.execute(f"SELECT {follower_col}, {followee_col} FROM follow")
+        rows = cursor.fetchall()
+        conn.close()
+
+        pairs: List[Tuple[int, int]] = []
+        for src_uid, dst_uid in rows:
+            if src_uid is None or dst_uid is None:
+                continue
+            src = user_to_agent.get(int(src_uid))
+            dst = user_to_agent.get(int(dst_uid))
+            if src is None or dst is None or src == dst:
+                continue
+            pairs.append((src, dst))
+        return pairs
+    except Exception:
+        return []
+
+
+def _insert_follow_pairs_into_db(
+    db_path: str,
+    pairs: List[Tuple[int, int]],
+    agent_to_user: Dict[int, int],
+) -> List[Tuple[int, int]]:
+    if not pairs or not os.path.exists(db_path):
+        return []
+
+    inserted: List[Tuple[int, int]] = []
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+        follower_col, followee_col, columns = _detect_follow_columns(cursor)
+        if not follower_col or not followee_col:
+            conn.close()
+            return []
+
+        existing = set()
+        try:
+            cursor.execute(f"SELECT {follower_col}, {followee_col} FROM follow")
+            for src_uid, dst_uid in cursor.fetchall():
+                if src_uid is None or dst_uid is None:
+                    continue
+                existing.add((int(src_uid), int(dst_uid)))
+        except Exception:
+            pass
+
+        base_cols = [follower_col, followee_col]
+        created_col = next((c for c in columns if c.lower() == "created_at"), None)
+        updated_col = next((c for c in columns if c.lower() == "updated_at"), None)
+        if created_col:
+            base_cols.append(created_col)
+        if updated_col and updated_col != created_col:
+            base_cols.append(updated_col)
+
+        placeholders = ",".join(["?"] * len(base_cols))
+        col_text = ",".join(base_cols)
+        now = datetime.now().isoformat()
+        sql = f"INSERT OR IGNORE INTO follow ({col_text}) VALUES ({placeholders})"
+
+        for src_aid, dst_aid in pairs:
+            src_uid = agent_to_user.get(int(src_aid))
+            dst_uid = agent_to_user.get(int(dst_aid))
+            if src_uid is None or dst_uid is None or src_uid == dst_uid:
+                continue
+            if (src_uid, dst_uid) in existing:
+                continue
+            values: List[Any] = [src_uid, dst_uid]
+            if created_col:
+                values.append(now)
+            if updated_col and updated_col != created_col:
+                values.append(now)
+            cursor.execute(sql, values)
+            if cursor.rowcount and cursor.rowcount > 0:
+                inserted.append((int(src_aid), int(dst_aid)))
+                existing.add((src_uid, dst_uid))
+
+        conn.commit()
+        conn.close()
+    except Exception:
+        return []
+
+    return inserted
+
+
+async def _inject_follow_pairs_via_manual_action(
+    env: Any,
+    pairs: List[Tuple[int, int]],
+    agent_names: Dict[int, str],
+    agent_to_user: Dict[int, int],
+    max_pairs: int = 24,
+) -> int:
+    if not pairs:
+        return 0
+
+    count = 0
+    for src_aid, dst_aid in pairs[:max_pairs]:
+        try:
+            src_agent = env.agent_graph.get_agent(src_aid)
+        except Exception:
+            continue
+
+        target_name = agent_names.get(dst_aid, f"Agent_{dst_aid}")
+        target_uid = agent_to_user.get(dst_aid)
+        arg_candidates = [
+            {"target_user_name": target_name},
+            {"user_name": target_name},
+            {"username": target_name},
+        ]
+        if target_uid is not None:
+            arg_candidates.extend([
+                {"target_user_id": target_uid},
+                {"user_id": target_uid},
+                {"followee_id": target_uid},
+            ])
+
+        done = False
+        for action_args in arg_candidates:
+            try:
+                await env.step({
+                    src_agent: ManualAction(
+                        action_type=ActionType.FOLLOW,
+                        action_args=action_args,
+                    )
+                })
+                done = True
+                break
+            except Exception:
+                continue
+
+        if done:
+            count += 1
+    return count
+
+
+async def _sync_social_links_from_topology(
+    env: Any,
+    db_path: str,
+    topology_runtime: Optional[TopologyAwareRuntime],
+    agent_names: Dict[int, str],
+    log_info: Callable[[str], None],
+    max_per_agent: Optional[int] = None,
+    max_total: Optional[int] = None,
+    manual_fallback_max_pairs: int = 24,
+) -> int:
+    if not topology_runtime or not topology_runtime.enabled:
+        return 0
+
+    agent_to_user, user_to_agent = _load_user_id_mapping(db_path)
+    existing_pairs = _get_existing_follow_pairs(db_path, user_to_agent)
+    if existing_pairs:
+        topology_runtime.register_existing_follow_pairs(existing_pairs)
+
+    follow_plan = topology_runtime.compile_initial_follow_pairs(
+        max_per_agent=max_per_agent,
+        max_total=max_total,
+    )
+    if not follow_plan:
+        return 0
+
+    plan_pairs = [(src, dst) for src, dst, _, _ in follow_plan]
+    inserted = _insert_follow_pairs_into_db(db_path, plan_pairs, agent_to_user)
+    if inserted:
+        topology_runtime.register_existing_follow_pairs(inserted)
+        log_info(f"已注入初始社交关系: db_follow_edges={len(inserted)}")
+        return len(inserted)
+
+    # 某些平台版本可能不允许直接写表，回退到 manual FOLLOW 动作
+    manual_injected = await _inject_follow_pairs_via_manual_action(
+        env=env,
+        pairs=plan_pairs,
+        agent_names=agent_names,
+        agent_to_user=agent_to_user,
+        max_pairs=manual_fallback_max_pairs,
+    )
+    if manual_injected > 0:
+        # 重新读取数据库中的 follow，转成 known pairs
+        _, user_to_agent_after = _load_user_id_mapping(db_path)
+        refreshed_pairs = _get_existing_follow_pairs(db_path, user_to_agent_after)
+        if refreshed_pairs:
+            topology_runtime.register_existing_follow_pairs(refreshed_pairs)
+        log_info(f"已通过动作回退注入社交关系: follow_actions={manual_injected}")
+    return manual_injected
+
+
 async def run_platform_simulation(
     spec: PlatformSpec,
     config: Dict[str, Any],
@@ -235,21 +604,41 @@ async def run_platform_simulation(
     if os.path.exists(db_path):
         os.remove(db_path)
 
-    result.env = oasis.make(
+    platform_cfg = _extract_platform_config(config, spec.name)
+    result.env = _create_env(
+        spec=spec,
         agent_graph=result.agent_graph,
-        platform=spec.oasis_platform,
-        database_path=db_path,
-        semaphore=30,
+        db_path=db_path,
+        platform_cfg=platform_cfg,
+        log_info=log_info,
     )
 
     await result.env.reset()
     log_info("环境已启动")
+    if platform_cfg:
+        _apply_platform_config_best_effort(result.env, platform_cfg, log_info)
+
+    # 启动前同步一次“图谱关系 -> 初始社交关系”
+    await _sync_social_links_from_topology(
+        env=result.env,
+        db_path=db_path,
+        topology_runtime=topology_runtime,
+        agent_names=agent_names,
+        log_info=log_info,
+    )
 
     if action_logger:
         action_logger.log_simulation_start(config)
 
     total_actions = 0
     last_rowid = 0
+    topo_cfg = config.get("topology_aware", {}) or {}
+    social_link_sync_enabled = bool(topo_cfg.get("social_link_sync_enabled", True))
+    social_link_sync_interval = max(1, int(topo_cfg.get("social_link_sync_interval", 6)))
+    social_link_sync_max_total = max(
+        4,
+        int(topo_cfg.get("social_link_sync_max_total", max(8, len(agent_names) // 4)))
+    )
 
     event_config = config.get("event_config", {})
     initial_posts = event_config.get("initial_posts", [])
@@ -358,6 +747,24 @@ async def run_platform_simulation(
                 )
                 total_actions += 1
                 round_action_count += 1
+
+        topology_runtime.ingest_round_actions(
+            round_num=round_num + 1,
+            actions=actual_actions,
+        )
+
+        if social_link_sync_enabled and ((round_num + 1) % social_link_sync_interval == 0):
+            # 用最新拓扑结果增量同步弱曝光关系，让 topology-aware 结果进入平台曝光层
+            await _sync_social_links_from_topology(
+                env=result.env,
+                db_path=db_path,
+                topology_runtime=topology_runtime,
+                agent_names=agent_names,
+                log_info=log_info,
+                max_per_agent=1,
+                max_total=social_link_sync_max_total,
+                manual_fallback_max_pairs=8,
+            )
 
         simplemem_runtime.ingest_round_actions(
             round_num=round_num + 1,

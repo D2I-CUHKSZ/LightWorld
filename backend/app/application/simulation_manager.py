@@ -301,6 +301,56 @@ class SimulationManager:
                 self._save_simulation_state(state)
                 return state
 
+            # ========== 额外步骤: 保存图谱实体快照（供runtime编译初始社交关系） ==========
+            entity_graph_edge_count = 0
+            entity_graph_file = os.path.join(sim_dir, "entity_graph_snapshot.json")
+            try:
+                edge_seen = set()
+                graph_edges: List[Dict[str, Any]] = []
+                for entity in filtered.entities:
+                    for edge in (entity.related_edges or []):
+                        if not isinstance(edge, dict):
+                            continue
+                        source_uuid = str(edge.get("source_node_uuid", "") or "")
+                        target_uuid = str(edge.get("target_node_uuid", "") or "")
+                        edge_name = str(edge.get("name", "") or "")
+                        fact = str(edge.get("fact", "") or "")
+                        uuid = str(edge.get("uuid", "") or "")
+                        key = (
+                            uuid
+                            or f"{source_uuid}->{target_uuid}|{edge_name}|{fact[:200]}"
+                        )
+                        if key in edge_seen:
+                            continue
+                        edge_seen.add(key)
+                        graph_edges.append({
+                            "uuid": uuid,
+                            "name": edge_name,
+                            "fact": fact,
+                            "source_node_uuid": source_uuid,
+                            "target_node_uuid": target_uuid,
+                            "attributes": edge.get("attributes", {}) or {},
+                        })
+
+                entity_graph_edge_count = len(graph_edges)
+                graph_payload = {
+                    "simulation_id": simulation_id,
+                    "graph_id": state.graph_id,
+                    "generated_at": datetime.now().isoformat(),
+                    "entity_count": len(filtered.entities),
+                    "edge_count": entity_graph_edge_count,
+                    "entities": [e.to_dict() for e in filtered.entities],
+                    "edges": graph_edges,
+                }
+                with open(entity_graph_file, "w", encoding="utf-8") as f:
+                    json.dump(graph_payload, f, ensure_ascii=False, indent=2)
+                logger.info(
+                    f"已保存图谱实体快照: {entity_graph_file}, "
+                    f"entities={len(filtered.entities)}, edges={entity_graph_edge_count}"
+                )
+            except Exception as e:
+                logger.warning(f"保存图谱实体快照失败，继续后续流程: {e}")
+
             # ========== 额外步骤: 为每个实体提取语义 prompts（LightRAG 风格） ==========
             entity_prompts: List[Dict[str, Any]] = []
             entity_prompts_file = os.path.join(sim_dir, "entity_prompts.json")
@@ -439,6 +489,10 @@ class SimulationManager:
             if entity_prompts:
                 config_data["entity_prompts_file"] = "entity_prompts.json"
                 config_data["entity_prompts_count"] = len(entity_prompts)
+            if os.path.exists(entity_graph_file):
+                config_data["entity_graph_file"] = "entity_graph_snapshot.json"
+                config_data["entity_graph_entity_count"] = len(filtered.entities)
+                config_data["entity_graph_edge_count"] = entity_graph_edge_count
             with open(config_path, 'w', encoding='utf-8') as f:
                 json.dump(config_data, f, ensure_ascii=False, indent=2)
             

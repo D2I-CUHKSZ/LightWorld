@@ -143,6 +143,70 @@ class PlatformConfig:
 
 
 @dataclass
+class TopologyAwareConfig:
+    """Topology-aware 运行配置（完整默认值）"""
+    enabled: bool = True
+    coordination_enabled: bool = True
+    differentiation_enabled: bool = True
+
+    similarity_threshold: float = 0.9
+    top_pairs_ratio: float = 0.03
+    min_unit_size: int = 2
+    extra_member_prob: float = 0.12
+    importance_alpha: float = 0.7
+
+    sentiment_diff_threshold: float = 0.35
+    opinion_threshold: float = 0.5
+    stubbornness_threshold: float = 0.5
+    influence_threshold: float = 0.5
+
+    ppr_alpha: float = 0.85
+    ppr_eps: float = 1e-4
+
+    semantic_threshold: float = 0.1
+    keyword_jaccard_threshold: float = 0.12
+    keyword_overlap_min: int = 1
+
+    # 图谱关系先验注入
+    graph_prior_similarity_boost: float = 0.35
+    graph_prior_extra_ratio: float = 0.25
+
+    # 交互驱动动态拓扑更新
+    dynamic_update_enabled: bool = True
+    dynamic_update_interval: int = 4
+    dynamic_update_min_events: int = 8
+    dynamic_interaction_min_weight: float = 0.25
+    dynamic_neighbors_per_agent: int = 6
+
+    # 初始社交关系注入
+    initial_follow_max_per_agent: int = 3
+    initial_follow_max_total: int = 0
+
+    # 运行中社交关系增量同步
+    social_link_sync_enabled: bool = True
+    social_link_sync_interval: int = 6
+    social_link_sync_max_total: int = 20
+
+
+@dataclass
+class SimpleMemConfig:
+    """SimpleMem 轻量记忆配置（完整默认值）"""
+    enabled: bool = True
+    max_units_per_agent: int = 120
+    retrieval_topk: int = 5
+    merge_jaccard_threshold: float = 0.45
+    max_injected_chars: int = 1200
+    recency_decay: float = 0.08
+
+
+@dataclass
+class LightModeConfig:
+    """Light mode 配置（可按需开启）"""
+    enabled: bool = False
+    agent_ratio: float = 0.6
+
+
+@dataclass
 class SimulationParameters:
     """完整的模拟参数配置"""
     # 基础信息
@@ -163,6 +227,11 @@ class SimulationParameters:
     # 平台配置
     twitter_config: Optional[PlatformConfig] = None
     reddit_config: Optional[PlatformConfig] = None
+
+    # runtime 策略配置
+    topology_aware: TopologyAwareConfig = field(default_factory=TopologyAwareConfig)
+    simplemem: SimpleMemConfig = field(default_factory=SimpleMemConfig)
+    light_mode: LightModeConfig = field(default_factory=LightModeConfig)
     
     # LLM配置
     llm_model: str = ""
@@ -185,6 +254,9 @@ class SimulationParameters:
             "event_config": asdict(self.event_config),
             "twitter_config": asdict(self.twitter_config) if self.twitter_config else None,
             "reddit_config": asdict(self.reddit_config) if self.reddit_config else None,
+            "topology_aware": asdict(self.topology_aware),
+            "simplemem": asdict(self.simplemem),
+            "light_mode": asdict(self.light_mode),
             "llm_model": self.llm_model,
             "llm_base_url": self.llm_base_url,
             "generated_at": self.generated_at,
@@ -984,4 +1056,3 @@ class SimulationConfigGenerator:
                 "influence_weight": 1.0
             }
     
-

@@ -77,6 +77,21 @@ class TopologyAwareRuntime:
             1.0, max(0.0, _safe_float(topo_cfg.get("keyword_jaccard_threshold", 0.12), 0.12))
         )
         self.keyword_overlap_min = max(0, int(topo_cfg.get("keyword_overlap_min", 1)))
+        self.graph_prior_similarity_boost = min(
+            0.8, max(0.0, _safe_float(topo_cfg.get("graph_prior_similarity_boost", 0.35), 0.35))
+        )
+        self.graph_prior_extra_ratio = min(
+            1.0, max(0.0, _safe_float(topo_cfg.get("graph_prior_extra_ratio", 0.25), 0.25))
+        )
+        self.dynamic_update_enabled = bool(topo_cfg.get("dynamic_update_enabled", True))
+        self.dynamic_update_interval = max(1, int(topo_cfg.get("dynamic_update_interval", 4)))
+        self.dynamic_update_min_events = max(1, int(topo_cfg.get("dynamic_update_min_events", 6)))
+        self.dynamic_interaction_min_weight = max(
+            0.05, _safe_float(topo_cfg.get("dynamic_interaction_min_weight", 0.25), 0.25)
+        )
+        self.dynamic_neighbors_per_agent = max(1, int(topo_cfg.get("dynamic_neighbors_per_agent", 6)))
+        self.initial_follow_max_per_agent = max(1, int(topo_cfg.get("initial_follow_max_per_agent", 3)))
+        self.initial_follow_max_total = max(0, int(topo_cfg.get("initial_follow_max_total", 0)))
 
         self.light_enabled = bool(light_cfg.get("enabled", False))
         self.light_agent_ratio = min(1.0, max(0.1, _safe_float(light_cfg.get("agent_ratio", 0.6), 0.6)))
@@ -102,6 +117,13 @@ class TopologyAwareRuntime:
         self.agent_entity_name: Dict[int, str] = {}
         self.agent_semantic_keywords: Dict[int, set] = {}
         self.agent_semantic_text: Dict[int, str] = {}
+        self.agent_id_by_name: Dict[str, int] = {}
+        self.graph_pair_strength: Dict[Tuple[int, int], float] = {}
+        self.graph_prior_pairs: set = set()
+        self.graph_prior_directed: Dict[Tuple[int, int], float] = {}
+        self.known_follow_pairs: set = set()
+        self.dynamic_interaction_neighbors: Dict[int, Dict[int, float]] = defaultdict(dict)
+        self._dynamic_events_since_refresh = 0
 
         self.units: List[List[int]] = []
         self.unit_id_by_agent: Dict[int, int] = {}
@@ -112,6 +134,8 @@ class TopologyAwareRuntime:
     def _build_runtime(self):
         self._index_agent_configs()
         self.profile_by_agent_id = self._load_platform_profiles()
+        self._rebuild_agent_name_index()
+        self._load_graph_prior()
         self._load_entity_prompts()
         self._build_structure_vectors()
         self._build_similarity_graph()
@@ -137,6 +161,32 @@ class TopologyAwareRuntime:
             self.agent_cfg_by_id[aid] = item
             self.agent_entity_uuid[aid] = str(item.get("entity_uuid", "") or "")
             self.agent_entity_name[aid] = str(item.get("entity_name", "") or "")
+
+    def _normalize_agent_name(self, value: Any) -> str:
+        if value is None:
+            return ""
+        text = str(value).strip().lower()
+        text = re.sub(r"\s+", " ", text)
+        return text
+
+    def _rebuild_agent_name_index(self):
+        self.agent_id_by_name = {}
+        for aid, cfg in self.agent_cfg_by_id.items():
+            candidates = [
+                self.agent_entity_name.get(aid, ""),
+                cfg.get("entity_name", ""),
+                cfg.get("name", ""),
+            ]
+            profile = self.profile_by_agent_id.get(aid, {}) or {}
+            candidates.extend([
+                profile.get("name", ""),
+                profile.get("user_name", ""),
+                profile.get("username", ""),
+            ])
+            for raw in candidates:
+                key = self._normalize_agent_name(raw)
+                if key and key not in self.agent_id_by_name:
+                    self.agent_id_by_name[key] = aid
 
     def _load_platform_profiles(self) -> Dict[int, Dict[str, Any]]:
         data: Dict[int, Dict[str, Any]] = {}
@@ -229,6 +279,102 @@ class TopologyAwareRuntime:
 
             self.agent_semantic_keywords[aid] = keywords
             self.agent_semantic_text[aid] = semantic_text
+
+    def _edge_prior_strength(self, edge_name: str, fact: str) -> float:
+        text = f"{edge_name} {fact}".lower()
+        score = 0.45
+
+        strong_pos = [
+            "follow", "ally", "alliance", "support", "cooperate", "collaborate",
+            "partner", "friend", "trust", "endorse", "retweet", "repost", "quote",
+            "关注", "支持", "合作", "联盟", "信任", "转发", "引用",
+        ]
+        weak_pos = [
+            "mention", "related", "associate", "connect", "work with",
+            "提及", "关联", "联系",
+        ]
+        neg = [
+            "oppose", "conflict", "attack", "criticize", "dispute", "block", "mute",
+            "反对", "冲突", "攻击", "批评", "屏蔽",
+        ]
+
+        if any(k in text for k in strong_pos):
+            score += 0.35
+        elif any(k in text for k in weak_pos):
+            score += 0.20
+
+        if any(k in text for k in neg):
+            score -= 0.30
+
+        return min(1.0, max(0.05, score))
+
+    def _load_graph_prior(self):
+        """
+        读取 prepare 阶段保存的图谱快照，编译 entity->agent 的关系先验。
+        产物：
+        - graph_prior_directed: 有向关系及强度（用于初始follow）
+        - graph_prior_pairs / graph_pair_strength: 无向关系（用于相似图先验）
+        """
+        self.graph_pair_strength = {}
+        self.graph_prior_pairs = set()
+        self.graph_prior_directed = {}
+
+        graph_file = self.config.get("entity_graph_file", "entity_graph_snapshot.json")
+        path = os.path.join(self.simulation_dir, graph_file)
+        if not os.path.exists(path):
+            return
+
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                payload = json.load(f)
+        except Exception as e:
+            self.log(f"读取图谱快照失败: {e}")
+            return
+
+        edges = payload.get("edges", []) if isinstance(payload, dict) else []
+        if not isinstance(edges, list):
+            return
+
+        aid_by_uuid: Dict[str, int] = {}
+        for aid, uuid in self.agent_entity_uuid.items():
+            key = str(uuid or "").strip().lower()
+            if key:
+                aid_by_uuid[key] = aid
+
+        mapped = 0
+        for edge in edges:
+            if not isinstance(edge, dict):
+                continue
+            src_uuid = str(edge.get("source_node_uuid", "") or "").strip().lower()
+            dst_uuid = str(edge.get("target_node_uuid", "") or "").strip().lower()
+            if not src_uuid or not dst_uuid:
+                continue
+
+            src_aid = aid_by_uuid.get(src_uuid)
+            dst_aid = aid_by_uuid.get(dst_uuid)
+            if src_aid is None or dst_aid is None or src_aid == dst_aid:
+                continue
+
+            strength = self._edge_prior_strength(
+                str(edge.get("name", "") or ""),
+                str(edge.get("fact", "") or ""),
+            )
+
+            directed_key = (src_aid, dst_aid)
+            old_directed = self.graph_prior_directed.get(directed_key, 0.0)
+            self.graph_prior_directed[directed_key] = max(old_directed, strength)
+
+            pair = (min(src_aid, dst_aid), max(src_aid, dst_aid))
+            old_pair = self.graph_pair_strength.get(pair, 0.0)
+            self.graph_pair_strength[pair] = max(old_pair, strength)
+            self.graph_prior_pairs.add(pair)
+            mapped += 1
+
+        if mapped > 0:
+            self.log(
+                f"已加载图谱关系先验: directed={len(self.graph_prior_directed)}, "
+                f"undirected={len(self.graph_prior_pairs)}"
+            )
 
     def _build_importance_scores(self):
         for agent_id, cfg in self.agent_cfg_by_id.items():
@@ -377,6 +523,7 @@ class TopologyAwareRuntime:
 
         records: List[Tuple[int, int, float]] = []
         backup_records: List[Tuple[int, int, float]] = []
+        pair_dist: Dict[Tuple[int, int], float] = {}
         for idx, aid in enumerate(agent_ids):
             vec_i = self.structure_vec.get(aid, [])
             for bid in agent_ids[idx + 1:]:
@@ -391,8 +538,17 @@ class TopologyAwareRuntime:
                 if overlap_count > 0:
                     # 关键词重叠单独加权，确保关键词对候选对排序有实质影响
                     dist *= (1.0 - min(0.35, 0.2 + 0.15 * overlap_jaccard))
+
+                # 图谱关系先验：若实体关系在语义图中已存在，则提升入图概率
+                pair = (min(aid, bid), max(aid, bid))
+                prior_strength = self.graph_pair_strength.get(pair, 0.0)
+                if prior_strength > 0.0:
+                    boost = self.graph_prior_similarity_boost * min(1.0, prior_strength)
+                    dist *= max(0.15, 1.0 - boost)
+
                 pair = (aid, bid, dist)
                 backup_records.append(pair)
+                pair_dist[(min(aid, bid), max(aid, bid))] = dist
                 if _cosine_similarity(vec_i, vec_j) >= self.similarity_threshold:
                     records.append(pair)
 
@@ -402,7 +558,23 @@ class TopologyAwareRuntime:
 
         records.sort(key=lambda x: x[2])
         top_k = max(1, int(math.ceil(len(records) * self.top_pairs_ratio)))
-        selected = records[:top_k]
+        selected = list(records[:top_k])
+
+        # 图谱先验补边：在 top-k 基础上追加少量图谱关系边，避免被纯向量相似完全淹没
+        if self.graph_prior_pairs and self.graph_prior_extra_ratio > 0.0:
+            extra_k = max(1, int(math.ceil(top_k * self.graph_prior_extra_ratio)))
+            existing = {(min(a, b), max(a, b)) for a, b, _ in selected}
+            prior_candidates: List[Tuple[int, int, float]] = []
+            for pair in self.graph_prior_pairs:
+                if pair in existing:
+                    continue
+                a, b = pair
+                if a not in self.synthetic_adj or b not in self.synthetic_adj:
+                    continue
+                dist = pair_dist.get(pair, 1e9)
+                prior_candidates.append((a, b, dist))
+            prior_candidates.sort(key=lambda x: x[2])
+            selected.extend(prior_candidates[:extra_k])
 
         self.top_pair_records = selected
         self.top_pairs = set((min(a, b), max(a, b)) for a, b, _ in selected)
@@ -716,6 +888,214 @@ class TopologyAwareRuntime:
             selected = self._weighted_sample_without_replacement(selected, weights, target_count)
 
         return selected
+
+    def register_existing_follow_pairs(self, pairs: List[Tuple[int, int]]):
+        for src, dst in pairs:
+            if src == dst:
+                continue
+            self.known_follow_pairs.add((int(src), int(dst)))
+
+    def compile_initial_follow_pairs(
+        self,
+        max_per_agent: Optional[int] = None,
+        max_total: Optional[int] = None,
+    ) -> List[Tuple[int, int, float, str]]:
+        """
+        编译初始 follow 建议边（有向）：
+        1) 优先使用语义图谱中的有向关系
+        2) 用 synthetic_adj + 重要性做补充弱曝光边
+        """
+        per_agent_limit = self.initial_follow_max_per_agent if max_per_agent is None else max(1, int(max_per_agent))
+        total_limit = self.initial_follow_max_total if max_total is None else max(0, int(max_total))
+        if total_limit <= 0:
+            total_limit = max(12, len(self.agent_cfg_by_id) * per_agent_limit)
+
+        by_src: Dict[int, List[Tuple[int, float, str]]] = defaultdict(list)
+
+        for (src, dst), rel_strength in self.graph_prior_directed.items():
+            if src == dst:
+                continue
+            if (src, dst) in self.known_follow_pairs:
+                continue
+            dst_imp = self.importance_scaled.get(dst, 1.0)
+            score = 0.72 * rel_strength + 0.28 * min(2.0, dst_imp) / 2.0
+            by_src[src].append((dst, score, "graph_prior"))
+
+        for src, nbrs in self.synthetic_adj.items():
+            if not nbrs:
+                continue
+            for dst in nbrs:
+                if src == dst:
+                    continue
+                if (src, dst) in self.known_follow_pairs:
+                    continue
+                ppr = self.ppr_scores.get(src, {}).get(dst, 0.0)
+                dst_imp = self.importance_scaled.get(dst, 1.0)
+                score = 0.5 * min(1.0, ppr) + 0.3 * min(1.0, dst_imp / 2.0) + 0.2
+                by_src[src].append((dst, score, "topology_weak_exposure"))
+
+        selected: List[Tuple[int, int, float, str]] = []
+        for src, candidates in by_src.items():
+            # 去重并保留更高分
+            best_by_dst: Dict[int, Tuple[float, str]] = {}
+            for dst, score, reason in candidates:
+                prev = best_by_dst.get(dst)
+                if prev is None or score > prev[0]:
+                    best_by_dst[dst] = (score, reason)
+            ranked = sorted(best_by_dst.items(), key=lambda x: x[1][0], reverse=True)
+            for dst, (score, reason) in ranked[:per_agent_limit]:
+                selected.append((src, dst, score, reason))
+
+        selected.sort(key=lambda x: x[2], reverse=True)
+        selected = selected[:total_limit]
+        return selected
+
+    def _interaction_weight(self, action_type: str) -> float:
+        action = str(action_type or "").upper()
+        weight_map = {
+            "FOLLOW": 1.00,
+            "REPOST": 0.85,
+            "QUOTE_POST": 0.80,
+            "CREATE_COMMENT": 0.70,
+            "LIKE_POST": 0.55,
+            "LIKE_COMMENT": 0.50,
+            "SEARCH_USER": 0.35,
+            "DISLIKE_POST": -0.30,
+            "DISLIKE_COMMENT": -0.25,
+            "MUTE": -0.80,
+        }
+        return weight_map.get(action, 0.0)
+
+    def _extract_target_agent_ids(self, action_args: Dict[str, Any]) -> List[int]:
+        if not isinstance(action_args, dict):
+            return []
+
+        ids: List[int] = []
+        id_keys = [
+            "target_agent_id",
+            "post_author_agent_id",
+            "comment_author_agent_id",
+            "original_author_agent_id",
+        ]
+        for k in id_keys:
+            val = action_args.get(k)
+            if val is None:
+                continue
+            try:
+                ids.append(int(val))
+            except Exception:
+                continue
+
+        name_keys = [
+            "target_user_name",
+            "post_author_name",
+            "comment_author_name",
+            "original_author_name",
+        ]
+        for k in name_keys:
+            name = action_args.get(k)
+            key = self._normalize_agent_name(name)
+            if not key:
+                continue
+            aid = self.agent_id_by_name.get(key)
+            if aid is not None:
+                ids.append(aid)
+
+        dedup = []
+        seen = set()
+        for aid in ids:
+            if aid in seen:
+                continue
+            seen.add(aid)
+            dedup.append(aid)
+        return dedup
+
+    def _refresh_topology_from_interactions(self):
+        if not self.synthetic_adj:
+            return
+
+        added = 0
+        for src, nb_scores in self.dynamic_interaction_neighbors.items():
+            if src not in self.synthetic_adj:
+                continue
+            ranked = sorted(nb_scores.items(), key=lambda x: x[1], reverse=True)
+            keep = 0
+            for dst, score in ranked:
+                if dst == src:
+                    continue
+                if score < self.dynamic_interaction_min_weight:
+                    continue
+                if dst not in self.synthetic_adj:
+                    continue
+                pair = (min(src, dst), max(src, dst))
+                if dst not in self.synthetic_adj[src]:
+                    self.synthetic_adj[src].append(dst)
+                    self.synthetic_adj[dst].append(src)
+                    self.top_pairs.add(pair)
+                    self.top_pair_records.append((pair[0], pair[1], 0.0))
+                    added += 1
+                keep += 1
+                if keep >= self.dynamic_neighbors_per_agent:
+                    break
+
+        # 交互边会改变局部传播和聚类，刷新 PPR / unit / importance
+        self._build_neighbor_influence_with_ppr()
+        self._build_coordination_units()
+        self._build_importance_scores()
+        self._dynamic_events_since_refresh = 0
+
+        if added > 0:
+            self.log(f"Topology-aware 动态更新: 新增交互边={added}, units={len(self.units)}")
+
+    def ingest_round_actions(self, round_num: int, actions: List[Dict[str, Any]]):
+        if not self.enabled or not self.dynamic_update_enabled or not actions:
+            return
+
+        touched = 0
+        for row in actions:
+            if not isinstance(row, dict):
+                continue
+            try:
+                src = int(row.get("agent_id", -1))
+            except Exception:
+                continue
+            if src < 0:
+                continue
+
+            action_type = row.get("action_type", "")
+            weight = self._interaction_weight(action_type)
+            if abs(weight) <= 1e-9:
+                continue
+
+            targets = self._extract_target_agent_ids(row.get("action_args", {}) or {})
+            for dst in targets:
+                if dst == src or dst not in self.agent_cfg_by_id:
+                    continue
+
+                old = self.dynamic_interaction_neighbors.get(src, {}).get(dst, 0.0)
+                new_val = max(-2.0, min(4.0, old + weight))
+                self.dynamic_interaction_neighbors.setdefault(src, {})[dst] = new_val
+
+                # follow 是有向关系，记录下来避免重复注入
+                if str(action_type).upper() == "FOLLOW":
+                    self.known_follow_pairs.add((src, dst))
+
+                # 正向互动提供弱双向关联，帮助邻域检索和聚类收敛
+                if weight > 0:
+                    old_back = self.dynamic_interaction_neighbors.get(dst, {}).get(src, 0.0)
+                    back_val = max(-2.0, min(4.0, old_back + weight * 0.25))
+                    self.dynamic_interaction_neighbors.setdefault(dst, {})[src] = back_val
+
+                touched += 1
+
+        if touched <= 0:
+            return
+
+        self._dynamic_events_since_refresh += touched
+        if (round_num % self.dynamic_update_interval == 0) and (
+            self._dynamic_events_since_refresh >= self.dynamic_update_min_events
+        ):
+            self._refresh_topology_from_interactions()
 
 
 class SimpleMemRuntime:
