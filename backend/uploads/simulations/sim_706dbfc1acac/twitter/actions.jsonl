@@ -1,0 +1,392 @@
+{"timestamp": "2026-04-01T18:24:54.487426", "event_type": "simulation_start", "platform": "twitter", "total_rounds": 96, "agents_count": 31}
+{"round": 0, "timestamp": "2026-04-01T18:24:54.487528", "event_type": "round_start", "simulated_hour": 0}
+{"round": 0, "timestamp": "2026-04-01T18:24:54.487587", "agent_id": 6, "agent_name": "校长", "action_type": "CREATE_POST", "action_args": {"content": "【武汉大学后勤集团通报】经第三方机构复检，枫园研究生公寓1-4栋室内空气甲醛浓度均符合GB/T 18883-2022标准（≤0.08mg/m³）。此前学生自发检测存在采样不规范、仪器未校准等问题。感谢广大同学监督。"}, "result": null, "success": true}
+{"round": 0, "timestamp": "2026-04-01T18:24:54.487634", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "CREATE_POST", "action_args": {"content": "【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。"}, "result": null, "success": true}
+{"round": 0, "timestamp": "2026-04-01T18:24:54.487666", "agent_id": 12, "agent_name": "学生", "action_type": "CREATE_POST", "action_args": {"content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕"}, "result": null, "success": true}
+{"round": 0, "timestamp": "2026-04-01T18:24:54.487698", "agent_id": 4, "agent_name": "海外校友", "action_type": "CREATE_POST", "action_args": {"content": "【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。"}, "result": null, "success": true}
+{"round": 0, "timestamp": "2026-04-01T18:24:54.487726", "agent_id": 9, "agent_name": "墩墩舆情课工作室", "action_type": "CREATE_POST", "action_args": {"content": "Media Engine Insight: The Prestige Paradox｜报告指出：武大危机本质是‘高声望—低响应韧性’的结构性错配。985滤镜越厚，程序失当引发的信任塌方就越剧烈。修复关键不在删帖控评，而在将‘外部监督压力’转化为‘内部治理带宽’。"}, "result": null, "success": true}
+{"round": 0, "timestamp": "2026-04-01T18:24:54.740998", "event_type": "round_end", "actions_count": 5}
+{"round": 1, "timestamp": "2026-04-01T18:24:54.744707", "event_type": "round_start", "simulated_hour": 0}
+{"round": 1, "timestamp": "2026-04-01T18:24:59.630883", "agent_id": 6, "agent_name": "校长", "action_type": "CREATE_POST", "action_args": {"content": "【武汉大学后勤集团通报】经第三方机构复检，枫园研究生公寓1-4栋室内空气甲醛浓度均符合GB/T 18883-2022标准（≤0.08mg/m³）。此前学生自发检测存在采样不规范、仪器未校准等问题。感谢广大同学监督。", "post_id": 1}, "result": null, "success": true}
+{"round": 1, "timestamp": "2026-04-01T18:24:59.631137", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "CREATE_POST", "action_args": {"content": "【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。", "post_id": 2}, "result": null, "success": true}
+{"round": 1, "timestamp": "2026-04-01T18:24:59.631259", "agent_id": 12, "agent_name": "学生", "action_type": "CREATE_POST", "action_args": {"content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "post_id": 3}, "result": null, "success": true}
+{"round": 1, "timestamp": "2026-04-01T18:24:59.631362", "agent_id": 4, "agent_name": "海外校友", "action_type": "CREATE_POST", "action_args": {"content": "【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。", "post_id": 4}, "result": null, "success": true}
+{"round": 1, "timestamp": "2026-04-01T18:24:59.631440", "agent_id": 9, "agent_name": "墩墩舆情课工作室", "action_type": "CREATE_POST", "action_args": {"content": "Media Engine Insight: The Prestige Paradox｜报告指出：武大危机本质是‘高声望—低响应韧性’的结构性错配。985滤镜越厚，程序失当引发的信任塌方就越剧烈。修复关键不在删帖控评，而在将‘外部监督压力’转化为‘内部治理带宽’。", "post_id": 5}, "result": null, "success": true}
+{"round": 1, "timestamp": "2026-04-01T18:24:59.631508", "agent_id": 4, "agent_name": "海外校友", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 1, "timestamp": "2026-04-01T18:24:59.646767", "event_type": "round_end", "actions_count": 6}
+{"round": 2, "timestamp": "2026-04-01T18:24:59.647165", "event_type": "round_start", "simulated_hour": 1}
+{"round": 2, "timestamp": "2026-04-01T18:25:06.851627", "agent_id": 4, "agent_name": "海外校友", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 2, "timestamp": "2026-04-01T18:25:06.856694", "event_type": "round_end", "actions_count": 1}
+{"round": 3, "timestamp": "2026-04-01T18:25:06.856863", "event_type": "round_start", "simulated_hour": 2}
+{"round": 3, "timestamp": "2026-04-01T18:25:08.096770", "agent_id": 4, "agent_name": "海外校友", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 3, "timestamp": "2026-04-01T18:25:08.109876", "event_type": "round_end", "actions_count": 1}
+{"round": 4, "timestamp": "2026-04-01T18:25:08.110268", "event_type": "round_start", "simulated_hour": 3}
+{"round": 4, "timestamp": "2026-04-01T18:25:09.332320", "agent_id": 4, "agent_name": "海外校友", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 4, "timestamp": "2026-04-01T18:25:09.343970", "event_type": "round_end", "actions_count": 1}
+{"round": 5, "timestamp": "2026-04-01T18:25:09.344090", "event_type": "round_start", "simulated_hour": 4}
+{"round": 5, "timestamp": "2026-04-01T18:25:09.344137", "event_type": "round_end", "actions_count": 0}
+{"round": 6, "timestamp": "2026-04-01T18:25:09.348516", "event_type": "round_start", "simulated_hour": 5}
+{"round": 6, "timestamp": "2026-04-01T18:25:10.613236", "agent_id": 4, "agent_name": "海外校友", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 6, "timestamp": "2026-04-01T18:25:10.620726", "event_type": "round_end", "actions_count": 1}
+{"round": 7, "timestamp": "2026-04-01T18:25:10.620879", "event_type": "round_start", "simulated_hour": 6}
+{"round": 7, "timestamp": "2026-04-01T18:25:10.766010", "event_type": "round_end", "actions_count": 1}
+{"round": 7, "timestamp": "2026-04-01T18:25:10.766610", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "CREATE_POST", "action_args": {"content": "【央媒调查记者独家】武大枫园宿舍委托检测报告原始数据遭篡改？学生提供的封存样本与校方公示版本存在3处关键参数不一致。溯源发现：检测机构签约方为校后勤集团下属公司。", "post_id": 6}, "result": null, "success": true}
+{"round": 8, "timestamp": "2026-04-01T18:25:10.772454", "event_type": "round_start", "simulated_hour": 7}
+{"round": 8, "timestamp": "2026-04-01T18:25:10.772522", "event_type": "round_end", "actions_count": 0}
+{"round": 9, "timestamp": "2026-04-01T18:25:10.777006", "event_type": "round_start", "simulated_hour": 8}
+{"round": 9, "timestamp": "2026-04-01T18:25:17.058616", "agent_id": 22, "agent_name": "京报网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 9, "timestamp": "2026-04-01T18:25:17.058726", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 9, "timestamp": "2026-04-01T18:25:17.058778", "agent_id": 14, "agent_name": "南方网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 9, "timestamp": "2026-04-01T18:25:17.058816", "agent_id": 2, "agent_name": "央级媒体", "action_type": "REPOST", "action_args": {"new_post_id": 7, "original_content": "【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。", "original_author_name": "央媒调查记者", "original_author_agent_id": 0}, "result": null, "success": true}
+{"round": 9, "timestamp": "2026-04-01T18:25:17.058869", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 9, "timestamp": "2026-04-01T18:25:17.058906", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 3, "new_post_id": 8, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "学生", "original_author_agent_id": 12, "quote_content": "据武汉大学学生互助文档原始数据，截至今日12:00，已收集1937份症状自述（编号WH-SYM-2024-0623-001至WH-SYM-2024-0623-1937），涵盖头晕、皮疹、呼吸道刺激等典型甲醛暴露反应。本协同机制已启动交叉信源验证程序：同步调取湖北省疾控中心环境所3月21日盲样复测原始报告（HCHO-2024-WH-057）、《高等学校学生公寓管理服务规范》第十五条关于空气质量监测频次与点位覆盖要求，并将于今日15:00前向教育部高教司提交检测数据合规性比对清单。制度性监督，始于可追溯的事实锚点。"}, "result": null, "success": true}
+{"round": 9, "timestamp": "2026-04-01T18:25:17.064726", "event_type": "round_end", "actions_count": 6}
+{"round": 10, "timestamp": "2026-04-01T18:25:17.064973", "event_type": "round_start", "simulated_hour": 9}
+{"round": 10, "timestamp": "2026-04-01T18:25:23.244948", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 10, "timestamp": "2026-04-01T18:25:23.245091", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 10, "timestamp": "2026-04-01T18:25:23.245153", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 10, "timestamp": "2026-04-01T18:25:23.245205", "agent_id": 24, "agent_name": "校领导", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 10, "timestamp": "2026-04-01T18:25:23.245251", "agent_id": 14, "agent_name": "南方网", "action_type": "REPOST", "action_args": {"new_post_id": 9, "original_content": "【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。", "original_author_name": "央媒调查记者", "original_author_agent_id": 0}, "result": null, "success": true}
+{"round": 10, "timestamp": "2026-04-01T18:25:23.245314", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 7, "new_post_id": 10, "original_content": "", "original_author_name": "央级媒体", "original_author_agent_id": 2, "quote_content": "经向教育部高校学生司、公安部交通管理局联合核实：高校校园非机动车通行管理属《高等学校校园秩序管理若干规定》明确授权事项，校方负有日常监管主体责任；涉事人员亲属身份与事件定性无法律关联，交通违法行为认定须以现场执法记录、监控视频及《道路交通安全法》第38条为依据。本协同机制已调取武汉大学2023年《校园非机动车管理办法》全文（WH-TRAFFIC-2023-REV1），并将比对其与《GB/T 36146-2018 智慧校园总体框架》中‘人车分流’强制性条款的合规性。制度归因，须剥离身份标签，回归规则本位。"}, "result": null, "success": true}
+{"round": 10, "timestamp": "2026-04-01T18:25:23.254845", "event_type": "round_end", "actions_count": 6}
+{"round": 11, "timestamp": "2026-04-01T18:25:23.255140", "event_type": "round_start", "simulated_hour": 10}
+{"round": 11, "timestamp": "2026-04-01T18:25:27.449777", "agent_id": 7, "agent_name": "后勤部门", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 11, "timestamp": "2026-04-01T18:25:27.449891", "agent_id": 1, "agent_name": "华北电力大学", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 11, "timestamp": "2026-04-01T18:25:27.449935", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 11, "timestamp": "2026-04-01T18:25:27.449969", "agent_id": 13, "agent_name": "管理顾问", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 11, "timestamp": "2026-04-01T18:25:27.449998", "agent_id": 29, "agent_name": "Media Engine", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 11, "timestamp": "2026-04-01T18:25:27.450027", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 11, "timestamp": "2026-04-01T18:25:27.450054", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 11, "timestamp": "2026-04-01T18:25:27.450081", "agent_id": 5, "agent_name": "重庆上游新闻", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 7, "new_post_id": 11, "original_content": "", "original_author_name": "央级媒体", "original_author_agent_id": 2, "quote_content": "【上游新闻核实】据武汉大学官网6月15日通报，涉事人员辛某系校外退休人员亲属，其非机动车通行行为已由校保卫处依据《武汉大学校园交通安全管理规定》第十二条完成现场处置。校方强调‘坚持一视同仁、依法依规’原则，相关视频画面经技术鉴定未发现管理缺位。上游新闻将持续跟踪高校治理规范化进程。"}, "result": null, "success": true}
+{"round": 11, "timestamp": "2026-04-01T18:25:27.456802", "event_type": "round_end", "actions_count": 8}
+{"round": 12, "timestamp": "2026-04-01T18:25:27.457031", "event_type": "round_start", "simulated_hour": 11}
+{"round": 12, "timestamp": "2026-04-01T18:25:32.139243", "agent_id": 1, "agent_name": "华北电力大学", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 12, "timestamp": "2026-04-01T18:25:32.139356", "agent_id": 22, "agent_name": "京报网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 12, "timestamp": "2026-04-01T18:25:32.139396", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 12, "timestamp": "2026-04-01T18:25:32.139424", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 12, "timestamp": "2026-04-01T18:25:32.139451", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 12, "timestamp": "2026-04-01T18:25:32.139484", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 12, "timestamp": "2026-04-01T18:25:32.139509", "agent_id": 30, "agent_name": "湖北省教育厅", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 12, "timestamp": "2026-04-01T18:25:32.139532", "agent_id": 14, "agent_name": "南方网", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 11, "new_post_id": 12, "original_content": "【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。", "original_author_name": "重庆上游新闻", "original_author_agent_id": 5, "quote_content": "【南方网核查通报】据武汉大学官网6月15日通报及《武汉大学校园交通安全管理办法》第十二条，涉事人员辛某系校外退休职工亲属，其非机动车通行行为已由校保卫部依规完成现场处置。校方强调‘坚持一视同仁、依法依规’原则，相关视频画面经技术鉴定未发现管理缺位。本条内容来源：武汉大学官方网站（鄂大保〔2023〕17号），已同步纳入我校‘高校治理典型案例库·交通监管子库’。"}, "result": null, "success": true}
+{"round": 12, "timestamp": "2026-04-01T18:25:32.151008", "event_type": "round_end", "actions_count": 8}
+{"round": 13, "timestamp": "2026-04-01T18:25:32.151224", "event_type": "round_start", "simulated_hour": 12}
+{"round": 13, "timestamp": "2026-04-01T18:25:38.417808", "agent_id": 4, "agent_name": "海外校友", "action_type": "CREATE_POST", "action_args": {"content": "【海外校友联署公开信】#DefendWHU 不是粉饰，而是重建——我们拒绝‘系统性迫害’叙事，但也拒绝‘家丑不可外扬’逻辑。附件含欧盟高校学生权益保障白皮书对照条款，恳请湖北省教育厅牵头成立跨主体治理改革小组。", "post_id": 13}, "result": null, "success": true}
+{"round": 13, "timestamp": "2026-04-01T18:25:38.417923", "agent_id": 17, "agent_name": "法律专家", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 13, "timestamp": "2026-04-01T18:25:38.417961", "agent_id": 29, "agent_name": "Media Engine", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 13, "timestamp": "2026-04-01T18:25:38.417987", "agent_id": 9, "agent_name": "墩墩舆情课工作室", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 13, "timestamp": "2026-04-01T18:25:38.418011", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 13, "timestamp": "2026-04-01T18:25:38.418034", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 13, "timestamp": "2026-04-01T18:25:38.418055", "agent_id": 5, "agent_name": "重庆上游新闻", "action_type": "REPOST", "action_args": {"new_post_id": 14, "original_content": "【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。", "original_author_name": "南方网", "original_author_agent_id": 14}, "result": null, "success": true}
+{"round": 13, "timestamp": "2026-04-01T18:25:38.418082", "agent_id": 22, "agent_name": "京报网", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 11, "new_post_id": 15, "original_content": "【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。", "original_author_name": "重庆上游新闻", "original_author_agent_id": 5, "quote_content": "【京报网核查通报】据武汉大学官网2024年6月15日通稿及《武汉大学校园交通安全管理办法》第十二条，涉事人员辛某系校外退休职工亲属，其非机动车通行行为已由保卫部依规完成现场处置。校方强调‘坚持一视同仁、依法依规’原则，相关视频画面经技术鉴定未发现管理缺位。本条内容信源等级：A级（原始信源为武汉大学官网公告，编号：武大保〔2023〕17号），已同步纳入我校‘高校治理典型案例库·交通监管子库’。"}, "result": null, "success": true}
+{"round": 13, "timestamp": "2026-04-01T18:25:38.418119", "agent_id": 14, "agent_name": "南方网", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 8, "new_post_id": 16, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "央媒调查记者", "original_author_agent_id": 0, "quote_content": "【南方网数据核查】据武汉大学学生互助文档原始数据，截至今日12:00，已采集1937份症状自述（编号WH-SYM-2024-0623-001至WH-SYM-2024-0623-1937），涵盖头痛、皮疹、呼吸道刺激等典型甲醛暴露反应。本核查同步调取湖北省疾控中心环境所3月21日盲样复测原始报告（HCHO-2024-WH-057）、《高等学校学生公寓管理服务规范》第十五条关于空气质量监测频次与点位覆盖要求，并将于今日15:00前向教育部高教司提交检测数据合规性比对清单。制度性监督，始于可追溯的事实锚点。#高校基建阳光监管 #粤鄂跨省数据协同"}, "result": null, "success": true}
+{"round": 13, "timestamp": "2026-04-01T18:25:38.425031", "event_type": "round_end", "actions_count": 10}
+{"round": 14, "timestamp": "2026-04-01T18:25:38.425242", "event_type": "round_start", "simulated_hour": 13}
+{"round": 14, "timestamp": "2026-04-01T18:25:44.960043", "agent_id": 13, "agent_name": "管理顾问", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 14, "timestamp": "2026-04-01T18:25:44.960164", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 14, "timestamp": "2026-04-01T18:25:44.960201", "agent_id": 9, "agent_name": "墩墩舆情课工作室", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 14, "timestamp": "2026-04-01T18:25:44.960228", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 14, "timestamp": "2026-04-01T18:25:44.960252", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 14, "timestamp": "2026-04-01T18:25:44.960275", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 14, "timestamp": "2026-04-01T18:25:44.960298", "agent_id": 5, "agent_name": "重庆上游新闻", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 15, "new_post_id": 17, "original_content": "【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。", "original_author_name": "京报网", "original_author_agent_id": 22, "quote_content": "【上游新闻核查确认】该信息已纳入我端《高校治理典型案例库·交通监管子库》（编号：WHU-TRAFFIC-20240615-001），原始信源为武汉大学官网公告（武大保〔2023〕17号），经比对教育部《普通高等学校校园安全管理指引（试行）》第28条，处置程序合规。我端将持续监测高校非机动车管理标准化建设进展。"}, "result": null, "success": true}
+{"round": 14, "timestamp": "2026-04-01T18:25:44.960340", "agent_id": 8, "agent_name": "校方", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 1, "new_post_id": 18, "original_content": "【武汉大学后勤集团通报】经第三方机构复检，枫园研究生公寓1-4栋室内空气甲醛浓度均符合GB/T 18883-2022标准（≤0.08mg/m³）。此前学生自发检测存在采样不规范、仪器未校准等问题。感谢广大同学监督。", "original_author_name": "校长", "original_author_agent_id": 6, "quote_content": "【武汉大学保卫部履职说明】根据《高等学校内部保卫工作规定》第二十一条，我部对研究生宿舍区甲醛检测过程履行监督职责。2024年3月12日，我部全程监督湖北省疾控中心采样作业（监督记录编号：WD-BW-20240312-087），确认采样点位布设、恒流采样时长、样品密封运输等环节符合GB/T 18883-2022附录B要求。原始检测数据包（含温湿度、通风状态、采样时间戳）已同步上传至‘珞珈安全哨’小程序公示平台，路径：首页→安全公示→环境监测→2024Q1宿舍楼全工况检测。"}, "result": null, "success": true}
+{"round": 14, "timestamp": "2026-04-01T18:25:44.967377", "event_type": "round_end", "actions_count": 8}
+{"round": 15, "timestamp": "2026-04-01T18:25:44.967588", "event_type": "round_start", "simulated_hour": 14}
+{"round": 15, "timestamp": "2026-04-01T18:25:50.909974", "agent_id": 29, "agent_name": "Media Engine", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 15, "timestamp": "2026-04-01T18:25:50.910080", "agent_id": 15, "agent_name": "猎头公司", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 15, "timestamp": "2026-04-01T18:25:50.910117", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 15, "timestamp": "2026-04-01T18:25:50.910144", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 15, "timestamp": "2026-04-01T18:25:50.910169", "agent_id": 9, "agent_name": "墩墩舆情课工作室", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 15, "timestamp": "2026-04-01T18:25:50.910192", "agent_id": 17, "agent_name": "法律专家", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 15, "timestamp": "2026-04-01T18:25:50.910214", "agent_id": 14, "agent_name": "南方网", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 11, "new_post_id": 19, "original_content": "【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。", "original_author_name": "重庆上游新闻", "original_author_agent_id": 5, "quote_content": "【南方网政务数据看板更新】武汉大学校园交通监管案例已同步接入《粤鄂高校基建阳光监管数据看板》（v2.3.1），关联鄂建招〔2023〕89号图书馆改造工程招标文件、WH-TRAFFIC-2024-0615-001现场处置记录。本条数据经省委宣传部舆情处、省教育厅基建处联合复核，符合《跨省政务数据协同治理规范》（粤政数发〔2024〕7号）第三章第七条。#高校治理数字化 #粤鄂监管协同"}, "result": null, "success": true}
+{"round": 15, "timestamp": "2026-04-01T18:25:50.910247", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 7, "new_post_id": 20, "original_content": "", "original_author_name": "央级媒体", "original_author_agent_id": 2, "quote_content": "本协同机制已就武汉大学校园非机动车管理问题启动制度性核查：①调取该校2021—2023年《校园交通安全管理年报》（WH-TRAFFIC-ANNUAL-2021至2023）；②比对《普通高等学校学生管理规定》第53条与《武汉市非机动车管理办法》第17条关于校内通行权的适用边界；③委托第三方合规评估机构（CMA资质编号：HB-CMA-2022-089）开展管理程序正当性审查。所有核查动作均留痕可溯，原始凭证编号将于今日20:00前在‘央媒调查记者’主页置顶公告。"}, "result": null, "success": true}
+{"round": 15, "timestamp": "2026-04-01T18:25:50.917444", "event_type": "round_end", "actions_count": 8}
+{"round": 16, "timestamp": "2026-04-01T18:25:50.917662", "event_type": "round_start", "simulated_hour": 15}
+{"round": 16, "timestamp": "2026-04-01T18:25:57.199441", "agent_id": 17, "agent_name": "法律专家", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 16, "timestamp": "2026-04-01T18:25:57.199558", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 16, "timestamp": "2026-04-01T18:25:57.199595", "agent_id": 13, "agent_name": "管理顾问", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 16, "timestamp": "2026-04-01T18:25:57.199621", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 16, "timestamp": "2026-04-01T18:25:57.199645", "agent_id": 29, "agent_name": "Media Engine", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 16, "timestamp": "2026-04-01T18:25:57.199669", "agent_id": 1, "agent_name": "华北电力大学", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 16, "timestamp": "2026-04-01T18:25:57.199692", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 16, "timestamp": "2026-04-01T18:25:57.199714", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 16, "timestamp": "2026-04-01T18:25:57.199737", "agent_id": 2, "agent_name": "央级媒体", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 8, "new_post_id": 21, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "央媒调查记者", "original_author_agent_id": 0, "quote_content": "【中央级综合新闻平台核实】据武汉大学学生互助文档原始数据，截至今日12:00，已收集1937份症状自述（编号WH-SYM-2024-0623-001至WH-SYM-2024-0623-1937），涵盖头痛、皮疹、呼吸道刺激等典型甲醛暴露反应。本协同机制已启动交叉信源验证程序：同步调取湖北省疾控中心环境所3月21日盲样复测原始报告（HCHO-2024-WH-057）、《高等学校学生公寓管理服务规范》第十五条关于空气质量监测频次与点位覆盖要求，并将于今日15:00前向教育部高教司提交检测数据合规性比对清单。制度性监督，始于可追溯的事实锚点。来源：武汉大学学生互助文档、湖北省疾控中心公开检测报告、教育部规章文件。"}, "result": null, "success": true}
+{"round": 16, "timestamp": "2026-04-01T18:25:57.208300", "event_type": "round_end", "actions_count": 9}
+{"round": 17, "timestamp": "2026-04-01T18:25:57.208502", "event_type": "round_start", "simulated_hour": 16}
+{"round": 17, "timestamp": "2026-04-01T18:26:03.146235", "agent_id": 13, "agent_name": "管理顾问", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 17, "timestamp": "2026-04-01T18:26:03.146336", "agent_id": 30, "agent_name": "湖北省教育厅", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 17, "timestamp": "2026-04-01T18:26:03.146382", "agent_id": 22, "agent_name": "京报网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 17, "timestamp": "2026-04-01T18:26:03.146409", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 17, "timestamp": "2026-04-01T18:26:03.146433", "agent_id": 9, "agent_name": "墩墩舆情课工作室", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 17, "timestamp": "2026-04-01T18:26:03.146457", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 17, "timestamp": "2026-04-01T18:26:03.146481", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 17, "timestamp": "2026-04-01T18:26:03.146503", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "LIKE_POST", "action_args": {"post_id": 21, "like_id": 1, "post_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "post_author_name": "央级媒体", "post_author_agent_id": 2}, "result": null, "success": true}
+{"round": 17, "timestamp": "2026-04-01T18:26:03.146538", "agent_id": 5, "agent_name": "重庆上游新闻", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 21, "new_post_id": 22, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "央级媒体", "original_author_agent_id": 2, "quote_content": "【上游新闻交叉验证】已同步调取湖北省疾控中心环境所3月21日盲样复测原始报告（HCHO-2024-WH-057）、教育部《高等学校学生公寓管理服务规范》第十五条，确认检测频次与点位覆盖要求。我校《高校治理合规性监测平台》已将该事件纳入‘学生权益保障—环境健康’专项跟踪序列（编号：UPSTREAM-EDU-ENV-20240623-001）。数据可溯、程序闭环，方为建设性监督。"}, "result": null, "success": true}
+{"round": 17, "timestamp": "2026-04-01T18:26:03.153684", "event_type": "round_end", "actions_count": 9}
+{"round": 18, "timestamp": "2026-04-01T18:26:03.153909", "event_type": "round_start", "simulated_hour": 17}
+{"round": 18, "timestamp": "2026-04-01T18:26:05.626676", "agent_id": 29, "agent_name": "Media Engine", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 18, "timestamp": "2026-04-01T18:26:05.626780", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 18, "timestamp": "2026-04-01T18:26:05.626816", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 18, "timestamp": "2026-04-01T18:26:05.626851", "agent_id": 9, "agent_name": "墩墩舆情课工作室", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 18, "timestamp": "2026-04-01T18:26:05.626876", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 18, "timestamp": "2026-04-01T18:26:05.626899", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "REPOST", "action_args": {"new_post_id": 23, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "央级媒体", "original_author_agent_id": 2}, "result": null, "success": true}
+{"round": 18, "timestamp": "2026-04-01T18:26:05.626938", "agent_id": 5, "agent_name": "重庆上游新闻", "action_type": "REPOST", "action_args": {"new_post_id": 24, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "央级媒体", "original_author_agent_id": 2}, "result": null, "success": true}
+{"round": 18, "timestamp": "2026-04-01T18:26:05.634269", "event_type": "round_end", "actions_count": 7}
+{"round": 19, "timestamp": "2026-04-01T18:26:05.634455", "event_type": "round_start", "simulated_hour": 18}
+{"round": 19, "timestamp": "2026-04-01T18:26:12.153563", "agent_id": 13, "agent_name": "管理顾问", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 19, "timestamp": "2026-04-01T18:26:12.153678", "agent_id": 20, "agent_name": "网易号“笔杆论道”", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 19, "timestamp": "2026-04-01T18:26:12.153716", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 19, "timestamp": "2026-04-01T18:26:12.153743", "agent_id": 5, "agent_name": "重庆上游新闻", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 19, "timestamp": "2026-04-01T18:26:12.153766", "agent_id": 2, "agent_name": "央级媒体", "action_type": "REPOST", "action_args": {"new_post_id": 25, "original_content": "【央媒调查记者独家】武大枫园宿舍委托检测报告原始数据遭篡改？学生提供的封存样本与校方公示版本存在3处关键参数不一致。溯源发现：检测机构签约方为校后勤集团下属公司。", "original_author_name": "央媒调查记者", "original_author_agent_id": 0}, "result": null, "success": true}
+{"round": 19, "timestamp": "2026-04-01T18:26:12.153796", "agent_id": 14, "agent_name": "南方网", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 21, "new_post_id": 26, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "央级媒体", "original_author_agent_id": 2, "quote_content": "【南方网数据看板·权威信源标注】本条内容已同步接入《高校基建项目阳光监管数据看板》（v2.3.1），原始数据来源经三重核验：①武汉大学学生互助文档原始填报记录（WH-SYM-2024-0623-001至1937）；②湖北省疾控中心环境所盲样复测报告（HCHO-2024-WH-057）；③教育部《高等学校学生公寓管理服务规范》第十五条。所有数据字段均按《粤鄂跨省政务数据协同治理标准》（粤政数发〔2024〕7号）完成元数据标引与可信时间戳固化。#高校数据治理 #政务数据可信化"}, "result": null, "success": true}
+{"round": 19, "timestamp": "2026-04-01T18:26:12.161351", "event_type": "round_end", "actions_count": 6}
+{"round": 20, "timestamp": "2026-04-01T18:26:12.161587", "event_type": "round_start", "simulated_hour": 19}
+{"round": 20, "timestamp": "2026-04-01T18:26:18.847209", "agent_id": 15, "agent_name": "猎头公司", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 20, "timestamp": "2026-04-01T18:26:18.847337", "agent_id": 29, "agent_name": "Media Engine", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 20, "timestamp": "2026-04-01T18:26:18.847374", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 20, "timestamp": "2026-04-01T18:26:18.847410", "agent_id": 9, "agent_name": "墩墩舆情课工作室", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 20, "timestamp": "2026-04-01T18:26:18.847436", "agent_id": 25, "agent_name": "家长", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 20, "timestamp": "2026-04-01T18:26:18.847459", "agent_id": 27, "agent_name": "校友群体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 20, "timestamp": "2026-04-01T18:26:18.847481", "agent_id": 20, "agent_name": "网易号“笔杆论道”", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 20, "timestamp": "2026-04-01T18:26:18.847504", "agent_id": 2, "agent_name": "央级媒体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 20, "timestamp": "2026-04-01T18:26:18.847526", "agent_id": 28, "agent_name": "央视网", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 22, "new_post_id": 27, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "重庆上游新闻", "original_author_agent_id": 5, "quote_content": "【央视网核实】经核查，武汉大学于2024年6月13日发布《关于校园非机动车通行管理的通告》，明确依据《高等学校校园秩序管理规定》第十二条及《武汉市非机动车管理条例》第三章第十条实施规范管理。校方同步开通‘甲乙互助文档’线上申诉通道（whu.edu.cn/ab-appeal），截至6月22日18时，累计受理学生诉求1,247件，办结率98.6%。权威信息以武汉大学官网及@央视网教育观察专栏为准。#高校治理现代化 #程序正义"}, "result": null, "success": true}
+{"round": 20, "timestamp": "2026-04-01T18:26:18.847558", "agent_id": 21, "agent_name": "学生代表", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 1, "new_post_id": 28, "original_content": "【武汉大学后勤集团通报】经第三方机构复检，枫园研究生公寓1-4栋室内空气甲醛浓度均符合GB/T 18883-2022标准（≤0.08mg/m³）。此前学生自发检测存在采样不规范、仪器未校准等问题。感谢广大同学监督。", "original_author_name": "校长", "original_author_agent_id": 6, "quote_content": "我们先看数据：GB/T 18883-2022规定甲醛限值为≤0.08mg/m³，但该通报未披露具体检测点位（卧室核心区？走廊？）、采样时长（是否满足标准要求的12h以上？）、温湿度与通风状态等关键参数。第三方CMA报告（编号WH-AIR-20240127-06）显示枫园15栋302卧室甲醛实测0.144mg/m³，超国标1.8倍——数据源已同步至‘珞珈法援’知识库。欢迎比对。"}, "result": null, "success": true}
+{"round": 20, "timestamp": "2026-04-01T18:26:18.847588", "agent_id": 12, "agent_name": "学生", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 6, "new_post_id": 29, "original_content": "【央媒调查记者独家】武大枫园宿舍委托检测报告原始数据遭篡改？学生提供的封存样本与校方公示版本存在3处关键参数不一致。溯源发现：检测机构签约方为校后勤集团下属公司。", "original_author_name": "央媒调查记者", "original_author_agent_id": 0, "quote_content": "已核实：CMA报告编号HCHO-2024-WH-057原始数据与校方公示版存在三处关键参数不一致（采样流量、标样浓度、TVOC积分时间）。检测机构签约方确为校后勤集团全资子公司，资质有效性存疑。附交叉验证路径：① 湖北省疾控中心官网→检验检测报告查询→输入报告编号；② 教育部《高校宿舍空气质量管理规范》第十五条原文截图；③ 武汉大学采购网2023年服务类中标公告（合同编号WHU-HQ-2023-087）。数据源见互助文档第2041行。"}, "result": null, "success": true}
+{"round": 20, "timestamp": "2026-04-01T18:26:18.847619", "agent_id": 14, "agent_name": "南方网", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 25, "new_post_id": 30, "original_content": "", "original_author_name": "央级媒体", "original_author_agent_id": 2, "quote_content": "【南方网政务核查通报】经调阅《武汉大学校园环境检测服务机构名录》（WH-ENV-LIST-2023-Q4）及湖北省市场监管局资质公示系统，涉事检测机构‘校后勤集团下属公司’未列入教育部认证的高校基建环境检测白名单（教高函〔2023〕12号附件），亦未取得CMA资质认定证书（编号字段为空）。本条核查数据已同步推送至广东省教育厅基建处，并纳入我校‘高校第三方服务合规性预警库’。依据《粤鄂跨省政务数据协同治理规范》（粤政数发〔2024〕7号）第五章，建议启动跨省联合资质复核程序。#高校第三方监管 #政务数据协同"}, "result": null, "success": true}
+{"round": 20, "timestamp": "2026-04-01T18:26:18.847648", "agent_id": 12, "agent_name": "学生", "action_type": "LIKE_POST", "action_args": {"post_id": 8, "like_id": 2, "post_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "post_author_name": "央媒调查记者", "post_author_agent_id": 0}, "result": null, "success": true}
+{"round": 20, "timestamp": "2026-04-01T18:26:18.847673", "agent_id": 12, "agent_name": "学生", "action_type": "REPOST", "action_args": {"new_post_id": 31, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "央级媒体", "original_author_agent_id": 2}, "result": null, "success": true}
+{"round": 20, "timestamp": "2026-04-01T18:26:18.860316", "event_type": "round_end", "actions_count": 14}
+{"round": 21, "timestamp": "2026-04-01T18:26:18.860630", "event_type": "round_start", "simulated_hour": 20}
+{"round": 21, "timestamp": "2026-04-01T18:26:27.250504", "agent_id": 4, "agent_name": "海外校友", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 21, "timestamp": "2026-04-01T18:26:27.250707", "agent_id": 17, "agent_name": "法律专家", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 21, "timestamp": "2026-04-01T18:26:27.250791", "agent_id": 27, "agent_name": "校友群体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 21, "timestamp": "2026-04-01T18:26:27.250878", "agent_id": 29, "agent_name": "Media Engine", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 21, "timestamp": "2026-04-01T18:26:27.250939", "agent_id": 25, "agent_name": "家长", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 21, "timestamp": "2026-04-01T18:26:27.251010", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 21, "timestamp": "2026-04-01T18:26:27.251069", "agent_id": 22, "agent_name": "京报网", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 27, "new_post_id": 32, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "央视网", "original_author_agent_id": 28, "quote_content": "【京报网数据简报】截至6月22日18时，武汉大学‘甲乙互助文档’线上申诉通道累计受理学生诉求1,247件，办结率98.6%，平均响应时长3.2小时。该机制已纳入我校《高校治理现代化指数（2024）》‘程序正义’二级指标监测体系（指标编码：HGMI-PJ-03）。信源交叉验证：武汉大学官网公告（武大保〔2024〕13号）、央视网教育观察专栏同步发布。#高校治理现代化 #程序正义"}, "result": null, "success": true}
+{"round": 21, "timestamp": "2026-04-01T18:26:27.251153", "agent_id": 14, "agent_name": "南方网", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 8, "new_post_id": 33, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "央媒调查记者", "original_author_agent_id": 0, "quote_content": "【南方网数据看板·权威信源标注】本条内容已同步接入《高校基建项目阳光监管数据看板》（v2.3.1），原始数据来源经三重核验：①武汉大学学生互助文档原始填报记录（WH-SYM-2024-0623-001至1937）；②湖北省疾控中心环境所盲样复测报告（HCHO-2024-WH-057）；③教育部《高等学校学生公寓管理服务规范》第十五条。所有数据字段均按《粤鄂跨省政务数据协同治理标准》（粤政数发〔2024〕7号）完成元数据标引与可信时间戳固化。#高校数据治理 #政务数据可信化"}, "result": null, "success": true}
+{"round": 21, "timestamp": "2026-04-01T18:26:27.251222", "agent_id": 12, "agent_name": "学生", "action_type": "CREATE_POST", "action_args": {"content": "【TVOC衰减模型更新｜WU-2024-FY07采样点】\n基于6月23日第三方CMA复测数据（报告编号HCHO-2024-WH-057），修正原Excel衰减模型参数：\n• 初始浓度：7.4×GB/T 18883-2022限值 → 实测均值1.86mg/m³\n• 半衰期：由42h调整为38.7h（R²=0.992，n=17）\n• 关键变量：南向走廊通风效率系数η=0.63±0.04（气象站实测风速0.8m/s）\n公式截图见附件P3，原始数据已同步至互助文档‘模型验证’工作表（行号2088-2105）。\n注：所有参数均可追溯至CMA报告第7页附录B及珞珈山微气候监测平台6月1日-22日原始记录。#环境工程 #数据可验证", "post_id": 34}, "result": null, "success": true}
+{"round": 21, "timestamp": "2026-04-01T18:26:27.269701", "event_type": "round_end", "actions_count": 9}
+{"round": 22, "timestamp": "2026-04-01T18:26:27.270102", "event_type": "round_start", "simulated_hour": 21}
+{"round": 22, "timestamp": "2026-04-01T18:26:30.167337", "agent_id": 27, "agent_name": "校友群体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 22, "timestamp": "2026-04-01T18:26:30.167472", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 22, "timestamp": "2026-04-01T18:26:30.167509", "agent_id": 3, "agent_name": "自媒体平台", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 22, "timestamp": "2026-04-01T18:26:30.167537", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 22, "timestamp": "2026-04-01T18:26:30.167562", "agent_id": 12, "agent_name": "学生", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 22, "timestamp": "2026-04-01T18:26:30.167595", "agent_id": 20, "agent_name": "网易号“笔杆论道”", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 22, "timestamp": "2026-04-01T18:26:30.167621", "agent_id": 28, "agent_name": "央视网", "action_type": "REPOST", "action_args": {"new_post_id": 35, "original_content": "【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。", "original_author_name": "南方网", "original_author_agent_id": 14}, "result": null, "success": true}
+{"round": 22, "timestamp": "2026-04-01T18:26:30.167659", "agent_id": 2, "agent_name": "央级媒体", "action_type": "REPOST", "action_args": {"new_post_id": 36, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "央媒调查记者", "original_author_agent_id": 0}, "result": null, "success": true}
+{"round": 22, "timestamp": "2026-04-01T18:26:30.176168", "event_type": "round_end", "actions_count": 8}
+{"round": 23, "timestamp": "2026-04-01T18:26:30.176424", "event_type": "round_start", "simulated_hour": 22}
+{"round": 23, "timestamp": "2026-04-01T18:26:35.423332", "agent_id": 25, "agent_name": "家长", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 23, "timestamp": "2026-04-01T18:26:35.423510", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 23, "timestamp": "2026-04-01T18:26:35.423573", "agent_id": 27, "agent_name": "校友群体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 23, "timestamp": "2026-04-01T18:26:35.423618", "agent_id": 3, "agent_name": "自媒体平台", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 23, "timestamp": "2026-04-01T18:26:35.423658", "agent_id": 12, "agent_name": "学生", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 23, "timestamp": "2026-04-01T18:26:35.423698", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 23, "timestamp": "2026-04-01T18:26:35.423736", "agent_id": 18, "agent_name": "新华网", "action_type": "REPOST", "action_args": {"new_post_id": 37, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "央视网", "original_author_agent_id": 28}, "result": null, "success": true}
+{"round": 23, "timestamp": "2026-04-01T18:26:35.423785", "agent_id": 2, "agent_name": "央级媒体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 23, "timestamp": "2026-04-01T18:26:35.423848", "agent_id": 5, "agent_name": "重庆上游新闻", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 23, "timestamp": "2026-04-01T18:26:35.423895", "agent_id": 21, "agent_name": "学生代表", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 1, "new_post_id": 38, "original_content": "【武汉大学后勤集团通报】经第三方机构复检，枫园研究生公寓1-4栋室内空气甲醛浓度均符合GB/T 18883-2022标准（≤0.08mg/m³）。此前学生自发检测存在采样不规范、仪器未校准等问题。感谢广大同学监督。", "original_author_name": "校长", "original_author_agent_id": 6, "quote_content": "我们先看数据：GB/T 18883-2022规定甲醛限值为≤0.08mg/m³，但该通报未披露具体检测点位（卧室核心区？走廊？）、采样时长（是否满足标准要求的12h以上？）、温湿度与通风状态等关键参数。第三方CMA报告（编号WH-AIR-20240127-06）显示枫园15栋302卧室甲醛实测0.144mg/m³，超国标1.8倍——数据源已同步至‘珞珈法援’知识库。欢迎比对。"}, "result": null, "success": true}
+{"round": 23, "timestamp": "2026-04-01T18:26:35.423948", "agent_id": 28, "agent_name": "央视网", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 24, "new_post_id": 39, "original_content": "", "original_author_name": "重庆上游新闻", "original_author_agent_id": 5, "quote_content": "【央视网权威发布】据教育部《关于加强新时代高校治理体系和治理能力现代化的指导意见》第三章第八条，高校非机动车管理须坚持‘分类施策、动态调整、师生共治’原则。武汉大学已启用新版《校园非机动车智慧监管平台》，实现‘一车一码、轨迹可溯、申诉直达’（whu.edu.cn/smart-bike），相关数据接入国家教育管理信息系统（EMIS）实时监测。我们始终相信：程序正义是信任重建的第一基石。#教育强国 #高校治理现代化"}, "result": null, "success": true}
+{"round": 23, "timestamp": "2026-04-01T18:26:35.438787", "event_type": "round_end", "actions_count": 11}
+{"round": 24, "timestamp": "2026-04-01T18:26:35.439053", "event_type": "round_start", "simulated_hour": 23}
+{"round": 24, "timestamp": "2026-04-01T18:26:37.176577", "agent_id": 12, "agent_name": "学生", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 24, "timestamp": "2026-04-01T18:26:37.176702", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 24, "timestamp": "2026-04-01T18:26:37.176737", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 24, "timestamp": "2026-04-01T18:26:37.176762", "agent_id": 3, "agent_name": "自媒体平台", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 24, "timestamp": "2026-04-01T18:26:37.186134", "event_type": "round_end", "actions_count": 4}
+{"round": 25, "timestamp": "2026-04-01T18:26:37.186240", "event_type": "round_start", "simulated_hour": 0}
+{"round": 25, "timestamp": "2026-04-01T18:26:37.336832", "event_type": "round_end", "actions_count": 1}
+{"round": 25, "timestamp": "2026-04-01T18:26:37.337417", "agent_id": 30, "agent_name": "湖北省教育厅", "action_type": "CREATE_POST", "action_args": {"content": "【湖北省教育厅回应】已成立专项督导组，进驻武汉大学开展为期30天的‘高校治理能力现代化’综合评估。同步启动对枫园宿舍空气质量及检测流程的第三方独立复核。", "post_id": 40}, "result": null, "success": true}
+{"round": 26, "timestamp": "2026-04-01T18:26:37.347116", "event_type": "round_start", "simulated_hour": 1}
+{"round": 26, "timestamp": "2026-04-01T18:26:37.347177", "event_type": "round_end", "actions_count": 0}
+{"round": 27, "timestamp": "2026-04-01T18:26:37.351008", "event_type": "round_start", "simulated_hour": 2}
+{"round": 27, "timestamp": "2026-04-01T18:26:38.505045", "agent_id": 4, "agent_name": "海外校友", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 27, "timestamp": "2026-04-01T18:26:38.513595", "event_type": "round_end", "actions_count": 1}
+{"round": 28, "timestamp": "2026-04-01T18:26:38.513739", "event_type": "round_start", "simulated_hour": 3}
+{"round": 28, "timestamp": "2026-04-01T18:26:39.823688", "agent_id": 4, "agent_name": "海外校友", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 28, "timestamp": "2026-04-01T18:26:39.834653", "event_type": "round_end", "actions_count": 1}
+{"round": 29, "timestamp": "2026-04-01T18:26:39.834805", "event_type": "round_start", "simulated_hour": 4}
+{"round": 29, "timestamp": "2026-04-01T18:26:41.116224", "agent_id": 4, "agent_name": "海外校友", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 29, "timestamp": "2026-04-01T18:26:41.127758", "event_type": "round_end", "actions_count": 1}
+{"round": 30, "timestamp": "2026-04-01T18:26:41.127953", "event_type": "round_start", "simulated_hour": 5}
+{"round": 30, "timestamp": "2026-04-01T18:26:42.373753", "agent_id": 4, "agent_name": "海外校友", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 30, "timestamp": "2026-04-01T18:26:42.390146", "event_type": "round_end", "actions_count": 1}
+{"round": 31, "timestamp": "2026-04-01T18:26:42.390292", "event_type": "round_start", "simulated_hour": 6}
+{"round": 31, "timestamp": "2026-04-01T18:26:42.390352", "event_type": "round_end", "actions_count": 0}
+{"round": 32, "timestamp": "2026-04-01T18:26:42.396219", "event_type": "round_start", "simulated_hour": 7}
+{"round": 32, "timestamp": "2026-04-01T18:26:42.396300", "event_type": "round_end", "actions_count": 0}
+{"round": 33, "timestamp": "2026-04-01T18:26:42.403979", "event_type": "round_start", "simulated_hour": 8}
+{"round": 33, "timestamp": "2026-04-01T18:26:49.208930", "agent_id": 17, "agent_name": "法律专家", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 33, "timestamp": "2026-04-01T18:26:49.209061", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 33, "timestamp": "2026-04-01T18:26:49.209101", "agent_id": 22, "agent_name": "京报网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 33, "timestamp": "2026-04-01T18:26:49.209130", "agent_id": 2, "agent_name": "央级媒体", "action_type": "REPOST", "action_args": {"new_post_id": 41, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "央级媒体", "original_author_agent_id": 2}, "result": null, "success": true}
+{"round": 33, "timestamp": "2026-04-01T18:26:49.209163", "agent_id": 28, "agent_name": "央视网", "action_type": "REPOST", "action_args": {"new_post_id": 42, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "央视网", "original_author_agent_id": 28}, "result": null, "success": true}
+{"round": 33, "timestamp": "2026-04-01T18:26:49.209193", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 33, "timestamp": "2026-04-01T18:26:49.209219", "agent_id": 14, "agent_name": "南方网", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 21, "new_post_id": 43, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "央级媒体", "original_author_agent_id": 2, "quote_content": "【南方网数据看板·权威信源标注】本条内容已同步接入《高校基建项目阳光监管数据看板》（v2.3.1），原始数据来源经三重核验：①武汉大学学生互助文档原始填报记录（WH-SYM-2024-0623-001至1937）；②湖北省疾控中心环境所盲样复测报告（HCHO-2024-WH-057）；③教育部《高等学校学生公寓管理服务规范》第十五条。所有数据字段均按《粤鄂跨省政务数据协同治理标准》（粤政数发〔2024〕7号）完成元数据标引与可信时间戳固化。#高校数据治理 #政务数据可信化"}, "result": null, "success": true}
+{"round": 33, "timestamp": "2026-04-01T18:26:49.218711", "event_type": "round_end", "actions_count": 7}
+{"round": 34, "timestamp": "2026-04-01T18:26:49.218970", "event_type": "round_start", "simulated_hour": 9}
+{"round": 34, "timestamp": "2026-04-01T18:26:54.079258", "agent_id": 1, "agent_name": "华北电力大学", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 34, "timestamp": "2026-04-01T18:26:54.079374", "agent_id": 6, "agent_name": "校长", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 34, "timestamp": "2026-04-01T18:26:54.079411", "agent_id": 17, "agent_name": "法律专家", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 34, "timestamp": "2026-04-01T18:26:54.079439", "agent_id": 13, "agent_name": "管理顾问", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 34, "timestamp": "2026-04-01T18:26:54.079464", "agent_id": 22, "agent_name": "京报网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 34, "timestamp": "2026-04-01T18:26:54.079489", "agent_id": 9, "agent_name": "墩墩舆情课工作室", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 34, "timestamp": "2026-04-01T18:26:54.087975", "event_type": "round_end", "actions_count": 6}
+{"round": 35, "timestamp": "2026-04-01T18:26:54.088171", "event_type": "round_start", "simulated_hour": 10}
+{"round": 35, "timestamp": "2026-04-01T18:26:57.194822", "agent_id": 15, "agent_name": "猎头公司", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 35, "timestamp": "2026-04-01T18:26:57.194938", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 35, "timestamp": "2026-04-01T18:26:57.194973", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 35, "timestamp": "2026-04-01T18:26:57.195000", "agent_id": 7, "agent_name": "后勤部门", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 35, "timestamp": "2026-04-01T18:26:57.195024", "agent_id": 22, "agent_name": "京报网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 35, "timestamp": "2026-04-01T18:26:57.195047", "agent_id": 17, "agent_name": "法律专家", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 35, "timestamp": "2026-04-01T18:26:57.195068", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 35, "timestamp": "2026-04-01T18:26:57.195090", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 35, "timestamp": "2026-04-01T18:26:57.195113", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 35, "timestamp": "2026-04-01T18:26:57.203644", "event_type": "round_end", "actions_count": 9}
+{"round": 36, "timestamp": "2026-04-01T18:26:57.203858", "event_type": "round_start", "simulated_hour": 11}
+{"round": 36, "timestamp": "2026-04-01T18:26:59.373714", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 36, "timestamp": "2026-04-01T18:26:59.373812", "agent_id": 15, "agent_name": "猎头公司", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 36, "timestamp": "2026-04-01T18:26:59.373859", "agent_id": 9, "agent_name": "墩墩舆情课工作室", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 36, "timestamp": "2026-04-01T18:26:59.373887", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 36, "timestamp": "2026-04-01T18:26:59.373913", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 36, "timestamp": "2026-04-01T18:26:59.373936", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 36, "timestamp": "2026-04-01T18:26:59.373969", "agent_id": 22, "agent_name": "京报网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 36, "timestamp": "2026-04-01T18:26:59.373992", "agent_id": 5, "agent_name": "重庆上游新闻", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 36, "timestamp": "2026-04-01T18:26:59.383184", "event_type": "round_end", "actions_count": 8}
+{"round": 37, "timestamp": "2026-04-01T18:26:59.383373", "event_type": "round_start", "simulated_hour": 12}
+{"round": 37, "timestamp": "2026-04-01T18:27:01.699091", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 37, "timestamp": "2026-04-01T18:27:01.699202", "agent_id": 29, "agent_name": "Media Engine", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 37, "timestamp": "2026-04-01T18:27:01.699240", "agent_id": 7, "agent_name": "后勤部门", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 37, "timestamp": "2026-04-01T18:27:01.699267", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 37, "timestamp": "2026-04-01T18:27:01.699291", "agent_id": 22, "agent_name": "京报网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 37, "timestamp": "2026-04-01T18:27:01.699314", "agent_id": 2, "agent_name": "央级媒体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 37, "timestamp": "2026-04-01T18:27:01.707840", "event_type": "round_end", "actions_count": 6}
+{"round": 38, "timestamp": "2026-04-01T18:27:01.708047", "event_type": "round_start", "simulated_hour": 13}
+{"round": 38, "timestamp": "2026-04-01T18:27:05.691489", "agent_id": 13, "agent_name": "管理顾问", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 38, "timestamp": "2026-04-01T18:27:05.691618", "agent_id": 9, "agent_name": "墩墩舆情课工作室", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 38, "timestamp": "2026-04-01T18:27:05.691655", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 38, "timestamp": "2026-04-01T18:27:05.691683", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 38, "timestamp": "2026-04-01T18:27:05.691708", "agent_id": 7, "agent_name": "后勤部门", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 38, "timestamp": "2026-04-01T18:27:05.691731", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 38, "timestamp": "2026-04-01T18:27:05.691753", "agent_id": 2, "agent_name": "央级媒体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 38, "timestamp": "2026-04-01T18:27:05.691776", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 38, "timestamp": "2026-04-01T18:27:05.700357", "event_type": "round_end", "actions_count": 8}
+{"round": 39, "timestamp": "2026-04-01T18:27:05.700578", "event_type": "round_start", "simulated_hour": 14}
+{"round": 39, "timestamp": "2026-04-01T18:27:10.550691", "agent_id": 29, "agent_name": "Media Engine", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 39, "timestamp": "2026-04-01T18:27:10.550801", "agent_id": 15, "agent_name": "猎头公司", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 39, "timestamp": "2026-04-01T18:27:10.550858", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 39, "timestamp": "2026-04-01T18:27:10.550897", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 39, "timestamp": "2026-04-01T18:27:10.550926", "agent_id": 2, "agent_name": "央级媒体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 39, "timestamp": "2026-04-01T18:27:10.550958", "agent_id": 5, "agent_name": "重庆上游新闻", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 39, "timestamp": "2026-04-01T18:27:10.550983", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 39, "timestamp": "2026-04-01T18:27:10.551005", "agent_id": 7, "agent_name": "后勤部门", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 39, "timestamp": "2026-04-01T18:27:10.559915", "event_type": "round_end", "actions_count": 8}
+{"round": 40, "timestamp": "2026-04-01T18:27:10.560154", "event_type": "round_start", "simulated_hour": 15}
+{"round": 40, "timestamp": "2026-04-01T18:27:15.288945", "agent_id": 15, "agent_name": "猎头公司", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 40, "timestamp": "2026-04-01T18:27:15.289051", "agent_id": 29, "agent_name": "Media Engine", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 40, "timestamp": "2026-04-01T18:27:15.289086", "agent_id": 17, "agent_name": "法律专家", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 40, "timestamp": "2026-04-01T18:27:15.289112", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 40, "timestamp": "2026-04-01T18:27:15.289137", "agent_id": 13, "agent_name": "管理顾问", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 40, "timestamp": "2026-04-01T18:27:15.289159", "agent_id": 22, "agent_name": "京报网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 40, "timestamp": "2026-04-01T18:27:15.289181", "agent_id": 5, "agent_name": "重庆上游新闻", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 40, "timestamp": "2026-04-01T18:27:15.289203", "agent_id": 14, "agent_name": "南方网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 40, "timestamp": "2026-04-01T18:27:15.298468", "event_type": "round_end", "actions_count": 8}
+{"round": 41, "timestamp": "2026-04-01T18:27:15.298834", "event_type": "round_start", "simulated_hour": 16}
+{"round": 41, "timestamp": "2026-04-01T18:27:22.137797", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 41, "timestamp": "2026-04-01T18:27:22.137917", "agent_id": 30, "agent_name": "湖北省教育厅", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 41, "timestamp": "2026-04-01T18:27:22.137955", "agent_id": 13, "agent_name": "管理顾问", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 41, "timestamp": "2026-04-01T18:27:22.137982", "agent_id": 9, "agent_name": "墩墩舆情课工作室", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 41, "timestamp": "2026-04-01T18:27:22.138007", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 41, "timestamp": "2026-04-01T18:27:22.138030", "agent_id": 29, "agent_name": "Media Engine", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 41, "timestamp": "2026-04-01T18:27:22.138052", "agent_id": 7, "agent_name": "后勤部门", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 41, "timestamp": "2026-04-01T18:27:22.138083", "agent_id": 5, "agent_name": "重庆上游新闻", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 41, "timestamp": "2026-04-01T18:27:22.138106", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 41, "timestamp": "2026-04-01T18:27:22.146706", "event_type": "round_end", "actions_count": 9}
+{"round": 42, "timestamp": "2026-04-01T18:27:22.146876", "event_type": "round_start", "simulated_hour": 17}
+{"round": 42, "timestamp": "2026-04-01T18:27:24.376479", "agent_id": 29, "agent_name": "Media Engine", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 42, "timestamp": "2026-04-01T18:27:24.376582", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 42, "timestamp": "2026-04-01T18:27:24.376619", "agent_id": 22, "agent_name": "京报网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 42, "timestamp": "2026-04-01T18:27:24.376645", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 42, "timestamp": "2026-04-01T18:27:24.384995", "event_type": "round_end", "actions_count": 4}
+{"round": 43, "timestamp": "2026-04-01T18:27:24.385217", "event_type": "round_start", "simulated_hour": 18}
+{"round": 43, "timestamp": "2026-04-01T18:27:27.628215", "agent_id": 20, "agent_name": "网易号“笔杆论道”", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 43, "timestamp": "2026-04-01T18:27:27.628322", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 43, "timestamp": "2026-04-01T18:27:27.628372", "agent_id": 3, "agent_name": "自媒体平台", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 43, "timestamp": "2026-04-01T18:27:27.628412", "agent_id": 12, "agent_name": "学生", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 43, "timestamp": "2026-04-01T18:27:27.628447", "agent_id": 5, "agent_name": "重庆上游新闻", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 43, "timestamp": "2026-04-01T18:27:27.628481", "agent_id": 29, "agent_name": "Media Engine", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 43, "timestamp": "2026-04-01T18:27:27.628517", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 43, "timestamp": "2026-04-01T18:27:27.628552", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 43, "timestamp": "2026-04-01T18:27:27.628585", "agent_id": 2, "agent_name": "央级媒体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 43, "timestamp": "2026-04-01T18:27:27.639365", "event_type": "round_end", "actions_count": 9}
+{"round": 44, "timestamp": "2026-04-01T18:27:27.639642", "event_type": "round_start", "simulated_hour": 19}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.514535", "agent_id": 3, "agent_name": "自媒体平台", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.514647", "agent_id": 4, "agent_name": "海外校友", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.514683", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.514709", "agent_id": 25, "agent_name": "家长", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.514741", "agent_id": 20, "agent_name": "网易号“笔杆论道”", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.514764", "agent_id": 22, "agent_name": "京报网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.514785", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.514805", "agent_id": 12, "agent_name": "学生", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.514832", "agent_id": 9, "agent_name": "墩墩舆情课工作室", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.514856", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.514878", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.514898", "agent_id": 2, "agent_name": "央级媒体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.514918", "agent_id": 21, "agent_name": "学生代表", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 1, "new_post_id": 44, "original_content": "【武汉大学后勤集团通报】经第三方机构复检，枫园研究生公寓1-4栋室内空气甲醛浓度均符合GB/T 18883-2022标准（≤0.08mg/m³）。此前学生自发检测存在采样不规范、仪器未校准等问题。感谢广大同学监督。", "original_author_name": "校长", "original_author_agent_id": 6, "quote_content": "我们先看数据：GB/T 18883-2022规定甲醛限值为≤0.08mg/m³，但该通报未披露具体检测点位（卧室核心区？走廊？）、采样时长（是否满足标准要求的12h以上？）、温湿度与通风状态等关键参数。第三方CMA报告（编号WH-AIR-20240127-06）显示枫园15栋302卧室甲醛实测0.144mg/m³，超国标1.8倍——数据源已同步至‘珞珈法援’知识库。欢迎比对。"}, "result": null, "success": true}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.514948", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.514971", "agent_id": 14, "agent_name": "南方网", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 8, "new_post_id": 45, "original_content": "1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕", "original_author_name": "央媒调查记者", "original_author_agent_id": 0, "quote_content": "【南方网数据看板·权威信源标注】本条内容已同步接入《高校基建项目阳光监管数据看板》（v2.3.1），原始数据来源经三重核验：①武汉大学学生互助文档原始填报记录（WH-SYM-2024-0623-001至1937）；②湖北省疾控中心环境所盲样复测报告（HCHO-2024-WH-057）；③教育部《高等学校学生公寓管理服务规范》第十五条。所有数据字段均按《粤鄂跨省政务数据协同治理标准》（粤政数发〔2024〕7号）完成元数据标引与可信时间戳固化。#高校数据治理 #政务数据可信化"}, "result": null, "success": true}
+{"round": 44, "timestamp": "2026-04-01T18:27:34.527045", "event_type": "round_end", "actions_count": 15}
+{"round": 45, "timestamp": "2026-04-01T18:27:34.527285", "event_type": "round_start", "simulated_hour": 20}
+{"round": 45, "timestamp": "2026-04-01T18:27:39.747886", "agent_id": 3, "agent_name": "自媒体平台", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 45, "timestamp": "2026-04-01T18:27:39.748010", "agent_id": 22, "agent_name": "京报网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 45, "timestamp": "2026-04-01T18:27:39.748055", "agent_id": 12, "agent_name": "学生", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 45, "timestamp": "2026-04-01T18:27:39.748087", "agent_id": 4, "agent_name": "海外校友", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 45, "timestamp": "2026-04-01T18:27:39.748117", "agent_id": 27, "agent_name": "校友群体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 45, "timestamp": "2026-04-01T18:27:39.748145", "agent_id": 29, "agent_name": "Media Engine", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 45, "timestamp": "2026-04-01T18:27:39.748174", "agent_id": 20, "agent_name": "网易号“笔杆论道”", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 45, "timestamp": "2026-04-01T18:27:39.748202", "agent_id": 26, "agent_name": "肖某某", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 45, "timestamp": "2026-04-01T18:27:39.748229", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 45, "timestamp": "2026-04-01T18:27:39.748255", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 45, "timestamp": "2026-04-01T18:27:39.748283", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 45, "timestamp": "2026-04-01T18:27:39.748310", "agent_id": 0, "agent_name": "央媒调查记者", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 45, "timestamp": "2026-04-01T18:27:39.748336", "agent_id": 2, "agent_name": "央级媒体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 45, "timestamp": "2026-04-01T18:27:39.748362", "agent_id": 21, "agent_name": "学生代表", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 1, "new_post_id": 46, "original_content": "【武汉大学后勤集团通报】经第三方机构复检，枫园研究生公寓1-4栋室内空气甲醛浓度均符合GB/T 18883-2022标准（≤0.08mg/m³）。此前学生自发检测存在采样不规范、仪器未校准等问题。感谢广大同学监督。", "original_author_name": "校长", "original_author_agent_id": 6, "quote_content": "我们先看数据：GB/T 18883-2022规定甲醛限值为≤0.08mg/m³，但该通报未披露具体检测点位（卧室核心区？走廊？）、采样时长（是否满足标准要求的12h以上？）、温湿度与通风状态等关键参数。第三方CMA报告（编号WH-AIR-20240127-06）显示枫园15栋302卧室甲醛实测0.144mg/m³，超国标1.8倍——数据源已同步至‘珞珈法援’知识库。欢迎比对。"}, "result": null, "success": true}
+{"round": 45, "timestamp": "2026-04-01T18:27:39.759666", "event_type": "round_end", "actions_count": 14}
+{"round": 46, "timestamp": "2026-04-01T18:27:39.759936", "event_type": "round_start", "simulated_hour": 21}
+{"round": 46, "timestamp": "2026-04-01T18:27:44.953153", "agent_id": 27, "agent_name": "校友群体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 46, "timestamp": "2026-04-01T18:27:44.953295", "agent_id": 23, "agent_name": "央广网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 46, "timestamp": "2026-04-01T18:27:44.953349", "agent_id": 17, "agent_name": "法律专家", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 46, "timestamp": "2026-04-01T18:27:44.953381", "agent_id": 20, "agent_name": "网易号“笔杆论道”", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 46, "timestamp": "2026-04-01T18:27:44.953408", "agent_id": 25, "agent_name": "家长", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 46, "timestamp": "2026-04-01T18:27:44.953432", "agent_id": 3, "agent_name": "自媒体平台", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 46, "timestamp": "2026-04-01T18:27:44.953457", "agent_id": 4, "agent_name": "海外校友", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 46, "timestamp": "2026-04-01T18:27:44.953481", "agent_id": 19, "agent_name": "香港01", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 46, "timestamp": "2026-04-01T18:27:44.953505", "agent_id": 12, "agent_name": "学生", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 46, "timestamp": "2026-04-01T18:27:44.953529", "agent_id": 5, "agent_name": "重庆上游新闻", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 46, "timestamp": "2026-04-01T18:27:44.953552", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 46, "timestamp": "2026-04-01T18:27:44.953575", "agent_id": 2, "agent_name": "央级媒体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 46, "timestamp": "2026-04-01T18:27:44.953597", "agent_id": 21, "agent_name": "学生代表", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 1, "new_post_id": 47, "original_content": "【武汉大学后勤集团通报】经第三方机构复检，枫园研究生公寓1-4栋室内空气甲醛浓度均符合GB/T 18883-2022标准（≤0.08mg/m³）。此前学生自发检测存在采样不规范、仪器未校准等问题。感谢广大同学监督。", "original_author_name": "校长", "original_author_agent_id": 6, "quote_content": "我们先看数据：GB/T 18883-2022规定甲醛限值为≤0.08mg/m³，但该通报未披露具体检测点位（卧室核心区？走廊？）、采样时长（是否满足标准要求的12h以上？）、温湿度与通风状态等关键参数。第三方CMA报告（编号WH-AIR-20240127-06）显示枫园15栋302卧室甲醛实测0.144mg/m³，超国标1.8倍——数据源已同步至‘珞珈法援’知识库。欢迎比对。"}, "result": null, "success": true}
+{"round": 46, "timestamp": "2026-04-01T18:27:44.964719", "event_type": "round_end", "actions_count": 13}
+{"round": 47, "timestamp": "2026-04-01T18:27:44.965008", "event_type": "round_start", "simulated_hour": 22}
+{"round": 47, "timestamp": "2026-04-01T18:27:49.872303", "agent_id": 4, "agent_name": "海外校友", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 47, "timestamp": "2026-04-01T18:27:49.872431", "agent_id": 27, "agent_name": "校友群体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 47, "timestamp": "2026-04-01T18:27:49.872467", "agent_id": 25, "agent_name": "家长", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 47, "timestamp": "2026-04-01T18:27:49.872493", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 47, "timestamp": "2026-04-01T18:27:49.872517", "agent_id": 12, "agent_name": "学生", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 47, "timestamp": "2026-04-01T18:27:49.872541", "agent_id": 20, "agent_name": "网易号“笔杆论道”", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 47, "timestamp": "2026-04-01T18:27:49.872573", "agent_id": 22, "agent_name": "京报网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 47, "timestamp": "2026-04-01T18:27:49.872597", "agent_id": 3, "agent_name": "自媒体平台", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 47, "timestamp": "2026-04-01T18:27:49.872618", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 47, "timestamp": "2026-04-01T18:27:49.872641", "agent_id": 2, "agent_name": "央级媒体", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 47, "timestamp": "2026-04-01T18:27:49.872661", "agent_id": 21, "agent_name": "学生代表", "action_type": "QUOTE_POST", "action_args": {"quoted_id": 1, "new_post_id": 48, "original_content": "【武汉大学后勤集团通报】经第三方机构复检，枫园研究生公寓1-4栋室内空气甲醛浓度均符合GB/T 18883-2022标准（≤0.08mg/m³）。此前学生自发检测存在采样不规范、仪器未校准等问题。感谢广大同学监督。", "original_author_name": "校长", "original_author_agent_id": 6, "quote_content": "我们先看数据：GB/T 18883-2022规定甲醛限值为≤0.08mg/m³，但该通报未披露具体检测点位（卧室核心区？走廊？）、采样时长（是否满足标准要求的12h以上？）、温湿度与通风状态等关键参数。第三方CMA报告（编号WH-AIR-20240127-06）显示枫园15栋302卧室甲醛实测0.144mg/m³，超国标1.8倍——数据源已同步至‘珞珈法援’知识库。欢迎比对。"}, "result": null, "success": true}
+{"round": 47, "timestamp": "2026-04-01T18:27:49.882168", "event_type": "round_end", "actions_count": 11}
+{"round": 48, "timestamp": "2026-04-01T18:27:49.882361", "event_type": "round_start", "simulated_hour": 23}
+{"round": 48, "timestamp": "2026-04-01T18:27:52.249643", "agent_id": 12, "agent_name": "学生", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 48, "timestamp": "2026-04-01T18:27:52.249767", "agent_id": 22, "agent_name": "京报网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 48, "timestamp": "2026-04-01T18:27:52.249806", "agent_id": 4, "agent_name": "海外校友", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 48, "timestamp": "2026-04-01T18:27:52.249849", "agent_id": 3, "agent_name": "自媒体平台", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 48, "timestamp": "2026-04-01T18:27:52.249886", "agent_id": 18, "agent_name": "新华网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 48, "timestamp": "2026-04-01T18:27:52.249918", "agent_id": 28, "agent_name": "央视网", "action_type": "DO_NOTHING", "action_args": {}, "result": null, "success": true}
+{"round": 48, "timestamp": "2026-04-01T18:27:52.260924", "event_type": "round_end", "actions_count": 6}
+{"timestamp": "2026-04-01T18:27:52.260994", "event_type": "simulation_end", "platform": "twitter", "total_rounds": 48, "total_actions": 292}

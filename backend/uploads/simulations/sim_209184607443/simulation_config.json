@@ -1,0 +1,313 @@
+{
+  "simulation_id": "sim_209184607443",
+  "project_id": "proj_6d56e4817baf",
+  "graph_id": "mirofish_9f0d1c84b2164adf",
+  "simulation_requirement": "基于 README 图谱做一次最小 Twitter 舆论模拟 smoke test，要求支持定时事件与显式社交关系图",
+  "time_config": {
+    "total_simulation_hours": 48,
+    "minutes_per_round": 60,
+    "agents_per_hour_min": 1,
+    "agents_per_hour_max": 5,
+    "peak_hours": [
+      19,
+      20,
+      21,
+      22
+    ],
+    "peak_activity_multiplier": 1.5,
+    "off_peak_hours": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "off_peak_activity_multiplier": 0.05,
+    "morning_hours": [
+      6,
+      7,
+      8
+    ],
+    "morning_activity_multiplier": 0.4,
+    "work_hours": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "work_activity_multiplier": 0.7
+  },
+  "agent_configs": [
+    {
+      "agent_id": 0,
+      "entity_uuid": "e50b9516-d55b-4fdd-81e8-28ab7b855c98",
+      "entity_name": "bot_01",
+      "entity_type": "BotAccount",
+      "activity_level": 0.75,
+      "posts_per_hour": 2.4,
+      "comments_per_hour": 0.8,
+      "active_hours": [
+        19,
+        20,
+        21,
+        22
+      ],
+      "response_delay_min": 3,
+      "response_delay_max": 12,
+      "sentiment_bias": 0.2,
+      "stance": "supportive",
+      "influence_weight": 1.1
+    },
+    {
+      "agent_id": 1,
+      "entity_uuid": "de15ecdb-fab1-4e1b-8a27-f6a8bf0ce1ce",
+      "entity_name": "CAMEL-AI",
+      "entity_type": "Organization",
+      "activity_level": 0.2,
+      "posts_per_hour": 0.3,
+      "comments_per_hour": 0.1,
+      "active_hours": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "response_delay_min": 120,
+      "response_delay_max": 240,
+      "sentiment_bias": 0.4,
+      "stance": "supportive",
+      "influence_weight": 2.8
+    },
+    {
+      "agent_id": 2,
+      "entity_uuid": "db2417d4-1555-4b2a-9cdf-95462e2f4ec1",
+      "entity_name": "group_a_01",
+      "entity_type": "CitizenUser",
+      "activity_level": 0.85,
+      "posts_per_hour": 1.8,
+      "comments_per_hour": 2.2,
+      "active_hours": [
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "response_delay_min": 2,
+      "response_delay_max": 10,
+      "sentiment_bias": 0.3,
+      "stance": "supportive",
+      "influence_weight": 1.05
+    },
+    {
+      "agent_id": 3,
+      "entity_uuid": "b8485b3c-29d4-4774-a55b-69e0fe11b803",
+      "entity_name": "News",
+      "entity_type": "MediaOutlet",
+      "activity_level": 0.5,
+      "posts_per_hour": 3.0,
+      "comments_per_hour": 0.5,
+      "active_hours": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "response_delay_min": 5,
+      "response_delay_max": 20,
+      "sentiment_bias": 0.0,
+      "stance": "neutral",
+      "influence_weight": 2.3
+    },
+    {
+      "agent_id": 4,
+      "entity_uuid": "65f06893-76ab-4a1a-89e3-c0b583c0909c",
+      "entity_name": "666ghj",
+      "entity_type": "Person",
+      "activity_level": 0.78,
+      "posts_per_hour": 1.2,
+      "comments_per_hour": 1.5,
+      "active_hours": [
+        19,
+        20,
+        21,
+        22
+      ],
+      "response_delay_min": 1,
+      "response_delay_max": 8,
+      "sentiment_bias": 0.5,
+      "stance": "supportive",
+      "influence_weight": 1.15
+    },
+    {
+      "agent_id": 5,
+      "entity_uuid": "2d6bce10-b5f3-41ed-a9c1-4b0c52b43b54",
+      "entity_name": "Blogs",
+      "entity_type": "MediaOutlet",
+      "activity_level": 0.45,
+      "posts_per_hour": 2.0,
+      "comments_per_hour": 0.3,
+      "active_hours": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "response_delay_min": 8,
+      "response_delay_max": 25,
+      "sentiment_bias": 0.1,
+      "stance": "neutral",
+      "influence_weight": 2.1
+    }
+  ],
+  "event_config": {
+    "initial_posts": [
+      {
+        "content": "Just launched LIGHTWORLD — a lightweight, omni-modal social simulation engine. Graph + Text + Image + Video native. AGPL-3.0. 100k+ agents booting now. #LIGHTWORLD #OASIS",
+        "poster_type": "Organization",
+        "poster_agent_id": 1
+      },
+      {
+        "content": "OASIS is a CAMEL-AI project. Full architecture and graph ingestion specs now live in README.md — including follow/repost topology for emergent influence modeling.",
+        "poster_type": "Organization",
+        "poster_agent_id": 1
+      },
+      {
+        "content": "MiroFish was created by 666ghj — an early open agent framework. Interesting how LIGHTWORLD’s swarm runtime (100k+ agents) extends similar primitives but adds video-aware event tracking & polarization forecasting.",
+        "poster_type": "Person",
+        "poster_agent_id": 4
+      },
+      {
+        "content": "BREAKING: New simulation engine LIGHTWORLD enters public testing. Claims real-time narrative volatility tracking and intervention window scoring. Initial topology seeded with Twitter/X-like follows & reposts.",
+        "poster_type": "MediaOutlet",
+        "poster_agent_id": 3
+      }
+    ],
+    "scheduled_events": [
+      {
+        "event_type": "create_post",
+        "trigger_hour": 6,
+        "content": "RT @group_a_01: 'The repost edge from bot_01 → group_a_01 (weight 0.60) shows coordinated amplification — not organic reach.' #LIGHTWORLD #GraphPhysics",
+        "poster_type": "BotAccount",
+        "hot_topics_add": [],
+        "hot_topics_remove": [],
+        "poster_agent_id": 0
+      },
+      {
+        "event_type": "hot_topics_update",
+        "trigger_hour": 12,
+        "hot_topics_add": [
+          "graph_physics",
+          "bot_amplification"
+        ],
+        "hot_topics_remove": [
+          "MiroFish"
+        ]
+      }
+    ],
+    "hot_topics": [
+      "LIGHTWORLD",
+      "OASIS",
+      "MiroFish"
+    ],
+    "narrative_direction": "舆论从技术好奇（LIGHTWORLD开源发布）向项目归属与可信度追问演进：CAMEL-AI的OASIS项目被关联质疑，666ghj创建的MiroFish被引为对比案例，引发关于AI工具主权与社区治理的早期讨论。"
+  },
+  "twitter_config": {
+    "platform": "twitter",
+    "recency_weight": 0.4,
+    "popularity_weight": 0.3,
+    "relevance_weight": 0.3,
+    "viral_threshold": 10,
+    "echo_chamber_strength": 0.5
+  },
+  "reddit_config": null,
+  "topology_aware": {
+    "enabled": true,
+    "coordination_enabled": true,
+    "differentiation_enabled": true,
+    "similarity_threshold": 0.9,
+    "top_pairs_ratio": 0.03,
+    "min_unit_size": 2,
+    "extra_member_prob": 0.12,
+    "importance_alpha": 0.7,
+    "sentiment_diff_threshold": 0.35,
+    "opinion_threshold": 0.5,
+    "stubbornness_threshold": 0.5,
+    "influence_threshold": 0.5,
+    "ppr_alpha": 0.85,
+    "ppr_eps": 0.0001,
+    "semantic_threshold": 0.1,
+    "keyword_jaccard_threshold": 0.12,
+    "keyword_overlap_min": 1,
+    "graph_prior_similarity_boost": 0.35,
+    "graph_prior_extra_ratio": 0.25,
+    "dynamic_update_enabled": true,
+    "dynamic_update_interval": 4,
+    "dynamic_update_min_events": 8,
+    "dynamic_interaction_min_weight": 0.25,
+    "dynamic_neighbors_per_agent": 6,
+    "initial_follow_max_per_agent": 3,
+    "initial_follow_max_total": 0,
+    "social_link_sync_enabled": true,
+    "social_link_sync_interval": 6,
+    "social_link_sync_max_total": 20
+  },
+  "simplemem": {
+    "enabled": true,
+    "max_units_per_agent": 120,
+    "retrieval_topk": 5,
+    "merge_jaccard_threshold": 0.45,
+    "max_injected_chars": 1200,
+    "recency_decay": 0.08
+  },
+  "light_mode": {
+    "enabled": false,
+    "agent_ratio": 0.6
+  },
+  "llm_model": "qwen-plus",
+  "llm_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "generated_at": "2026-03-31T10:56:18.153560",
+  "generation_reasoning": "时间配置: 本次smoke test基于minimal graph seed，仅含6个实体（含1个bot、1个KOL关联公民用户、1个组织、2个媒体源、1个开发者），事件密度低、无外部冲击注入（seed中t=3/t=9事件未在本次模拟启用），属轻量级拓扑验证。参与主体含中国网民（group_a_01）、中文技术社区关注者（kol_01）、自动化bot（bot_01）及项目方（CAMEL-AI、666ghj），整体符合典型中国互联网用户作息：晚间19-22点为内容消费与互动高峰；凌晨0-5点静默；早间6-8点信息初筛；工作时段9-18点以媒体（News/Blogs）持续供稿为主，但社交互动频次中等。agents_per_hour_min/max设为1-5，体现最小化激活原则——仅需触发follow/repost等基础边行为即可验证图谱传播逻辑，无需高并发。 | 事件配置: 初始热点紧扣README核心术语（LIGHTWORLD/OASIS/MiroFish），覆盖全部5类可用实体；叙事方向体现从功能宣告→归属溯源→横向对比→结构质疑的自然升级；初始帖子严格按实体类型分配（CAMEL-AI as Organization, 666ghj as Person, News/Blogs as MediaOutlet）；定时事件在6h注入bot_01的转发行为（符合图谱中repost边定义），12h更新话题以反映舆论焦点向图结构可信度迁移，移除MiroFish因讨论收敛、新增graph_physics和bot_amplification体现 emergent social dynamics。 | Agent配置: 成功生成 6 个 | 初始帖子分配: 4 个帖子已分配发布者",
+  "entity_prompts_file": "entity_prompts.json",
+  "entity_prompts_count": 6,
+  "entity_graph_file": "entity_graph_snapshot.json",
+  "entity_graph_entity_count": 6,
+  "entity_graph_edge_count": 5,
+  "social_relation_graph_file": "social_relation_graph.json",
+  "social_relation_graph_edge_count": 0
+}

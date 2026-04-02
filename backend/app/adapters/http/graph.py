@@ -12,8 +12,8 @@ from . import graph_bp
 from ...config import Config
 from ...application.ontology_generator import OntologyGenerator
 from ...application.graph_builder import GraphBuilderService
+from ...application.multimodal_ingestion import MultimodalIngestionService
 from ...application.text_processor import TextProcessor
-from ...infrastructure.file_parser import FileParser
 from ...infrastructure.logger import get_logger
 from ...domain.task import TaskManager, TaskStatus
 from ...domain.project import ProjectManager, ProjectStatus
@@ -126,7 +126,7 @@ def generate_ontology():
     请求方式：multipart/form-data
     
     参数：
-        files: 上传的文件（PDF/MD/TXT），可多个
+        files: 上传的文件（PDF/MD/TXT/JPG/PNG/WEBP/MP4/MOV/MKV/AVI），可多个
         simulation_requirement: 模拟需求描述（必填）
         project_name: 项目名称（可选）
         additional_context: 额外说明（可选）
@@ -176,9 +176,8 @@ def generate_ontology():
         project.simulation_requirement = simulation_requirement
         logger.info(f"创建项目: {project.project_id}")
         
-        # 保存文件并提取文本
-        document_texts = []
-        all_text = ""
+        # 保存文件并执行统一多模态解析
+        saved_inputs = []
         
         for file in uploaded_files:
             if file and file.filename and allowed_file(file.filename):
@@ -192,23 +191,46 @@ def generate_ontology():
                     "filename": file_info["original_filename"],
                     "size": file_info["size"]
                 })
-                
-                # 提取文本
-                text = FileParser.extract_text(file_info["path"])
-                text = TextProcessor.preprocess_text(text)
-                document_texts.append(text)
-                all_text += f"\n\n=== {file_info['original_filename']} ===\n{text}"
+                saved_inputs.append({
+                    "path": file_info["path"],
+                    "display_name": file_info["original_filename"],
+                })
         
-        if not document_texts:
+        if not saved_inputs:
             ProjectManager.delete_project(project.project_id)
             return jsonify({
                 "success": False,
                 "error": "没有成功处理任何文档，请检查文件格式"
             }), 400
+
+        ingestion = MultimodalIngestionService().ingest_files(
+            saved_inputs,
+            simulation_requirement=simulation_requirement,
+            additional_context=additional_context,
+        )
+        document_texts = ingestion.get("document_texts", [])
+        all_text = ingestion.get("all_text", "")
+        if not document_texts or not all_text.strip():
+            ProjectManager.delete_project(project.project_id)
+            return jsonify({
+                "success": False,
+                "error": "多模态输入解析后未生成可用文本，请检查文件内容"
+            }), 400
         
         # 保存提取的文本
         project.total_text_length = len(all_text)
+        project.ingestion_summary = ingestion.get("manifest")
         ProjectManager.save_extracted_text(project.project_id, all_text)
+        ProjectManager.save_json_artifact(
+            project.project_id,
+            "parsed_content.json",
+            ingestion.get("parsed_content", {}),
+        )
+        ProjectManager.save_json_artifact(
+            project.project_id,
+            "source_manifest.json",
+            ingestion.get("manifest", {}),
+        )
         logger.info(f"文本提取完成，共 {len(all_text)} 字符")
         
         # 生成本体
@@ -242,7 +264,8 @@ def generate_ontology():
                 "ontology": project.ontology,
                 "analysis_summary": project.analysis_summary,
                 "files": project.files,
-                "total_text_length": project.total_text_length
+                "total_text_length": project.total_text_length,
+                "ingestion_summary": project.ingestion_summary,
             }
         })
         

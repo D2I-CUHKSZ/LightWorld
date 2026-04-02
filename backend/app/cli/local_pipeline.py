@@ -12,9 +12,14 @@ from app.modules.graph.local_pipeline import LocalGraphPipeline, LocalPipelineOp
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="MiroFish 本地文档直读：文本提取 -> 本体生成 -> 图谱构建"
+        description="MiroFish 本地多模态直读：文本/图片/视频 -> 证据块 -> 本体生成 -> 图谱构建"
     )
-    parser.add_argument("--files", nargs="*", default=[], help="本地文档路径列表，支持 pdf/md/txt/markdown")
+    parser.add_argument(
+        "--files",
+        nargs="*",
+        default=[],
+        help="本地输入路径列表，支持 pdf/md/txt/markdown/jpg/png/webp/mp4/mov/mkv/avi",
+    )
     parser.add_argument("--files-from", default="", help="从文本文件读取路径（每行一个文件路径）")
     parser.add_argument("--simulation-requirement", required=True, help="模拟需求描述")
     parser.add_argument("--project-name", default="Local Pipeline Project", help="项目名称")

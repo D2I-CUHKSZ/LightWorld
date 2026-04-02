@@ -546,6 +546,23 @@ TOOL_DESC_INTERVIEW_AGENTS = """\
 
 【重要】需要OASIS模拟环境正在运行才能使用此功能！"""
 
+TOOL_DESC_REVIEW_SIMULATION_STATE = """\
+【运行摘要 - 补充模拟后的行为与结构信号】
+这个工具会读取 simulation 目录里的运行后摘要文件，用简洁方式返回：
+- 动作分布与活跃Agent
+- entity keywords 的代表样本
+- 协同 unit、影响力差异等结构信号
+- memory 写入与检索的概况
+
+适合在这些场景中使用：
+- 需要快速把握模拟整体走向
+- 需要验证某个章节是否存在明显的群体协同、影响力不对称或记忆回流
+- 需要从运行摘要中抓到进一步检索的线索
+
+注意：
+- 这是运行摘要，不替代图谱检索和采访
+- 正文写作仍应优先使用检索结果和采访内容作为主要证据"""
+
 # ── 大纲规划 prompt ──
 
 PLAN_SYSTEM_PROMPT = """\
@@ -600,6 +617,9 @@ PLAN_USER_PROMPT_TEMPLATE = """\
 【模拟预测到的部分未来事实样本】
 {related_facts_json}
 
+【补充运行信号】
+{simulation_artifact_digest}
+
 请以「上帝视角」审视这个未来预演：
 1. 在我们设定的条件下，未来呈现出了什么样的状态？
 2. 各类人群（Agent）是如何反应和行动的？
@@ -619,6 +639,9 @@ SECTION_SYSTEM_PROMPT_TEMPLATE = """\
 预测场景（模拟需求）: {simulation_requirement}
 
 当前要撰写的章节: {section_title}
+
+运行后摘要（辅助线索，不可直接替代检索证据）:
+{simulation_artifact_digest}
 
 ═══════════════════════════════════════════════════════════════
 【核心理念】
@@ -644,6 +667,7 @@ SECTION_SYSTEM_PROMPT_TEMPLATE = """\
    - 所有内容必须来自模拟世界中发生的事件和Agent言行
    - 禁止使用你自己的知识来编写报告内容
    - 每个章节至少调用3次工具（最多5次）来观察模拟的世界，它代表了未来
+   - 上方的运行摘要只是帮助你发现线索，正文论证仍应主要依赖工具返回结果
 
 2. 【必须引用Agent的原始言行】
    - Agent的发言和行为是对未来人群行为的预测
@@ -712,6 +736,7 @@ SECTION_SYSTEM_PROMPT_TEMPLATE = """\
 - panorama_search: 广角全景搜索，了解事件全貌、时间线和演变过程
 - quick_search: 快速验证某个具体信息点
 - interview_agents: 采访模拟Agent，获取不同角色的第一人称观点和真实反应
+- review_simulation_state: 快速查看运行后动作、协同、影响力与记忆信号，再决定下一步深挖方向
 
 ═══════════════════════════════════════════════════════════════
 【工作流程】
@@ -778,6 +803,7 @@ SECTION_USER_PROMPT_TEMPLATE = """\
 2. 开始前必须先调用工具获取模拟数据
 3. 请混合使用不同工具，不要只用一种
 4. 报告内容必须来自检索结果，不要使用自己的知识
+5. 如果章节涉及群体协同、传播差异或认知变化，优先考虑先看一次运行摘要，再决定深挖什么
 
 【⚠️ 格式警告 - 必须遵守】
 - ❌ 不要写任何标题（#、##、###、####都不行）
@@ -904,6 +930,7 @@ class ReportAgent:
         
         self.llm = llm_client or LLMClient()
         self.zep_tools = zep_tools or ZepToolsService()
+        self._simulation_context_cache: Optional[Dict[str, Any]] = None
         
         # 工具定义
         self.tools = self._define_tools()
@@ -949,8 +976,24 @@ class ReportAgent:
                     "interview_topic": "采访主题或需求描述（如：'了解学生对宿舍甲醛事件的看法'）",
                     "max_agents": "最多采访的Agent数量（可选，默认5，最大10）"
                 }
+            },
+            "review_simulation_state": {
+                "name": "review_simulation_state",
+                "description": TOOL_DESC_REVIEW_SIMULATION_STATE,
+                "parameters": {
+                    "focus": "想优先查看的角度（如：'动作分布'、'协同单元'、'影响力差异'、'记忆回收'），可选"
+                }
             }
         }
+
+    def _get_simulation_context(self) -> Dict[str, Any]:
+        if self._simulation_context_cache is None:
+            self._simulation_context_cache = self.zep_tools.get_simulation_context(
+                graph_id=self.graph_id,
+                simulation_requirement=self.simulation_requirement,
+                simulation_id=self.simulation_id,
+            )
+        return self._simulation_context_cache
     
     def _execute_tool(self, tool_name: str, parameters: Dict[str, Any], report_context: str = "") -> str:
         """
@@ -1018,6 +1061,10 @@ class ReportAgent:
                     max_agents=max_agents
                 )
                 return result.to_text()
+
+            elif tool_name == "review_simulation_state":
+                summary = self.zep_tools.get_simulation_artifact_summary(self.simulation_id)
+                return summary.to_text()
             
             # ========== 向后兼容的旧工具（内部重定向到新工具） ==========
             
@@ -1054,14 +1101,23 @@ class ReportAgent:
                 return json.dumps(result, ensure_ascii=False, indent=2)
             
             else:
-                return f"未知工具: {tool_name}。请使用以下工具之一: insight_forge, panorama_search, quick_search"
+                return (
+                    f"未知工具: {tool_name}。请使用以下工具之一: "
+                    "insight_forge, panorama_search, quick_search, interview_agents, review_simulation_state"
+                )
                 
         except Exception as e:
             logger.error(f"工具执行失败: {tool_name}, 错误: {str(e)}")
             return f"工具执行失败: {str(e)}"
     
     # 合法的工具名称集合，用于裸 JSON 兜底解析时校验
-    VALID_TOOL_NAMES = {"insight_forge", "panorama_search", "quick_search", "interview_agents"}
+    VALID_TOOL_NAMES = {
+        "insight_forge",
+        "panorama_search",
+        "quick_search",
+        "interview_agents",
+        "review_simulation_state",
+    }
 
     def _parse_tool_calls(self, response: str) -> List[Dict[str, Any]]:
         """
@@ -1154,10 +1210,10 @@ class ReportAgent:
             progress_callback("planning", 0, "正在分析模拟需求...")
         
         # 首先获取模拟上下文
-        context = self.zep_tools.get_simulation_context(
-            graph_id=self.graph_id,
-            simulation_requirement=self.simulation_requirement
-        )
+        context = self._get_simulation_context()
+
+        if self.report_logger:
+            self.report_logger.log_planning_context(context)
         
         if progress_callback:
             progress_callback("planning", 30, "正在生成报告大纲...")
@@ -1170,6 +1226,9 @@ class ReportAgent:
             entity_types=list(context.get('graph_statistics', {}).get('entity_types', {}).keys()),
             total_entities=context.get('total_entities', 0),
             related_facts_json=json.dumps(context.get('related_facts', [])[:10], ensure_ascii=False, indent=2),
+            simulation_artifact_digest="\n".join(
+                f"- {line}" for line in (context.get("simulation_artifact_digest", []) or [])
+            ) or "（暂无运行摘要）",
         )
 
         try:
@@ -1257,6 +1316,9 @@ class ReportAgent:
             simulation_requirement=self.simulation_requirement,
             section_title=section.title,
             tools_description=self._get_tools_description(),
+            simulation_artifact_digest="\n".join(
+                f"- {line}" for line in (self._get_simulation_context().get("simulation_artifact_digest", []) or [])
+            ) or "（暂无运行摘要）",
         )
 
         # 构建用户prompt - 每个已完成章节各传入最大4000字
@@ -1286,10 +1348,21 @@ class ReportAgent:
         min_tool_calls = 3  # 最少工具调用次数
         conflict_retries = 0  # 工具调用与Final Answer同时出现的连续冲突次数
         used_tools = set()  # 记录已调用过的工具名
-        all_tools = {"insight_forge", "panorama_search", "quick_search", "interview_agents"}
+        all_tools = {
+            "insight_forge",
+            "panorama_search",
+            "quick_search",
+            "interview_agents",
+            "review_simulation_state",
+        }
 
         # 报告上下文，用于InsightForge的子问题生成
-        report_context = f"章节标题: {section.title}\n模拟需求: {self.simulation_requirement}"
+        artifact_digest = self._get_simulation_context().get("simulation_artifact_digest", []) or []
+        report_context = (
+            f"章节标题: {section.title}\n"
+            f"模拟需求: {self.simulation_requirement}\n"
+            f"运行摘要: {' | '.join(artifact_digest[:6])}"
+        )
         
         for iteration in range(max_iterations):
             if progress_callback:

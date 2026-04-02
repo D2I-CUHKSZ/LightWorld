@@ -1,0 +1,134 @@
+[
+  {
+    "entity_uuid": "e50b9516-d55b-4fdd-81e8-28ab7b855c98",
+    "entity_name": "bot_01",
+    "entity_type": "BotAccount",
+    "keywords": [
+      "bot_01",
+      "BotAccount",
+      "group_a_01",
+      "repost",
+      "weight_0.60",
+      "minimal_graph_seed"
+    ],
+    "description": "bot_01 is a bot account entity defined by its directed repost relationship to group_a_01, with an observed edge weight of 0.60 in the minimal graph seed—indicating a moderate-strength, non-random content amplification role without further attributed coordination or behavioral metadata.",
+    "semantic_prompt": "Identify bot_01 as a BotAccount that reposts from group_a_01 with weight 0.60 in the minimal graph seed; distinguish it from coordinated or profile-enriched bots by its null bot_type and absence of OASIS runtime fields.",
+    "topic_tags": [
+      "social_bot",
+      "information_amplification",
+      "graph_edge_semantics",
+      "OASIS_integration",
+      "seed_graph_analysis"
+    ]
+  },
+  {
+    "entity_uuid": "de15ecdb-fab1-4e1b-8a27-f6a8bf0ce1ce",
+    "entity_name": "CAMEL-AI",
+    "entity_type": "Organization",
+    "keywords": [
+      "CAMEL-AI",
+      "OASIS",
+      "AI research organization",
+      "LLM agent framework",
+      "open-source AI",
+      "multi-agent systems"
+    ],
+    "description": "CAMEL-AI is a research-oriented organization focused on advancing multi-agent LLM systems, best known for initiating the OASIS project—a framework for richer, context-aware Twitter profile integration into agent reasoning and runtime environments.",
+    "semantic_prompt": "CAMEL-AI is an AI research organization that develops open frameworks for multi-agent LLM systems; it launched the OASIS project to enable richer Twitter profile modeling in agent prompts and runtime contexts.",
+    "topic_tags": [
+      "AI research",
+      "multi-agent systems",
+      "LLM frameworks",
+      "OASIS",
+      "social media integration",
+      "open-source AI"
+    ]
+  },
+  {
+    "entity_uuid": "db2417d4-1555-4b2a-9cdf-95462e2f4ec1",
+    "entity_name": "group_a_01",
+    "entity_type": "CitizenUser",
+    "keywords": [
+      "CitizenUser",
+      "kol_01_follower",
+      "bot_01_content_source",
+      "low_stance_score",
+      "social_graph_seed",
+      "OASIS_simulation_target"
+    ],
+    "description": "group_a_01 is a CitizenUser entity in a minimal social graph seed, characterized by following KOL kol_01 (follow weight 0.80) and serving as a content source for bot_01 (repost weight 0.60); its stance_score of 0.20 indicates low ideological alignment or neutrality.",
+    "semantic_prompt": "Identify group_a_01 as a low-stance CitizenUser who follows kol_01 and is reposted by bot_01—key for validating richer Twitter profile integration into OASIS runtime fields.",
+    "topic_tags": [
+      "social_graph_seeding",
+      "content_provenance",
+      "stance_modeling",
+      "OASIS_integration",
+      "bot-human_interaction"
+    ]
+  },
+  {
+    "entity_uuid": "b8485b3c-29d4-4774-a55b-69e0fe11b803",
+    "entity_name": "News",
+    "entity_type": "MediaOutlet",
+    "keywords": [
+      "News",
+      "MediaOutlet",
+      "TextData",
+      "RealWorldData",
+      "OASIS",
+      "TwitterProfiles"
+    ],
+    "description": "News is a generic MediaOutlet entity representing news and blog data sources within the Text data category, serving as foundational real-world input for systems like OASIS—particularly in validating enriched Twitter profile integrations.",
+    "semantic_prompt": "This entity represents a media outlet category for news and blog content, used as real-world text data input; it anchors validation of richer Twitter profiles in OASIS runtime and prompt engineering.",
+    "topic_tags": [
+      "MediaSources",
+      "TextDataIngestion",
+      "OASISIntegration",
+      "SocialProfileEnrichment"
+    ]
+  },
+  {
+    "entity_uuid": "65f06893-76ab-4a1a-89e3-c0b583c0909c",
+    "entity_name": "666ghj",
+    "entity_type": "Person",
+    "keywords": [
+      "666ghj",
+      "MiroFish",
+      "author",
+      "Twitter developer",
+      "OASIS",
+      "simulation requirement"
+    ],
+    "description": "666ghj is the author and creator of MiroFish, a tool or artifact linked to Twitter profile enrichment and OASIS simulation requirements; identity is primarily defined by technical authorship rather than biographical or organizational attributes.",
+    "semantic_prompt": "Who is the author of MiroFish, and what is their role in the context of Twitter profile enrichment and OASIS simulation requirements?",
+    "topic_tags": [
+      "software authorship",
+      "MiroFish",
+      "OASIS",
+      "Twitter API simulation",
+      "profile enrichment"
+    ]
+  },
+  {
+    "entity_uuid": "2d6bce10-b5f3-41ed-a9c1-4b0c52b43b54",
+    "entity_name": "Blogs",
+    "entity_type": "MediaOutlet",
+    "keywords": [
+      "blogs",
+      "user-generated content",
+      "online publishing",
+      "text data",
+      "real-world data sources",
+      "digital media"
+    ],
+    "description": "Blogs is a MediaOutlet entity representing decentralized, informal online publishing platforms that serve as a primary source of unstructured text data from real-world contexts; it is semantically distinct from institutional news outlets by its non-professional authorship, open editorial control, and heterogeneous topical scope.",
+    "semantic_prompt": "Identify blogs as informal, user-driven digital publishing channels contributing unstructured text data to real-world datasets—distinguish them from professional news outlets by authorship model, editorial governance, and content variability.",
+    "topic_tags": [
+      "digital_media",
+      "text_data",
+      "user_generated_content",
+      "information_sources",
+      "web_publishing"
+    ]
+  }
+]

@@ -1,0 +1,43 @@
+2026-04-01 15:40:03 - INFO - ============================================================
+2026-04-01 15:40:03 - INFO - OASIS 双平台并行模拟
+2026-04-01 15:40:03 - INFO - 配置文件: uploads/simulations/sim_05e3fce7d931/simulation_config.json
+2026-04-01 15:40:03 - INFO - 模拟ID: sim_05e3fce7d931
+2026-04-01 15:40:03 - INFO - 等待命令模式: 禁用
+2026-04-01 15:40:03 - INFO - light模式: 禁用
+2026-04-01 15:40:03 - INFO - topology-aware: 启用
+2026-04-01 15:40:03 - INFO - simplemem: 启用
+2026-04-01 15:40:03 - INFO - ============================================================
+2026-04-01 15:40:03 - INFO - 模拟参数:
+2026-04-01 15:40:03 - INFO -   - 总模拟时长: 72小时
+2026-04-01 15:40:03 - INFO -   - 每轮时间: 60分钟
+2026-04-01 15:40:03 - INFO -   - 配置总轮数: 72
+2026-04-01 15:40:03 - INFO -   - 最大轮数限制: 1
+2026-04-01 15:40:03 - INFO -   - 实际执行轮数: 1 (已截断)
+2026-04-01 15:40:03 - INFO -   - Agent数量: 6
+2026-04-01 15:40:03 - INFO - 日志结构:
+2026-04-01 15:40:03 - INFO -   - 主日志: simulation.log
+2026-04-01 15:40:03 - INFO -   - Twitter动作: twitter/actions.jsonl
+2026-04-01 15:40:03 - INFO -   - Reddit动作: reddit/actions.jsonl
+2026-04-01 15:40:03 - INFO - ============================================================
+2026-04-01 15:40:03 - INFO - [Twitter] 初始化...
+2026-04-01 15:40:04 - INFO - [Twitter] 已加载显式社交关系图: directed=1, undirected=1
+2026-04-01 15:40:04 - INFO - [Twitter] 已加载图谱关系先验: directed=1, undirected=1
+2026-04-01 15:40:04 - INFO - [Twitter] Topology-aware已启用: coordination=True, differentiation=True, units=6, avg_unit_size=1.00, light=False, top_pairs=1
+2026-04-01 15:40:04 - INFO - [Twitter] SimpleMem已启用: platform=twitter, agents=0, retrieval_topk=5, max_units_per_agent=120
+2026-04-01 15:40:04 - INFO - [Twitter] 平台配置未能映射到OASIS对象属性，继续使用平台默认参数
+2026-04-01 15:40:04 - INFO - [Twitter] 环境已启动
+2026-04-01 15:40:04 - INFO - [Twitter] 平台配置未能映射到OASIS对象属性，继续使用平台默认参数
+2026-04-01 15:40:04 - INFO - [Twitter] 已注入初始社交关系: db_follow_edges=2
+2026-04-01 15:40:05 - INFO - [Twitter] 已发布 3 条初始帖子
+2026-04-01 15:40:05 - INFO - [Twitter] 轮数已截断: 72 -> 1 (max_rounds=1)
+2026-04-01 15:40:05 - INFO - [Twitter] 模拟循环完成! 耗时: 0.0秒, 总动作: 3
+2026-04-01 15:40:05 - INFO - ============================================================
+2026-04-01 15:40:05 - INFO - 模拟循环完成! 总耗时: 1.4秒
+2026-04-01 15:40:05 - INFO - [Twitter] 环境已关闭
+2026-04-01 15:40:05 - INFO - ============================================================
+2026-04-01 15:40:05 - INFO - 全部完成!
+2026-04-01 15:40:05 - INFO - 日志文件:
+2026-04-01 15:40:05 - INFO -   - uploads/simulations/sim_05e3fce7d931/simulation.log
+2026-04-01 15:40:05 - INFO -   - uploads/simulations/sim_05e3fce7d931/twitter/actions.jsonl
+2026-04-01 15:40:05 - INFO -   - uploads/simulations/sim_05e3fce7d931/reddit/actions.jsonl
+2026-04-01 15:40:05 - INFO - ============================================================

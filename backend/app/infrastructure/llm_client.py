@@ -34,7 +34,7 @@ class LLMClient:
     
     def chat(
         self,
-        messages: List[Dict[str, str]],
+        messages: List[Dict[str, Any]],
         temperature: float = 0.7,
         max_tokens: int = 4096,
         response_format: Optional[Dict] = None
@@ -69,7 +69,7 @@ class LLMClient:
     
     def chat_json(
         self,
-        messages: List[Dict[str, str]],
+        messages: List[Dict[str, Any]],
         temperature: float = 0.3,
         max_tokens: int = 4096
     ) -> Dict[str, Any]:
@@ -101,3 +101,28 @@ class LLMClient:
         except json.JSONDecodeError:
             raise ValueError(f"LLM返回的JSON格式无效: {cleaned_response}")
 
+    def transcribe_audio(
+        self,
+        audio_path: str,
+        model: str = "whisper-1",
+    ) -> str:
+        """
+        使用 OpenAI 兼容音频接口转写音频。
+
+        Args:
+            audio_path: 音频文件路径
+            model: 转写模型名
+
+        Returns:
+            转写后的文本
+        """
+        with open(audio_path, "rb") as audio_file:
+            response = self.client.audio.transcriptions.create(
+                model=model,
+                file=audio_file,
+            )
+
+        text = getattr(response, "text", "")
+        if not text and isinstance(response, dict):
+            text = str(response.get("text", "") or "")
+        return str(text or "").strip()

@@ -1,0 +1,25 @@
+{
+  "simulation_id": "sim_826a7c28a5eb",
+  "project_id": "proj_6d56e4817baf",
+  "graph_id": "mirofish_9f0d1c84b2164adf",
+  "enable_twitter": true,
+  "enable_reddit": false,
+  "status": "ready",
+  "entities_count": 6,
+  "profiles_count": 6,
+  "entity_types": [
+    "BotAccount",
+    "Organization",
+    "CitizenUser",
+    "Person",
+    "MediaOutlet"
+  ],
+  "config_generated": true,
+  "config_reasoning": "时间配置: 本次smoke test基于最小图谱（仅3个核心节点：kol_01、group_a_01、bot_01）和轻量级事件注入（t=3视频谣言、t=9辟谣），目标是验证社交关系驱动的传播链路与时间节奏是否可复现。参与实体含中国公民用户（group_a_01）、KOL（kol_01）、机器人（bot_01）及媒体类源（News/Blogs），均适配中文互联网作息：晚间19-22点为信息消费与互动高峰；凌晨0-5点全局静默；工作时段保持基础传播（如媒体转载、机构响应）；早间6-8点为信息初筛与转发预备期。模拟时长设为48小时，覆盖完整两个昼夜周期，足以观测t=3与t=9事件的两级传播响应（初始扩散→公众讨论→辟谣反制→声量衰减）。Agent激活数较低（1-5/h），符合smoke test轻量验证定位，避免过载干扰因果链识别。 | 事件配置: Initial posts reflect entity roles per README: Organization (CAMEL-AI) announces launch, CitizenUser (group_a_01) provides technical commentary, MediaOutlet (News) issues breaking coverage, Person (666ghj) adds creator credibility, BotAccount (bot_01) amplifies with weighted repost behavior. Scheduled events reinforce graph-native semantics (OASIS integration at hour 6) and refine hot topics to match the minimal seed graph’s emphasis on structured influence (repost-weighted swarm), replacing generic 'agent swarm'. All poster_type values strictly match the five allowed types. | Agent配置: 成功生成 6 个 | 初始帖子分配: 5 个帖子已分配发布者",
+  "current_round": 0,
+  "twitter_status": "not_started",
+  "reddit_status": "not_started",
+  "created_at": "2026-03-31T10:58:17.377333",
+  "updated_at": "2026-03-31T10:59:32.252734",
+  "error": null
+}

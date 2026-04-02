@@ -1083,31 +1083,94 @@ class OasisProfileGenerator:
         if not file_path.endswith('.csv'):
             file_path = file_path.replace('.json', '.csv')
         
+        def clean_text(value: str) -> str:
+            return str(value or "").replace('\n', ' ').replace('\r', ' ').strip()
+
+        def build_user_char(profile: OasisAgentProfile) -> str:
+            parts: List[str] = []
+            if profile.bio:
+                parts.append(clean_text(profile.bio))
+            if profile.persona and profile.persona != profile.bio:
+                parts.append(clean_text(profile.persona))
+
+            structured_bits: List[str] = []
+            if profile.age:
+                structured_bits.append(f"age={profile.age}")
+            if profile.gender:
+                structured_bits.append(f"gender={profile.gender}")
+            if profile.mbti:
+                structured_bits.append(f"mbti={profile.mbti}")
+            if profile.country:
+                structured_bits.append(f"country={profile.country}")
+            if profile.profession:
+                structured_bits.append(f"profession={profile.profession}")
+            if profile.interested_topics:
+                structured_bits.append(
+                    "interested_topics=" + ", ".join(str(x) for x in profile.interested_topics[:8])
+                )
+            structured_bits.append(f"follower_count={profile.follower_count}")
+            structured_bits.append(f"friend_count={profile.friend_count}")
+            structured_bits.append(f"statuses_count={profile.statuses_count}")
+            if profile.source_entity_uuid:
+                structured_bits.append(f"source_entity_uuid={profile.source_entity_uuid}")
+            if profile.source_entity_type:
+                structured_bits.append(f"source_entity_type={profile.source_entity_type}")
+
+            if structured_bits:
+                parts.append("Structured profile: " + "; ".join(structured_bits) + ".")
+
+            return clean_text(" ".join(p for p in parts if p))
+
         with open(file_path, 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             
-            # 写入OASIS要求的表头
-            headers = ['user_id', 'name', 'username', 'user_char', 'description']
+            # 前五列保持 OASIS 兼容；后续列供本地 richer twitter builder 读取
+            headers = [
+                'user_id',
+                'name',
+                'username',
+                'user_char',
+                'description',
+                'bio',
+                'persona',
+                'age',
+                'gender',
+                'mbti',
+                'country',
+                'profession',
+                'interested_topics',
+                'friend_count',
+                'follower_count',
+                'statuses_count',
+                'source_entity_uuid',
+                'source_entity_type',
+            ]
             writer.writerow(headers)
             
             # 写入数据行
             for idx, profile in enumerate(profiles):
-                # user_char: 完整人设（bio + persona），用于LLM系统提示
-                user_char = profile.bio
-                if profile.persona and profile.persona != profile.bio:
-                    user_char = f"{profile.bio} {profile.persona}"
-                # 处理换行符（CSV中用空格替代）
-                user_char = user_char.replace('\n', ' ').replace('\r', ' ')
-                
-                # description: 简短简介，用于外部显示
-                description = profile.bio.replace('\n', ' ').replace('\r', ' ')
+                user_char = build_user_char(profile)
+                description = clean_text(profile.bio)
                 
                 row = [
-                    idx,                    # user_id: 从0开始的顺序ID
-                    profile.name,           # name: 真实姓名
-                    profile.user_name,      # username: 用户名
-                    user_char,              # user_char: 完整人设（内部LLM使用）
-                    description             # description: 简短简介（外部显示）
+                    idx,
+                    profile.name,
+                    profile.user_name,
+                    user_char,
+                    description,
+                    clean_text(profile.bio),
+                    clean_text(profile.persona),
+                    profile.age or "",
+                    profile.gender or "",
+                    profile.mbti or "",
+                    profile.country or "",
+                    profile.profession or "",
+                    json.dumps(profile.interested_topics, ensure_ascii=False),
+                    profile.friend_count,
+                    profile.follower_count,
+                    profile.statuses_count,
+                    profile.source_entity_uuid or "",
+                    profile.source_entity_type or "",
                 ]
                 writer.writerow(row)
         
@@ -1197,4 +1260,3 @@ class OasisProfileGenerator:
         """[已废弃] 请使用 save_profiles() 方法"""
         logger.warning("save_profiles_to_json已废弃，请使用save_profiles方法")
         self.save_profiles(profiles, file_path, platform)
-

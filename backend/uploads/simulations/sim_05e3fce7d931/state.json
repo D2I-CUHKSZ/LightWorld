@@ -1,0 +1,25 @@
+{
+  "simulation_id": "sim_05e3fce7d931",
+  "project_id": "proj_6d56e4817baf",
+  "graph_id": "mirofish_9f0d1c84b2164adf",
+  "enable_twitter": true,
+  "enable_reddit": false,
+  "status": "ready",
+  "entities_count": 6,
+  "profiles_count": 6,
+  "entity_types": [
+    "CitizenUser",
+    "BotAccount",
+    "MediaOutlet",
+    "Person",
+    "Organization"
+  ],
+  "config_generated": true,
+  "config_reasoning": "时间配置: 模拟聚焦于中文社交媒体环境下的OASIS项目认知扩散与richer Twitter profile验证，核心实体含公民用户（group_a_01）、Bot（bot_01）、KOL（kol_01）及媒体源（News/Blogs）。中国用户夜间19-22点为内容消费与互动高峰，符合 repost/follow 等社交动作高频时段；早间6-8点轻度唤醒（通勤阅读）；工作时间9-18点中等活跃（办公场景下碎片化浏览）；凌晨0-5点极低活跃，适合作为低扰动基线期。Bot_01与group_a_01的repost关系、group_a_01对kol_01的follow行为，在晚间高峰更易触发级联传播，利于验证OASIS提示字段（如influence_weight、source_trust_score）与运行时字段（如realtime_engagement_rate、cross_source_amplification）的动态注入效果。 | 事件配置: The simulation validates richer Twitter profiles entering OASIS by anchoring initial posts to entities with explicit graph roles (bot_01 reposts from group_a_01; CAMEL-AI owns OASIS; group_a_01 follows kol_01), while using precise technical terminology from the README (e.g., 'prompt templates', 'attention routing', 'runtime fields'). Scheduled events reinforce temporal validation: a patch announcement at hour 6 confirms deployment, and a hot topics update at hour 12 shifts focus to newly exposed profile metrics — ensuring both prompt surface and runtime state are exercised. | Agent配置: 成功生成 6 个 | 初始帖子分配: 3 个帖子已分配发布者",
+  "current_round": 0,
+  "twitter_status": "not_started",
+  "reddit_status": "not_started",
+  "created_at": "2026-04-01T15:37:04.493390",
+  "updated_at": "2026-04-01T15:39:07.599426",
+  "error": null
+}

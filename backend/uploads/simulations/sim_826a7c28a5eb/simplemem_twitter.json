@@ -1,0 +1,158 @@
+{
+  "platform": "twitter",
+  "updated_at": "2026-03-31T11:01:34.103974",
+  "seq": 6,
+  "per_agent_units": {
+    "1": [
+      {
+        "id": "twitter_m_1",
+        "agent_id": 1,
+        "agent_name": "CAMEL-AI",
+        "action_type": "CREATE_POST",
+        "summary": "CREATE_POST | content:Just launched LIGHTWORLD — a lightweight, omni-modal emergent social simulation engine. Graph + Text + Image + Video native. 100k+ agents already online. #LIGHTWORLD #socialsimulation",
+        "summaries": [
+          "CREATE_POST | content:Just launched LIGHTWORLD — a lightweight, omni-modal emergent social simulation engine. Graph + Text + Image + Video native. 100k+ agents already online. #LIGHTWORLD #socialsimulation"
+        ],
+        "keywords": [
+          "lightworld",
+          "just",
+          "omni",
+          "text",
+          "100k",
+          "modal",
+          "graph",
+          "image"
+        ],
+        "first_round": 1,
+        "last_round": 1,
+        "last_hour": 0,
+        "count": 1
+      },
+      {
+        "id": "twitter_m_6",
+        "agent_id": 1,
+        "agent_name": "CAMEL-AI",
+        "action_type": "CREATE_POST",
+        "summary": "CREATE_POST | content:__SCHEDULED_EVENT_CREATE_POST__ explicit scheduled post smoke test",
+        "summaries": [
+          "CREATE_POST | content:__SCHEDULED_EVENT_CREATE_POST__ explicit scheduled post smoke test"
+        ],
+        "keywords": [
+          "test",
+          "smoke",
+          "explicit",
+          "scheduled",
+          "__scheduled_event_create_post__"
+        ],
+        "first_round": 1,
+        "last_round": 1,
+        "last_hour": 0,
+        "count": 1
+      }
+    ],
+    "2": [
+      {
+        "id": "twitter_m_2",
+        "agent_id": 2,
+        "agent_name": "group_a_01",
+        "action_type": "CREATE_POST",
+        "summary": "CREATE_POST | content:Fascinated by how LIGHTWORLD models repost influence (e.g., bot_01 → group_a_01 @ weight 0.6). Finally a sandbox that treats social topology as physics, not just metadata.",
+        "summaries": [
+          "CREATE_POST | content:Fascinated by how LIGHTWORLD models repost influence (e.g., bot_01 → group_a_01 @ weight 0.6). Finally a sandbox that treats social topology as physics, not just metadata."
+        ],
+        "keywords": [
+          "by",
+          "as",
+          "how",
+          "not",
+          "that",
+          "just",
+          "models",
+          "bot_01"
+        ],
+        "first_round": 1,
+        "last_round": 1,
+        "last_hour": 0,
+        "count": 1
+      }
+    ],
+    "3": [
+      {
+        "id": "twitter_m_3",
+        "agent_id": 3,
+        "agent_name": "News",
+        "action_type": "CREATE_POST",
+        "summary": "CREATE_POST | content:BREAKING: CAMEL-AI releases LIGHTWORLD — an AGPL-3.0 open framework for simulating narrative cascades, echo chambers, and intervention windows in real time. Full dashboard & matrix architecture now live.",
+        "summaries": [
+          "CREATE_POST | content:BREAKING: CAMEL-AI releases LIGHTWORLD — an AGPL-3.0 open framework for simulating narrative cascades, echo chambers, and intervention windows in real time. Full dashboard & matrix architecture now live."
+        ],
+        "keywords": [
+          "ai",
+          "an",
+          "in",
+          "for",
+          "and",
+          "now",
+          "agpl",
+          "open"
+        ],
+        "first_round": 1,
+        "last_round": 1,
+        "last_hour": 0,
+        "count": 1
+      }
+    ],
+    "4": [
+      {
+        "id": "twitter_m_4",
+        "agent_id": 4,
+        "agent_name": "666ghj",
+        "action_type": "CREATE_POST",
+        "summary": "CREATE_POST | content:Built MiroFish — and now I'm watching LIGHTWORLD evolve the same principles at scale: minimal tokens, maximal sharing, real-world grounding. This is how agent civilizations begin.",
+        "summaries": [
+          "CREATE_POST | content:Built MiroFish — and now I'm watching LIGHTWORLD evolve the same principles at scale: minimal tokens, maximal sharing, real-world grounding. This is how agent civilizations begin."
+        ],
+        "keywords": [
+          "at",
+          "is",
+          "and",
+          "now",
+          "the",
+          "how",
+          "same",
+          "real"
+        ],
+        "first_round": 1,
+        "last_round": 1,
+        "last_hour": 0,
+        "count": 1
+      }
+    ],
+    "0": [
+      {
+        "id": "twitter_m_5",
+        "agent_id": 0,
+        "agent_name": "bot_01",
+        "action_type": "CREATE_POST",
+        "summary": "CREATE_POST | content:Reposting from @group_a_01 — this is exactly why we built the repost-weighted swarm layer. Signal fidelity > volume. #LIGHTWORLD",
+        "summaries": [
+          "CREATE_POST | content:Reposting from @group_a_01 — this is exactly why we built the repost-weighted swarm layer. Signal fidelity > volume. #LIGHTWORLD"
+        ],
+        "keywords": [
+          "is",
+          "we",
+          "why",
+          "the",
+          "from",
+          "this",
+          "built",
+          "swarm"
+        ],
+        "first_round": 1,
+        "last_round": 1,
+        "last_hour": 0,
+        "count": 1
+      }
+    ]
+  }
+}

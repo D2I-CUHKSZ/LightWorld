@@ -12,9 +12,9 @@ from typing import Any, Dict, List, Optional
 from ...core.settings import Config
 from ...domain.project import ProjectManager, ProjectStatus
 from ...application.graph_builder import GraphBuilderService
+from ...application.multimodal_ingestion import MultimodalIngestionService
 from ...application.ontology_generator import OntologyGenerator
 from ...application.text_processor import TextProcessor
-from ...infrastructure.file_parser import FileParser
 
 
 @dataclass
@@ -86,7 +86,7 @@ class LocalGraphPipeline:
             sampled.append(chunks[idx])
         return sampled
 
-    def run(
+def run(
         self,
         opts: LocalPipelineOptions,
         progress_callback: Optional[Any] = None,
@@ -114,8 +114,7 @@ class LocalGraphPipeline:
             ProjectManager.save_project(project)
 
             log_step("读取并提取本地文档文本")
-            document_texts: List[str] = []
-            all_text = ""
+            saved_inputs: List[Dict[str, str]] = []
             skipped = []
 
             for src in [os.path.abspath(p) for p in opts.files]:
@@ -134,20 +133,39 @@ class LocalGraphPipeline:
                     "filename": file_info["original_filename"],
                     "size": file_info["size"]
                 })
+                saved_inputs.append({
+                    "path": file_info["path"],
+                    "display_name": file_info["original_filename"],
+                })
 
-                text = TextProcessor.preprocess_text(FileParser.extract_text(file_info["path"]))
-                if not text.strip():
-                    skipped.append((src, "文本提取为空"))
-                    continue
-
-                document_texts.append(text)
-                all_text += f"\n\n=== {file_info['original_filename']} ===\n{text}"
-
-            if not document_texts:
+            if not saved_inputs:
                 raise ValueError("没有可用文档可处理，请检查文件路径和格式")
 
+            log_step("执行多模态输入解析")
+            ingestion = MultimodalIngestionService().ingest_files(
+                saved_inputs,
+                simulation_requirement=opts.simulation_requirement,
+                additional_context=opts.additional_context,
+            )
+
+            document_texts = ingestion.get("document_texts", [])
+            all_text = ingestion.get("all_text", "")
+            if not document_texts or not all_text.strip():
+                raise ValueError("多模态输入解析后未生成可用文本，请检查输入内容")
+
             project.total_text_length = len(all_text)
+            project.ingestion_summary = ingestion.get("manifest")
             ProjectManager.save_extracted_text(project.project_id, all_text)
+            ProjectManager.save_json_artifact(
+                project.project_id,
+                "parsed_content.json",
+                ingestion.get("parsed_content", {}),
+            )
+            ProjectManager.save_json_artifact(
+                project.project_id,
+                "source_manifest.json",
+                ingestion.get("manifest", {}),
+            )
             ProjectManager.save_project(project)
 
             ontology_texts = document_texts
@@ -224,6 +242,7 @@ class LocalGraphPipeline:
                 "skipped": [{"path": p, "reason": r} for p, r in skipped],
                 "ontology": project.ontology,
                 "analysis_summary": project.analysis_summary,
+                "ingestion_summary": project.ingestion_summary,
                 "graph": {
                     "graph_id": graph_id,
                     "node_count": graph_data.get("node_count", 0),

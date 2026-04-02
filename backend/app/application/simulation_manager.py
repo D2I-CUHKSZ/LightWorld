@@ -17,6 +17,7 @@ from ..infrastructure.logger import get_logger
 from .zep_entity_reader import ZepEntityReader, FilteredEntities
 from .oasis_profile_generator import OasisProfileGenerator, OasisAgentProfile
 from .entity_prompt_extractor import EntityPromptExtractor
+from .social_relation_graph import SocialRelationGraphCompiler
 from .simulation_config_generator import SimulationConfigGenerator, SimulationParameters
 
 logger = get_logger('mirofish.simulation')
@@ -311,9 +312,16 @@ class SimulationManager:
                     for edge in (entity.related_edges or []):
                         if not isinstance(edge, dict):
                             continue
+                        direction = str(edge.get("direction", "") or "").lower()
                         source_uuid = str(edge.get("source_node_uuid", "") or "")
                         target_uuid = str(edge.get("target_node_uuid", "") or "")
+                        if direction == "outgoing":
+                            source_uuid = source_uuid or entity.uuid
+                        elif direction == "incoming":
+                            target_uuid = target_uuid or entity.uuid
                         edge_name = str(edge.get("name", "") or "")
+                        if not edge_name:
+                            edge_name = str(edge.get("edge_name", "") or "")
                         fact = str(edge.get("fact", "") or "")
                         uuid = str(edge.get("uuid", "") or "")
                         key = (
@@ -474,6 +482,27 @@ class SimulationManager:
                 enable_twitter=state.enable_twitter,
                 enable_reddit=state.enable_reddit
             )
+
+            # ========== 额外步骤: 编译显式 social relation graph ==========
+            social_relation_graph_file = os.path.join(sim_dir, "social_relation_graph.json")
+            social_relation_edge_count = 0
+            try:
+                compiler = SocialRelationGraphCompiler()
+                relation_graph = compiler.compile(
+                    graph_snapshot_path=entity_graph_file,
+                    agent_configs=sim_params.agent_configs,
+                    simulation_id=simulation_id,
+                    graph_id=state.graph_id,
+                )
+                social_relation_edge_count = int(relation_graph.get("edge_count", 0))
+                compiler.save(relation_graph, social_relation_graph_file)
+                logger.info(
+                    f"已编译显式社交关系图: {social_relation_graph_file}, "
+                    f"nodes={relation_graph.get('node_count', 0)}, "
+                    f"edges={social_relation_edge_count}"
+                )
+            except Exception as e:
+                logger.warning(f"编译显式社交关系图失败，继续后续流程: {e}")
             
             if progress_callback:
                 progress_callback(
@@ -493,6 +522,9 @@ class SimulationManager:
                 config_data["entity_graph_file"] = "entity_graph_snapshot.json"
                 config_data["entity_graph_entity_count"] = len(filtered.entities)
                 config_data["entity_graph_edge_count"] = entity_graph_edge_count
+            if os.path.exists(social_relation_graph_file):
+                config_data["social_relation_graph_file"] = "social_relation_graph.json"
+                config_data["social_relation_graph_edge_count"] = social_relation_edge_count
             with open(config_path, 'w', encoding='utf-8') as f:
                 json.dump(config_data, f, ensure_ascii=False, indent=2)
             

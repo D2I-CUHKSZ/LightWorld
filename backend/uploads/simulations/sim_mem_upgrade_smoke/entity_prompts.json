@@ -1,0 +1,137 @@
+[
+  {
+    "entity_uuid": "e50b9516-d55b-4fdd-81e8-28ab7b855c98",
+    "entity_name": "bot_01",
+    "entity_type": "BotAccount",
+    "keywords": [
+      "bot_01",
+      "BotAccount",
+      "group_a_01",
+      "repost",
+      "social bot",
+      "information diffusion",
+      "graph seed",
+      "Twitter simulation"
+    ],
+    "description": "bot_01 is a synthetic BotAccount entity in a minimal Twitter-style social graph, functionally defined by its directed repost relationship (weight 0.60) toward group_a_01; it has no attributed bot type or coordination network, serving as a lightweight, behaviorally anchored node for smoke-testing舆论 simulation logic.",
+    "semantic_prompt": "Find all BotAccount entities that repost content from group_a_01 with measurable edge weight in the minimal graph seed, especially those used in timing-aware Twitter simulation smoke tests.",
+    "topic_tags": [
+      "social bot",
+      "information diffusion",
+      "graph simulation",
+      "Twitter ecosystem",
+      "repost behavior"
+    ]
+  },
+  {
+    "entity_uuid": "de15ecdb-fab1-4e1b-8a27-f6a8bf0ce1ce",
+    "entity_name": "CAMEL-AI",
+    "entity_type": "Organization",
+    "keywords": [
+      "CAMEL-AI",
+      "OASIS",
+      "AI research organization",
+      "multi-agent systems",
+      "open-source AI",
+      "LLM simulation"
+    ],
+    "description": "CAMEL-AI is a research-oriented organization focused on advancing collaborative multi-agent AI systems, best known for initiating the OASIS project—a framework for scalable, socially grounded LLM-based simulation with explicit social graphs and temporal event support.",
+    "semantic_prompt": "CAMEL-AI is an AI research organization that develops multi-agent simulation frameworks like OASIS; it emphasizes structured social interaction modeling, timed events, and open-source agent ecosystems.",
+    "topic_tags": [
+      "multi-agent systems",
+      "AI simulation",
+      "open-source AI",
+      "LLM agents",
+      "social graph modeling"
+    ]
+  },
+  {
+    "entity_uuid": "db2417d4-1555-4b2a-9cdf-95462e2f4ec1",
+    "entity_name": "group_a_01",
+    "entity_type": "CitizenUser",
+    "keywords": [
+      "group_a_01",
+      "CitizenUser",
+      "kol_01_follower",
+      "bot_01_source",
+      "low_stance_score",
+      "Twitter_smoke_test"
+    ],
+    "description": "group_a_01 is a CitizenUser node in a minimal Twitter-style social graph, characterized by actively following KOL kol_01 (edge weight 0.80) and serving as an original content source reposted by bot_01 (edge weight 0.60); its stance_score of 0.20 indicates low ideological alignment or neutrality in simulated discourse.",
+    "semantic_prompt": "Find users who follow influential KOLs and simultaneously act as primary content sources for bots in minimal Twitter simulation graphs; prioritize those with low stance scores and explicit follow/repost edges.",
+    "topic_tags": [
+      "social_graph_simulation",
+      "influence_flow",
+      "bot_content_origin",
+      "stance_modeling",
+      "smoke_test"
+    ]
+  },
+  {
+    "entity_uuid": "b8485b3c-29d4-4774-a55b-69e0fe11b803",
+    "entity_name": "News",
+    "entity_type": "MediaOutlet",
+    "keywords": [
+      "News",
+      "MediaOutlet",
+      "TextData",
+      "RealWorldData",
+      "TwitterSimulation",
+      "SmokeTest"
+    ],
+    "description": "News is a generic MediaOutlet entity representing news and blog data sources within the Real-World Data Sources category; it serves as a foundational, schema-level placeholder for text-based media in lightweight graph-based simulation workflows—especially for initializing Twitter-style舆论 simulations with timing and social topology constraints.",
+    "semantic_prompt": "This entity represents a generic news/blogs media outlet used as a text data source in real-world simulation contexts, particularly for bootstrapping minimal Twitter-like舆论 models with scheduled events and explicit social graphs.",
+    "topic_tags": [
+      "Media",
+      "Simulation",
+      "GraphRAG",
+      "SocialMedia",
+      "DataProvenance"
+    ]
+  },
+  {
+    "entity_uuid": "65f06893-76ab-4a1a-89e3-c0b583c0909c",
+    "entity_name": "666ghj",
+    "entity_type": "Person",
+    "keywords": [
+      "666ghj",
+      "MiroFish",
+      "author",
+      "tool creator",
+      "Twitter simulation",
+      "README graph"
+    ],
+    "description": "666ghj is the sole author and creator of MiroFish, a tool designed for minimal Twitter-style舆论 simulation on README-based knowledge graphs, with explicit support for timed events and social relationship modeling.",
+    "semantic_prompt": "Who is the creator of MiroFish, and what is their role in building a Twitter-like simulation tool grounded in README-derived graph structures?",
+    "topic_tags": [
+      "software authorship",
+      "graph-based simulation",
+      "MiroFish",
+      "social network modeling",
+      "README parsing",
+      "event-driven agents"
+    ]
+  },
+  {
+    "entity_uuid": "2d6bce10-b5f3-41ed-a9c1-4b0c52b43b54",
+    "entity_name": "Blogs",
+    "entity_type": "MediaOutlet",
+    "keywords": [
+      "blogs",
+      "user-generated content",
+      "digital media",
+      "text news",
+      "online publishing",
+      "real-world data"
+    ],
+    "description": "Blogs is a MediaOutlet entity representing decentralized, user-authored digital publishing platforms that contribute unstructured text data to the real-world data ecosystem; it is semantically distinct from institutional news outlets by its informal authorship, lack of editorial gatekeeping, and high topical diversity.",
+    "semantic_prompt": "Identify blogs as non-institutional, text-based digital publishing sources authored by individuals or communities, emphasizing their role in generating real-world, unstructured textual data for analysis.",
+    "topic_tags": [
+      "digital_media",
+      "user_generated_content",
+      "text_data",
+      "information_sources",
+      "online_publishing"
+    ]
+  }
+]

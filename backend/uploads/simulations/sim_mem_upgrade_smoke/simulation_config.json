@@ -1,0 +1,313 @@
+{
+  "simulation_id": "sim_mem_upgrade_smoke",
+  "project_id": "proj_6d56e4817baf",
+  "graph_id": "mirofish_9f0d1c84b2164adf",
+  "simulation_requirement": "基于 README 图谱做一次最小 Twitter 舆论模拟 smoke test，要求支持定时事件与显式社交关系图",
+  "time_config": {
+    "total_simulation_hours": 48,
+    "minutes_per_round": 60,
+    "agents_per_hour_min": 1,
+    "agents_per_hour_max": 5,
+    "peak_hours": [
+      19,
+      20,
+      21,
+      22
+    ],
+    "peak_activity_multiplier": 1.5,
+    "off_peak_hours": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "off_peak_activity_multiplier": 0.05,
+    "morning_hours": [
+      6,
+      7,
+      8
+    ],
+    "morning_activity_multiplier": 0.4,
+    "work_hours": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "work_activity_multiplier": 0.7
+  },
+  "agent_configs": [
+    {
+      "agent_id": 0,
+      "entity_uuid": "e50b9516-d55b-4fdd-81e8-28ab7b855c98",
+      "entity_name": "bot_01",
+      "entity_type": "BotAccount",
+      "activity_level": 0.75,
+      "posts_per_hour": 2.4,
+      "comments_per_hour": 0.8,
+      "active_hours": [
+        19,
+        20,
+        21,
+        22
+      ],
+      "response_delay_min": 3,
+      "response_delay_max": 12,
+      "sentiment_bias": 0.2,
+      "stance": "supportive",
+      "influence_weight": 1.1
+    },
+    {
+      "agent_id": 1,
+      "entity_uuid": "de15ecdb-fab1-4e1b-8a27-f6a8bf0ce1ce",
+      "entity_name": "CAMEL-AI",
+      "entity_type": "Organization",
+      "activity_level": 0.2,
+      "posts_per_hour": 0.3,
+      "comments_per_hour": 0.1,
+      "active_hours": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "response_delay_min": 120,
+      "response_delay_max": 240,
+      "sentiment_bias": 0.4,
+      "stance": "supportive",
+      "influence_weight": 2.8
+    },
+    {
+      "agent_id": 2,
+      "entity_uuid": "db2417d4-1555-4b2a-9cdf-95462e2f4ec1",
+      "entity_name": "group_a_01",
+      "entity_type": "CitizenUser",
+      "activity_level": 0.85,
+      "posts_per_hour": 1.8,
+      "comments_per_hour": 2.2,
+      "active_hours": [
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "response_delay_min": 2,
+      "response_delay_max": 10,
+      "sentiment_bias": 0.3,
+      "stance": "supportive",
+      "influence_weight": 1.05
+    },
+    {
+      "agent_id": 3,
+      "entity_uuid": "b8485b3c-29d4-4774-a55b-69e0fe11b803",
+      "entity_name": "News",
+      "entity_type": "MediaOutlet",
+      "activity_level": 0.5,
+      "posts_per_hour": 3.0,
+      "comments_per_hour": 0.5,
+      "active_hours": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "response_delay_min": 5,
+      "response_delay_max": 20,
+      "sentiment_bias": 0.0,
+      "stance": "neutral",
+      "influence_weight": 2.3
+    },
+    {
+      "agent_id": 4,
+      "entity_uuid": "65f06893-76ab-4a1a-89e3-c0b583c0909c",
+      "entity_name": "666ghj",
+      "entity_type": "Person",
+      "activity_level": 0.78,
+      "posts_per_hour": 1.2,
+      "comments_per_hour": 1.5,
+      "active_hours": [
+        19,
+        20,
+        21,
+        22
+      ],
+      "response_delay_min": 1,
+      "response_delay_max": 8,
+      "sentiment_bias": 0.5,
+      "stance": "supportive",
+      "influence_weight": 1.15
+    },
+    {
+      "agent_id": 5,
+      "entity_uuid": "2d6bce10-b5f3-41ed-a9c1-4b0c52b43b54",
+      "entity_name": "Blogs",
+      "entity_type": "MediaOutlet",
+      "activity_level": 0.45,
+      "posts_per_hour": 2.0,
+      "comments_per_hour": 0.3,
+      "active_hours": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "response_delay_min": 8,
+      "response_delay_max": 25,
+      "sentiment_bias": 0.1,
+      "stance": "neutral",
+      "influence_weight": 2.1
+    }
+  ],
+  "event_config": {
+    "initial_posts": [
+      {
+        "content": "Just launched LIGHTWORLD — a lightweight, omni-modal emergent social simulation engine. Graph + Text + Image + Video native. 100k+ agents already online. #LIGHTWORLD #socialsimulation",
+        "poster_type": "Organization",
+        "poster_agent_id": 1
+      },
+      {
+        "content": "Fascinated by how LIGHTWORLD models repost influence (e.g., bot_01 → group_a_01 @ weight 0.6). Finally a sandbox that treats social topology as physics, not just metadata.",
+        "poster_type": "CitizenUser",
+        "poster_agent_id": 2
+      },
+      {
+        "content": "BREAKING: CAMEL-AI releases LIGHTWORLD — an AGPL-3.0 open framework for simulating narrative cascades, echo chambers, and intervention windows in real time. Full dashboard & matrix architecture now live.",
+        "poster_type": "MediaOutlet",
+        "poster_agent_id": 3
+      },
+      {
+        "content": "Built MiroFish — and now I'm watching LIGHTWORLD evolve the same principles at scale: minimal tokens, maximal sharing, real-world grounding. This is how agent civilizations begin.",
+        "poster_type": "Person",
+        "poster_agent_id": 4
+      },
+      {
+        "content": "Reposting from @group_a_01 — this is exactly why we built the repost-weighted swarm layer. Signal fidelity > volume. #LIGHTWORLD",
+        "poster_type": "BotAccount",
+        "poster_agent_id": 0
+      }
+    ],
+    "scheduled_events": [
+      {
+        "event_type": "create_post",
+        "trigger_round": 1,
+        "content": "__SCHEDULED_EVENT_CREATE_POST__ explicit scheduled post smoke test",
+        "poster_type": "Organization",
+        "poster_agent_id": 1
+      },
+      {
+        "event_type": "hot_topics_update",
+        "trigger_round": 2,
+        "hot_topics_add": [
+          "__SCHEDULED_HOT_TOPIC__"
+        ],
+        "hot_topics_remove": []
+      }
+    ],
+    "hot_topics": [
+      "LIGHTWORLD",
+      "social simulation",
+      "agent swarm"
+    ],
+    "narrative_direction": "Technical community begins discussing LIGHTWORLD as a novel lightweight, omni-modal social simulation engine; early traction centers on its graph-native architecture and real-world data ingestion capabilities, with growing curiosity about bot-human interaction dynamics and polarization forecasting."
+  },
+  "twitter_config": {
+    "platform": "twitter",
+    "recency_weight": 0.4,
+    "popularity_weight": 0.3,
+    "relevance_weight": 0.3,
+    "viral_threshold": 10,
+    "echo_chamber_strength": 0.5
+  },
+  "reddit_config": null,
+  "topology_aware": {
+    "enabled": true,
+    "coordination_enabled": true,
+    "differentiation_enabled": true,
+    "similarity_threshold": 0.9,
+    "top_pairs_ratio": 0.03,
+    "min_unit_size": 2,
+    "extra_member_prob": 0.12,
+    "importance_alpha": 0.7,
+    "sentiment_diff_threshold": 0.35,
+    "opinion_threshold": 0.5,
+    "stubbornness_threshold": 0.5,
+    "influence_threshold": 0.5,
+    "ppr_alpha": 0.85,
+    "ppr_eps": 0.0001,
+    "semantic_threshold": 0.1,
+    "keyword_jaccard_threshold": 0.12,
+    "keyword_overlap_min": 1,
+    "graph_prior_similarity_boost": 0.35,
+    "graph_prior_extra_ratio": 0.25,
+    "dynamic_update_enabled": true,
+    "dynamic_update_interval": 4,
+    "dynamic_update_min_events": 8,
+    "dynamic_interaction_min_weight": 0.25,
+    "dynamic_neighbors_per_agent": 6,
+    "initial_follow_max_per_agent": 3,
+    "initial_follow_max_total": 0,
+    "social_link_sync_enabled": true,
+    "social_link_sync_interval": 6,
+    "social_link_sync_max_total": 20
+  },
+  "simplemem": {
+    "enabled": true,
+    "max_units_per_agent": 120,
+    "retrieval_topk": 5,
+    "merge_jaccard_threshold": 0.45,
+    "max_injected_chars": 1200,
+    "recency_decay": 0.08
+  },
+  "light_mode": {
+    "enabled": false,
+    "agent_ratio": 0.6
+  },
+  "llm_model": "qwen-plus",
+  "llm_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "generated_at": "2026-03-31T10:59:32.248978",
+  "generation_reasoning": "时间配置: 本次smoke test基于最小图谱（仅3个核心节点：kol_01、group_a_01、bot_01）和轻量级事件注入（t=3视频谣言、t=9辟谣），目标是验证社交关系驱动的传播链路与时间节奏是否可复现。参与实体含中国公民用户（group_a_01）、KOL（kol_01）、机器人（bot_01）及媒体类源（News/Blogs），均适配中文互联网作息：晚间19-22点为信息消费与互动高峰；凌晨0-5点全局静默；工作时段保持基础传播（如媒体转载、机构响应）；早间6-8点为信息初筛与转发预备期。模拟时长设为48小时，覆盖完整两个昼夜周期，足以观测t=3与t=9事件的两级传播响应（初始扩散→公众讨论→辟谣反制→声量衰减）。Agent激活数较低（1-5/h），符合smoke test轻量验证定位，避免过载干扰因果链识别。 | 事件配置: Initial posts reflect entity roles per README: Organization (CAMEL-AI) announces launch, CitizenUser (group_a_01) provides technical commentary, MediaOutlet (News) issues breaking coverage, Person (666ghj) adds creator credibility, BotAccount (bot_01) amplifies with weighted repost behavior. Scheduled events reinforce graph-native semantics (OASIS integration at hour 6) and refine hot topics to match the minimal seed graph’s emphasis on structured influence (repost-weighted swarm), replacing generic 'agent swarm'. All poster_type values strictly match the five allowed types. | Agent配置: 成功生成 6 个 | 初始帖子分配: 5 个帖子已分配发布者",
+  "entity_prompts_file": "entity_prompts.json",
+  "entity_prompts_count": 6,
+  "entity_graph_file": "entity_graph_snapshot.json",
+  "entity_graph_entity_count": 6,
+  "entity_graph_edge_count": 4,
+  "social_relation_graph_file": "social_relation_graph.json",
+  "social_relation_graph_edge_count": 1
+}

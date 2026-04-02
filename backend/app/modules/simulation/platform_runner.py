@@ -11,6 +11,8 @@ from __future__ import annotations
 import os
 import random
 import sqlite3
+import csv
+import json
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Callable, Dict, List, Optional, Tuple
@@ -21,8 +23,9 @@ from oasis import (
     LLMAction,
     ManualAction,
     generate_reddit_agent_graph,
-    generate_twitter_agent_graph,
 )
+from oasis.social_agent import AgentGraph, SocialAgent
+from oasis.social_platform.config import UserInfo
 
 from .runtimes import SimpleMemRuntime, TopologyAwareRuntime, safe_float
 
@@ -152,11 +155,89 @@ def get_active_agents_for_round(
 
 async def _build_agent_graph(spec: PlatformSpec, profile_path: str, model: Any) -> Any:
     if spec.name == "twitter":
-        return await generate_twitter_agent_graph(
-            profile_path=profile_path,
-            model=model,
-            available_actions=spec.available_actions,
-        )
+        agent_graph = AgentGraph()
+        with open(profile_path, "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for idx, row in enumerate(reader):
+                bio = str(row.get("bio", "") or "").strip()
+                persona = str(row.get("persona", "") or "").strip()
+                description = str(row.get("description", "") or bio).strip()
+                user_profile = str(row.get("user_char", "") or "").strip()
+
+                interested_topics = row.get("interested_topics", "[]")
+                if isinstance(interested_topics, str):
+                    try:
+                        interested_topics = json.loads(interested_topics)
+                    except Exception:
+                        interested_topics = [x.strip() for x in interested_topics.split(",") if x.strip()]
+                if not isinstance(interested_topics, list):
+                    interested_topics = []
+
+                structured_bits: List[str] = []
+                for key in [
+                    "age",
+                    "gender",
+                    "mbti",
+                    "country",
+                    "profession",
+                    "source_entity_uuid",
+                    "source_entity_type",
+                    "friend_count",
+                    "follower_count",
+                    "statuses_count",
+                ]:
+                    val = row.get(key)
+                    if val is None or str(val).strip() == "":
+                        continue
+                    structured_bits.append(f"{key}={str(val).strip()}")
+                if interested_topics:
+                    structured_bits.append("interested_topics=" + ", ".join(str(x) for x in interested_topics))
+
+                if structured_bits:
+                    user_profile = (user_profile + " Structured fields: " + "; ".join(structured_bits) + ".").strip()
+                if bio and bio not in user_profile:
+                    user_profile = (bio + " " + user_profile).strip()
+                if persona and persona not in user_profile:
+                    user_profile = (user_profile + " " + persona).strip()
+
+                profile = {
+                    "nodes": [],
+                    "edges": [],
+                    "other_info": {
+                        "user_profile": user_profile,
+                        "bio": bio,
+                        "persona": persona,
+                        "description": description,
+                        "age": row.get("age"),
+                        "gender": row.get("gender"),
+                        "mbti": row.get("mbti"),
+                        "country": row.get("country"),
+                        "profession": row.get("profession"),
+                        "interested_topics": interested_topics,
+                        "friend_count": row.get("friend_count"),
+                        "follower_count": row.get("follower_count"),
+                        "statuses_count": row.get("statuses_count"),
+                        "source_entity_uuid": row.get("source_entity_uuid"),
+                        "source_entity_type": row.get("source_entity_type"),
+                    },
+                }
+
+                user_info = UserInfo(
+                    user_name=str(row.get("username", "") or f"user_{idx}"),
+                    name=str(row.get("name", "") or row.get("username", "") or f"user_{idx}"),
+                    description=description,
+                    profile=profile,
+                    recsys_type="twitter",
+                )
+                agent = SocialAgent(
+                    agent_id=idx,
+                    user_info=user_info,
+                    model=model,
+                    agent_graph=agent_graph,
+                    available_actions=spec.available_actions,
+                )
+                agent_graph.add_agent(agent)
+        return agent_graph
     return await generate_reddit_agent_graph(
         profile_path=profile_path,
         model=model,
@@ -179,6 +260,125 @@ def _append_initial_action(
         initial_actions[agent].append(action)
     else:
         initial_actions[agent] = action
+
+
+def _coerce_positive_int(value: Any) -> Optional[int]:
+    try:
+        if value is None:
+            return None
+        return int(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _resolve_scheduled_event_round(event: Dict[str, Any], minutes_per_round: int) -> Optional[int]:
+    if not isinstance(event, dict):
+        return None
+
+    trigger_round = _coerce_positive_int(event.get("trigger_round"))
+    if trigger_round is not None and trigger_round >= 1:
+        return trigger_round
+
+    round_offset = _coerce_positive_int(event.get("round_offset"))
+    if round_offset is not None and round_offset >= 0:
+        return round_offset + 1
+
+    trigger_day = _coerce_positive_int(event.get("trigger_day"))
+    trigger_hour = None
+    for key in ["trigger_hour", "hour", "hour_offset"]:
+        trigger_hour = _coerce_positive_int(event.get(key))
+        if trigger_hour is not None:
+            break
+
+    if trigger_hour is None:
+        return None
+
+    total_hours = max(0, trigger_hour)
+    if trigger_day is not None and trigger_day >= 1:
+        total_hours += (trigger_day - 1) * 24
+
+    total_minutes = total_hours * 60
+    return (total_minutes // max(1, minutes_per_round)) + 1
+
+
+async def _apply_scheduled_events_for_round(
+    spec: PlatformSpec,
+    env: Any,
+    event_config: Dict[str, Any],
+    round_num: int,
+    minutes_per_round: int,
+    triggered_event_ids: set,
+    log_info: Callable[[str], None],
+) -> int:
+    scheduled_events = event_config.get("scheduled_events", []) or []
+    if not isinstance(scheduled_events, list):
+        return 0
+
+    manual_actions: Dict[Any, Any] = {}
+    scheduled_action_count = 0
+
+    for idx, event in enumerate(scheduled_events):
+        if idx in triggered_event_ids or not isinstance(event, dict):
+            continue
+
+        target_round = _resolve_scheduled_event_round(event, minutes_per_round)
+        if target_round is None or target_round != round_num:
+            continue
+
+        triggered_event_ids.add(idx)
+        event_type = str(event.get("event_type", "") or "").strip().lower()
+
+        if event_type == "hot_topics_update":
+            current_topics = list(event_config.get("hot_topics", []) or [])
+            current_set = {str(x).strip() for x in current_topics if str(x).strip()}
+
+            for topic in event.get("hot_topics_remove", []) or []:
+                current_set.discard(str(topic).strip())
+            for topic in event.get("hot_topics_add", []) or []:
+                topic_text = str(topic).strip()
+                if topic_text:
+                    current_set.add(topic_text)
+
+            event_config["hot_topics"] = sorted(current_set)
+            log_info(
+                f"触发定时事件: hot_topics_update round={round_num}, "
+                f"topics={len(event_config['hot_topics'])}"
+            )
+            continue
+
+        if event_type != "create_post":
+            log_info(f"跳过不支持的定时事件类型: {event_type}")
+            continue
+
+        content = str(event.get("content", "") or "").strip()
+        poster_agent_id = _coerce_positive_int(event.get("poster_agent_id"))
+        if not content or poster_agent_id is None:
+            log_info(f"定时发帖事件缺少内容或发布者，已跳过: round={round_num}")
+            continue
+
+        try:
+            agent = env.agent_graph.get_agent(poster_agent_id)
+        except Exception:
+            log_info(f"定时发帖事件找不到Agent: agent_id={poster_agent_id}")
+            continue
+
+        action = ManualAction(
+            action_type=ActionType.CREATE_POST,
+            action_args={"content": content},
+        )
+        _append_initial_action(
+            initial_actions=manual_actions,
+            agent=agent,
+            action=action,
+            allow_multiple=spec.allow_multi_initial_posts_per_agent,
+        )
+        scheduled_action_count += 1
+
+    if manual_actions:
+        await env.step(manual_actions)
+        log_info(f"已执行定时事件帖子: round={round_num}, count={scheduled_action_count}")
+
+    return scheduled_action_count
 
 
 def _extract_platform_config(config: Dict[str, Any], platform_name: str) -> Dict[str, Any]:
@@ -642,6 +842,7 @@ async def run_platform_simulation(
 
     event_config = config.get("event_config", {})
     initial_posts = event_config.get("initial_posts", [])
+    triggered_event_ids: set = set()
 
     if action_logger:
         action_logger.log_round_start(0, 0)
@@ -684,6 +885,18 @@ async def run_platform_simulation(
     if action_logger:
         action_logger.log_round_end(0, initial_action_count)
 
+    topology_runtime.record_round_state(
+        round_num=0,
+        simulated_hour=0,
+        reason="post_initialization",
+        active_agent_ids=[],
+    )
+    simplemem_runtime.record_round_state(
+        round_num=0,
+        simulated_hour=0,
+        active_agent_ids=[],
+    )
+
     time_config = config.get("time_config", {})
     total_hours = time_config.get("total_simulation_hours", 72)
     minutes_per_round = time_config.get("minutes_per_round", 30)
@@ -718,9 +931,52 @@ async def run_platform_simulation(
         if action_logger:
             action_logger.log_round_start(round_num + 1, simulated_hour)
 
+        scheduled_action_count = await _apply_scheduled_events_for_round(
+            spec=spec,
+            env=result.env,
+            event_config=event_config,
+            round_num=round_num + 1,
+            minutes_per_round=minutes_per_round,
+            triggered_event_ids=triggered_event_ids,
+            log_info=log_info,
+        )
+
         if not active_agents:
             if action_logger:
-                action_logger.log_round_end(round_num + 1, 0)
+                action_logger.log_round_end(round_num + 1, scheduled_action_count)
+            if scheduled_action_count > 0:
+                actual_actions, last_rowid = fetch_actions_fn(db_path, last_rowid, agent_names)
+                for action_data in actual_actions:
+                    if action_logger:
+                        action_logger.log_action(
+                            round_num=round_num + 1,
+                            agent_id=action_data["agent_id"],
+                            agent_name=action_data["agent_name"],
+                            action_type=action_data["action_type"],
+                            action_args=action_data["action_args"],
+                        )
+                        total_actions += 1
+
+                topology_runtime.ingest_round_actions(
+                    round_num=round_num + 1,
+                    actions=actual_actions,
+                )
+                simplemem_runtime.ingest_round_actions(
+                    round_num=round_num + 1,
+                    simulated_hour=simulated_hour,
+                    actions=actual_actions,
+                )
+            topology_runtime.record_round_state(
+                round_num=round_num + 1,
+                simulated_hour=simulated_hour,
+                reason="round_idle",
+                active_agent_ids=[],
+            )
+            simplemem_runtime.record_round_state(
+                round_num=round_num + 1,
+                simulated_hour=simulated_hour,
+                active_agent_ids=[],
+            )
             continue
 
         actions: Dict[Any, Any] = {}
@@ -748,6 +1004,8 @@ async def run_platform_simulation(
                 total_actions += 1
                 round_action_count += 1
 
+        round_action_count += scheduled_action_count
+
         topology_runtime.ingest_round_actions(
             round_num=round_num + 1,
             actions=actual_actions,
@@ -770,6 +1028,17 @@ async def run_platform_simulation(
             round_num=round_num + 1,
             simulated_hour=simulated_hour,
             actions=actual_actions,
+        )
+        topology_runtime.record_round_state(
+            round_num=round_num + 1,
+            simulated_hour=simulated_hour,
+            reason="round_complete",
+            active_agent_ids=[aid for aid, _ in active_agents],
+        )
+        simplemem_runtime.record_round_state(
+            round_num=round_num + 1,
+            simulated_hour=simulated_hour,
+            active_agent_ids=[aid for aid, _ in active_agents],
         )
 
         if action_logger:

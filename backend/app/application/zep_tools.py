@@ -8,8 +8,10 @@ Zep检索工具服务
 3. QuickSearch（简单搜索）- 快速检索
 """
 
+import os
 import time
 import json
+from collections import Counter
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, field
 
@@ -397,6 +399,147 @@ class InterviewResult:
         return "\n".join(text_parts)
 
 
+@dataclass
+class SimulationArtifactSummary:
+    """模拟运行后 artifact 的轻量摘要。"""
+    simulation_id: str
+    entity_prompt_count: int = 0
+    keyword_examples: List[Dict[str, Any]] = field(default_factory=list)
+    action_summary: Dict[str, Any] = field(default_factory=dict)
+    topology_summary: Dict[str, Any] = field(default_factory=dict)
+    memory_summary: Dict[str, Any] = field(default_factory=dict)
+    notes: List[str] = field(default_factory=list)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "simulation_id": self.simulation_id,
+            "entity_prompt_count": self.entity_prompt_count,
+            "keyword_examples": self.keyword_examples,
+            "action_summary": self.action_summary,
+            "topology_summary": self.topology_summary,
+            "memory_summary": self.memory_summary,
+            "notes": self.notes,
+        }
+
+    def to_digest_lines(self) -> List[str]:
+        lines: List[str] = []
+        if self.entity_prompt_count > 0:
+            lines.append(f"实体语义蒸馏已完成，entity prompts 数量为 {self.entity_prompt_count}。")
+
+        for platform, summary in self.action_summary.items():
+            total_actions = int(summary.get("total_actions", 0) or 0)
+            if total_actions <= 0:
+                continue
+            top_actions = summary.get("top_action_types", []) or []
+            action_text = "，".join(
+                f"{item.get('action_type')}:{item.get('count')}"
+                for item in top_actions[:3]
+            )
+            lines.append(f"{platform} 平台共产生 {total_actions} 条动作，主要行为包括 {action_text}。")
+
+        for platform, summary in self.topology_summary.items():
+            unit_count = int(summary.get("unit_count", 0) or 0)
+            if unit_count <= 0:
+                continue
+            avg_unit_size = summary.get("avg_unit_size", 0)
+            top_pair = (summary.get("top_asymmetric_pairs", []) or [{}])[0]
+            if top_pair:
+                pair_text = (
+                    f"{top_pair.get('dominant_source_agent_name')} -> "
+                    f"{top_pair.get('dominant_target_agent_name')} "
+                    f"(delta={top_pair.get('delta')})"
+                )
+            else:
+                pair_text = "无显著非对称对"
+            lines.append(
+                f"{platform} 平台形成 {unit_count} 个协同单元，平均 unit 大小 {avg_unit_size}，"
+                f"最明显的影响力非对称对为 {pair_text}。"
+            )
+
+        for platform, summary in self.memory_summary.items():
+            agents_with_memory = int(summary.get("agents_with_memory", 0) or 0)
+            total_units = int(summary.get("total_agent_units", 0) or 0)
+            retrieval_events = int(summary.get("retrieval_events", 0) or 0)
+            if total_units <= 0:
+                continue
+            lines.append(
+                f"{platform} 平台已有 {agents_with_memory} 个 agent 写入记忆，共 {total_units} 条 agent memory，"
+                f"检索发生 {retrieval_events} 次。"
+            )
+
+        lines.extend(self.notes[:3])
+        return lines[:10]
+
+    def to_text(self) -> str:
+        lines = [
+            "## 模拟运行摘要",
+            f"simulation_id: {self.simulation_id}",
+        ]
+
+        if self.keyword_examples:
+            lines.append("\n### 实体语义线索")
+            for row in self.keyword_examples[:6]:
+                lines.append(
+                    f"- {row.get('entity_name')} ({row.get('entity_type')}): "
+                    f"{', '.join(row.get('keywords', [])[:6])}"
+                )
+
+        if self.action_summary:
+            lines.append("\n### 行为概览")
+            for platform, summary in self.action_summary.items():
+                top_agents = "，".join(
+                    f"{item.get('agent_name')}:{item.get('actions')}"
+                    for item in (summary.get("top_agents", []) or [])[:4]
+                ) or "无"
+                top_actions = "，".join(
+                    f"{item.get('action_type')}:{item.get('count')}"
+                    for item in (summary.get("top_action_types", []) or [])[:5]
+                ) or "无"
+                lines.append(
+                    f"- {platform}: total_actions={summary.get('total_actions', 0)}, "
+                    f"top_actions={top_actions}, top_agents={top_agents}"
+                )
+
+        if self.topology_summary:
+            lines.append("\n### 协同与影响力信号")
+            for platform, summary in self.topology_summary.items():
+                lines.append(
+                    f"- {platform}: units={summary.get('unit_count', 0)}, "
+                    f"avg_unit_size={summary.get('avg_unit_size', 0)}, "
+                    f"largest_unit_size={summary.get('largest_unit_size', 0)}"
+                )
+                for pair in (summary.get("top_asymmetric_pairs", []) or [])[:3]:
+                    lines.append(
+                        f"  - asymmetric: {pair.get('dominant_source_agent_name')} -> "
+                        f"{pair.get('dominant_target_agent_name')} "
+                        f"(dominant={pair.get('dominant_weight')}, reverse={pair.get('reverse_weight')})"
+                    )
+
+        if self.memory_summary:
+            lines.append("\n### 记忆信号")
+            for platform, summary in self.memory_summary.items():
+                sample = summary.get("sample_retrieval")
+                lines.append(
+                    f"- {platform}: agents_with_memory={summary.get('agents_with_memory', 0)}, "
+                    f"total_agent_units={summary.get('total_agent_units', 0)}, "
+                    f"world_units={summary.get('world_units', 0)}, "
+                    f"retrieval_events={summary.get('retrieval_events', 0)}"
+                )
+                if sample:
+                    lines.append(
+                        f"  - sample_retrieval: {sample.get('agent_name')} | "
+                        f"complexity={sample.get('complexity')} | "
+                        f"selected={sample.get('selected_topics')}"
+                    )
+
+        if self.notes:
+            lines.append("\n### 备注")
+            for note in self.notes[:5]:
+                lines.append(f"- {note}")
+
+        return "\n".join(lines)
+
+
 class ZepToolsService:
     """
     Zep检索工具服务
@@ -460,6 +603,141 @@ class ZepToolsService:
                     logger.error(f"Zep {operation_name} 在 {max_retries} 次尝试后仍失败: {str(e)}")
         
         raise last_exception
+
+    def _get_simulation_dir(self, simulation_id: str) -> str:
+        return os.path.abspath(
+            os.path.join(os.path.dirname(__file__), f"../../uploads/simulations/{simulation_id}")
+        )
+
+    def _read_json_file(self, path: str, default: Any = None) -> Any:
+        if not os.path.exists(path):
+            return default
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return default
+
+    def _read_jsonl_file(self, path: str, limit: Optional[int] = None) -> List[Dict[str, Any]]:
+        if not os.path.exists(path):
+            return []
+        rows: List[Dict[str, Any]] = []
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        rows.append(json.loads(line))
+                    except json.JSONDecodeError:
+                        continue
+                    if limit is not None and len(rows) >= limit:
+                        break
+        except Exception:
+            return []
+        return rows
+
+    def _summarize_action_rows(self, rows: List[Dict[str, Any]]) -> Dict[str, Any]:
+        action_rows = [row for row in rows if row.get("agent_id") is not None and row.get("action_type")]
+        by_type = Counter(str(row.get("action_type")) for row in action_rows)
+        by_agent = Counter(str(row.get("agent_name", f"Agent_{row.get('agent_id')}")) for row in action_rows)
+        return {
+            "total_actions": len(action_rows),
+            "top_action_types": [
+                {"action_type": name, "count": count}
+                for name, count in by_type.most_common(6)
+            ],
+            "top_agents": [
+                {"agent_name": name, "actions": count}
+                for name, count in by_agent.most_common(6)
+            ],
+        }
+
+    def _pick_sample_retrieval(self, rows: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+        for row in rows:
+            selected_units = row.get("selected_units") or []
+            if not selected_units:
+                continue
+            topic_parts = []
+            for item in selected_units[:4]:
+                topic_parts.append(
+                    f"{item.get('scope')}:{item.get('source_agent_name')}:{item.get('topic')}"
+                )
+            return {
+                "agent_name": row.get("agent_name"),
+                "complexity": (row.get("plan") or {}).get("complexity"),
+                "selected_topics": "; ".join(topic_parts),
+            }
+        return None
+
+    def get_simulation_artifact_summary(self, simulation_id: str) -> SimulationArtifactSummary:
+        """
+        读取 simulation 目录中的运行后 artifact，并整理为轻量摘要。
+
+        这类摘要不替代检索，只作为报告写作时的运行信号补充。
+        """
+        summary = SimulationArtifactSummary(simulation_id=simulation_id)
+        sim_dir = self._get_simulation_dir(simulation_id)
+
+        if not os.path.exists(sim_dir):
+            summary.notes.append("未找到 simulation 目录，运行摘要不可用。")
+            return summary
+
+        entity_prompts = self._read_json_file(os.path.join(sim_dir, "entity_prompts.json"), default=[]) or []
+        if isinstance(entity_prompts, list):
+            summary.entity_prompt_count = len(entity_prompts)
+            for row in entity_prompts[:6]:
+                if not isinstance(row, dict):
+                    continue
+                summary.keyword_examples.append({
+                    "entity_name": row.get("entity_name"),
+                    "entity_type": row.get("entity_type"),
+                    "keywords": row.get("keywords", []) or [],
+                })
+
+        for platform in ["twitter", "reddit"]:
+            actions_path = os.path.join(sim_dir, platform, "actions.jsonl")
+            action_rows = self._read_jsonl_file(actions_path)
+            if action_rows:
+                summary.action_summary[platform] = self._summarize_action_rows(action_rows)
+
+            topology_path = os.path.join(
+                sim_dir, "artifacts", "topology", platform, "latest_topology.json"
+            )
+            topology = self._read_json_file(topology_path, default={}) or {}
+            if isinstance(topology, dict) and topology:
+                summary.topology_summary[platform] = {
+                    "unit_count": topology.get("unit_count", 0),
+                    "avg_unit_size": topology.get("avg_unit_size", 0),
+                    "largest_unit_size": topology.get("largest_unit_size", 0),
+                    "top_asymmetric_pairs": (topology.get("top_asymmetric_pairs", []) or [])[:5],
+                }
+
+            memory_path = os.path.join(
+                sim_dir, "artifacts", "memory", platform, "latest_memory_state.json"
+            )
+            memory_state = self._read_json_file(memory_path, default={}) or {}
+            retrieval_path = os.path.join(
+                sim_dir, "artifacts", "memory", platform, "retrieval_trace.jsonl"
+            )
+            retrieval_rows = self._read_jsonl_file(retrieval_path, limit=400)
+            if isinstance(memory_state, dict) and memory_state:
+                summary.memory_summary[platform] = {
+                    "agents_with_memory": memory_state.get("agents_with_memory", 0),
+                    "total_agent_units": memory_state.get("total_agent_units", 0),
+                    "world_units": memory_state.get("world_units", 0),
+                    "retrieval_events": len(retrieval_rows),
+                    "sample_retrieval": self._pick_sample_retrieval(retrieval_rows),
+                }
+
+        if not summary.action_summary:
+            summary.notes.append("动作日志未找到或为空，报告将更多依赖图谱与检索证据。")
+        if not summary.topology_summary:
+            summary.notes.append("未检测到 topology artifact，协同单元与影响力差异只会弱化呈现。")
+        if not summary.memory_summary:
+            summary.notes.append("未检测到 memory artifact，跨轮次记忆信号不可用。")
+        return summary
     
     def search_graph(
         self, 
@@ -891,6 +1169,7 @@ class ZepToolsService:
         self, 
         graph_id: str,
         simulation_requirement: str,
+        simulation_id: str = "",
         limit: int = 30
     ) -> Dict[str, Any]:
         """
@@ -931,13 +1210,26 @@ class ZepToolsService:
                     "type": custom_labels[0],
                     "summary": node.summary
                 })
+
+        artifact_summary = None
+        artifact_lines: List[str] = []
+        if simulation_id:
+            artifact_summary = self.get_simulation_artifact_summary(simulation_id)
+            artifact_lines = artifact_summary.to_digest_lines()
+
+        related_facts = list(search_result.facts)
+        if artifact_lines:
+            related_facts.extend([f"[运行信号] {line}" for line in artifact_lines])
         
         return {
             "simulation_requirement": simulation_requirement,
-            "related_facts": search_result.facts,
+            "related_facts": related_facts,
             "graph_statistics": stats,
             "entities": entities[:limit],  # 限制数量
-            "total_entities": len(entities)
+            "total_entities": len(entities),
+            "simulation_id": simulation_id,
+            "simulation_artifact_summary": artifact_summary.to_dict() if artifact_summary else {},
+            "simulation_artifact_digest": artifact_lines,
         }
     
     # ========== 核心检索工具（优化后） ==========

@@ -1,0 +1,25 @@
+{
+  "simulation_id": "sim_209184607443",
+  "project_id": "proj_6d56e4817baf",
+  "graph_id": "mirofish_9f0d1c84b2164adf",
+  "enable_twitter": true,
+  "enable_reddit": false,
+  "status": "ready",
+  "entities_count": 6,
+  "profiles_count": 6,
+  "entity_types": [
+    "Person",
+    "MediaOutlet",
+    "BotAccount",
+    "CitizenUser",
+    "Organization"
+  ],
+  "config_generated": true,
+  "config_reasoning": "时间配置: 本次smoke test基于minimal graph seed，仅含6个实体（含1个bot、1个KOL关联公民用户、1个组织、2个媒体源、1个开发者），事件密度低、无外部冲击注入（seed中t=3/t=9事件未在本次模拟启用），属轻量级拓扑验证。参与主体含中国网民（group_a_01）、中文技术社区关注者（kol_01）、自动化bot（bot_01）及项目方（CAMEL-AI、666ghj），整体符合典型中国互联网用户作息：晚间19-22点为内容消费与互动高峰；凌晨0-5点静默；早间6-8点信息初筛；工作时段9-18点以媒体（News/Blogs）持续供稿为主，但社交互动频次中等。agents_per_hour_min/max设为1-5，体现最小化激活原则——仅需触发follow/repost等基础边行为即可验证图谱传播逻辑，无需高并发。 | 事件配置: 初始热点紧扣README核心术语（LIGHTWORLD/OASIS/MiroFish），覆盖全部5类可用实体；叙事方向体现从功能宣告→归属溯源→横向对比→结构质疑的自然升级；初始帖子严格按实体类型分配（CAMEL-AI as Organization, 666ghj as Person, News/Blogs as MediaOutlet）；定时事件在6h注入bot_01的转发行为（符合图谱中repost边定义），12h更新话题以反映舆论焦点向图结构可信度迁移，移除MiroFish因讨论收敛、新增graph_physics和bot_amplification体现 emergent social dynamics。 | Agent配置: 成功生成 6 个 | 初始帖子分配: 4 个帖子已分配发布者",
+  "current_round": 0,
+  "twitter_status": "not_started",
+  "reddit_status": "not_started",
+  "created_at": "2026-03-31T10:55:05.344346",
+  "updated_at": "2026-03-31T10:56:18.157030",
+  "error": null
+}

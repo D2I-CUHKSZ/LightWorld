@@ -12,6 +12,7 @@
 
 import json
 import math
+import re
 from typing import Dict, Any, List, Optional, Callable
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
@@ -752,25 +753,50 @@ class SimulationConfigGenerator:
 ## 可用实体类型及示例
 {type_info}
 
-## 任务
-请生成事件配置JSON：
-- 提取热点话题关键词
-- 描述舆论发展方向
-- 设计初始帖子内容，**每个帖子必须指定 poster_type（发布者类型）**
+        ## 任务
+        请生成事件配置JSON：
+        - 提取热点话题关键词
+        - 描述舆论发展方向
+        - 设计初始帖子内容，**每个帖子必须指定 poster_type（发布者类型）**
+        - 如果需要中途注入事件，可生成 `scheduled_events`
+
+        `scheduled_events` 当前支持两类事件：
+        1. `create_post`
+           - 必须包含 `trigger_hour`
+           - 必须包含 `content`
+           - 必须包含 `poster_type`
+        2. `hot_topics_update`
+           - 必须包含 `trigger_hour`
+           - 可以包含 `hot_topics_add`
+           - 可以包含 `hot_topics_remove`
 
 **重要**: poster_type 必须从上面的"可用实体类型"中选择，这样初始帖子才能分配给合适的 Agent 发布。
 例如：官方声明应由 Official/University 类型发布，新闻由 MediaOutlet 发布，学生观点由 Student 发布。
 
 返回JSON格式（不要markdown）：
-{{
-    "hot_topics": ["关键词1", "关键词2", ...],
-    "narrative_direction": "<舆论发展方向描述>",
-    "initial_posts": [
-        {{"content": "帖子内容", "poster_type": "实体类型（必须从可用类型中选择）"}},
-        ...
-    ],
-    "reasoning": "<简要说明>"
-}}"""
+        {{
+            "hot_topics": ["关键词1", "关键词2", ...],
+            "narrative_direction": "<舆论发展方向描述>",
+            "initial_posts": [
+                {{"content": "帖子内容", "poster_type": "实体类型（必须从可用类型中选择）"}},
+                ...
+            ],
+            "scheduled_events": [
+                {{
+                    "event_type": "create_post",
+                    "trigger_hour": 6,
+                    "content": "定时帖子内容",
+                    "poster_type": "实体类型（必须从可用类型中选择）"
+                }},
+                {{
+                    "event_type": "hot_topics_update",
+                    "trigger_hour": 12,
+                    "hot_topics_add": ["新增话题1"],
+                    "hot_topics_remove": ["旧话题1"]
+                }}
+            ],
+            "reasoning": "<简要说明>"
+        }}"""
 
         system_prompt = "你是舆论分析专家。返回纯JSON格式。注意 poster_type 必须精确匹配可用实体类型。"
         
@@ -782,40 +808,72 @@ class SimulationConfigGenerator:
                 "hot_topics": [],
                 "narrative_direction": "",
                 "initial_posts": [],
+                "scheduled_events": [],
                 "reasoning": "使用默认配置"
             }
     
     def _parse_event_config(self, result: Dict[str, Any]) -> EventConfig:
         """解析事件配置结果"""
+        scheduled_events = result.get("scheduled_events", [])
+        if not isinstance(scheduled_events, list):
+            scheduled_events = []
+
+        normalized_scheduled_events = []
+        for item in scheduled_events:
+            if not isinstance(item, dict):
+                continue
+
+            normalized = dict(item)
+            event_type = str(normalized.get("event_type", "") or "").strip().lower()
+            if not event_type:
+                if normalized.get("content"):
+                    event_type = "create_post"
+                elif normalized.get("hot_topics_add") or normalized.get("hot_topics_remove"):
+                    event_type = "hot_topics_update"
+                else:
+                    continue
+            normalized["event_type"] = event_type
+
+            for key in ["trigger_hour", "hour", "hour_offset", "trigger_day", "trigger_round", "round_offset"]:
+                if key not in normalized:
+                    continue
+                try:
+                    normalized[key] = int(normalized[key])
+                except Exception:
+                    normalized.pop(key, None)
+
+            for key in ["hot_topics_add", "hot_topics_remove"]:
+                value = normalized.get(key, [])
+                if isinstance(value, str):
+                    value = [x.strip() for x in re.split(r"[，,;；\s]+", value) if x.strip()]
+                if not isinstance(value, list):
+                    value = []
+                normalized[key] = [str(x).strip() for x in value if str(x).strip()]
+
+            normalized_scheduled_events.append(normalized)
+
         return EventConfig(
             initial_posts=result.get("initial_posts", []),
-            scheduled_events=[],
+            scheduled_events=normalized_scheduled_events,
             hot_topics=result.get("hot_topics", []),
             narrative_direction=result.get("narrative_direction", "")
         )
-    
-    def _assign_initial_post_agents(
+
+    def _assign_posts_to_agents(
         self,
-        event_config: EventConfig,
+        posts: List[Dict[str, Any]],
         agent_configs: List[AgentActivityConfig]
-    ) -> EventConfig:
-        """
-        为初始帖子分配合适的发布者 Agent
-        
-        根据每个帖子的 poster_type 匹配最合适的 agent_id
-        """
-        if not event_config.initial_posts:
-            return event_config
-        
-        # 按实体类型建立 agent 索引
+    ) -> List[Dict[str, Any]]:
+        if not posts:
+            return []
+
         agents_by_type: Dict[str, List[AgentActivityConfig]] = {}
         for agent in agent_configs:
             etype = agent.entity_type.lower()
             if etype not in agents_by_type:
                 agents_by_type[etype] = []
             agents_by_type[etype].append(agent)
-        
-        # 类型映射表（处理 LLM 可能输出的不同格式）
+
         type_aliases = {
             "official": ["official", "university", "governmentagency", "government"],
             "university": ["university", "official"],
@@ -826,26 +884,19 @@ class SimulationConfigGenerator:
             "organization": ["organization", "ngo", "company", "group"],
             "person": ["person", "student", "alumni"],
         }
-        
-        # 记录每种类型已使用的 agent 索引，避免重复使用同一个 agent
+
         used_indices: Dict[str, int] = {}
-        
         updated_posts = []
-        for post in event_config.initial_posts:
-            poster_type = post.get("poster_type", "").lower()
-            content = post.get("content", "")
-            
-            # 尝试找到匹配的 agent
+        for post in posts:
+            poster_type = str(post.get("poster_type", "") or "").lower()
             matched_agent_id = None
-            
-            # 1. 直接匹配
+
             if poster_type in agents_by_type:
                 agents = agents_by_type[poster_type]
                 idx = used_indices.get(poster_type, 0) % len(agents)
                 matched_agent_id = agents[idx].agent_id
                 used_indices[poster_type] = idx + 1
             else:
-                # 2. 使用别名匹配
                 for alias_key, aliases in type_aliases.items():
                     if poster_type in aliases or alias_key == poster_type:
                         for alias in aliases:
@@ -857,26 +908,63 @@ class SimulationConfigGenerator:
                                 break
                     if matched_agent_id is not None:
                         break
-            
-            # 3. 如果仍未找到，使用影响力最高的 agent
+
             if matched_agent_id is None:
                 logger.warning(f"未找到类型 '{poster_type}' 的匹配 Agent，使用影响力最高的 Agent")
                 if agent_configs:
-                    # 按影响力排序，选择影响力最高的
                     sorted_agents = sorted(agent_configs, key=lambda a: a.influence_weight, reverse=True)
                     matched_agent_id = sorted_agents[0].agent_id
                 else:
                     matched_agent_id = 0
-            
+
             updated_posts.append({
-                "content": content,
+                **post,
                 "poster_type": post.get("poster_type", "Unknown"),
-                "poster_agent_id": matched_agent_id
+                "poster_agent_id": matched_agent_id,
             })
-            
-            logger.info(f"初始帖子分配: poster_type='{poster_type}' -> agent_id={matched_agent_id}")
+
+        return updated_posts
+    
+    def _assign_initial_post_agents(
+        self,
+        event_config: EventConfig,
+        agent_configs: List[AgentActivityConfig]
+    ) -> EventConfig:
+        """
+        为初始帖子分配合适的发布者 Agent
         
-        event_config.initial_posts = updated_posts
+        根据每个帖子的 poster_type 匹配最合适的 agent_id
+        """
+        event_config.initial_posts = self._assign_posts_to_agents(
+            event_config.initial_posts,
+            agent_configs,
+        )
+        for post in event_config.initial_posts:
+            logger.info(
+                f"初始帖子分配: poster_type='{str(post.get('poster_type', '')).lower()}' "
+                f"-> agent_id={post.get('poster_agent_id')}"
+            )
+
+        scheduled_post_events = []
+        passthrough_events = []
+        for event in event_config.scheduled_events:
+            if str(event.get("event_type", "")).lower() == "create_post" and event.get("content"):
+                scheduled_post_events.append(event)
+            else:
+                passthrough_events.append(event)
+
+        scheduled_post_events = self._assign_posts_to_agents(
+            scheduled_post_events,
+            agent_configs,
+        )
+        for event in scheduled_post_events:
+            logger.info(
+                f"定时事件分配: event_type=create_post, "
+                f"poster_type='{str(event.get('poster_type', '')).lower()}' "
+                f"-> agent_id={event.get('poster_agent_id')}"
+            )
+
+        event_config.scheduled_events = scheduled_post_events + passthrough_events
         return event_config
     
     def _generate_agent_configs_batch(

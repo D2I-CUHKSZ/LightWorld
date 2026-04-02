@@ -1,0 +1,25 @@
+{
+  "simulation_id": "sim_514cf6a5a09d",
+  "project_id": "proj_6d56e4817baf",
+  "graph_id": "mirofish_9f0d1c84b2164adf",
+  "enable_twitter": true,
+  "enable_reddit": false,
+  "status": "ready",
+  "entities_count": 6,
+  "profiles_count": 6,
+  "entity_types": [
+    "Person",
+    "BotAccount",
+    "MediaOutlet",
+    "CitizenUser",
+    "Organization"
+  ],
+  "config_generated": true,
+  "config_reasoning": "时间配置: 本次smoke test基于最小图谱（仅3个核心节点：kol_01、group_a_01、bot_01），无真实事件驱动，属轻量级功能验证；参与实体含1个公民用户（group_a_01）、1个KOL（kol_01）和1个bot，无官方/媒体实时响应机制；模拟聚焦基础社交行为链（follow + repost），不依赖突发传播或全天候运营。因此采用48小时覆盖两个完整昼夜周期，验证时序稳定性；高峰设定为19–22点符合中国网民晚间内容消费习惯；bot_01虽可24小时运行，但按最小测试原则，其活跃服从人类主体节奏（即仅在人类活跃时段触发repost动作）；media outlets（News/Blogs）和organization（CAMEL-AI）在seed中无直接行为边，故不设独立活跃时段，仅通过text stream在工作时段（9–18）隐式供稿；person（666ghj）为项目作者，无社交动作定义，不额外激活。整体配置兼顾真实性与极简性，满足README图谱的端到端行为闭环验证。 | 事件配置: 帖子覆盖全部5类可用实体类型（Organization、CitizenUser、MediaOutlet、BotAccount、Person），严格匹配README中声明的实体关系（如 bot_01 reposts group_a_01 → BotAccount posts referencing CitizenUser；CAMEL-AI owns OASIS/LIGHTWORLD → Organization leads announcement；666ghj created MiroFish → Person ties to project lineage）。话题词提取自README高频术语（LIGHTWORLD, omni-modal, agent swarm, social simulation），舆论方向基于系统仪表盘指标（Attention Heatmap 72%, Intervention Window 91%）和架构描述推导出的技术社区典型演进路径：兴奋→ scrutiny → contextualization. | Agent配置: 成功生成 6 个 | 初始帖子分配: 5 个帖子已分配发布者",
+  "current_round": 0,
+  "twitter_status": "not_started",
+  "reddit_status": "not_started",
+  "created_at": "2026-03-31T09:57:00.726811",
+  "updated_at": "2026-03-31T09:58:12.280123",
+  "error": null
+}

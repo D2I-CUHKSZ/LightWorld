@@ -1,0 +1,1355 @@
+{
+  "lemmaId": 63585559,
+  "lemmaTitle": "10·11武大男生被指性骚扰事件",
+  "lemmaDesc": "2023年武汉大学发生的事件",
+  "lemmaType": 0,
+  "uid": 11995734,
+  "uname": "yanlis",
+  "createTime": 1697114745,
+  "updateTime": 1769320399,
+  "isDefault": 0,
+  "isDeleted": 0,
+  "rank": 1,
+  "extData": {
+    "classify": [
+      {
+        "id": 1033564,
+        "idPath": "1033564/1033585/1033715",
+        "leafId": 1033715,
+        "leafName": "社会事件",
+        "mainCategory": 1,
+        "name": "社会科学",
+        "path": "社会科学/社会学/社会事件"
+      }
+    ],
+    "isBaikeV6": 1,
+    "isFrontV6": 1,
+    "isSapp": 0,
+    "isWaitForPersonal": false,
+    "is_locked": 0,
+    "kpdClassify": [
+      {
+        "id": 337559,
+        "name": "社会事件"
+      }
+    ],
+    "lemmaId": 33907948,
+    "lemma_id": 33907948,
+    "limitedFlag": 2,
+    "move": {
+      "fromCommitId": 777870677,
+      "fromLemmaId": 63582864
+    },
+    "newEditor": 1,
+    "pass_count": 56,
+    "redirectFrom": [
+      {
+        "fromLemmaId": 63594285,
+        "fromTitle": "10月11日武大男生被指性骚扰事件"
+      },
+      {
+        "fromLemmaId": 63594283,
+        "fromTitle": "2023年10月11日武大男生被指性骚扰事件"
+      },
+      {
+        "fromLemmaId": 63594282,
+        "fromTitle": "10.11武大男生被指性骚扰事件"
+      },
+      {
+        "fromLemmaId": 63594280,
+        "fromTitle": "1011武大男生被指性骚扰事件"
+      },
+      {
+        "fromLemmaId": 63582864,
+        "fromTitle": "2023年武大男生图书馆性骚扰事件"
+      }
+    ],
+    "subLemmaId": 37602733,
+    "updateTime": 1769320399,
+    "wapEdit": 0
+  },
+  "extFlag": 0,
+  "versionId": 729259225,
+  "versionUid": 4842460412,
+  "versionUname": "青梅茶小绿",
+  "versionCreateTime": 1758421512,
+  "catalog": [
+    {
+      "level": 1,
+      "title": "事件背景",
+      "index": "1",
+      "uuid": "tSqYpnPTaX3S",
+      "height": 28
+    },
+    {
+      "level": 1,
+      "title": "事件经过",
+      "index": "2",
+      "uuid": "tSqYpnPc0xYg",
+      "height": 28
+    },
+    {
+      "level": 1,
+      "title": "事件处置",
+      "index": "3",
+      "uuid": "tStznpi2oPni",
+      "height": 28
+    },
+    {
+      "level": 2,
+      "title": "进行调查",
+      "index": "3-1",
+      "uuid": "uRYcO8RRSTko",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "给予处分",
+      "index": "3-2",
+      "uuid": "uRYcOrvfNJqA",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "一审宣判",
+      "index": "3-3",
+      "uuid": "uRYcOPTqejvk",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "取消处分",
+      "index": "3-4",
+      "uuid": "uXjo3YdhikFr",
+      "height": 21
+    },
+    {
+      "level": 1,
+      "title": "事件影响",
+      "index": "4",
+      "uuid": "uXiA2D7j3Kkw",
+      "height": 28
+    },
+    {
+      "level": 2,
+      "title": "肖某某被确诊“创伤后应激障碍”",
+      "index": "4-1",
+      "uuid": "uUXrvaFLQrIN",
+      "height": 37
+    },
+    {
+      "level": 2,
+      "title": "杨某信息被泄露",
+      "index": "4-2",
+      "uuid": "uUXry7TgglCh",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "杨某媛论文突然下架",
+      "index": "4-3",
+      "uuid": "uWmcLJkbQy3w",
+      "height": 21
+    },
+    {
+      "level": 1,
+      "title": "事件回应",
+      "index": "5",
+      "uuid": "uSwPSozZ1RnH",
+      "height": 28
+    },
+    {
+      "level": 2,
+      "title": "涉事男生母亲",
+      "index": "5-1",
+      "uuid": "uUXrs7fd3yJT",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "涉事男生皮肤科医生",
+      "index": "5-2",
+      "uuid": "uUXrJwRAJMyo",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "涉事男生代理律师",
+      "index": "5-3",
+      "uuid": "uUXrLP3z3XEG",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "涉事女生",
+      "index": "5-4",
+      "uuid": "uUXrSn7vQFIk",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "香港浸会大学",
+      "index": "5-5",
+      "uuid": "uUXrV9TZeSzj",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "武汉大学",
+      "index": "5-6",
+      "uuid": "uUXrYBHGTaLp",
+      "height": 21
+    },
+    {
+      "level": 1,
+      "title": "律师解读",
+      "index": "6",
+      "uuid": "uUqH3hrTDFEC",
+      "height": 28
+    },
+    {
+      "level": 1,
+      "title": "社会评论",
+      "index": "7",
+      "uuid": "uUWsD8PjlOvT",
+      "height": 28
+    },
+    {
+      "level": 1,
+      "title": "相关事件",
+      "index": "8",
+      "uuid": "uUWs6ZrKqDeO",
+      "height": 28
+    },
+    {
+      "level": 2,
+      "title": "社会舆论",
+      "index": "8-1",
+      "uuid": "uV2F3ay47DCd",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "网民冒充当事人的同学",
+      "index": "8-2",
+      "uuid": "uV2DYj8bGLeD",
+      "height": 37
+    },
+    {
+      "level": 2,
+      "title": "企业家校友的公共表达困境",
+      "index": "8-3",
+      "uuid": "uV2FYyUKJhAZ",
+      "height": 37
+    }
+  ],
+  "abstract": [],
+  "abstractAlbum": {
+    "content": [
+      {
+        "albumId": 1,
+        "src": "ac4bd11373f082025aafb32ff4acecedab64034fadde",
+        "width": 858,
+        "height": 504,
+        "uuid": "tStAoDvIy3cs"
+      }
+    ],
+    "desc": "10·11武大男生被指性骚扰事件的概述图",
+    "total": 1,
+    "coverPic": {
+      "albumId": 1,
+      "url": "https://bkimg.cdn.bcebos.com/pic/ac4bd11373f082025aafb32ff4acecedab64034fadde?x-bce-process=image/resize,m_lfit,w_536,limit_1/quality,Q_70",
+      "src": "ac4bd11373f082025aafb32ff4acecedab64034fadde",
+      "origSrc": "ac4bd11373f082025aafb32ff4acecedab64034fadde",
+      "width": 858,
+      "height": 504,
+      "coverCrop": {},
+      "uuid": "tStAoDvIy3cs"
+    },
+    "wapPic": {
+      "src": "a50f4bfbfbedab64034f64d04861b8c379310a55b0de",
+      "origSrc": "ac4bd11373f082025aafb32ff4acecedab64034fadde",
+      "width": 837,
+      "height": 557,
+      "coverCrop": {
+        "x": 2.5,
+        "aspect": 1.5,
+        "width": 97.5,
+        "height": 100,
+        "padHeight": 110.54422,
+        "padWidth": 97.5
+      },
+      "uuid": "tStArRGHwstm"
+    },
+    "sharePic": {
+      "src": "aa64034f78f0f736afc36611b502a419ebc4b745b5de",
+      "origSrc": "ac4bd11373f082025aafb32ff4acecedab64034fadde",
+      "width": 837,
+      "height": 836,
+      "coverCrop": {
+        "x": 2.5,
+        "aspect": 1,
+        "width": 97.5,
+        "height": 100,
+        "padHeight": 165.81633,
+        "padWidth": 97.5
+      },
+      "uuid": "tStAshvu6QIA"
+    }
+  },
+  "reference": [
+    {
+      "type": 1,
+      "title": "武汉大学图书馆涉嫌性骚扰事件一审宣判：不符合性骚扰构成要件；男方母亲透露：多次摩擦下体是因为湿疹复发，已提供强有力证据",
+      "site": "杭州日报",
+      "publishDate": "2025-07-26",
+      "refDate": "2025-07-26",
+      "index": 1,
+      "uuid": "tStzVXG0Y3SV",
+      "encodeUrl": "533aYdO6cr3_z3kATPTexa_zMyiVM9Ws6-eBUrZzzqIPmGapB4zkU4I74d8-8bllFQLPpdZhb9tahbejXkZE5vQYd-UyRLUrm3_4VDrBwbnh6Z5n2NwH49MXDe8B0a6zuwSv"
+    },
+    {
+      "type": 1,
+      "title": "武汉大学回应“学生举报遭受性骚扰”：已成立工作组进行调查",
+      "site": "澎湃新闻",
+      "refDate": "2023-10-12",
+      "index": 2,
+      "uuid": "tStA0g4A8l5i",
+      "encodeUrl": "533aYdO6cr3_z3kATPzazf_3NS7AYImkuuHWB7RzzqIPmGapB5nyTcYm6NIv_-diBkXIvtdsZcEGsu2-WxIZgaFPM6pkAOFNn3L3WjvFz78"
+    },
+    {
+      "type": 1,
+      "title": "武汉警方回应“武大学生举报图书馆遭性骚扰”：已出警处理",
+      "site": "澎湃新闻",
+      "refDate": "2023-10-12",
+      "index": 3,
+      "uuid": "tStA4ppVJoda",
+      "encodeUrl": "533aYdO6cr3_z3kATPeOyP_4N37GN9X9trCAAbRzzqIPmGapB5nyTcYm6NIv_-diBkXIvtdsZcEGsu2-WxIZgaFPM6pkAOFNn3L2UzXCzb4"
+    },
+    {
+      "id": "378214086",
+      "type": 1,
+      "title": "武汉大学：学校研究决定，给予2022级本科生肖某某记过处分",
+      "site": "新浪网",
+      "publishDate": "2023-10-13",
+      "index": 4,
+      "uuid": "tSzcO7ltLfhc",
+      "encodeUrl": "533aYdO6cr3_z3kATKGIxPvzZy_CNtqotrLbVrVzzqIPmGapB4jsVIk849Jx7f5pFUXIv5UsY9hanOKyTVRH7vUTbOw1X7QhgiKgAC6blPSntoJ3w9ZBoo1LW60JxKm16xg"
+    },
+    {
+      "type": 1,
+      "title": "武汉大学通报“学生举报遭受性骚扰”：给予肖某某记过处分",
+      "site": "界面新闻",
+      "refDate": "2023-10-13",
+      "index": 5,
+      "uuid": "tSzeNPWOBabo",
+      "encodeUrl": "533aYdO6cr3_z3kATKaKzfr5YS6SMYmsubfbUuFzzqIPmGapB5nyTcY46dIy9_ZpWgjEvddjcsIcleSvFUpF7PUWcOgzXO1mwCo"
+    },
+    {
+      "type": 1,
+      "title": "武大性骚扰事件涉事男方首度发声：系隔裤挠痒，已就网暴起诉",
+      "site": "腾讯新闻",
+      "publishDate": "2024-02-04",
+      "refDate": "2024-02-04",
+      "index": 6,
+      "uuid": "u3ijR1Go0XGI",
+      "encodeUrl": "533aYdO6cr3_z3kATKaCyP7yNn3GMYyq6LTSVLpzzqIPmGapB4DgTcYj8Zk88fooBgrCvtdjL4RFxLz6CEtBn_cSBos3QrU"
+    },
+    {
+      "id": "528242292",
+      "type": 1,
+      "title": "武大图书馆性骚扰事件一审：驳回性骚扰指控，双方深陷网暴两败俱伤|封面深镜",
+      "site": "封面新闻",
+      "publishDate": "2025-07-25",
+      "refDate": "2025-07-25",
+      "index": 7,
+      "uuid": "uRYcvE0JTBpN",
+      "encodeUrl": "533aYdO6cr3_z3kATPKOzf2lY36RP9St7eLSU7JzzqIP0XOpSo_sUIEz6NYwsPVmHQ_e_pttbZkGyeGuB0pN7f8Wc-gxRrQmm3L5UDXGz7nwuI9zl4MV-tEW"
+    },
+    {
+      "id": "529194116",
+      "type": 1,
+      "title": "主编有态度 | 武汉大学图书馆性骚扰事件：别让性别对立成为舆论的预设立场",
+      "site": "潇湘晨报",
+      "publishDate": "2025-07-30",
+      "index": 8,
+      "uuid": "uSqYLB0wzxhj",
+      "encodeUrl": "533aYdO6cr3_z3kATPfdyqmhNyuRNdX67-DaALFzzqIPmGapB4DgTZt88cZx_fhqWxnKuZYtYZlHxrr_CkxG7oYQd5ZTMbUi"
+    },
+    {
+      "id": "529312571",
+      "type": 1,
+      "title": "教授评武大事件：欺人太甚 处分不当",
+      "site": "潇湘晨报",
+      "publishDate": "2025-07-31",
+      "index": 9,
+      "uuid": "uSugYP4ColiR",
+      "encodeUrl": "533aYdO6cr3_z3kATKWJy_SlYX3NM9ikub3TVLdzzqIPmGapB4DgTZt88cZx_fhqWxnKuZYtYZlHxrr_CkxG74YQc5YzQ7UikjW6CmfP3-Ozq4Bg9YgQrg"
+    },
+    {
+      "type": 1,
+      "title": "马上评｜武大图书馆事件，“两败俱伤”不能再继续了",
+      "site": "澎湃新闻",
+      "refDate": "2025-07-31",
+      "index": 10,
+      "uuid": "uSuWnoL6IDqf",
+      "encodeUrl": "533aYdO6cr3_z3kATPGPy671YS2VN4z_vrTaUbNzzqIPmGapB4zkU4I74d8-8bllFQLPpdZhb9tahbejXkZE5vQZceU1RrMlnXL_WjXLwLnj6Z5n2NwH49MXDe8B0a6zuwSv"
+    },
+    {
+      "type": 1,
+      "title": "胡锡进称武汉大学应向肖某某道歉",
+      "site": "930老友记",
+      "refDate": "2025-07-31",
+      "index": 11,
+      "uuid": "uSuWFpGnhkHY",
+      "encodeUrl": "533aYdO6cr3_z3kATPyOyq6lM3qSY9ukt7PRA7VzzqIPmGapB5ngU4o9rtQw87g2TVqZ58k3MIBE2diOTyExupdwceJ3F-N33xmpD2KVxL_m_9gxmdFFo4ks"
+    },
+    {
+      "id": "529380616",
+      "type": 1,
+      "title": "武汉大学回应法院驳回图书馆性骚扰指控：领导很重视目前相关处分通报仍在武汉大学官网未删除",
+      "site": "扬子晚报",
+      "publishDate": "2025-07-31",
+      "refDate": "2025-07-31",
+      "index": 12,
+      "uuid": "uSwtf3e2QrcF",
+      "encodeUrl": "533aYdO6cr3_z3kATPXayqrwNizNZ9-pubeHULVzzqIP0XOpSo_sUIEz6NYwsPVmHQ_e_pttbZkGyeGuB0pN7f4RdeQ0SrQjmXD_VDDCz7_wuI9zl4MV-tEW"
+    },
+    {
+      "id": "529400665",
+      "type": 1,
+      "title": "武大图书馆性骚扰事件一审宣判！男生患PTSD，女生精神崩溃",
+      "site": "百家号",
+      "publishDate": "2025-07-31",
+      "index": 13,
+      "uuid": "uSwOZb3IOmnH",
+      "encodeUrl": "533aYdO6cr3_z3kATPTexKqhN3zANIysv7TTV7NzzqIPmGapB4zkU4I74d8-8bllFQLPpdZhb9tahbejXkZE5vQYd-o9RbUgm3b3UDrLzrnm6Z5n2NwH49MXDe8B0a6zuwSv"
+    },
+    {
+      "id": "529436766",
+      "type": 1,
+      "title": "武汉大学校长张平文：正在处理“学生性骚扰指控被驳回”事件",
+      "site": "经济观察报",
+      "publishDate": "2025-07-31",
+      "index": 14,
+      "uuid": "uSxvQq0A2X6f",
+      "encodeUrl": "533aYdO6cr3_z3kATKLey6_2OyiSMt7_67KAWuFzzqIPmGapB4DgTZt88cZx_fhqWxnKuZYtYZlHxrr_CkxG74YQAJhWP7UikjSqBWaAxO2mkNgxmthS4NkWBvgaxrCy4xW-gXs"
+    },
+    {
+      "id": "529513408",
+      "type": 1,
+      "title": "武汉大学仍未删除对肖某某的处分通报",
+      "site": "观察者网",
+      "publishDate": "2025-08-01",
+      "index": 15,
+      "uuid": "uSB8TQbab6AG",
+      "encodeUrl": "533aYdO6cr3_z3kATKCOnfSmNXvCZ9ikvLHQU-FzzqIPmGapB5nyTcYm6NIv_-diBkXIvtdsZcEGsu2-WxIZgaFPM6pkAOFNnnf9VDbAzro"
+    },
+    {
+      "id": "529561044",
+      "type": 1,
+      "title": "武大的回应不是在此时，不知在何时｜羊晚快评",
+      "site": " 羊城派",
+      "publishDate": "2025-08-01",
+      "index": 16,
+      "uuid": "uSBAG4wWGI8A",
+      "encodeUrl": "533aYdO6cr3_z3kATPKIyfv5My_ENdT5urHUBOFzzqIPmGapB4zkU4I74d8-8bllFQLPpdZhb9tahbejXkZE5vQZc-8zQrAilX_5WjrCzbbk"
+    },
+    {
+      "id": "529580236",
+      "type": 1,
+      "title": "武汉大学：对肖某某纪律处分、杨某某学位论文等进行全面调查复核",
+      "site": "新华社",
+      "publishDate": "2025-08-01",
+      "index": 17,
+      "uuid": "uSC1j916dYUK",
+      "encodeUrl": "533aYdO6cr3_z3kATPSOn6qlN3ySY4_-7LKBU7JzzqIPmGapB4arQoE86MI-5vpzWgjEvdd0aINExKe5UhoHu-gRc-syQrwmnHmrDGCbnbPn_d82mthAopwdDepUw7ix40n90iOLz-TYtz7mlGTP55O2cHGaEdBBh5YLC9LbUQ"
+    },
+    {
+      "id": "529580250",
+      "type": 1,
+      "title": "武汉大学：对肖某某纪律处分、杨某某学位论文等进行全面调查复核",
+      "site": "新京报",
+      "publishDate": "2025-08-01",
+      "index": 18,
+      "uuid": "uSC2EQHQZ8Cy",
+      "encodeUrl": "533aYdO6cr3_z3kATKXaz6n2Zi-RMouk77LTB-BzzqIPmGapB5nyTcYw6tk66eQpFwTG_ptsL9IQgumjVlRE6fIUce48SrEgnHT2VTTB1-aiooU"
+    },
+    {
+      "type": 1,
+      "title": "主编有态度｜从“等上级安排”到“全面调查复核”：尽管迟来，但毕竟来了",
+      "site": "潇湘晨报",
+      "refDate": "2025-08-02",
+      "index": 19,
+      "uuid": "uSGzUeJ6DORL",
+      "encodeUrl": "533aYdO6cr3_z3kATPTZzv2lN3rBMtj-trHRA7JzzqIPmGapB4zkU4I74d8-8bllFQLPpdZhb9tahbejXkZE5vQZc-k8S7AnnnH-VDTGy7zm"
+    },
+    {
+      "id": "529771957",
+      "type": 1,
+      "title": "武大“性骚扰”案冲上热搜！雷军躺枪了！",
+      "site": "新浪网",
+      "publishDate": "2025-08-02",
+      "index": 20,
+      "uuid": "uSGNuB9d6b9q",
+      "encodeUrl": "533aYdO6cr3_z3kATPKPzf-mYS2WN9j6t7HUUbFzzqIPmGapB4jsVIk849Jx7f5pFUXIv5UsY9hahfylWRBarKhMLfI3QrcngHb3TjPA1uq5rMRoxIcd4tIbC68Rg_X2tEDikXvOhOw"
+    },
+    {
+      "type": 1,
+      "title": "香港浸会大学回应武大图书馆女生控诉男生性骚扰案，强调学校有清晰的招生政策和行为守则，将严格遵循相关规定处理任何违规行为，但不会就个别案件发表评论",
+      "site": "齐鲁壹点",
+      "refDate": "2025-08-03",
+      "index": 21,
+      "uuid": "uSNxMXyfOgio",
+      "encodeUrl": "533aYdO6cr3_z3kATKCPxfX0ZCjHZ9-q67aHULBzzqIPmGapB5nyTcYm78Ir9_ZoWgjEvddjcsIcleSvFUxA7fUTc-syQLMknXf9WjfBzL_5"
+    },
+    {
+      "type": 1,
+      "title": "香港浸会大学：对于任何违反行为守则的大学成员，会根据既定的纪律程序处理",
+      "site": "观察者网",
+      "refDate": "2025-08-03",
+      "index": 22,
+      "uuid": "uSNy8Ez7ajQm",
+      "encodeUrl": "533aYdO6cr3_z3kATPKKya2lMXqRP9upt7OAU7tzzqIPmGapB4DgTZt88cZx_fhqWxnKuZYtYZlHxrr_CkxH5oYQeJdBIrUi"
+    },
+    {
+      "id": "530811273",
+      "type": 1,
+      "title": "武大图书馆事件不应就这样过去，高校还要做什么",
+      "site": "风声",
+      "publishDate": "2025-08-06",
+      "refDate": "2025-08-06",
+      "index": 23,
+      "uuid": "uT3GdazDwOYW",
+      "encodeUrl": "533aYdO6cr3_z3kATPTfyv75Zy3DM46ou7WFB7tzzqIPmGapB4f2Uokg5Zk2-PJpE0XIv5UtY5kG2bCmWxQetpdKJqRTTfZi3jXyDXPUmua3oYdkxqgQrpwSBfxJivCg5RH41yaNiLWjsGyyzTWYtOezeiagHoIZzdFXBOuDXf10dlWJ-BPpfQ"
+    },
+    {
+      "type": 1,
+      "title": "最新 | 杨某媛疑并非浸会大学博士生！",
+      "site": "天津广播",
+      "refDate": "2025-08-08",
+      "index": 24,
+      "uuid": "uTgySGEVUIMG",
+      "encodeUrl": "533aYdO6cr3_z3kATKeInfWiZi6WY9T96LSHV7FzzqIPmGapB4P1FJ836c828Ll2BUXIv5Utc5kbsdmEUUo_i6BCOK59Jsck33XiUnCj"
+    },
+    {
+      "id": "533526194",
+      "type": 1,
+      "title": "马上评｜全面调查复核，对真相负责",
+      "site": "澎湃新闻",
+      "publishDate": "2025-08-16",
+      "index": 25,
+      "uuid": "uU1FaoImrOPF",
+      "encodeUrl": "533aYdO6cr3_z3kATKDYn_qlNijDPo-quuWCVOBzzqIPmGapB4zkU4I74d8-8bllFQLPpdZhb9tahbejXkZE5vQZc-k8RLIlmHL4VzLFzb_k"
+    },
+    {
+      "id": "534614023",
+      "type": 1,
+      "title": "武大图书馆事件肖同学处分公告被隐藏  仅校内网可查",
+      "site": "凤凰网",
+      "publishDate": "2025-08-21",
+      "index": 26,
+      "uuid": "uUsfSa1CYg3Z",
+      "encodeUrl": "533aYdO6cr3_z3kATKeOy_rxYymQYtyu6OfTBLdzzqIPmGapB5ngU4o9rtQw87g1Qlqe5Mk1M4ZC2dn6cCs2sa1kNQ"
+    },
+    {
+      "id": "535270612",
+      "type": 1,
+      "title": "壹快评｜莫把“有事找警察”变成“有事上警察”",
+      "site": "第一财经",
+      "publishDate": "2025-08-23",
+      "index": 27,
+      "uuid": "uUGSlUJejIlQ",
+      "encodeUrl": "533aYdO6cr3_z3kATPfZyvShYyvHNdn4veCFWrVzzqIPmGapB4zkU4I74d8-8bllFQLPpdZhb9tahbejXkZE5vMRc-08RbIlnHL4VzrHyrbm6Z5n2NwH49MXDe8B0a6zuwSv"
+    },
+    {
+      "type": 1,
+      "title": "武大图书馆性骚扰事件一审宣判：驳回性骚扰指控，双方深陷网暴",
+      "site": "今日头条",
+      "refDate": "2025-08-26",
+      "index": 28,
+      "uuid": "uUWqssGr9Buc",
+      "encodeUrl": "533aYdO6cr3_z3kATKLYyqn4ZCbFNt2rv7OFV7ZzzqIPmGapB5nyTcYm78Ir9_ZoWgjEvddjcsIcleSvFUxA7fYScu08Q7IkmHb6VzTAyLv58Ippy48a9tZOTu5IwrOi40m_h3LIiui68myx"
+    },
+    {
+      "type": 1,
+      "title": "网民冒充武大肖某某的同学，微博：两名违规用户被关闭账号",
+      "site": "今日头条",
+      "refDate": "2025-08-26",
+      "index": 29,
+      "uuid": "uUWsolR5p8kR",
+      "encodeUrl": "533aYdO6cr3_z3kATPaInanwM37EN4_-7LHUA7pzzqIPmGapB5nyTcYm78Ir9_ZoWgjEvddjcsIcleSvFUxA7fMWdeQ8QLEjlH7-UTHCyL_58IVuzb4S4dUeVf4R1KCntED01iLZ3eG6tzrmkGed4Y3lKijDTA"
+    },
+    {
+      "type": 1,
+      "title": "武大性骚扰事件涉事男方首度发声：系隔裤挠痒，已就网暴起诉",
+      "site": "今日头条",
+      "refDate": "2025-08-26",
+      "index": 30,
+      "uuid": "uUWt79EZRIac",
+      "encodeUrl": "533aYdO6cr3_z3kATKCMxKn4M3uVZY-rurDTUbpzzqIPmGapB4zkU4I74d8-8bllFQLPpdZhb9tahbejXkZE6f8ZeO4wR7QhmXb4VzDDyL_g6Z5n2NwH49MXDe8B0a6zuwSv"
+    },
+    {
+      "type": 1,
+      "title": "武汉大学图书馆事件一审宣判，法院认定“不构成性骚扰”引多重追问",
+      "site": "百家号",
+      "refDate": "2025-08-26",
+      "index": 31,
+      "uuid": "uUWtvCalORBx",
+      "encodeUrl": "533aYdO6cr3_z3kATKGJmq6hNSaRMN-pvL3VUbNzzqIPmGapB4zkU4I74d8-8bllFQLPpdZhb9tahbejXkZE5vQZcOsxQ7QjmXP9UTfCzb_i6Z5n2NwH49MXDe8B0a6zuwSv"
+    },
+    {
+      "type": 1,
+      "title": "“武大图书馆性骚扰事件”一审宣判！男生患PTSD，女生精神崩溃",
+      "site": "今日头条",
+      "refDate": "2025-08-26",
+      "index": 32,
+      "uuid": "uUXn8XEmYMXe",
+      "encodeUrl": "533aYdO6cr3_z3kATPaCy_umMXuQZ9-oveGGULJzzqIPmGapB5nyTcYm78Ir9_ZoWgjEvddjcsIcleSvFUxA7fYTdOwxQbAknXH8VDXGyLf58Ippy48a9tZOTu5IwrOi40m_h3LIiui68myx"
+    },
+    {
+      "type": 1,
+      "title": "武大性骚扰事件涉事男方首度发声：系隔裤挠痒，已就网暴起诉",
+      "site": "南方都市报",
+      "refDate": "2025-08-26",
+      "index": 33,
+      "uuid": "uUXq71oiuiFP",
+      "encodeUrl": "533aYdO6cr3_z3kATKCMxKn4M3uVZY-rurDTUbpzzqIPmGapB4zkU4I74d8-8bllFQLPpdZhb9tahbejXkZE6f8ZeO4wR7QhmXb4VzDDyL_g6Z5n2NwH49MXDe8B0a6zuwSv"
+    },
+    {
+      "type": 1,
+      "title": "武大图书馆性骚扰事件一审宣判：驳回性骚扰指控，双方深陷网暴",
+      "site": "今日头条",
+      "refDate": "2025-08-26",
+      "index": 34,
+      "uuid": "uUXqOJsGU08Y",
+      "encodeUrl": "533aYdO6cr3_z3kATKLYyqn4ZCbFNt2rv7OFV7ZzzqIPmGapB5nyTcYm78Ir9_ZoWgjEvddjcsIcleSvFUxA7fYScu08Q7IkmHb6VzTAyLv58Ippy48a9tZOTu5IwrOi40m_h3LIiui68myx"
+    },
+    {
+      "id": "539798311",
+      "type": 1,
+      "title": "武汉大学杨某媛论文突然下架，知网回应",
+      "site": "第一财经",
+      "publishDate": "2025-09-10",
+      "index": 35,
+      "uuid": "uWmcvmwrgXlu",
+      "encodeUrl": "533aYdO6cr3_z3kATP3Zmf72YyzBZd76vLyABLdzzqIPmGapB4DgTZt88cZx_fhqWxnKuZYtYZlHxrr_CkJE7oYQc-lHQLUikjW6CmfP3-Ozq4Bg9YgQrg"
+    },
+    {
+      "id": "539944680",
+      "type": 1,
+      "title": "知网恢复展示武汉大学杨某媛论文",
+      "site": "第一财经",
+      "publishDate": "2025-09-10",
+      "refDate": "2025-09-10",
+      "index": 36,
+      "uuid": "uWpjvLunoeKf",
+      "encodeUrl": "533aYdO6cr3_z3kATPSNy_6kYSnAP9yk6uHbAbZzzqIP0XOpSo_sUIEz6NYwsPVmHQ_e_pttbZkGyeGuB0pN6vUYeeU8S7wmmX_3VTDBwL3wuI9zl4MV-tEW"
+    },
+    {
+      "id": "540056521",
+      "type": 1,
+      "title": "武大杨某媛论文下架后再上架，知网应公开说明",
+      "site": "澎湃新闻",
+      "publishDate": "2025-09-11",
+      "index": 37,
+      "uuid": "uWs0JYzNoFKh",
+      "encodeUrl": "533aYdO6cr3_z3kATPeNnvijOybFMtr6ubeAUbpzzqIPmGapB4P1FJ836c828Ll2BUXIv5Utc5k-geSZAi0bqpZGc5VxKMcm5SyjAnmV"
+    },
+    {
+      "id": "542418458",
+      "type": 1,
+      "title": "#武大撤销肖某某记过处分#",
+      "site": " 新华社",
+      "publishDate": "2025-09-20",
+      "index": 38,
+      "uuid": "uXiz04ynVsYF",
+      "encodeUrl": "533aYdO6cr3_z3kATPOOzvnyOy3CMYutv7HTUOZzzqIPmGapB5ngU4o9rtQw87g2QlKS5MswNIdF2dn_ShIE7qlwBeJ3F-N33xmpD2KVxL_m_9gxmdFFo4ks"
+    },
+    {
+      "type": 1,
+      "title": "情况通报",
+      "site": "武汉大学",
+      "refDate": "2025-09-20",
+      "index": 39,
+      "uuid": "uXizZRkbT2bF",
+      "encodeUrl": "533aYdO6cr3_z3kATP3dnfymMXySMo6r7-eAUrRzzqIPmGapB5nyTcYl6MJx-_NyWgjF_5FsZtlaw7r5C1RH6_8UdekrGvF_"
+    },
+    {
+      "id": "542426251",
+      "type": 1,
+      "title": "武汉大学回应网传肖某瑫“遭遇网暴致学业中断、爷爷去世”：均为不实信息",
+      "site": "界面新闻",
+      "publishDate": "2025-09-20",
+      "index": 40,
+      "uuid": "uXiKxqC6yS8z",
+      "encodeUrl": "533aYdO6cr3_z3kATPGJyvrwYX6RY4j56rbQUOdzzqIPmGapB5nyTcY46dIy9_ZpWgjEvddjcsIcleSvFUpG7fAWees8XO1mwCo"
+    },
+    {
+      "type": 1,
+      "title": "武汉中院：驳回杨某媛上诉",
+      "site": "观察者网",
+      "refDate": "2025-09-20",
+      "index": 41,
+      "uuid": "uXjoaeJ6vaiu",
+      "encodeUrl": "533aYdO6cr3_z3kATKbdxa31NCjMNt6ov-eGBOZzzqIPmGapB5nyTcY19dYx_f9mWgjF_4htbN8Bn-u5FUlF7PJ_ceRaQLVNmn__VDDG1_2-u4Rt"
+    }
+  ],
+  "modules": {
+    "adManager": {
+      "data": {
+        "DiscussionAuditBeforePublish": 1
+      }
+    },
+    "card": {
+      "type": 106,
+      "left": [
+        {
+          "key": "name",
+          "title": "中文名",
+          "isArray": false,
+          "delimiter": "",
+          "data": [
+            {
+              "dataType": "text",
+              "text": [
+                {
+                  "tag": "text",
+                  "text": "10·11武大图书馆女生诬告事件"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "foreignName",
+          "title": "外文名",
+          "isArray": true,
+          "delimiter": "",
+          "data": [
+            {
+              "dataType": "text",
+              "text": [
+                {
+                  "tag": "text",
+                  "text": "10.11 Wuhan University Library Female Student False Accusation Incident"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "right": [
+        {
+          "key": "time",
+          "title": "发生时间",
+          "isArray": false,
+          "delimiter": "",
+          "data": [
+            {
+              "dataType": "dateTime",
+              "text": [
+                {
+                  "tag": "text",
+                  "text": "2023年10月11日"
+                }
+              ],
+              "unit": "AD",
+              "value": {
+                "day": "11",
+                "hour": "",
+                "minitue": "",
+                "month": "10",
+                "second": "",
+                "year": "2023"
+              }
+            }
+          ]
+        },
+        {
+          "key": "location",
+          "title": "发生地点",
+          "isArray": false,
+          "delimiter": "",
+          "data": [
+            {
+              "dataType": "text",
+              "text": [
+                {
+                  "tag": "text",
+                  "text": "武汉大学图书馆"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "customDefault",
+          "title": "事件处置",
+          "isArray": false,
+          "delimiter": "",
+          "data": [
+            {
+              "dataType": "enum",
+              "text": [
+                {
+                  "tag": "text",
+                  "text": "法院已宣判"
+                }
+              ],
+              "value": "法院已宣判"
+            }
+          ]
+        }
+      ]
+    },
+    "discussion": {
+      "showHelpEdit": 1
+    },
+    "globalConfig": {
+      "data": {
+        "serviceAdLemmaCategory": [
+          337597,
+          337474
+        ]
+      }
+    },
+    "knowledge": {
+      "data": [
+        {
+          "data": [
+            {
+              "data": {
+                "catalog": [
+                  {
+                    "level": 1,
+                    "title": "事件处置",
+                    "uuid": "tStznpi2oPni"
+                  },
+                  {
+                    "level": 2,
+                    "title": "进行调查",
+                    "uuid": "uRYcO8RRSTko"
+                  }
+                ],
+                "content": [
+                  {
+                    "position": 0,
+                    "text": "2025年7月25日，该事件一审宣判。法院审理认为，不能认定男生肖某某针对特定对象实施了性骚扰，驳回女生杨某的指控。",
+                    "type": "paragraph",
+                    "uuid": "uRYcPnXvEy2b"
+                  }
+                ]
+              },
+              "moduleId": 5966252452,
+              "moduleName": "body",
+              "uuid": "BoDYtStznpi2oPni"
+            }
+          ],
+          "imgs": null,
+          "keywords": null,
+          "knowledgeId": 1402101,
+          "rank": 0,
+          "tag": "",
+          "title": "",
+          "type": 5,
+          "uid": 6636532407
+        },
+        {
+          "data": [
+            {
+              "data": {
+                "content": [
+                  {
+                    "position": 237,
+                    "text": "8月1日，武汉大学发布情况通报称，已组建工作专班，正在对肖某某纪律处分、杨某某学位论文等进行全面调查复核。",
+                    "type": "paragraph",
+                    "uuid": "tStwHfnPfvdE"
+                  }
+                ]
+              },
+              "moduleId": 6023440519,
+              "moduleName": "abstract",
+              "uuid": "uuidAbstract"
+            }
+          ],
+          "imgs": null,
+          "keywords": null,
+          "knowledgeId": 1402106,
+          "rank": 0,
+          "tag": "",
+          "title": "",
+          "type": 5,
+          "uid": 6636532407
+        },
+        {
+          "data": [
+            {
+              "data": {
+                "content": [
+                  {
+                    "position": 669,
+                    "text": "8月1日，武汉大学发布情况通报称，已组建工作专班，正在对肖某某纪律处分、杨某某学位论文等进行全面调查复核。9月20日，武汉大学公告，撤销肖某瑫记过处分，维持授予杨景媛硕士学位，并对相关人员问责。",
+                    "type": "paragraph",
+                    "uuid": "tStwHfnPfvdE"
+                  }
+                ]
+              },
+              "moduleId": 6023440519,
+              "moduleName": "abstract",
+              "uuid": "uuidAbstract"
+            }
+          ],
+          "imgs": null,
+          "keywords": null,
+          "knowledgeId": 1402304,
+          "rank": 0,
+          "tag": "",
+          "title": "",
+          "type": 5,
+          "uid": 6636532407
+        }
+      ]
+    },
+    "paper": {
+      "switch": false
+    },
+    "renwuguanxi": {
+      "isShow": true
+    },
+    "second": {
+      "head": [
+        {
+          "secondId": 96200379,
+          "type": 1,
+          "form": 2,
+          "style": 1,
+          "source": 105,
+          "sourceId": "14994094508917655060",
+          "authorType": 0,
+          "platform": 96,
+          "lemma": {
+            "relType": 1,
+            "relValue": [],
+            "te": 1800769833,
+            "tr": [
+              "换新计划"
+            ],
+            "ts": 1769320233,
+            "tw": 1,
+            "type": 1,
+            "weight": 0
+          },
+          "score": 2,
+          "createTime": 1769303518,
+          "publishTime": 1769320327,
+          "isPay": 0,
+          "collectionId": 0
+        }
+      ]
+    },
+    "starMapMount": {
+      "data": {
+        "isShow": true,
+        "manualInfo": {
+          "starmapIds": [
+            1237260,
+            1168713
+          ]
+        },
+        "relationStarmaps": [
+          {
+            "starmapId": 1237260,
+            "subTitle": "相关人物",
+            "type": 1
+          }
+        ]
+      }
+    },
+    "videos": {
+      "data": [
+        {
+          "form": 2,
+          "mountType": 1,
+          "nid": "3445017984987331942",
+          "secondId": 0,
+          "source": 105,
+          "style": 1,
+          "title": "",
+          "uuid": "uSwErs5HAOcR"
+        },
+        {
+          "form": 2,
+          "mountType": 1,
+          "nid": "130275894393355833",
+          "secondId": 0,
+          "source": 101,
+          "style": 1,
+          "title": "",
+          "uuid": "uSBliyIlfc4T"
+        },
+        {
+          "form": 2,
+          "mountType": 1,
+          "nid": "12660852853714326039",
+          "secondId": 0,
+          "source": 100,
+          "style": 1,
+          "title": "",
+          "uuid": "uSwErs5nrkQK"
+        },
+        {
+          "form": 2,
+          "mountType": 1,
+          "nid": "5664246089230657137",
+          "secondId": 0,
+          "source": 101,
+          "style": 1,
+          "title": "",
+          "uuid": "uSAcBqDrXpRJ"
+        },
+        {
+          "form": 2,
+          "mountType": 1,
+          "nid": "12746061947441374425",
+          "secondId": 0,
+          "source": 101,
+          "style": 1,
+          "title": "",
+          "uuid": "uXoxsSL7sRMU"
+        },
+        {
+          "form": 2,
+          "mountType": 1,
+          "nid": "11526974303779598783",
+          "secondId": 0,
+          "source": 101,
+          "style": 1,
+          "title": "",
+          "uuid": "uXiBRR3W21Sw"
+        },
+        {
+          "form": 2,
+          "mountType": 1,
+          "nid": "15620982055945781919",
+          "secondId": 0,
+          "source": 105,
+          "style": 1,
+          "title": "",
+          "uuid": "uSxLKGTGRZAc"
+        },
+        {
+          "form": 2,
+          "mountType": 1,
+          "nid": "7402544413212768338",
+          "secondId": 0,
+          "source": 100,
+          "style": 1,
+          "title": "",
+          "uuid": "uSAASdcQpUHR"
+        },
+        {
+          "form": 2,
+          "mountType": 1,
+          "nid": "18189669483648957698",
+          "secondId": 0,
+          "source": 105,
+          "style": 1,
+          "title": "",
+          "uuid": "uSCbn1W4tsEK"
+        },
+        {
+          "form": 2,
+          "mountType": 1,
+          "nid": "14261258909694057910",
+          "secondId": 0,
+          "source": 101,
+          "style": 1,
+          "title": "",
+          "uuid": "uUvbWrOpIKYg"
+        },
+        {
+          "form": 2,
+          "mountType": 1,
+          "nid": "4429196904573573670",
+          "secondId": 0,
+          "source": 101,
+          "style": 1,
+          "title": "",
+          "uuid": "uUvbWrO8Np8R"
+        },
+        {
+          "form": 2,
+          "mountType": 1,
+          "nid": "14939333719524332427",
+          "secondId": 0,
+          "source": 100,
+          "style": 1,
+          "title": "",
+          "uuid": "uXoxsSLlh7RQ"
+        },
+        {
+          "form": 2,
+          "mountType": 1,
+          "nid": "4244580956789861159",
+          "secondId": 0,
+          "source": 101,
+          "style": 1,
+          "title": "",
+          "uuid": "uSwmOgSF7qHH"
+        },
+        {
+          "form": 2,
+          "mountType": 1,
+          "nid": "6090386255501006075",
+          "secondId": 0,
+          "source": 101,
+          "style": 1,
+          "title": "",
+          "uuid": "uSwmOgSS8lEC"
+        }
+      ]
+    },
+    "pinzhuan": {}
+  },
+  "albums": [
+    {
+      "albumId": 1,
+      "desc": "概述图册",
+      "total": 1,
+      "coverPic": {
+        "albumId": 1,
+        "src": "ac4bd11373f082025aafb32ff4acecedab64034fadde",
+        "url": "https://bkimg.cdn.bcebos.com/pic/ac4bd11373f082025aafb32ff4acecedab64034fadde?x-bce-process=image/resize,m_lfit,w_536,limit_1/quality,Q_70",
+        "width": 858,
+        "height": 504,
+        "desc": "概述图册",
+        "uuid": "tStAoDvIy3cs"
+      },
+      "content": [
+        {
+          "albumId": 1,
+          "src": "ac4bd11373f082025aafb32ff4acecedab64034fadde",
+          "url": "",
+          "width": 858,
+          "height": 504,
+          "uuid": "tStAoDvIy3cs"
+        }
+      ]
+    },
+    {
+      "albumId": 5966252445,
+      "desc": "网帖",
+      "total": 2,
+      "layout": "gallery",
+      "coverPic": {
+        "albumId": 5966252445,
+        "src": "b3119313b07eca8065380220d17880dda144ac3425fb",
+        "url": "https://bkimg.cdn.bcebos.com/pic/b3119313b07eca8065380220d17880dda144ac3425fb?x-bce-process=image/resize,m_lfit,w_2030,limit_1",
+        "width": 1015,
+        "height": 1592,
+        "owner": "你看不见芬芬",
+        "uuid": "uUXlgXZbtYSy"
+      },
+      "content": [
+        {
+          "albumId": 5966252445,
+          "src": "b3119313b07eca8065380220d17880dda144ac3425fb",
+          "url": "",
+          "width": 1015,
+          "height": 1592,
+          "owner": "你看不见芬芬",
+          "uuid": "uUXlgXZbtYSy"
+        },
+        {
+          "albumId": 5966252445,
+          "src": "0b46f21fbe096b63f62486964c689044ebf81b4c06fb",
+          "url": "",
+          "width": 578,
+          "height": 730,
+          "owner": "你看不见芬芬",
+          "uuid": "uUXliaZcw3YD"
+        }
+      ]
+    },
+    {
+      "albumId": 0,
+      "desc": "词条图片",
+      "total": 3,
+      "coverPic": {
+        "albumId": 0,
+        "tag": "image",
+        "type": "normal",
+        "src": "cdbf6c81800a19d8bc3ee90808a2958ba61ea8d3e83c",
+        "url": "https://bkimg.cdn.bcebos.com/pic/cdbf6c81800a19d8bc3ee90808a2958ba61ea8d3e83c?x-bce-process=image/resize,m_lfit,w_220,h_220,limit_1",
+        "width": 734,
+        "height": 825,
+        "cropWidth": 195.73334,
+        "cropHeight": 220,
+        "title": "其中一份病历",
+        "layout": "right",
+        "style": "float: right;",
+        "uuid": "u3im5ZSm0sKe"
+      },
+      "content": [
+        {
+          "albumId": 0,
+          "tag": "image",
+          "type": "normal",
+          "src": "cdbf6c81800a19d8bc3ee90808a2958ba61ea8d3e83c",
+          "url": "https://bkimg.cdn.bcebos.com/pic/cdbf6c81800a19d8bc3ee90808a2958ba61ea8d3e83c?x-bce-process=image/resize,m_lfit,w_220,h_220,limit_1",
+          "width": 734,
+          "height": 825,
+          "cropWidth": 195.73334,
+          "cropHeight": 220,
+          "title": "其中一份病历",
+          "layout": "right",
+          "style": "float: right;",
+          "uuid": "u3im5ZSm0sKe"
+        },
+        {
+          "albumId": 0,
+          "tag": "image",
+          "type": "normal",
+          "src": "95eef01f3a292df5e0feda1887694b6034a85edfd53c",
+          "url": "https://bkimg.cdn.bcebos.com/pic/95eef01f3a292df5e0feda1887694b6034a85edfd53c?x-bce-process=image/resize,m_lfit,w_220,h_220,limit_1",
+          "width": 960,
+          "height": 1280,
+          "cropWidth": 165,
+          "cropHeight": 220,
+          "title": "病历",
+          "layout": "right",
+          "style": "float: right;",
+          "uuid": "u3ilMgBCP3rD"
+        },
+        {
+          "albumId": 0,
+          "tag": "image",
+          "type": "normal",
+          "src": "9a504fc2d5628535e5dda212b9b461c6a7efce1bc5f7",
+          "url": "https://bkimg.cdn.bcebos.com/pic/9a504fc2d5628535e5dda212b9b461c6a7efce1bc5f7?x-bce-process=image/resize,m_lfit,w_220,h_220,limit_1",
+          "width": 657,
+          "height": 621,
+          "cropWidth": 220,
+          "cropHeight": 207.9452,
+          "title": "香港浸会大学回应",
+          "layout": "largecenter",
+          "style": "float: none; display: block; margin: 0px auto; clear: both;",
+          "uuid": "uSNycS65pf4E",
+          "refs": [
+            "uSNy8Ez7ajQm"
+          ]
+        }
+      ]
+    }
+  ],
+  "card": {
+    "type": 106,
+    "left": [
+      {
+        "key": "name",
+        "title": "中文名",
+        "isArray": false,
+        "delimiter": "",
+        "data": [
+          {
+            "dataType": "text",
+            "text": [
+              {
+                "tag": "text",
+                "text": "10·11武大图书馆女生诬告事件"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foreignName",
+        "title": "外文名",
+        "isArray": true,
+        "delimiter": "",
+        "data": [
+          {
+            "dataType": "text",
+            "text": [
+              {
+                "tag": "text",
+                "text": "10.11 Wuhan University Library Female Student False Accusation Incident"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "right": [
+      {
+        "key": "time",
+        "title": "发生时间",
+        "isArray": false,
+        "delimiter": "",
+        "data": [
+          {
+            "dataType": "dateTime",
+            "text": [
+              {
+                "tag": "text",
+                "text": "2023年10月11日"
+              }
+            ],
+            "unit": "AD",
+            "value": {
+              "day": "11",
+              "hour": "",
+              "minitue": "",
+              "month": "10",
+              "second": "",
+              "year": "2023"
+            }
+          }
+        ]
+      },
+      {
+        "key": "location",
+        "title": "发生地点",
+        "isArray": false,
+        "delimiter": "",
+        "data": [
+          {
+            "dataType": "text",
+            "text": [
+              {
+                "tag": "text",
+                "text": "武汉大学图书馆"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "customDefault",
+        "title": "事件处置",
+        "isArray": false,
+        "delimiter": "",
+        "data": [
+          {
+            "dataType": "enum",
+            "text": [
+              {
+                "tag": "text",
+                "text": "法院已宣判"
+              }
+            ],
+            "value": "法院已宣判"
+          }
+        ]
+      }
+    ]
+  },
+  "lemmaCnt": 1,
+  "tips": {
+    "isPolyseme": 0
+  },
+  "encodeLemmaId": "7225f0f450b0e33ea39a73e6",
+  "versionUk": "JXTmJ53ufmnFKTKZSh6QvA",
+  "description": "2023年10月11日，一篇发表于微信公众号上的“举报”网文引发舆论关注。武汉大学女生杨某以第一人称发帖，称自己于当年7月11日在学校图书馆自习时遭同校一男生（..."
+}

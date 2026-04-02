@@ -39,6 +39,7 @@ class Project:
     # 本体信息（接口1生成后填充）
     ontology: Optional[Dict[str, Any]] = None
     analysis_summary: Optional[str] = None
+    ingestion_summary: Optional[Dict[str, Any]] = None
     
     # 图谱信息（接口2完成后填充）
     graph_id: Optional[str] = None
@@ -64,6 +65,7 @@ class Project:
             "total_text_length": self.total_text_length,
             "ontology": self.ontology,
             "analysis_summary": self.analysis_summary,
+            "ingestion_summary": self.ingestion_summary,
             "graph_id": self.graph_id,
             "graph_build_task_id": self.graph_build_task_id,
             "simulation_requirement": self.simulation_requirement,
@@ -89,6 +91,7 @@ class Project:
             total_text_length=data.get('total_text_length', 0),
             ontology=data.get('ontology'),
             analysis_summary=data.get('analysis_summary'),
+            ingestion_summary=data.get('ingestion_summary'),
             graph_id=data.get('graph_id'),
             graph_build_task_id=data.get('graph_build_task_id'),
             simulation_requirement=data.get('simulation_requirement'),
@@ -128,6 +131,11 @@ class ProjectManager:
     def _get_project_text_path(cls, project_id: str) -> str:
         """获取项目提取文本存储路径"""
         return os.path.join(cls._get_project_dir(project_id), 'extracted_text.txt')
+
+    @classmethod
+    def _get_project_artifact_path(cls, project_id: str, filename: str) -> str:
+        """获取项目产物路径"""
+        return os.path.join(cls._get_project_dir(project_id), filename)
     
     @classmethod
     def create_project(cls, name: str = "Unnamed Project") -> Project:
@@ -313,6 +321,23 @@ class ProjectManager:
         text_path = cls._get_project_text_path(project_id)
         with open(text_path, 'w', encoding='utf-8') as f:
             f.write(text)
+
+    @classmethod
+    def save_json_artifact(cls, project_id: str, filename: str, payload: Dict[str, Any]) -> None:
+        """保存 JSON 产物到项目目录"""
+        artifact_path = cls._get_project_artifact_path(project_id, filename)
+        with open(artifact_path, 'w', encoding='utf-8') as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+
+    @classmethod
+    def get_json_artifact(cls, project_id: str, filename: str) -> Optional[Dict[str, Any]]:
+        """读取项目目录中的 JSON 产物"""
+        artifact_path = cls._get_project_artifact_path(project_id, filename)
+        if not os.path.exists(artifact_path):
+            return None
+
+        with open(artifact_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
     
     @classmethod
     def get_extracted_text(cls, project_id: str) -> Optional[str]:

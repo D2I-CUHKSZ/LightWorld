@@ -1,0 +1,991 @@
+{
+  "platform": "reddit",
+  "generated_at": "2026-04-01T18:38:56.345883",
+  "round": 48,
+  "simulated_hour": 23,
+  "reason": "round_complete",
+  "enabled": true,
+  "coordination_enabled": true,
+  "differentiation_enabled": true,
+  "agent_count": 31,
+  "active_agent_ids": [
+    4,
+    3,
+    12,
+    23,
+    22
+  ],
+  "active_agent_names": [
+    "海外校友",
+    "自媒体平台",
+    "学生",
+    "央广网",
+    "京报网"
+  ],
+  "unit_count": 29,
+  "unit_size_distribution": [
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "avg_unit_size": 1.069,
+  "largest_unit_size": 2,
+  "singleton_units": 27,
+  "largest_units": [
+    {
+      "unit_id": 1,
+      "size": 2,
+      "representative_agent_id": 13,
+      "representative_agent_name": "管理顾问",
+      "members": [
+        {
+          "agent_id": 13,
+          "agent_name": "管理顾问",
+          "importance": 1.436306,
+          "ppr_centrality": 0.028582,
+          "neighbor_influence": 0.024021,
+          "keywords": [
+            "内部智囊",
+            "学校治理改革",
+            "教育政策咨询",
+            "武汉大学",
+            "管理顾问",
+            "高校治理"
+          ]
+        },
+        {
+          "agent_id": 17,
+          "agent_name": "法律专家",
+          "importance": 1.400628,
+          "ppr_centrality": 0.034343,
+          "neighbor_influence": 0.140656,
+          "keywords": [
+            "内部智囊",
+            "外部监督转化",
+            "学校治理改革",
+            "教育法治化",
+            "武汉大学",
+            "法律专家"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": 0,
+      "size": 2,
+      "representative_agent_id": 18,
+      "representative_agent_name": "新华网",
+      "members": [
+        {
+          "agent_id": 18,
+          "agent_name": "新华网",
+          "importance": 1.984011,
+          "ppr_centrality": 0.033323,
+          "neighbor_influence": 0.100307,
+          "keywords": [
+            "主流舆论阵地",
+            "国家通讯社",
+            "央媒",
+            "新华社主办",
+            "新华网",
+            "新闻传播",
+            "权威媒体"
+          ]
+        },
+        {
+          "agent_id": 22,
+          "agent_name": "京报网",
+          "importance": 1.786769,
+          "ppr_centrality": 0.031464,
+          "neighbor_influence": 0.111007,
+          "keywords": [
+            "京报网",
+            "北京日报报业集团",
+            "媒体背书",
+            "官方媒体",
+            "新闻传播",
+            "权威媒体",
+            "高校声誉监测"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": 28,
+      "size": 1,
+      "representative_agent_id": 0,
+      "representative_agent_name": "央媒调查记者",
+      "members": [
+        {
+          "agent_id": 0,
+          "agent_name": "央媒调查记者",
+          "importance": 1.722148,
+          "ppr_centrality": 0.03206,
+          "neighbor_influence": -0.007068,
+          "keywords": [
+            "央级媒体",
+            "媒体监督",
+            "学生权益",
+            "武汉大学",
+            "甲醛超标事件",
+            "立体维权",
+            "舆情介入",
+            "调查记者"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": 27,
+      "size": 1,
+      "representative_agent_id": 1,
+      "representative_agent_name": "华北电力大学",
+      "members": [
+        {
+          "agent_id": 1,
+          "agent_name": "华北电力大学",
+          "importance": 1.59473,
+          "ppr_centrality": 0.029495,
+          "neighbor_influence": 0.033333,
+          "keywords": [
+            "“211工程”高校",
+            "“双一流”建设高校",
+            "华北电力大学",
+            "教育部直属高校",
+            "智能电网研究",
+            "电力特色高校",
+            "能源电力人才培养"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": 26,
+      "size": 1,
+      "representative_agent_id": 2,
+      "representative_agent_name": "央级媒体",
+      "members": [
+        {
+          "agent_id": 2,
+          "agent_name": "央级媒体",
+          "importance": 1.756231,
+          "ppr_centrality": 0.039194,
+          "neighbor_influence": -0.012234,
+          "keywords": [
+            "品牌声誉传播",
+            "央级媒体",
+            "官方报道",
+            "权威转载",
+            "武汉大学事件",
+            "舆情放大器"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": 25,
+      "size": 1,
+      "representative_agent_id": 3,
+      "representative_agent_name": "自媒体平台",
+      "members": [
+        {
+          "agent_id": 3,
+          "agent_name": "自媒体平台",
+          "importance": 1.438551,
+          "ppr_centrality": 0.029427,
+          "neighbor_influence": -0.334478,
+          "keywords": [
+            "不实信息传播",
+            "副校长子女谣言",
+            "校园交通事件",
+            "校方报警",
+            "武汉大学声誉危机",
+            "自媒体平台",
+            "舆情放大器"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": 24,
+      "size": 1,
+      "representative_agent_id": 4,
+      "representative_agent_name": "海外校友",
+      "members": [
+        {
+          "agent_id": 4,
+          "agent_name": "海外校友",
+          "importance": 1.14983,
+          "ppr_centrality": 0.044555,
+          "neighbor_influence": 0.018384,
+          "keywords": [
+            "北美时区",
+            "国际声誉",
+            "境外势力叙事",
+            "欧洲时区",
+            "武汉大学",
+            "海外校友",
+            "程序正义",
+            "立场撕裂"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": 23,
+      "size": 1,
+      "representative_agent_id": 5,
+      "representative_agent_name": "重庆上游新闻",
+      "members": [
+        {
+          "agent_id": 5,
+          "agent_name": "重庆上游新闻",
+          "importance": 1.872599,
+          "ppr_centrality": 0.030626,
+          "neighbor_influence": 0.101752,
+          "keywords": [
+            "上游新闻客户端",
+            "地方主流媒体",
+            "川渝媒体",
+            "权威媒体",
+            "重庆上游新闻",
+            "重庆日报报业集团"
+          ]
+        }
+      ]
+    }
+  ],
+  "top_pairs": [
+    {
+      "source_agent_id": 4,
+      "source_agent_name": "海外校友",
+      "target_agent_id": 12,
+      "target_agent_name": "学生",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 0,
+      "source_agent_name": "央媒调查记者",
+      "target_agent_id": 4,
+      "target_agent_name": "海外校友",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 4,
+      "source_agent_name": "海外校友",
+      "target_agent_id": 28,
+      "target_agent_name": "央视网",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 6,
+      "source_agent_name": "校长",
+      "target_agent_id": 18,
+      "target_agent_name": "新华网",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 4,
+      "source_agent_name": "海外校友",
+      "target_agent_id": 18,
+      "target_agent_name": "新华网",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 4,
+      "source_agent_name": "海外校友",
+      "target_agent_id": 22,
+      "target_agent_name": "京报网",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 0,
+      "source_agent_name": "央媒调查记者",
+      "target_agent_id": 28,
+      "target_agent_name": "央视网",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 4,
+      "source_agent_name": "海外校友",
+      "target_agent_id": 5,
+      "target_agent_name": "重庆上游新闻",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 4,
+      "source_agent_name": "海外校友",
+      "target_agent_id": 19,
+      "target_agent_name": "香港01",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 6,
+      "source_agent_name": "校长",
+      "target_agent_id": 17,
+      "target_agent_name": "法律专家",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 4,
+      "source_agent_name": "海外校友",
+      "target_agent_id": 17,
+      "target_agent_name": "法律专家",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 4,
+      "source_agent_name": "海外校友",
+      "target_agent_id": 29,
+      "target_agent_name": "Media Engine",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 1,
+      "source_agent_name": "华北电力大学",
+      "target_agent_id": 23,
+      "target_agent_name": "央广网",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 4,
+      "source_agent_name": "海外校友",
+      "target_agent_id": 9,
+      "target_agent_name": "墩墩舆情课工作室",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 12,
+      "source_agent_name": "学生",
+      "target_agent_id": 30,
+      "target_agent_name": "湖北省教育厅",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 2,
+      "source_agent_name": "央级媒体",
+      "target_agent_id": 12,
+      "target_agent_name": "学生",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 18,
+      "source_agent_name": "新华网",
+      "target_agent_id": 30,
+      "target_agent_name": "湖北省教育厅",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 2,
+      "source_agent_name": "央级媒体",
+      "target_agent_id": 18,
+      "target_agent_name": "新华网",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 0,
+      "source_agent_name": "央媒调查记者",
+      "target_agent_id": 30,
+      "target_agent_name": "湖北省教育厅",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 5,
+      "source_agent_name": "重庆上游新闻",
+      "target_agent_id": 30,
+      "target_agent_name": "湖北省教育厅",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 2,
+      "source_agent_name": "央级媒体",
+      "target_agent_id": 19,
+      "target_agent_name": "香港01",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 2,
+      "source_agent_name": "央级媒体",
+      "target_agent_id": 29,
+      "target_agent_name": "Media Engine",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 29,
+      "source_agent_name": "Media Engine",
+      "target_agent_id": 30,
+      "target_agent_name": "湖北省教育厅",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 2,
+      "source_agent_name": "央级媒体",
+      "target_agent_id": 14,
+      "target_agent_name": "南方网",
+      "distance": 0.0
+    }
+  ],
+  "top_central_agents": [
+    {
+      "agent_id": 4,
+      "agent_name": "海外校友",
+      "unit_id": 24,
+      "importance": 1.14983,
+      "ppr_centrality": 0.044555,
+      "neighbor_influence": 0.018384,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 28,
+          "target_agent_name": "央视网",
+          "weight": 0.009742,
+          "target_unit_id": 4
+        },
+        {
+          "target_agent_id": 17,
+          "target_agent_name": "法律专家",
+          "weight": 0.009649,
+          "target_unit_id": 1
+        },
+        {
+          "target_agent_id": 0,
+          "target_agent_name": "央媒调查记者",
+          "weight": 0.009535,
+          "target_unit_id": 28
+        },
+        {
+          "target_agent_id": 12,
+          "target_agent_name": "学生",
+          "weight": 0.009279,
+          "target_unit_id": 16
+        },
+        {
+          "target_agent_id": 29,
+          "target_agent_name": "Media Engine",
+          "weight": 0.008872,
+          "target_unit_id": 3
+        }
+      ]
+    },
+    {
+      "agent_id": 12,
+      "agent_name": "学生",
+      "unit_id": 16,
+      "importance": 1.540687,
+      "ppr_centrality": 0.039405,
+      "neighbor_influence": -0.189899,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 20,
+          "target_agent_name": "网易号“笔杆论道”",
+          "weight": 0.015396,
+          "target_unit_id": 11
+        },
+        {
+          "target_agent_id": 4,
+          "target_agent_name": "海外校友",
+          "weight": 0.015179,
+          "target_unit_id": 24
+        },
+        {
+          "target_agent_id": 27,
+          "target_agent_name": "校友群体",
+          "weight": 0.015033,
+          "target_unit_id": 5
+        },
+        {
+          "target_agent_id": 0,
+          "target_agent_name": "央媒调查记者",
+          "weight": 0.014812,
+          "target_unit_id": 28
+        },
+        {
+          "target_agent_id": 30,
+          "target_agent_name": "湖北省教育厅",
+          "weight": 0.01447,
+          "target_unit_id": 2
+        }
+      ]
+    },
+    {
+      "agent_id": 2,
+      "agent_name": "央级媒体",
+      "unit_id": 26,
+      "importance": 1.756231,
+      "ppr_centrality": 0.039194,
+      "neighbor_influence": -0.012234,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 0,
+          "target_agent_name": "央媒调查记者",
+          "weight": 0.010771,
+          "target_unit_id": 28
+        },
+        {
+          "target_agent_id": 22,
+          "target_agent_name": "京报网",
+          "weight": 0.010469,
+          "target_unit_id": 0
+        },
+        {
+          "target_agent_id": 12,
+          "target_agent_name": "学生",
+          "weight": 0.010018,
+          "target_unit_id": 16
+        },
+        {
+          "target_agent_id": 18,
+          "target_agent_name": "新华网",
+          "weight": 0.010018,
+          "target_unit_id": 0
+        },
+        {
+          "target_agent_id": 17,
+          "target_agent_name": "法律专家",
+          "weight": 0.010018,
+          "target_unit_id": 1
+        }
+      ]
+    },
+    {
+      "agent_id": 30,
+      "agent_name": "湖北省教育厅",
+      "unit_id": 2,
+      "importance": 1.768142,
+      "ppr_centrality": 0.037124,
+      "neighbor_influence": 0.083604,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 18,
+          "target_agent_name": "新华网",
+          "weight": 0.011767,
+          "target_unit_id": 0
+        },
+        {
+          "target_agent_id": 22,
+          "target_agent_name": "京报网",
+          "weight": 0.011592,
+          "target_unit_id": 0
+        },
+        {
+          "target_agent_id": 29,
+          "target_agent_name": "Media Engine",
+          "weight": 0.011553,
+          "target_unit_id": 3
+        },
+        {
+          "target_agent_id": 23,
+          "target_agent_name": "央广网",
+          "weight": 0.011477,
+          "target_unit_id": 9
+        },
+        {
+          "target_agent_id": 5,
+          "target_agent_name": "重庆上游新闻",
+          "weight": 0.01141,
+          "target_unit_id": 23
+        }
+      ]
+    },
+    {
+      "agent_id": 17,
+      "agent_name": "法律专家",
+      "unit_id": 1,
+      "importance": 1.400628,
+      "ppr_centrality": 0.034343,
+      "neighbor_influence": 0.140656,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 29,
+          "target_agent_name": "Media Engine",
+          "weight": 0.020075,
+          "target_unit_id": 3
+        },
+        {
+          "target_agent_id": 4,
+          "target_agent_name": "海外校友",
+          "weight": 0.01999,
+          "target_unit_id": 24
+        },
+        {
+          "target_agent_id": 28,
+          "target_agent_name": "央视网",
+          "weight": 0.018824,
+          "target_unit_id": 4
+        },
+        {
+          "target_agent_id": 15,
+          "target_agent_name": "猎头公司",
+          "weight": 0.018714,
+          "target_unit_id": 14
+        },
+        {
+          "target_agent_id": 2,
+          "target_agent_name": "央级媒体",
+          "weight": 0.018624,
+          "target_unit_id": 26
+        }
+      ]
+    },
+    {
+      "agent_id": 18,
+      "agent_name": "新华网",
+      "unit_id": 0,
+      "importance": 1.984011,
+      "ppr_centrality": 0.033323,
+      "neighbor_influence": 0.100307,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 22,
+          "target_agent_name": "京报网",
+          "weight": 0.015444,
+          "target_unit_id": 0
+        },
+        {
+          "target_agent_id": 5,
+          "target_agent_name": "重庆上游新闻",
+          "weight": 0.015378,
+          "target_unit_id": 23
+        },
+        {
+          "target_agent_id": 4,
+          "target_agent_name": "海外校友",
+          "weight": 0.01515,
+          "target_unit_id": 24
+        },
+        {
+          "target_agent_id": 30,
+          "target_agent_name": "湖北省教育厅",
+          "weight": 0.01515,
+          "target_unit_id": 2
+        },
+        {
+          "target_agent_id": 23,
+          "target_agent_name": "央广网",
+          "weight": 0.015104,
+          "target_unit_id": 9
+        }
+      ]
+    },
+    {
+      "agent_id": 24,
+      "agent_name": "校领导",
+      "unit_id": 8,
+      "importance": 1.849591,
+      "ppr_centrality": 0.033105,
+      "neighbor_influence": -0.274546,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 6,
+          "target_agent_name": "校长",
+          "weight": 0.064827,
+          "target_unit_id": 22
+        },
+        {
+          "target_agent_id": 10,
+          "target_agent_name": "辛某",
+          "weight": 0.064646,
+          "target_unit_id": 18
+        },
+        {
+          "target_agent_id": 21,
+          "target_agent_name": "学生代表",
+          "weight": 0.002391,
+          "target_unit_id": 10
+        },
+        {
+          "target_agent_id": 18,
+          "target_agent_name": "新华网",
+          "weight": 0.002391,
+          "target_unit_id": 0
+        },
+        {
+          "target_agent_id": 17,
+          "target_agent_name": "法律专家",
+          "weight": 0.002391,
+          "target_unit_id": 1
+        }
+      ]
+    },
+    {
+      "agent_id": 23,
+      "agent_name": "央广网",
+      "unit_id": 9,
+      "importance": 2.0,
+      "ppr_centrality": 0.032557,
+      "neighbor_influence": 0.089536,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 18,
+          "target_agent_name": "新华网",
+          "weight": 0.019391,
+          "target_unit_id": 0
+        },
+        {
+          "target_agent_id": 30,
+          "target_agent_name": "湖北省教育厅",
+          "weight": 0.019388,
+          "target_unit_id": 2
+        },
+        {
+          "target_agent_id": 5,
+          "target_agent_name": "重庆上游新闻",
+          "weight": 0.019284,
+          "target_unit_id": 23
+        },
+        {
+          "target_agent_id": 22,
+          "target_agent_name": "京报网",
+          "weight": 0.018981,
+          "target_unit_id": 0
+        },
+        {
+          "target_agent_id": 12,
+          "target_agent_name": "学生",
+          "weight": 0.018457,
+          "target_unit_id": 16
+        }
+      ]
+    },
+    {
+      "agent_id": 8,
+      "agent_name": "校方",
+      "unit_id": 20,
+      "importance": 1.52644,
+      "ppr_centrality": 0.032419,
+      "neighbor_influence": -0.080213,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 30,
+          "target_agent_name": "湖北省教育厅",
+          "weight": 0.027149,
+          "target_unit_id": 2
+        },
+        {
+          "target_agent_id": 19,
+          "target_agent_name": "香港01",
+          "weight": 0.025819,
+          "target_unit_id": 12
+        },
+        {
+          "target_agent_id": 14,
+          "target_agent_name": "南方网",
+          "weight": 0.025819,
+          "target_unit_id": 15
+        },
+        {
+          "target_agent_id": 1,
+          "target_agent_name": "华北电力大学",
+          "weight": 0.0255,
+          "target_unit_id": 27
+        },
+        {
+          "target_agent_id": 3,
+          "target_agent_name": "自媒体平台",
+          "weight": 0.0255,
+          "target_unit_id": 25
+        }
+      ]
+    },
+    {
+      "agent_id": 25,
+      "agent_name": "家长",
+      "unit_id": 7,
+      "importance": 1.080422,
+      "ppr_centrality": 0.032258,
+      "neighbor_influence": 0.0,
+      "top_outgoing_ppr": []
+    },
+    {
+      "agent_id": 11,
+      "agent_name": "杨景媛",
+      "unit_id": 17,
+      "importance": 0.782678,
+      "ppr_centrality": 0.032256,
+      "neighbor_influence": -0.9,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 26,
+          "target_agent_name": "肖某某",
+          "weight": 0.130369,
+          "target_unit_id": 6
+        }
+      ]
+    },
+    {
+      "agent_id": 26,
+      "agent_name": "肖某某",
+      "unit_id": 6,
+      "importance": 0.640413,
+      "ppr_centrality": 0.032256,
+      "neighbor_influence": -0.55,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 11,
+          "target_agent_name": "杨景媛",
+          "weight": 0.130369,
+          "target_unit_id": 17
+        }
+      ]
+    }
+  ],
+  "top_asymmetric_pairs": [
+    {
+      "dominant_source_agent_id": 16,
+      "dominant_source_agent_name": "985高校",
+      "dominant_target_agent_id": 4,
+      "dominant_target_agent_name": "海外校友",
+      "dominant_weight": 0.1275,
+      "reverse_weight": 0.0085,
+      "delta": 0.119,
+      "source_unit_id": 13,
+      "target_unit_id": 24
+    },
+    {
+      "dominant_source_agent_id": 7,
+      "dominant_source_agent_name": "后勤部门",
+      "dominant_target_agent_id": 12,
+      "dominant_target_agent_name": "学生",
+      "dominant_weight": 0.128366,
+      "reverse_weight": 0.014263,
+      "delta": 0.114104,
+      "source_unit_id": 21,
+      "target_unit_id": 16
+    },
+    {
+      "dominant_source_agent_id": 10,
+      "dominant_source_agent_name": "辛某",
+      "dominant_target_agent_id": 24,
+      "dominant_target_agent_name": "校领导",
+      "dominant_weight": 0.129293,
+      "reverse_weight": 0.064646,
+      "delta": 0.064646,
+      "source_unit_id": 18,
+      "target_unit_id": 8
+    },
+    {
+      "dominant_source_agent_id": 13,
+      "dominant_source_agent_name": "管理顾问",
+      "dominant_target_agent_id": 4,
+      "dominant_target_agent_name": "海外校友",
+      "dominant_weight": 0.065116,
+      "reverse_weight": 0.008686,
+      "delta": 0.05643,
+      "source_unit_id": 1,
+      "target_unit_id": 24
+    },
+    {
+      "dominant_source_agent_id": 27,
+      "dominant_source_agent_name": "校友群体",
+      "dominant_target_agent_id": 12,
+      "dominant_target_agent_name": "学生",
+      "dominant_weight": 0.066938,
+      "reverse_weight": 0.015033,
+      "delta": 0.051905,
+      "source_unit_id": 5,
+      "target_unit_id": 16
+    },
+    {
+      "dominant_source_agent_id": 13,
+      "dominant_source_agent_name": "管理顾问",
+      "dominant_target_agent_id": 17,
+      "dominant_target_agent_name": "法律专家",
+      "dominant_weight": 0.064777,
+      "reverse_weight": 0.018504,
+      "delta": 0.046273,
+      "source_unit_id": 1,
+      "target_unit_id": 1
+    },
+    {
+      "dominant_source_agent_id": 9,
+      "dominant_source_agent_name": "墩墩舆情课工作室",
+      "dominant_target_agent_id": 4,
+      "dominant_target_agent_name": "海外校友",
+      "dominant_weight": 0.043411,
+      "reverse_weight": 0.008685,
+      "delta": 0.034726,
+      "source_unit_id": 19,
+      "target_unit_id": 24
+    },
+    {
+      "dominant_source_agent_id": 3,
+      "dominant_source_agent_name": "自媒体平台",
+      "dominant_target_agent_id": 4,
+      "dominant_target_agent_name": "海外校友",
+      "dominant_weight": 0.043208,
+      "reverse_weight": 0.008642,
+      "delta": 0.034567,
+      "source_unit_id": 25,
+      "target_unit_id": 24
+    },
+    {
+      "dominant_source_agent_id": 9,
+      "dominant_source_agent_name": "墩墩舆情课工作室",
+      "dominant_target_agent_id": 2,
+      "dominant_target_agent_name": "央级媒体",
+      "dominant_weight": 0.043411,
+      "reverse_weight": 0.010018,
+      "delta": 0.033393,
+      "source_unit_id": 19,
+      "target_unit_id": 26
+    },
+    {
+      "dominant_source_agent_id": 20,
+      "dominant_source_agent_name": "网易号“笔杆论道”",
+      "dominant_target_agent_id": 2,
+      "dominant_target_agent_name": "央级媒体",
+      "dominant_weight": 0.043261,
+      "reverse_weight": 0.009975,
+      "delta": 0.033287,
+      "source_unit_id": 11,
+      "target_unit_id": 26
+    },
+    {
+      "dominant_source_agent_id": 1,
+      "dominant_source_agent_name": "华北电力大学",
+      "dominant_target_agent_id": 2,
+      "dominant_target_agent_name": "央级媒体",
+      "dominant_weight": 0.0425,
+      "reverse_weight": 0.009808,
+      "delta": 0.032692,
+      "source_unit_id": 27,
+      "target_unit_id": 26
+    },
+    {
+      "dominant_source_agent_id": 15,
+      "dominant_source_agent_name": "猎头公司",
+      "dominant_target_agent_id": 30,
+      "dominant_target_agent_name": "湖北省教育厅",
+      "dominant_weight": 0.04343,
+      "reverse_weight": 0.010853,
+      "delta": 0.032578,
+      "source_unit_id": 14,
+      "target_unit_id": 2
+    }
+  ]
+}

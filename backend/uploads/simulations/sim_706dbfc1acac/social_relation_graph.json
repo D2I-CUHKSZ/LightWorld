@@ -1,0 +1,325 @@
+{
+  "simulation_id": "sim_706dbfc1acac",
+  "graph_id": "mirofish_f5f917771d814bfd",
+  "generated_at": "2026-04-01T18:24:38.513525",
+  "node_count": 31,
+  "edge_count": 6,
+  "nodes": [
+    {
+      "agent_id": 0,
+      "entity_uuid": "faf07eff-09e9-4fd5-82b1-cc31b4315761",
+      "entity_name": "央媒调查记者",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 1,
+      "entity_uuid": "fa84e1a9-e278-4932-b1ab-e6548b24c006",
+      "entity_name": "华北电力大学",
+      "entity_type": "PeerUniversity"
+    },
+    {
+      "agent_id": 2,
+      "entity_uuid": "f2c522c9-c434-44cb-80e4-09c6e111fa99",
+      "entity_name": "央级媒体",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 3,
+      "entity_uuid": "ec12b21a-c104-4e3f-b294-fd71b96d1022",
+      "entity_name": "自媒体平台",
+      "entity_type": "SelfMediaCreator"
+    },
+    {
+      "agent_id": 4,
+      "entity_uuid": "eb8b4e54-6d51-4a47-92b4-0a4118fe1fcc",
+      "entity_name": "海外校友",
+      "entity_type": "Alumni"
+    },
+    {
+      "agent_id": 5,
+      "entity_uuid": "e1350419-9eae-4ba1-940b-782939d225ba",
+      "entity_name": "重庆上游新闻",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 6,
+      "entity_uuid": "c9076ffd-41f0-4896-bc0d-7cf59f8923f7",
+      "entity_name": "校长",
+      "entity_type": "UniversityStaff"
+    },
+    {
+      "agent_id": 7,
+      "entity_uuid": "c79d9a52-0045-4202-a08c-1eaf9c9e6c2a",
+      "entity_name": "后勤部门",
+      "entity_type": "UniversityStaff"
+    },
+    {
+      "agent_id": 8,
+      "entity_uuid": "c4a1af3a-deba-45aa-95e3-255f19829924",
+      "entity_name": "校方",
+      "entity_type": "UniversityStaff"
+    },
+    {
+      "agent_id": 9,
+      "entity_uuid": "ba2b5b99-665c-4029-8953-3d216e0b1d61",
+      "entity_name": "墩墩舆情课工作室",
+      "entity_type": "Organization"
+    },
+    {
+      "agent_id": 10,
+      "entity_uuid": "b919e173-d25b-463b-925c-d995e888ae3f",
+      "entity_name": "辛某",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 11,
+      "entity_uuid": "b2ac67d6-279e-4eba-b2c3-23c335b6ccc7",
+      "entity_name": "杨景媛",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 12,
+      "entity_uuid": "a5c7715f-292e-4f19-a429-4387a4eeaaf7",
+      "entity_name": "学生",
+      "entity_type": "Student"
+    },
+    {
+      "agent_id": 13,
+      "entity_uuid": "9ff2d0f8-fb16-41b7-9856-455bc54b5644",
+      "entity_name": "管理顾问",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 14,
+      "entity_uuid": "9b413f49-5f4f-4372-8674-b15855a85655",
+      "entity_name": "南方网",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 15,
+      "entity_uuid": "8b9553a5-aad9-419c-ab4d-97a2f937d28d",
+      "entity_name": "猎头公司",
+      "entity_type": "Organization"
+    },
+    {
+      "agent_id": 16,
+      "entity_uuid": "7df4d0af-f7fb-4065-9961-16a99579c36b",
+      "entity_name": "985高校",
+      "entity_type": "PeerUniversity"
+    },
+    {
+      "agent_id": 17,
+      "entity_uuid": "793104f0-0e3a-47a8-8a6a-250fc0435b28",
+      "entity_name": "法律专家",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 18,
+      "entity_uuid": "708a5e85-89d0-4b02-b2f3-98b0e07da2a1",
+      "entity_name": "新华网",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 19,
+      "entity_uuid": "63981fe7-3f0a-4d77-9974-a1010510f52b",
+      "entity_name": "香港01",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 20,
+      "entity_uuid": "5b0589ac-918c-4175-ba77-bf29d1003807",
+      "entity_name": "网易号“笔杆论道”",
+      "entity_type": "SelfMediaCreator"
+    },
+    {
+      "agent_id": 21,
+      "entity_uuid": "52ac07a6-db2c-4e84-bd99-dfb26fdc271c",
+      "entity_name": "学生代表",
+      "entity_type": "Student"
+    },
+    {
+      "agent_id": 22,
+      "entity_uuid": "4aec3544-898d-4a8e-8e96-863325dba18e",
+      "entity_name": "京报网",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 23,
+      "entity_uuid": "4a0531fe-c486-4995-a8c6-c783a5955fda",
+      "entity_name": "央广网",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 24,
+      "entity_uuid": "352aff59-80b7-41cf-9393-8c4f75a4476d",
+      "entity_name": "校领导",
+      "entity_type": "UniversityStaff"
+    },
+    {
+      "agent_id": 25,
+      "entity_uuid": "290b2256-56e2-4ce9-8250-f8b266d6bf35",
+      "entity_name": "家长",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 26,
+      "entity_uuid": "26b92968-bdfb-46b8-b7ed-a9bbb73d80c5",
+      "entity_name": "肖某某",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 27,
+      "entity_uuid": "0f45507a-aab1-4eba-9303-634d2ebfc184",
+      "entity_name": "校友群体",
+      "entity_type": "Alumni"
+    },
+    {
+      "agent_id": 28,
+      "entity_uuid": "0de4d580-901e-4cd3-bfea-c5f55fed558d",
+      "entity_name": "央视网",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 29,
+      "entity_uuid": "0bdc86ec-7f49-4e78-8100-901b142f6b96",
+      "entity_name": "Media Engine",
+      "entity_type": "Organization"
+    },
+    {
+      "agent_id": 30,
+      "entity_uuid": "02873702-be5a-4c10-8a76-c36885498e21",
+      "entity_name": "湖北省教育厅",
+      "entity_type": "RegulatoryAgency"
+    }
+  ],
+  "edges": [
+    {
+      "source_agent_id": 0,
+      "target_agent_id": 12,
+      "source_entity_uuid": "faf07eff-09e9-4fd5-82b1-cc31b4315761",
+      "target_entity_uuid": "a5c7715f-292e-4f19-a429-4387a4eeaaf7",
+      "source_entity_name": "央媒调查记者",
+      "target_entity_name": "学生",
+      "facts": [
+        "央媒调查记者参与了学生的立体维权模式，介入调查甲醛事件。"
+      ],
+      "relation_names": [
+        "COLLABORATES_WITH"
+      ],
+      "exposure_weight": 0.2,
+      "trust_weight": 0.15,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.65,
+      "interaction_prior": 0.2775,
+      "relation_fact": "央媒调查记者参与了学生的立体维权模式，介入调查甲醛事件。",
+      "relation_name": "COLLABORATES_WITH"
+    },
+    {
+      "source_agent_id": 6,
+      "target_agent_id": 21,
+      "source_entity_uuid": "c9076ffd-41f0-4896-bc0d-7cf59f8923f7",
+      "target_entity_uuid": "52ac07a6-db2c-4e84-bd99-dfb26fdc271c",
+      "source_entity_name": "校长",
+      "target_entity_name": "学生代表",
+      "facts": [
+        "校长或学生代表应通过直播等形式进行可视化、人格化沟通"
+      ],
+      "relation_names": [
+        "COLLABORATES_WITH"
+      ],
+      "exposure_weight": 0.2,
+      "trust_weight": 0.15,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.65,
+      "interaction_prior": 0.2775,
+      "relation_fact": "校长或学生代表应通过直播等形式进行可视化、人格化沟通",
+      "relation_name": "COLLABORATES_WITH"
+    },
+    {
+      "source_agent_id": 7,
+      "target_agent_id": 12,
+      "source_entity_uuid": "c79d9a52-0045-4202-a08c-1eaf9c9e6c2a",
+      "target_entity_uuid": "a5c7715f-292e-4f19-a429-4387a4eeaaf7",
+      "source_entity_name": "后勤部门",
+      "target_entity_name": "学生",
+      "facts": [
+        "校方后勤部门在初期发布“检测合格”的通报，与学生的主张对立。"
+      ],
+      "relation_names": [
+        "OPPOSES"
+      ],
+      "exposure_weight": 0.18,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.75,
+      "alliance_weight": 0.0,
+      "interaction_prior": -0.2745,
+      "relation_fact": "校方后勤部门在初期发布“检测合格”的通报，与学生的主张对立。",
+      "relation_name": "OPPOSES"
+    },
+    {
+      "source_agent_id": 8,
+      "target_agent_id": 3,
+      "source_entity_uuid": "c4a1af3a-deba-45aa-95e3-255f19829924",
+      "target_entity_uuid": "ec12b21a-c104-4e3f-b294-fd71b96d1022",
+      "source_entity_name": "校方",
+      "target_entity_name": "自媒体平台",
+      "facts": [
+        "校方因自媒体传播不实信息而不得不报警处理。"
+      ],
+      "relation_names": [
+        "RESPONDS_TO"
+      ],
+      "exposure_weight": 0.1,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.035,
+      "relation_fact": "校方因自媒体传播不实信息而不得不报警处理。",
+      "relation_name": "RESPONDS_TO"
+    },
+    {
+      "source_agent_id": 10,
+      "target_agent_id": 24,
+      "source_entity_uuid": "b919e173-d25b-463b-925c-d995e888ae3f",
+      "target_entity_uuid": "352aff59-80b7-41cf-9393-8c4f75a4476d",
+      "source_entity_name": "辛某",
+      "target_entity_name": "校领导",
+      "facts": [
+        "辛某的父母不是姓“辛”的校领导。"
+      ],
+      "relation_names": [
+        "DOES_NOT_HAVE_RELATIONSHIP_WITH"
+      ],
+      "exposure_weight": 0.1,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.035,
+      "relation_fact": "辛某的父母不是姓“辛”的校领导。",
+      "relation_name": "DOES_NOT_HAVE_RELATIONSHIP_WITH"
+    },
+    {
+      "source_agent_id": 11,
+      "target_agent_id": 26,
+      "source_entity_uuid": "b2ac67d6-279e-4eba-b2c3-23c335b6ccc7",
+      "target_entity_uuid": "26b92968-bdfb-46b8-b7ed-a9bbb73d80c5",
+      "source_entity_name": "杨景媛",
+      "target_entity_name": "肖某某",
+      "facts": [
+        "杨景媛指控肖某某在图书馆实施了“隔空性骚扰”，并发布了相关视频，发生在2023年7月11日。",
+        "杨景媛正式起诉肖某某，事件于2024年6月进入司法程序。"
+      ],
+      "relation_names": [
+        "ACCUSED",
+        "INITIATED_LEGAL_PROCEEDING"
+      ],
+      "exposure_weight": 0.1,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.035,
+      "relation_fact": "杨景媛指控肖某某在图书馆实施了“隔空性骚扰”，并发布了相关视频，发生在2023年7月11日。 | 杨景媛正式起诉肖某某，事件于2024年6月进入司法程序。",
+      "relation_name": "ACCUSED,INITIATED_LEGAL_PROCEEDING"
+    }
+  ]
+}

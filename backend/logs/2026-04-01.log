@@ -1,0 +1,162 @@
+[2026-04-01 15:37:04] INFO [mirofish.simulation.create_simulation:227] 创建模拟: sim_05e3fce7d931, project=proj_6d56e4817baf, graph=mirofish_9f0d1c84b2164adf
+[2026-04-01 15:37:04] INFO [mirofish.zep_entity_reader.filter_defined_entities:236] 开始筛选图谱 mirofish_9f0d1c84b2164adf 的实体...
+[2026-04-01 15:37:04] INFO [mirofish.zep_entity_reader.get_all_nodes:137] 获取图谱 mirofish_9f0d1c84b2164adf 的所有节点...
+[2026-04-01 15:37:06] INFO [mirofish.zep_entity_reader.get_all_nodes:151] 共获取 50 个节点
+[2026-04-01 15:37:06] INFO [mirofish.zep_entity_reader.get_all_edges:164] 获取图谱 mirofish_9f0d1c84b2164adf 的所有边...
+[2026-04-01 15:37:07] INFO [mirofish.zep_entity_reader.get_all_edges:179] 共获取 43 条边
+[2026-04-01 15:37:07] INFO [mirofish.zep_entity_reader.filter_defined_entities:323] 筛选完成: 总节点 50, 符合条件 6, 实体类型: {'CitizenUser', 'BotAccount', 'MediaOutlet', 'Person', 'Organization'}
+[2026-04-01 15:37:07] INFO [mirofish.simulation.prepare_simulation:355] 已保存图谱实体快照: /home/shulun/project/LightWorld/backend/app/application/../../uploads/simulations/sim_05e3fce7d931/entity_graph_snapshot.json, entities=6, edges=4
+[2026-04-01 15:37:07] INFO [mirofish.simulation.prepare_simulation:366] 开始提取实体语义prompts: count=6
+[2026-04-01 15:37:33] INFO [mirofish.entity_prompt_extractor.save_prompts:214] 实体 prompts 已保存: /home/shulun/project/LightWorld/backend/app/application/../../uploads/simulations/sim_05e3fce7d931/entity_prompts.json, count=6
+[2026-04-01 15:37:33] INFO [mirofish.oasis_profile.generate_profiles_from_entities:948] 开始并行生成 6 个Agent人设（并行数: 1）...
+[2026-04-01 15:37:38] DEBUG [mirofish.oasis_profile.search_edges:336] Zep边搜索第 1 次失败: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl., 重试中...
+[2026-04-01 15:37:38] DEBUG [mirofish.oasis_profile.search_nodes:361] Zep节点搜索第 1 次失败: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl., 重试中...
+[2026-04-01 15:37:45] DEBUG [mirofish.oasis_profile.search_edges:336] Zep边搜索第 2 次失败: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl., 重试中...
+[2026-04-01 15:37:45] DEBUG [mirofish.oasis_profile.search_nodes:361] Zep节点搜索第 2 次失败: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl., 重试中...
+[2026-04-01 15:37:54] DEBUG [mirofish.oasis_profile.search_edges:340] Zep边搜索在 3 次尝试后仍失败: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+[2026-04-01 15:37:54] DEBUG [mirofish.oasis_profile.search_nodes:365] Zep节点搜索在 3 次尝试后仍失败: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+[2026-04-01 15:37:54] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: bot_01, 获取 0 条事实, 0 个相关节点
+[2026-04-01 15:37:54] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [1/6] 成功生成人设: bot_01 (BotAccount)
+[2026-04-01 15:37:59] DEBUG [mirofish.oasis_profile.search_edges:336] Zep边搜索第 1 次失败: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl., 重试中...
+[2026-04-01 15:37:59] DEBUG [mirofish.oasis_profile.search_nodes:361] Zep节点搜索第 1 次失败: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl., 重试中...
+[2026-04-01 15:38:06] DEBUG [mirofish.oasis_profile.search_edges:336] Zep边搜索第 2 次失败: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl., 重试中...
+[2026-04-01 15:38:06] DEBUG [mirofish.oasis_profile.search_nodes:361] Zep节点搜索第 2 次失败: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl., 重试中...
+[2026-04-01 15:38:15] DEBUG [mirofish.oasis_profile.search_nodes:365] Zep节点搜索在 3 次尝试后仍失败: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+[2026-04-01 15:38:15] DEBUG [mirofish.oasis_profile.search_edges:340] Zep边搜索在 3 次尝试后仍失败: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+[2026-04-01 15:38:15] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: CAMEL-AI, 获取 0 条事实, 0 个相关节点
+[2026-04-01 15:38:15] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [2/6] 成功生成人设: CAMEL-AI (Organization)
+[2026-04-01 15:38:20] DEBUG [mirofish.oasis_profile.search_edges:336] Zep边搜索第 1 次失败: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl., 重试中...
+[2026-04-01 15:38:20] DEBUG [mirofish.oasis_profile.search_nodes:361] Zep节点搜索第 1 次失败: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl., 重试中...
+[2026-04-01 15:38:23] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: group_a_01, 获取 30 条事实, 39 个相关节点
+[2026-04-01 15:38:23] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [3/6] 成功生成人设: group_a_01 (CitizenUser)
+[2026-04-01 15:38:24] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: News, 获取 30 条事实, 39 个相关节点
+[2026-04-01 15:38:24] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [4/6] 成功生成人设: News (MediaOutlet)
+[2026-04-01 15:38:24] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 666ghj, 获取 30 条事实, 39 个相关节点
+[2026-04-01 15:38:24] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [5/6] 成功生成人设: 666ghj (Person)
+[2026-04-01 15:38:24] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: Blogs, 获取 30 条事实, 39 个相关节点
+[2026-04-01 15:38:24] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [6/6] 成功生成人设: Blogs (MediaOutlet)
+[2026-04-01 15:38:24] INFO [mirofish.oasis_profile._save_twitter_csv:1177] 已保存 6 个Twitter Profile到 /home/shulun/project/LightWorld/backend/app/application/../../uploads/simulations/sim_05e3fce7d931/twitter_profiles.csv (OASIS CSV格式)
+[2026-04-01 15:38:25] INFO [mirofish.simulation_config.generate_config:344] 开始智能生成模拟配置: simulation_id=sim_05e3fce7d931, 实体数=6
+[2026-04-01 15:38:25] INFO [mirofish.simulation_config.report_progress:356] [1/4] 生成时间配置...
+[2026-04-01 15:38:34] WARNING [mirofish.simulation_config._parse_time_config:694] agents_per_hour_max (45) 超过总Agent数 (6)，已修正
+[2026-04-01 15:38:34] INFO [mirofish.simulation_config.report_progress:356] [2/4] 生成事件配置和热点话题...
+[2026-04-01 15:38:49] INFO [mirofish.simulation_config.report_progress:356] [3/4] 生成Agent配置 (1-6/6)...
+[2026-04-01 15:39:07] INFO [mirofish.simulation_config.generate_config:403] 为初始帖子分配合适的发布者 Agent...
+[2026-04-01 15:39:07] INFO [mirofish.simulation_config._assign_initial_post_agents:943] 初始帖子分配: poster_type='organization' -> agent_id=1
+[2026-04-01 15:39:07] INFO [mirofish.simulation_config._assign_initial_post_agents:943] 初始帖子分配: poster_type='botaccount' -> agent_id=0
+[2026-04-01 15:39:07] INFO [mirofish.simulation_config._assign_initial_post_agents:943] 初始帖子分配: poster_type='citizenuser' -> agent_id=2
+[2026-04-01 15:39:07] INFO [mirofish.simulation_config._assign_initial_post_agents:961] 定时事件分配: event_type=create_post, poster_type='organization' -> agent_id=1
+[2026-04-01 15:39:07] INFO [mirofish.simulation_config.report_progress:356] [4/4] 生成平台配置...
+[2026-04-01 15:39:07] INFO [mirofish.simulation_config.generate_config:449] 模拟配置生成完成: 6 个Agent配置
+[2026-04-01 15:39:07] INFO [mirofish.simulation.prepare_simulation:499] 已编译显式社交关系图: /home/shulun/project/LightWorld/backend/app/application/../../uploads/simulations/sim_05e3fce7d931/social_relation_graph.json, nodes=6, edges=1
+[2026-04-01 15:39:07] INFO [mirofish.simulation.prepare_simulation:549] 模拟准备完成: sim_05e3fce7d931, entities=6, profiles=6
+[2026-04-01 18:16:13] INFO [mirofish.simulation.create_simulation:227] 创建模拟: sim_706dbfc1acac, project=proj_f3fa5d99c95c, graph=mirofish_f5f917771d814bfd
+[2026-04-01 18:16:13] INFO [mirofish.zep_entity_reader.filter_defined_entities:236] 开始筛选图谱 mirofish_f5f917771d814bfd 的实体...
+[2026-04-01 18:16:13] INFO [mirofish.zep_entity_reader.get_all_nodes:137] 获取图谱 mirofish_f5f917771d814bfd 的所有节点...
+[2026-04-01 18:16:14] INFO [mirofish.zep_entity_reader.get_all_nodes:151] 共获取 111 个节点
+[2026-04-01 18:16:14] INFO [mirofish.zep_entity_reader.get_all_edges:164] 获取图谱 mirofish_f5f917771d814bfd 的所有边...
+[2026-04-01 18:16:14] INFO [mirofish.zep_entity_reader.get_all_edges:179] 共获取 131 条边
+[2026-04-01 18:16:14] INFO [mirofish.zep_entity_reader.filter_defined_entities:323] 筛选完成: 总节点 111, 符合条件 31, 实体类型: {'Alumni', 'PeerUniversity', 'Student', 'Person', 'UniversityStaff', 'RegulatoryAgency', 'SelfMediaCreator', 'MediaOutlet', 'Organization'}
+[2026-04-01 18:16:14] INFO [mirofish.simulation.prepare_simulation:355] 已保存图谱实体快照: /home/shulun/project/LightWorld/backend/app/application/../../uploads/simulations/sim_706dbfc1acac/entity_graph_snapshot.json, entities=31, edges=61
+[2026-04-01 18:16:14] INFO [mirofish.simulation.prepare_simulation:366] 开始提取实体语义prompts: count=31
+[2026-04-01 18:18:38] INFO [mirofish.entity_prompt_extractor.save_prompts:214] 实体 prompts 已保存: /home/shulun/project/LightWorld/backend/app/application/../../uploads/simulations/sim_706dbfc1acac/entity_prompts.json, count=31
+[2026-04-01 18:18:38] INFO [mirofish.oasis_profile.generate_profiles_from_entities:948] 开始并行生成 31 个Agent人设（并行数: 4）...
+[2026-04-01 18:18:39] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 华北电力大学, 获取 30 条事实, 38 个相关节点
+[2026-04-01 18:18:39] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 央媒调查记者, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:18:39] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 自媒体平台, 获取 29 条事实, 39 个相关节点
+[2026-04-01 18:18:40] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 央级媒体, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:19:04] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [1/31] 成功生成人设: 央级媒体 (MediaOutlet)
+[2026-04-01 18:19:05] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [2/31] 成功生成人设: 自媒体平台 (SelfMediaCreator)
+[2026-04-01 18:19:05] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 海外校友, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:19:05] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 重庆上游新闻, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:19:06] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [3/31] 成功生成人设: 央媒调查记者 (MediaOutlet)
+[2026-04-01 18:19:07] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 校长, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:19:07] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [4/31] 成功生成人设: 华北电力大学 (PeerUniversity)
+[2026-04-01 18:19:07] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 后勤部门, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:19:29] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [5/31] 成功生成人设: 海外校友 (Alumni)
+[2026-04-01 18:19:30] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 校方, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:19:30] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [6/31] 成功生成人设: 重庆上游新闻 (MediaOutlet)
+[2026-04-01 18:19:30] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 墩墩舆情课工作室, 获取 29 条事实, 39 个相关节点
+[2026-04-01 18:19:31] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [7/31] 成功生成人设: 校长 (UniversityStaff)
+[2026-04-01 18:19:32] DEBUG [mirofish.oasis_profile.search_edges:336] Zep边搜索第 1 次失败: Server disconnected without sending a response., 重试中...
+[2026-04-01 18:19:34] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 辛某, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:19:37] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [8/31] 成功生成人设: 后勤部门 (UniversityStaff)
+[2026-04-01 18:19:38] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 杨景媛, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:19:56] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [9/31] 成功生成人设: 墩墩舆情课工作室 (Organization)
+[2026-04-01 18:19:56] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 学生, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:20:01] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [10/31] 成功生成人设: 校方 (UniversityStaff)
+[2026-04-01 18:20:02] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 管理顾问, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:20:04] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [11/31] 成功生成人设: 辛某 (Person)
+[2026-04-01 18:20:04] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 南方网, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:20:09] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [12/31] 成功生成人设: 杨景媛 (Person)
+[2026-04-01 18:20:09] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 猎头公司, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:20:18] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [13/31] 成功生成人设: 学生 (Student)
+[2026-04-01 18:20:19] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 985高校, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:20:24] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [14/31] 成功生成人设: 管理顾问 (Person)
+[2026-04-01 18:20:25] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 法律专家, 获取 30 条事实, 37 个相关节点
+[2026-04-01 18:20:30] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [15/31] 成功生成人设: 南方网 (MediaOutlet)
+[2026-04-01 18:20:30] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 新华网, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:20:34] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [16/31] 成功生成人设: 猎头公司 (Organization)
+[2026-04-01 18:20:35] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 香港01, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:20:46] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [17/31] 成功生成人设: 985高校 (PeerUniversity)
+[2026-04-01 18:20:47] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 网易号“笔杆论道”, 获取 29 条事实, 39 个相关节点
+[2026-04-01 18:20:50] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [18/31] 成功生成人设: 法律专家 (Person)
+[2026-04-01 18:20:51] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 学生代表, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:21:00] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [19/31] 成功生成人设: 香港01 (MediaOutlet)
+[2026-04-01 18:21:00] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [20/31] 成功生成人设: 新华网 (MediaOutlet)
+[2026-04-01 18:21:01] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 京报网, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:21:01] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 央广网, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:21:13] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [21/31] 成功生成人设: 网易号“笔杆论道” (SelfMediaCreator)
+[2026-04-01 18:21:13] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 校领导, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:21:15] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [22/31] 成功生成人设: 学生代表 (Student)
+[2026-04-01 18:21:15] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 家长, 获取 29 条事实, 38 个相关节点
+[2026-04-01 18:21:22] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [23/31] 成功生成人设: 京报网 (MediaOutlet)
+[2026-04-01 18:21:22] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 肖某某, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:21:28] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [24/31] 成功生成人设: 央广网 (MediaOutlet)
+[2026-04-01 18:21:29] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 校友群体, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:21:37] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [25/31] 成功生成人设: 家长 (Person)
+[2026-04-01 18:21:38] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 央视网, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:21:38] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [26/31] 成功生成人设: 校领导 (UniversityStaff)
+[2026-04-01 18:21:39] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: Media Engine, 获取 30 条事实, 39 个相关节点
+[2026-04-01 18:21:53] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [27/31] 成功生成人设: 肖某某 (Person)
+[2026-04-01 18:21:53] INFO [mirofish.oasis_profile._search_zep_for_entity:404] Zep混合检索完成: 湖北省教育厅, 获取 30 条事实, 38 个相关节点
+[2026-04-01 18:21:55] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [28/31] 成功生成人设: 校友群体 (Alumni)
+[2026-04-01 18:22:04] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [29/31] 成功生成人设: Media Engine (Organization)
+[2026-04-01 18:22:06] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [30/31] 成功生成人设: 央视网 (MediaOutlet)
+[2026-04-01 18:22:21] INFO [mirofish.oasis_profile.generate_profiles_from_entities:987] [31/31] 成功生成人设: 湖北省教育厅 (RegulatoryAgency)
+[2026-04-01 18:22:21] INFO [mirofish.oasis_profile._save_reddit_json:1251] 已保存 31 个Reddit Profile到 /home/shulun/project/LightWorld/backend/app/application/../../uploads/simulations/sim_706dbfc1acac/reddit_profiles.json (JSON格式，包含user_id字段)
+[2026-04-01 18:22:21] INFO [mirofish.oasis_profile._save_twitter_csv:1177] 已保存 31 个Twitter Profile到 /home/shulun/project/LightWorld/backend/app/application/../../uploads/simulations/sim_706dbfc1acac/twitter_profiles.csv (OASIS CSV格式)
+[2026-04-01 18:22:22] INFO [mirofish.simulation_config.generate_config:344] 开始智能生成模拟配置: simulation_id=sim_706dbfc1acac, 实体数=31
+[2026-04-01 18:22:22] INFO [mirofish.simulation_config.report_progress:356] [1/6] 生成时间配置...
+[2026-04-01 18:22:31] INFO [mirofish.simulation_config.report_progress:356] [2/6] 生成事件配置和热点话题...
+[2026-04-01 18:23:03] INFO [mirofish.simulation_config.report_progress:356] [3/6] 生成Agent配置 (1-15/31)...
+[2026-04-01 18:23:48] INFO [mirofish.simulation_config.report_progress:356] [4/6] 生成Agent配置 (16-30/31)...
+[2026-04-01 18:24:34] INFO [mirofish.simulation_config.report_progress:356] [5/6] 生成Agent配置 (31-31/31)...
+[2026-04-01 18:24:38] INFO [mirofish.simulation_config.generate_config:403] 为初始帖子分配合适的发布者 Agent...
+[2026-04-01 18:24:38] INFO [mirofish.simulation_config._assign_initial_post_agents:943] 初始帖子分配: poster_type='universitystaff' -> agent_id=6
+[2026-04-01 18:24:38] INFO [mirofish.simulation_config._assign_initial_post_agents:943] 初始帖子分配: poster_type='mediaoutlet' -> agent_id=0
+[2026-04-01 18:24:38] INFO [mirofish.simulation_config._assign_initial_post_agents:943] 初始帖子分配: poster_type='student' -> agent_id=12
+[2026-04-01 18:24:38] INFO [mirofish.simulation_config._assign_initial_post_agents:943] 初始帖子分配: poster_type='alumni' -> agent_id=4
+[2026-04-01 18:24:38] INFO [mirofish.simulation_config._assign_initial_post_agents:943] 初始帖子分配: poster_type='organization' -> agent_id=9
+[2026-04-01 18:24:38] INFO [mirofish.simulation_config._assign_initial_post_agents:961] 定时事件分配: event_type=create_post, poster_type='mediaoutlet' -> agent_id=0
+[2026-04-01 18:24:38] INFO [mirofish.simulation_config._assign_initial_post_agents:961] 定时事件分配: event_type=create_post, poster_type='alumni' -> agent_id=4
+[2026-04-01 18:24:38] INFO [mirofish.simulation_config._assign_initial_post_agents:961] 定时事件分配: event_type=create_post, poster_type='regulatoryagency' -> agent_id=30
+[2026-04-01 18:24:38] INFO [mirofish.simulation_config.report_progress:356] [6/6] 生成平台配置...
+[2026-04-01 18:24:38] INFO [mirofish.simulation_config.generate_config:449] 模拟配置生成完成: 31 个Agent配置
+[2026-04-01 18:24:38] INFO [mirofish.simulation.prepare_simulation:499] 已编译显式社交关系图: /home/shulun/project/LightWorld/backend/app/application/../../uploads/simulations/sim_706dbfc1acac/social_relation_graph.json, nodes=31, edges=6
+[2026-04-01 18:24:38] INFO [mirofish.simulation.prepare_simulation:549] 模拟准备完成: sim_706dbfc1acac, entities=31, profiles=31
+[2026-04-01 20:01:47] INFO [mirofish.zep_tools.__init__:575] ZepToolsService 初始化完成
+[2026-04-01 20:01:47] INFO [mirofish.zep_tools.get_simulation_context:1188] 获取模拟上下文: 围绕武汉大学品牌声誉风险做模拟分析...
+[2026-04-01 20:01:47] INFO [mirofish.zep_tools.search_graph:764] 图谱搜索: graph_id=mirofish_f5f917771d814bfd, query=围绕武汉大学品牌声誉风险做模拟分析...
+[2026-04-01 20:01:47] WARNING [mirofish.zep_tools._call_with_retry:596] Zep 图谱搜索(graph=mirofish_f5f917771d814bfd) 第 1 次尝试失败: [Errno 1] Operation not permitted, 2.0秒后重试...
+[2026-04-01 20:01:49] WARNING [mirofish.zep_tools._call_with_retry:596] Zep 图谱搜索(graph=mirofish_f5f917771d814bfd) 第 2 次尝试失败: [Errno 1] Operation not permitted, 4.0秒后重试...
+[2026-04-01 20:01:53] ERROR [mirofish.zep_tools._call_with_retry:603] Zep 图谱搜索(graph=mirofish_f5f917771d814bfd) 在 3 次尝试后仍失败: [Errno 1] Operation not permitted
+[2026-04-01 20:01:53] WARNING [mirofish.zep_tools.search_graph:820] Zep Search API失败，降级为本地搜索: [Errno 1] Operation not permitted
+[2026-04-01 20:01:53] INFO [mirofish.zep_tools._local_search:845] 使用本地搜索: query=围绕武汉大学品牌声誉风险做模拟分析...
+[2026-04-01 20:01:53] INFO [mirofish.zep_tools.get_all_edges:967] 获取图谱 mirofish_f5f917771d814bfd 的所有边...
+[2026-04-01 20:01:53] ERROR [mirofish.zep_tools._local_search:918] 本地搜索失败: [Errno 1] Operation not permitted
+[2026-04-01 20:01:53] INFO [mirofish.zep_tools.get_graph_statistics:1143] 获取图谱 mirofish_f5f917771d814bfd 的统计信息...
+[2026-04-01 20:01:53] INFO [mirofish.zep_tools.get_all_nodes:938] 获取图谱 mirofish_f5f917771d814bfd 的所有节点...
+[2026-04-01 20:02:24] INFO [mirofish.zep_tools.__init__:575] ZepToolsService 初始化完成
+[2026-04-01 20:02:24] INFO [mirofish.report_agent.__init__:943] ReportAgent 初始化完成: graph_id=mirofish_f5f917771d814bfd, simulation_id=sim_706dbfc1acac
+[2026-04-01 20:02:24] INFO [mirofish.report_agent._execute_tool:1010] 执行工具: review_simulation_state, 参数: {}

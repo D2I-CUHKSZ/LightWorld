@@ -1105,6 +1105,8 @@ async def main():
     config = load_config(args.config)
     simulation_dir = os.path.dirname(args.config) or "."
     wait_for_commands = not args.no_wait
+    status_handler = ParallelIPCHandler(simulation_dir=simulation_dir)
+    status_handler.update_status("starting")
 
     # CLI 覆盖配置（不修改原配置文件）
     if args.light_mode:
@@ -1228,6 +1230,12 @@ async def main():
     total_elapsed = (datetime.now() - start_time).total_seconds()
     log_manager.info("=" * 60)
     log_manager.info(f"模拟循环完成! 总耗时: {total_elapsed:.1f}秒")
+
+    status_handler.twitter_env = twitter_result.env if twitter_result else None
+    status_handler.twitter_agent_graph = twitter_result.agent_graph if twitter_result else None
+    status_handler.reddit_env = reddit_result.env if reddit_result else None
+    status_handler.reddit_agent_graph = reddit_result.agent_graph if reddit_result else None
+    status_handler.update_status("running")
     
     # 是否进入等待命令模式
     if wait_for_commands:
@@ -1238,13 +1246,7 @@ async def main():
         log_manager.info("=" * 60)
         
         # 创建IPC处理器
-        ipc_handler = ParallelIPCHandler(
-            simulation_dir=simulation_dir,
-            twitter_env=twitter_result.env if twitter_result else None,
-            twitter_agent_graph=twitter_result.agent_graph if twitter_result else None,
-            reddit_env=reddit_result.env if reddit_result else None,
-            reddit_agent_graph=reddit_result.agent_graph if reddit_result else None
-        )
+        ipc_handler = status_handler
         ipc_handler.update_status("alive")
         
         # 等待命令循环（使用全局 _shutdown_event）
@@ -1277,6 +1279,8 @@ async def main():
     if reddit_result and reddit_result.env:
         await reddit_result.env.close()
         log_manager.info("[Reddit] 环境已关闭")
+
+    status_handler.update_status("stopped")
     
     log_manager.info("=" * 60)
     log_manager.info(f"全部完成!")

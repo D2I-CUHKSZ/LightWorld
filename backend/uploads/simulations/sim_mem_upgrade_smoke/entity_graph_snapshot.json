@@ -1,0 +1,211 @@
+{
+  "simulation_id": "sim_826a7c28a5eb",
+  "graph_id": "mirofish_9f0d1c84b2164adf",
+  "generated_at": "2026-03-31T10:58:18.553429",
+  "entity_count": 6,
+  "edge_count": 4,
+  "entities": [
+    {
+      "uuid": "e50b9516-d55b-4fdd-81e8-28ab7b855c98",
+      "name": "bot_01",
+      "labels": [
+        "BotAccount"
+      ],
+      "summary": "The entity bot_01 reposts content from group_a_01, indicated by a repost edge with weight 0.60 in the minimal graph seed.",
+      "attributes": {
+        "bot_type": "null",
+        "coordination_network": "null",
+        "name": "bot_01",
+        "weight_score": "null"
+      },
+      "related_edges": [
+        {
+          "direction": "outgoing",
+          "edge_name": "REPOSTS",
+          "fact": "The entity bot_01 reposts content from group_a_01, indicated by a repost edge with weight 0.60 in the minimal graph seed.",
+          "target_node_uuid": "db2417d4-1555-4b2a-9cdf-95462e2f4ec1"
+        }
+      ],
+      "related_nodes": [
+        {
+          "uuid": "db2417d4-1555-4b2a-9cdf-95462e2f4ec1",
+          "name": "group_a_01",
+          "labels": [
+            "CitizenUser"
+          ],
+          "summary": "The entity group_a_01 follows kol_01, indicated by a follow edge with weight 0.80 in the minimal graph seed.\nThe entity bot_01 reposts content from group_a_01, indicated by a repost edge with weight 0.60 in the minimal graph seed."
+        }
+      ]
+    },
+    {
+      "uuid": "de15ecdb-fab1-4e1b-8a27-f6a8bf0ce1ce",
+      "name": "CAMEL-AI",
+      "labels": [
+        "Organization"
+      ],
+      "summary": "OASIS is a project by CAMEL-AI.",
+      "attributes": {
+        "description": "Any formal or informal group not captured by specific types (e.g., local business, ad-hoc coaliti...",
+        "name": "CAMEL-AI",
+        "org_name": "CAMEL-AI",
+        "sector": "Organization"
+      },
+      "related_edges": [
+        {
+          "direction": "incoming",
+          "edge_name": "AFFILIATED_WITH",
+          "fact": "OASIS is a project by CAMEL-AI.",
+          "source_node_uuid": "7c75abb9-0bdf-4386-8c66-fe973aaa3f77"
+        }
+      ],
+      "related_nodes": [
+        {
+          "uuid": "7c75abb9-0bdf-4386-8c66-fe973aaa3f77",
+          "name": "OASIS",
+          "labels": [],
+          "summary": "LIGHTWORLD draws core inspiration for large-scale social-action architecture from OASIS.\nOASIS is a project by CAMEL-AI."
+        }
+      ]
+    },
+    {
+      "uuid": "db2417d4-1555-4b2a-9cdf-95462e2f4ec1",
+      "name": "group_a_01",
+      "labels": [
+        "CitizenUser"
+      ],
+      "summary": "The entity group_a_01 follows kol_01, indicated by a follow edge with weight 0.80 in the minimal graph seed.\nThe entity bot_01 reposts content from group_a_01, indicated by a repost edge with weight 0.60 in the minimal graph seed.",
+      "attributes": {
+        "engagement_level": null,
+        "full_name": "null",
+        "name": "group_a_01",
+        "stance_score": "0.20"
+      },
+      "related_edges": [
+        {
+          "direction": "incoming",
+          "edge_name": "REPOSTS",
+          "fact": "The entity bot_01 reposts content from group_a_01, indicated by a repost edge with weight 0.60 in the minimal graph seed.",
+          "source_node_uuid": "e50b9516-d55b-4fdd-81e8-28ab7b855c98"
+        },
+        {
+          "direction": "outgoing",
+          "edge_name": "FOLLOWS",
+          "fact": "The entity group_a_01 follows kol_01, indicated by a follow edge with weight 0.80 in the minimal graph seed.",
+          "target_node_uuid": "dc3c27fa-9084-4522-b8a2-20cad5696c7c"
+        }
+      ],
+      "related_nodes": [
+        {
+          "uuid": "dc3c27fa-9084-4522-b8a2-20cad5696c7c",
+          "name": "kol_01",
+          "labels": [],
+          "summary": "The entity group_a_01 follows kol_01, indicated by a follow edge with weight 0.80 in the minimal graph seed."
+        },
+        {
+          "uuid": "e50b9516-d55b-4fdd-81e8-28ab7b855c98",
+          "name": "bot_01",
+          "labels": [
+            "BotAccount"
+          ],
+          "summary": "The entity bot_01 reposts content from group_a_01, indicated by a repost edge with weight 0.60 in the minimal graph seed."
+        }
+      ]
+    },
+    {
+      "uuid": "b8485b3c-29d4-4774-a55b-69e0fe11b803",
+      "name": "News",
+      "labels": [
+        "MediaOutlet"
+      ],
+      "summary": "News data sources are part of the Text data category, originating from the Real-World Data Sources.",
+      "attributes": {
+        "bias_orientation": null,
+        "media_type": null,
+        "name": "News",
+        "org_name": "News/Blogs"
+      },
+      "related_edges": [],
+      "related_nodes": []
+    },
+    {
+      "uuid": "65f06893-76ab-4a1a-89e3-c0b583c0909c",
+      "name": "666ghj",
+      "labels": [
+        "Person"
+      ],
+      "summary": "MiroFish was created by 666ghj.",
+      "attributes": {
+        "full_name": "@666ghj",
+        "location": null,
+        "name": "666ghj",
+        "role": "author of MiroFish"
+      },
+      "related_edges": [
+        {
+          "direction": "incoming",
+          "edge_name": "AFFILIATED_WITH",
+          "fact": "MiroFish was created by 666ghj.",
+          "source_node_uuid": "eda5e8dc-3951-4790-9139-da0852ee5a89"
+        }
+      ],
+      "related_nodes": [
+        {
+          "uuid": "eda5e8dc-3951-4790-9139-da0852ee5a89",
+          "name": "MiroFish",
+          "labels": [],
+          "summary": "LIGHTWORLD stands on the work of MiroFish.\nMiroFish was created by 666ghj."
+        }
+      ]
+    },
+    {
+      "uuid": "2d6bce10-b5f3-41ed-a9c1-4b0c52b43b54",
+      "name": "Blogs",
+      "labels": [
+        "MediaOutlet"
+      ],
+      "summary": "Blogs data sources are part of the Text data category, originating from the Real-World Data Sources.",
+      "attributes": {
+        "bias_orientation": null,
+        "media_type": null,
+        "name": "Blogs",
+        "org_name": "Blogs/Blogs (inferred from context 'Text News/Blogs' mapping to 'Blogs' entity, but no explicit name given in messages, so keeping null based on strict instruction to not infer values explicitly stated - however, the entity name itself is 'Blogs', which is used as the name, but not as an 'org_name' attribute value since it's not an explicit attribute value found in the text. Sticking to explicit attribute setting from messages.)"
+      },
+      "related_edges": [],
+      "related_nodes": []
+    }
+  ],
+  "edges": [
+    {
+      "uuid": "",
+      "name": "REPOSTS",
+      "fact": "The entity bot_01 reposts content from group_a_01, indicated by a repost edge with weight 0.60 in the minimal graph seed.",
+      "source_node_uuid": "e50b9516-d55b-4fdd-81e8-28ab7b855c98",
+      "target_node_uuid": "db2417d4-1555-4b2a-9cdf-95462e2f4ec1",
+      "attributes": {}
+    },
+    {
+      "uuid": "",
+      "name": "AFFILIATED_WITH",
+      "fact": "OASIS is a project by CAMEL-AI.",
+      "source_node_uuid": "7c75abb9-0bdf-4386-8c66-fe973aaa3f77",
+      "target_node_uuid": "de15ecdb-fab1-4e1b-8a27-f6a8bf0ce1ce",
+      "attributes": {}
+    },
+    {
+      "uuid": "",
+      "name": "FOLLOWS",
+      "fact": "The entity group_a_01 follows kol_01, indicated by a follow edge with weight 0.80 in the minimal graph seed.",
+      "source_node_uuid": "db2417d4-1555-4b2a-9cdf-95462e2f4ec1",
+      "target_node_uuid": "dc3c27fa-9084-4522-b8a2-20cad5696c7c",
+      "attributes": {}
+    },
+    {
+      "uuid": "",
+      "name": "AFFILIATED_WITH",
+      "fact": "MiroFish was created by 666ghj.",
+      "source_node_uuid": "eda5e8dc-3951-4790-9139-da0852ee5a89",
+      "target_node_uuid": "65f06893-76ab-4a1a-89e3-c0b583c0909c",
+      "attributes": {}
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "simulation_id": "sim_209184607443",
+  "graph_id": "mirofish_9f0d1c84b2164adf",
+  "generated_at": "2026-03-31T10:56:18.154099",
+  "node_count": 6,
+  "edge_count": 0,
+  "nodes": [
+    {
+      "agent_id": 0,
+      "entity_uuid": "e50b9516-d55b-4fdd-81e8-28ab7b855c98",
+      "entity_name": "bot_01",
+      "entity_type": "BotAccount"
+    },
+    {
+      "agent_id": 1,
+      "entity_uuid": "de15ecdb-fab1-4e1b-8a27-f6a8bf0ce1ce",
+      "entity_name": "CAMEL-AI",
+      "entity_type": "Organization"
+    },
+    {
+      "agent_id": 2,
+      "entity_uuid": "db2417d4-1555-4b2a-9cdf-95462e2f4ec1",
+      "entity_name": "group_a_01",
+      "entity_type": "CitizenUser"
+    },
+    {
+      "agent_id": 3,
+      "entity_uuid": "b8485b3c-29d4-4774-a55b-69e0fe11b803",
+      "entity_name": "News",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 4,
+      "entity_uuid": "65f06893-76ab-4a1a-89e3-c0b583c0909c",
+      "entity_name": "666ghj",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 5,
+      "entity_uuid": "2d6bce10-b5f3-41ed-a9c1-4b0c52b43b54",
+      "entity_name": "Blogs",
+      "entity_type": "MediaOutlet"
+    }
+  ],
+  "edges": []
+}

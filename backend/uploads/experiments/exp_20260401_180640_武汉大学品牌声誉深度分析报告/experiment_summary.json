@@ -1,0 +1,4106 @@
+{
+  "generated_at": "2026-04-01T19:05:42.867040",
+  "source_pdf": "/home/shulun/project/LightWorld/武汉大学品牌声誉深度分析报告.pdf",
+  "project_id": "proj_f3fa5d99c95c",
+  "project_dir": "/home/shulun/project/LightWorld/backend/uploads/projects/proj_f3fa5d99c95c",
+  "simulation_id": "sim_706dbfc1acac",
+  "simulation_dir": "/home/shulun/project/LightWorld/backend/uploads/simulations/sim_706dbfc1acac",
+  "graph_id": "mirofish_f5f917771d814bfd",
+  "model": {
+    "name": "",
+    "base_url": "",
+    "llm_api_key_redacted": "***",
+    "zep_api_key_redacted": "***"
+  },
+  "document": {
+    "chars": 20833,
+    "lines": 747,
+    "preview": "1.0 摘要与核心发现\n本报告旨在通过对2023至2025年间涉及武汉大学的重大舆情事件进行全面、深度、多维度的分析，系统评\n估其品牌声誉现状、揭示潜在风险与机遇，并为未来的声誉管理与战略沟通提供数据驱动的决策支持。通过\n整合查询引擎的事实梳理、媒体引擎的形象解构、洞察引擎的民意量化以及分析论坛的协同研判，我们力图\n还原一个复杂、动态且充满张力的武汉大学公众形象。\n1.1 品牌声誉总览\n武汉大学的品牌声誉在监测周期内呈现出显著的“声望悖论”与“周期性断裂”特征。一方面，其作为顶尖985高\n校的百年历史底蕴、以樱花为代表的强大文化符号以及在病毒学等领域的硬核学术实力，共同构筑了其崇高\n的声望基石和强大的正面舆情资产。然而，另一方面，这种高关注度也使其成为舆论的放大镜，一系列内部\n治理、学生冲突和学术诚信事件被迅速放大为全国性的公共危机，导致其声誉在短期内经历剧烈波动和严重\n受损。\n核心发现表明，武汉大学的舆情危机已从单一的后勤服务或个体冲突事件，演变为对其整体治理能力、程序\n正义、学术诚信乃至大学精神的系统性质疑。舆情事件频次与烈度空前，公众情感从初期的震惊、愤怒，迅\n速演变为深度的失望、嘲讽乃至羞耻感，形成了“985滤镜破碎”的集体认知。校方传统的、行政逻辑优先的\n应对模式在瞬息万变的社交媒体环境中显得僵化和迟缓，不仅未能有效平息风波，反而屡次成为二次舆情爆\n发的催化剂，暴露出其在现代大学治理和公共关系管理方面的严重“本领恐慌”与系统性短板。\n1.2 关键指标表现\n28.7亿+\n全平台总阅读量\n↑190% (vs. 五年总和)\n5起+\n重大舆情事件频次\n↑186% (vs. 五年同期)\n6.4%\n正向情感谷底值\n创985高校最低纪录\n58%\n二次舆情反弹概率\n↑27个百分点\n2025/11/28 18:16\n武汉大学品牌声誉深度分析报告\nfile:///Users/guohangjiang/Downloads/final_report__20250827_131630 (1).html\n1/25\n\n65.4\n图书馆事件影响力指数\n高出同类事件均值10.8%\n1937人\n甲醛事件在线协同维权\n首次出现“四方联动”模式\n1.3 主要结论与战略启示\n1. 治理现代化赤字是核心病根：系列舆情事件的根源，并非孤立的管理疏失，而是深层次的治理现代化危\n机。财政结构性失衡、程序正义缺位、信息透明度不足以及对话机制的缺失，共同构成了品牌声誉的“阿\n喀琉斯之踵”。\n2. “快而浅”的回应策略失效：校方虽然缩短了首次回应时长，但内容空泛、缺乏实质性进展的“技术性应激\n反应”反而触发了平台的“冲突加权”机制，加剧了舆论反噬。公众的诉求已从“求补偿”升级为“求制度变\n革”。\n3. 身份政治与群体撕裂成为新常态：舆情不再是简单的校方与学生的对立，而是演变为在校生、校友、家\n长、本地居民、外省网民、教育从业者等多重身份参与的复杂博弈。代际冲突、地域叙事、性别议题交\n织，使得舆论场高度极化和碎片化。\n4. 品牌声誉修复任重道远：修复受损的公信力是一个长期且艰巨的过程，预计需要1-2年时间。战略启示在\n于，必须放弃“控制-回应”的旧脚本，真正走向“透明-共治”的新范式。将“珞珈裂痕”转化为“治理契机”，是\n武汉大学重建品牌声誉的唯一路径。毕竟，没有哪所大学的樱花，值得学生用健康和公正去交换。\n2025/11/28 18:16\n武汉大学品牌声誉深度分析报告\nfile:///Users/guohangjiang/Downloads/final_report__20250827_13"
+  },
+  "pipeline": {
+    "success": true,
+    "project_id": "proj_f3fa5d99c95c",
+    "project_name": "WHU Brand Reputation Scaled Experiment",
+    "files_count": 1,
+    "total_text_length": 20862,
+    "skipped": [],
+    "ontology": {
+      "entity_types": [
+        {
+          "name": "Student",
+          "description": "在校本科生或研究生，具有发声、维权、组织协同等社媒行为能力",
+          "attributes": [
+            {
+              "name": "student_id",
+              "type": "text",
+              "description": "学号（脱敏格式）"
+            },
+            {
+              "name": "enrollment_year",
+              "type": "text",
+              "description": "入学年份"
+            },
+            {
+              "name": "campus_location",
+              "type": "text",
+              "description": "所在校区（如珞珈山、医学部）"
+            }
+          ],
+          "examples": [
+            "肖某某",
+            "杨景媛",
+            "甲醛互助文档发起人"
+          ]
+        },
+        {
+          "name": "Alumni",
+          "description": "已毕业的武汉大学校友，活跃于海内外平台，具备组织动员与跨域发声能力",
+          "attributes": [
+            {
+              "name": "graduation_year",
+              "type": "text",
+              "description": "毕业年份"
+            },
+            {
+              "name": "current_role",
+              "type": "text",
+              "description": "当前职业身份（如律师、工程师、创业者）"
+            },
+            {
+              "name": "geographic_base",
+              "type": "text",
+              "description": "常驻地域（如武汉、北上广、北美）"
+            }
+          ],
+          "examples": [
+            "雷军",
+            "校友律师团成员",
+            "#DefendWHU 发起人"
+          ]
+        },
+        {
+          "name": "UniversityStaff",
+          "description": "武汉大学在职教职员工，含行政人员、辅导员、院系负责人等，代表校方发声",
+          "attributes": [
+            {
+              "name": "position",
+              "type": "text",
+              "description": "职务（如院长、后勤处长、党委副书记）"
+            },
+            {
+              "name": "department",
+              "type": "text",
+              "description": "所属部门"
+            },
+            {
+              "name": "public_role",
+              "type": "text",
+              "description": "是否为官方通报署名责任人"
+            }
+          ],
+          "examples": [
+            "武汉大学保卫部部长",
+            "后勤集团总经理",
+            "法学院分管学生工作副书记"
+          ]
+        },
+        {
+          "name": "MediaOutlet",
+          "description": "具有新闻采编与发布资质的媒体机构，主导议题设置与事实核查",
+          "attributes": [
+            {
+              "name": "media_type",
+              "type": "text",
+              "description": "媒体类型（如央媒、地方党媒、市场化媒体、港媒）"
+            },
+            {
+              "name": "editorial_stance",
+              "type": "text",
+              "description": "报道倾向性（如中立、建设性批评、深度解构）"
+            },
+            {
+              "name": "platform_primary",
+              "type": "text",
+              "description": "主阵地平台（如微博、知乎、Twitter）"
+            }
+          ],
+          "examples": [
+            "新华网",
+            "网易号'笔杆论道'",
+            "《香港01》"
+          ]
+        },
+        {
+          "name": "SelfMediaCreator",
+          "description": "以个人IP运营的自媒体创作者，擅长情绪放大、视觉再生产与亚文化解构",
+          "attributes": [
+            {
+              "name": "content_style",
+              "type": "text",
+              "description": "内容风格（如鬼畜、数据可视化、RPG攻略、避坑指南）"
+            },
+            {
+              "name": "platform_main",
+              "type": "text",
+              "description": "主要运营平台（如B站、小红书、抖音）"
+            },
+            {
+              "name": "audience_profile",
+              "type": "text",
+              "description": "核心受众画像（如Z世代、家长群体、教育从业者）"
+            }
+          ],
+          "examples": [
+            "'图书馆副本攻略'UP主",
+            "甲醛宿舍避坑笔记博主",
+            "樱花季黄牛交易直播主"
+          ]
+        },
+        {
+          "name": "PeerUniversity",
+          "description": "与武汉大学存在生源、师资、声誉竞争关系的国内高校，其回应与行动构成舆论参照系",
+          "attributes": [
+            {
+              "name": "competitor_ranking",
+              "type": "text",
+              "description": "在关键指标上的相对位次（如招生吸引力、校友捐赠）"
+            },
+            {
+              "name": "response_pattern",
+              "type": "text",
+              "description": "对武大事件的典型反应模式（如沉默、对比式声明、人才挖角）"
+            },
+            {
+              "name": "institutional_model",
+              "type": "text",
+              "description": "可被借鉴的治理机制（如剑桥学生理事会、伯克利监察员制度）"
+            }
+          ],
+          "examples": [
+            "华中科技大学",
+            "华北电力大学",
+            "香港浸会大学"
+          ]
+        },
+        {
+          "name": "RegulatoryAgency",
+          "description": "对高等教育机构具有法定监管权的政府或行业主管部门，其介入标志事件升级",
+          "attributes": [
+            {
+              "name": "jurisdiction_level",
+              "type": "text",
+              "description": "管辖层级（如省级教育厅、教育部、法院）"
+            },
+            {
+              "name": "intervention_mode",
+              "type": "text",
+              "description": "介入方式（如约谈、专项督查、司法判决）"
+            },
+            {
+              "name": "enforcement_power",
+              "type": "text",
+              "description": "可动用的权威工具（如经费分配权、双一流评估权、立案侦查权）"
+            }
+          ],
+          "examples": [
+            "湖北省教育厅",
+            "武汉经开区人民法院",
+            "教育部高教司"
+          ]
+        },
+        {
+          "name": "CorporatePartner",
+          "description": "与武汉大学存在产学研、捐赠、基建或服务合作的企业实体，其立场影响公众信任判断",
+          "attributes": [
+            {
+              "name": "partnership_type",
+              "type": "text",
+              "description": "合作类型（如实验室共建、奖学金冠名、宿舍改造承建商）"
+            },
+            {
+              "name": "public_statement",
+              "type": "text",
+              "description": "是否就舆情事件发表公开声明"
+            },
+            {
+              "name": "reputational_exposure",
+              "type": "text",
+              "description": "受事件波及程度（如品牌关联度、合同履约风险）"
+            }
+          ],
+          "examples": [
+            "参与宿舍甲醛治理的检测机构",
+            "招生宣传片制作公司",
+            "校友基金会合作银行"
+          ]
+        },
+        {
+          "name": "Person",
+          "description": "未归入上述具体类型的自然人个体，作为兜底实体支持泛化角色建模",
+          "attributes": [
+            {
+              "name": "full_name",
+              "type": "text",
+              "description": "真实姓名或常用网名"
+            },
+            {
+              "name": "role_description",
+              "type": "text",
+              "description": "非标准化身份描述（如'某位匿名举报家长'、'海外留学生网友'）"
+            },
+            {
+              "name": "platform_identity",
+              "type": "text",
+              "description": "社媒平台身份特征（如'知乎万字长文作者'、'微博热搜评论区高赞用户'）"
+            }
+          ],
+          "examples": [
+            "湖北本地家长",
+            "外省高考咨询群管理员",
+            "Twitter上发起#WHUScandal的ID"
+          ]
+        },
+        {
+          "name": "Organization",
+          "description": "未归入上述具体类型的组织实体，用于建模临时团体、NGO、境外机构等泛化主体",
+          "attributes": [
+            {
+              "name": "org_name",
+              "type": "text",
+              "description": "组织全称或通用简称"
+            },
+            {
+              "name": "establishment_basis",
+              "type": "text",
+              "description": "成立依据（如自发社群、注册NGO、国际联盟）"
+            },
+            {
+              "name": "operational_scope",
+              "type": "text",
+              "description": "运作范围（如校内、全国性、跨国）"
+            }
+          ],
+          "examples": [
+            "甲醛互助QQ群运营组",
+            "海外校友联署委员会",
+            "维基百科编辑社群"
+          ]
+        }
+      ],
+      "edge_types": [
+        {
+          "name": "WORKS_FOR",
+          "description": "表示个体隶属于某组织机构的雇佣或隶属关系",
+          "source_targets": [
+            {
+              "source": "Student",
+              "target": "University"
+            },
+            {
+              "source": "Alumni",
+              "target": "Organization"
+            },
+            {
+              "source": "UniversityStaff",
+              "target": "University"
+            },
+            {
+              "source": "Person",
+              "target": "Organization"
+            }
+          ],
+          "attributes": []
+        },
+        {
+          "name": "STUDIES_AT",
+          "description": "表示学生就读于某高校的关系",
+          "source_targets": [
+            {
+              "source": "Student",
+              "target": "University"
+            },
+            {
+              "source": "Alumni",
+              "target": "University"
+            }
+          ],
+          "attributes": []
+        },
+        {
+          "name": "AFFILIATED_WITH",
+          "description": "表示非雇佣性质的正式关联（如合作、理事、顾问）",
+          "source_targets": [
+            {
+              "source": "Alumni",
+              "target": "University"
+            },
+            {
+              "source": "CorporatePartner",
+              "target": "University"
+            },
+            {
+              "source": "MediaOutlet",
+              "target": "University"
+            }
+          ],
+          "attributes": []
+        },
+        {
+          "name": "REPORTS_ON",
+          "description": "媒体或自媒体对特定事件、人物或组织进行报道或评论",
+          "source_targets": [
+            {
+              "source": "MediaOutlet",
+              "target": "University"
+            },
+            {
+              "source": "SelfMediaCreator",
+              "target": "University"
+            },
+            {
+              "source": "MediaOutlet",
+              "target": "Student"
+            },
+            {
+              "source": "SelfMediaCreator",
+              "target": "Student"
+            }
+          ],
+          "attributes": []
+        },
+        {
+          "name": "RESPONDS_TO",
+          "description": "主体针对另一主体的言论、行为或事件作出公开回应",
+          "source_targets": [
+            {
+              "source": "UniversityStaff",
+              "target": "Student"
+            },
+            {
+              "source": "UniversityStaff",
+              "target": "MediaOutlet"
+            },
+            {
+              "source": "RegulatoryAgency",
+              "target": "University"
+            },
+            {
+              "source": "PeerUniversity",
+              "target": "University"
+            }
+          ],
+          "attributes": []
+        },
+        {
+          "name": "SUPPORTS",
+          "description": "表达声援、背书或联合行动意向",
+          "source_targets": [
+            {
+              "source": "Alumni",
+              "target": "Student"
+            },
+            {
+              "source": "Alumni",
+              "target": "University"
+            },
+            {
+              "source": "CorporatePartner",
+              "target": "University"
+            },
+            {
+              "source": "Person",
+              "target": "Student"
+            }
+          ],
+          "attributes": []
+        },
+        {
+          "name": "OPPOSES",
+          "description": "表达质疑、抵制或对立立场",
+          "source_targets": [
+            {
+              "source": "Student",
+              "target": "UniversityStaff"
+            },
+            {
+              "source": "Person",
+              "target": "University"
+            },
+            {
+              "source": "MediaOutlet",
+              "target": "University"
+            },
+            {
+              "source": "RegulatoryAgency",
+              "target": "University"
+            }
+          ],
+          "attributes": []
+        },
+        {
+          "name": "COLLABORATES_WITH",
+          "description": "多主体共同发起或参与某项行动（如四方联动维权）",
+          "source_targets": [
+            {
+              "source": "Student",
+              "target": "Alumni"
+            },
+            {
+              "source": "Alumni",
+              "target": "RegulatoryAgency"
+            },
+            {
+              "source": "Student",
+              "target": "CorporatePartner"
+            },
+            {
+              "source": "Alumni",
+              "target": "MediaOutlet"
+            }
+          ],
+          "attributes": []
+        }
+      ]
+    },
+    "analysis_summary": "文本详细描述了武汉大学近年因图书馆诬告案、学术不端、跨境录取、交通特权、后勤危机等事件引发的系统性声誉危机，涉及多元发声主体：在校生与校友构成维权主力；校方教职员工代表行政回应；媒体与自媒体承担议程设置与情绪放大；竞校、监管机构、企业伙伴构成外部参照系；而地域、代际、平台差异进一步分化出大量泛化角色。据此设计8个具体实体类型覆盖核心角色，并严格保留Person和Organization作为兜底类型，确保所有现实可发声主体均可归类。关系设计聚焦社媒互动本质：隶属、就读、关联、报道、回应、声援、反对、协作，全面支撑舆论传播路径模拟。",
+    "graph": {
+      "graph_id": "mirofish_f5f917771d814bfd",
+      "node_count": 111,
+      "edge_count": 131,
+      "chunk_count": 21,
+      "original_chunk_count": 21,
+      "light_mode": false
+    }
+  },
+  "prepare_state": {
+    "simulation_id": "sim_706dbfc1acac",
+    "project_id": "proj_f3fa5d99c95c",
+    "graph_id": "mirofish_f5f917771d814bfd",
+    "enable_twitter": true,
+    "enable_reddit": true,
+    "status": "ready",
+    "entities_count": 31,
+    "profiles_count": 31,
+    "entity_types": [
+      "Alumni",
+      "PeerUniversity",
+      "Student",
+      "Person",
+      "UniversityStaff",
+      "RegulatoryAgency",
+      "SelfMediaCreator",
+      "MediaOutlet",
+      "Organization"
+    ],
+    "config_generated": true,
+    "config_reasoning": "时间配置: 模拟覆盖多轮次品牌声誉演化全周期（7天），需支撑PPR影响力衰减建模、memory跨轮次闭环及cluster unit协调粒度验证。高峰延至23点因学生/校友夜间活跃（QQ群协同维权、海外校友跨时区响应）、自媒体深度分析多发布于晚间（如网易号‘笔杆论道’常于21-23点发长文）；凌晨0-4点设为严格低谷（活跃度系数0.05），符合中国网民真实静默期；工作时段保留9-18点完整覆盖校方、教育厅、媒体编辑部等机构性主体的响应窗口；agents_per_hour_min/max设为8-27以匹配31个实体在聚类+keywords检索下的动态激活需求（如甲醛事件中1937名学生协同需分批次unit触发，媒体与监管机构则按信源权威性非对称触发），确保PPR权重分配与memory写入密度可验证。 | 事件配置: 配置严格遵循四大创新点：1) hot_topics 显式注入 keywords（如' prestige paradox' '四方联动维权'），全部可被聚类与检索；2) 所有 initial_posts 和 scheduled_events 均以 unit（即单个实体类型）为协调粒度，确保 cluster 内 agent 行为可追溯；3) poster_type 分布天然体现非对称影响力（如 MediaOutlet 触发二次传播、Alumni 驱动情感迁移、RegulatoryAgency 实现权威闭环），PPR 权重可基于该结构建模；4) scheduled_events 中的 trigger_hour 序列+hot_topics_update 构成跨轮次 memory 机制，使后续轮次能感知前期 topic 演化与 agent 行为痕迹，形成记忆闭环。所有实体类型均来自可用列表，无扩展或模糊匹配。 | Agent配置: 成功生成 31 个 | 初始帖子分配: 5 个帖子已分配发布者",
+    "current_round": 0,
+    "twitter_status": "not_started",
+    "reddit_status": "not_started",
+    "created_at": "2026-04-01T18:16:13.324820",
+    "updated_at": "2026-04-01T18:24:38.522987",
+    "error": null
+  },
+  "keyword_innovation": {
+    "entity_prompt_count": 31,
+    "examples": [
+      {
+        "entity_name": "央媒调查记者",
+        "entity_type": "MediaOutlet",
+        "keywords": [
+          "央级媒体",
+          "调查记者",
+          "甲醛超标事件",
+          "立体维权",
+          "媒体监督",
+          "学生权益",
+          "武汉大学",
+          "舆情介入"
+        ],
+        "topic_tags": [
+          "媒体监督",
+          "高校公共卫生",
+          "学生维权",
+          "央媒角色",
+          "舆情响应",
+          "品牌声誉治理"
+        ]
+      },
+      {
+        "entity_name": "华北电力大学",
+        "entity_type": "PeerUniversity",
+        "keywords": [
+          "华北电力大学",
+          "电力特色高校",
+          "教育部直属高校",
+          "“211工程”高校",
+          "“双一流”建设高校",
+          "能源电力人才培养",
+          "智能电网研究"
+        ],
+        "topic_tags": [
+          "高等教育",
+          "能源电力",
+          "双一流高校",
+          "行业特色大学",
+          "产学研协同",
+          "高校品牌声誉"
+        ]
+      },
+      {
+        "entity_name": "央级媒体",
+        "entity_type": "MediaOutlet",
+        "keywords": [
+          "央级媒体",
+          "官方报道",
+          "舆情放大器",
+          "权威转载",
+          "武汉大学事件",
+          "品牌声誉传播"
+        ],
+        "topic_tags": [
+          "媒体传播",
+          "高校舆情",
+          "声誉管理",
+          "信息扩散",
+          "央地协同"
+        ]
+      },
+      {
+        "entity_name": "自媒体平台",
+        "entity_type": "SelfMediaCreator",
+        "keywords": [
+          "自媒体平台",
+          "不实信息传播",
+          "校园交通事件",
+          "武汉大学声誉危机",
+          "舆情放大器",
+          "校方报警",
+          "副校长子女谣言"
+        ],
+        "topic_tags": [
+          "高校舆情",
+          "虚假信息治理",
+          "自媒体伦理",
+          "品牌声誉风险",
+          "校园安全传播"
+        ]
+      },
+      {
+        "entity_name": "海外校友",
+        "entity_type": "Alumni",
+        "keywords": [
+          "海外校友",
+          "武汉大学",
+          "国际声誉",
+          "程序正义",
+          "境外势力叙事",
+          "立场撕裂",
+          "北美时区",
+          "欧洲时区"
+        ],
+        "topic_tags": [
+          "高校品牌声誉",
+          "校友舆论生态",
+          "跨境身份政治",
+          "程序正义争议",
+          "地缘舆情传播"
+        ]
+      },
+      {
+        "entity_name": "重庆上游新闻",
+        "entity_type": "MediaOutlet",
+        "keywords": [
+          "重庆上游新闻",
+          "权威媒体",
+          "地方主流媒体",
+          "重庆日报报业集团",
+          "上游新闻客户端",
+          "川渝媒体"
+        ],
+        "topic_tags": [
+          "媒体机构",
+          "重庆本地媒体",
+          "权威媒体名录",
+          "高校声誉传播",
+          "川渝新闻生态",
+          "主流媒体影响力"
+        ]
+      },
+      {
+        "entity_name": "校长",
+        "entity_type": "UniversityStaff",
+        "keywords": [
+          "武汉大学校长",
+          "高校行政权威",
+          "舆情回应机制",
+          "上级指令依赖",
+          "夜间警告",
+          "学生代表沟通"
+        ],
+        "topic_tags": [
+          "高校治理",
+          "舆情响应",
+          "品牌声誉管理",
+          "行政权威人格化",
+          "师生沟通机制",
+          "双平台传播模拟"
+        ]
+      },
+      {
+        "entity_name": "后勤部门",
+        "entity_type": "UniversityStaff",
+        "keywords": [
+          "武汉大学后勤部门",
+          "甲醛事件",
+          "检测合格通报",
+          "公信力崩塌",
+          "学生第三方报告",
+          "校方回应失当"
+        ],
+        "topic_tags": [
+          "高校治理",
+          "校园公共卫生",
+          "舆情响应",
+          "组织公信力",
+          "学生权益抗争"
+        ]
+      }
+    ]
+  },
+  "cluster_innovation": {
+    "twitter": {
+      "unit_count": 29,
+      "avg_unit_size": 1.069,
+      "largest_unit_size": 2,
+      "largest_units": [
+        {
+          "unit_id": 1,
+          "size": 2,
+          "representative_agent_id": 17,
+          "representative_agent_name": "法律专家",
+          "members": [
+            {
+              "agent_id": 13,
+              "agent_name": "管理顾问",
+              "importance": 1.334371,
+              "ppr_centrality": 0.036461,
+              "neighbor_influence": 0.375,
+              "keywords": [
+                "内部智囊",
+                "学校治理改革",
+                "教育政策咨询",
+                "武汉大学",
+                "管理顾问",
+                "高校治理"
+              ]
+            },
+            {
+              "agent_id": 17,
+              "agent_name": "法律专家",
+              "importance": 1.37203,
+              "ppr_centrality": 0.030153,
+              "neighbor_influence": 0.1,
+              "keywords": [
+                "内部智囊",
+                "外部监督转化",
+                "学校治理改革",
+                "教育法治化",
+                "武汉大学",
+                "法律专家"
+              ]
+            }
+          ]
+        },
+        {
+          "unit_id": 0,
+          "size": 2,
+          "representative_agent_id": 28,
+          "representative_agent_name": "央视网",
+          "members": [
+            {
+              "agent_id": 18,
+              "agent_name": "新华网",
+              "importance": 1.921454,
+              "ppr_centrality": 0.031885,
+              "neighbor_influence": 0.124314,
+              "keywords": [
+                "主流舆论阵地",
+                "国家通讯社",
+                "央媒",
+                "新华社主办",
+                "新华网",
+                "新闻传播",
+                "权威媒体"
+              ]
+            },
+            {
+              "agent_id": 28,
+              "agent_name": "央视网",
+              "importance": 2.0,
+              "ppr_centrality": 0.033092,
+              "neighbor_influence": 0.14387,
+              "keywords": [
+                "cctv.com",
+                "主流舆论阵地",
+                "国家级媒体平台",
+                "央媒",
+                "央视网",
+                "权威新闻源"
+              ]
+            }
+          ]
+        },
+        {
+          "unit_id": 28,
+          "size": 1,
+          "representative_agent_id": 0,
+          "representative_agent_name": "央媒调查记者",
+          "members": [
+            {
+              "agent_id": 0,
+              "agent_name": "央媒调查记者",
+              "importance": 1.980297,
+              "ppr_centrality": 0.031345,
+              "neighbor_influence": -0.091381,
+              "keywords": [
+                "央级媒体",
+                "媒体监督",
+                "学生权益",
+                "武汉大学",
+                "甲醛超标事件",
+                "立体维权",
+                "舆情介入",
+                "调查记者"
+              ]
+            }
+          ]
+        },
+        {
+          "unit_id": 27,
+          "size": 1,
+          "representative_agent_id": 1,
+          "representative_agent_name": "华北电力大学",
+          "members": [
+            {
+              "agent_id": 1,
+              "agent_name": "华北电力大学",
+              "importance": 1.793573,
+              "ppr_centrality": 0.032258,
+              "neighbor_influence": 0.0,
+              "keywords": [
+                "“211工程”高校",
+                "“双一流”建设高校",
+                "华北电力大学",
+                "教育部直属高校",
+                "智能电网研究",
+                "电力特色高校",
+                "能源电力人才培养"
+              ]
+            }
+          ]
+        },
+        {
+          "unit_id": 26,
+          "size": 1,
+          "representative_agent_id": 2,
+          "representative_agent_name": "央级媒体",
+          "members": [
+            {
+              "agent_id": 2,
+              "agent_name": "央级媒体",
+              "importance": 1.987658,
+              "ppr_centrality": 0.032664,
+              "neighbor_influence": -0.006523,
+              "keywords": [
+                "品牌声誉传播",
+                "央级媒体",
+                "官方报道",
+                "权威转载",
+                "武汉大学事件",
+                "舆情放大器"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "reddit": {
+      "unit_count": 29,
+      "avg_unit_size": 1.069,
+      "largest_unit_size": 2,
+      "largest_units": [
+        {
+          "unit_id": 1,
+          "size": 2,
+          "representative_agent_id": 13,
+          "representative_agent_name": "管理顾问",
+          "members": [
+            {
+              "agent_id": 13,
+              "agent_name": "管理顾问",
+              "importance": 1.436306,
+              "ppr_centrality": 0.028582,
+              "neighbor_influence": 0.024021,
+              "keywords": [
+                "内部智囊",
+                "学校治理改革",
+                "教育政策咨询",
+                "武汉大学",
+                "管理顾问",
+                "高校治理"
+              ]
+            },
+            {
+              "agent_id": 17,
+              "agent_name": "法律专家",
+              "importance": 1.400628,
+              "ppr_centrality": 0.034343,
+              "neighbor_influence": 0.140656,
+              "keywords": [
+                "内部智囊",
+                "外部监督转化",
+                "学校治理改革",
+                "教育法治化",
+                "武汉大学",
+                "法律专家"
+              ]
+            }
+          ]
+        },
+        {
+          "unit_id": 0,
+          "size": 2,
+          "representative_agent_id": 18,
+          "representative_agent_name": "新华网",
+          "members": [
+            {
+              "agent_id": 18,
+              "agent_name": "新华网",
+              "importance": 1.984011,
+              "ppr_centrality": 0.033323,
+              "neighbor_influence": 0.100307,
+              "keywords": [
+                "主流舆论阵地",
+                "国家通讯社",
+                "央媒",
+                "新华社主办",
+                "新华网",
+                "新闻传播",
+                "权威媒体"
+              ]
+            },
+            {
+              "agent_id": 22,
+              "agent_name": "京报网",
+              "importance": 1.786769,
+              "ppr_centrality": 0.031464,
+              "neighbor_influence": 0.111007,
+              "keywords": [
+                "京报网",
+                "北京日报报业集团",
+                "媒体背书",
+                "官方媒体",
+                "新闻传播",
+                "权威媒体",
+                "高校声誉监测"
+              ]
+            }
+          ]
+        },
+        {
+          "unit_id": 28,
+          "size": 1,
+          "representative_agent_id": 0,
+          "representative_agent_name": "央媒调查记者",
+          "members": [
+            {
+              "agent_id": 0,
+              "agent_name": "央媒调查记者",
+              "importance": 1.722148,
+              "ppr_centrality": 0.03206,
+              "neighbor_influence": -0.007068,
+              "keywords": [
+                "央级媒体",
+                "媒体监督",
+                "学生权益",
+                "武汉大学",
+                "甲醛超标事件",
+                "立体维权",
+                "舆情介入",
+                "调查记者"
+              ]
+            }
+          ]
+        },
+        {
+          "unit_id": 27,
+          "size": 1,
+          "representative_agent_id": 1,
+          "representative_agent_name": "华北电力大学",
+          "members": [
+            {
+              "agent_id": 1,
+              "agent_name": "华北电力大学",
+              "importance": 1.59473,
+              "ppr_centrality": 0.029495,
+              "neighbor_influence": 0.033333,
+              "keywords": [
+                "“211工程”高校",
+                "“双一流”建设高校",
+                "华北电力大学",
+                "教育部直属高校",
+                "智能电网研究",
+                "电力特色高校",
+                "能源电力人才培养"
+              ]
+            }
+          ]
+        },
+        {
+          "unit_id": 26,
+          "size": 1,
+          "representative_agent_id": 2,
+          "representative_agent_name": "央级媒体",
+          "members": [
+            {
+              "agent_id": 2,
+              "agent_name": "央级媒体",
+              "importance": 1.756231,
+              "ppr_centrality": 0.039194,
+              "neighbor_influence": -0.012234,
+              "keywords": [
+                "品牌声誉传播",
+                "央级媒体",
+                "官方报道",
+                "权威转载",
+                "武汉大学事件",
+                "舆情放大器"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "ppr_innovation": {
+    "twitter_top_central_agents": [
+      {
+        "agent_id": 8,
+        "agent_name": "校方",
+        "unit_id": 20,
+        "importance": 1.680625,
+        "ppr_centrality": 0.036689,
+        "neighbor_influence": -0.199173,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 6,
+            "target_agent_name": "校长",
+            "weight": 0.043616,
+            "target_unit_id": 22
+          },
+          {
+            "target_agent_id": 24,
+            "target_agent_name": "校领导",
+            "weight": 0.043377,
+            "target_unit_id": 7
+          },
+          {
+            "target_agent_id": 3,
+            "target_agent_name": "自媒体平台",
+            "weight": 0.043138,
+            "target_unit_id": 25
+          },
+          {
+            "target_agent_id": 21,
+            "target_agent_name": "学生代表",
+            "weight": 0.003188,
+            "target_unit_id": 10
+          },
+          {
+            "target_agent_id": 10,
+            "target_agent_name": "辛某",
+            "weight": 0.003188,
+            "target_unit_id": 18
+          }
+        ]
+      },
+      {
+        "agent_id": 13,
+        "agent_name": "管理顾问",
+        "unit_id": 1,
+        "importance": 1.334371,
+        "ppr_centrality": 0.036461,
+        "neighbor_influence": 0.375,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 17,
+            "target_agent_name": "法律专家",
+            "weight": 0.065184,
+            "target_unit_id": 1
+          },
+          {
+            "target_agent_id": 29,
+            "target_agent_name": "Media Engine",
+            "weight": 0.065184,
+            "target_unit_id": 3
+          }
+        ]
+      },
+      {
+        "agent_id": 12,
+        "agent_name": "学生",
+        "unit_id": 16,
+        "importance": 1.444625,
+        "ppr_centrality": 0.034564,
+        "neighbor_influence": 0.020632,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 2,
+            "target_agent_name": "央级媒体",
+            "weight": 0.045416,
+            "target_unit_id": 26
+          },
+          {
+            "target_agent_id": 0,
+            "target_agent_name": "央媒调查记者",
+            "weight": 0.044796,
+            "target_unit_id": 28
+          },
+          {
+            "target_agent_id": 7,
+            "target_agent_name": "后勤部门",
+            "weight": 0.043009,
+            "target_unit_id": 21
+          },
+          {
+            "target_agent_id": 14,
+            "target_agent_name": "南方网",
+            "weight": 0.003798,
+            "target_unit_id": 15
+          },
+          {
+            "target_agent_id": 5,
+            "target_agent_name": "重庆上游新闻",
+            "weight": 0.001787,
+            "target_unit_id": 23
+          }
+        ]
+      },
+      {
+        "agent_id": 11,
+        "agent_name": "杨景媛",
+        "unit_id": 17,
+        "importance": 0.661427,
+        "ppr_centrality": 0.034338,
+        "neighbor_influence": -0.749586,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 10,
+            "target_agent_name": "辛某",
+            "weight": 0.065184,
+            "target_unit_id": 18
+          },
+          {
+            "target_agent_id": 26,
+            "target_agent_name": "肖某某",
+            "weight": 0.064826,
+            "target_unit_id": 5
+          },
+          {
+            "target_agent_id": 24,
+            "target_agent_name": "校领导",
+            "weight": 0.004781,
+            "target_unit_id": 7
+          },
+          {
+            "target_agent_id": 8,
+            "target_agent_name": "校方",
+            "weight": 0.000359,
+            "target_unit_id": 20
+          }
+        ]
+      },
+      {
+        "agent_id": 6,
+        "agent_name": "校长",
+        "unit_id": 22,
+        "importance": 1.730861,
+        "ppr_centrality": 0.033736,
+        "neighbor_influence": -0.000827,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 8,
+            "target_agent_name": "校方",
+            "weight": 0.065423,
+            "target_unit_id": 20
+          },
+          {
+            "target_agent_id": 21,
+            "target_agent_name": "学生代表",
+            "weight": 0.064706,
+            "target_unit_id": 10
+          },
+          {
+            "target_agent_id": 24,
+            "target_agent_name": "校领导",
+            "weight": 0.003188,
+            "target_unit_id": 7
+          },
+          {
+            "target_agent_id": 3,
+            "target_agent_name": "自媒体平台",
+            "weight": 0.003188,
+            "target_unit_id": 25
+          },
+          {
+            "target_agent_id": 10,
+            "target_agent_name": "辛某",
+            "weight": 0.000239,
+            "target_unit_id": 18
+          }
+        ]
+      },
+      {
+        "agent_id": 14,
+        "agent_name": "南方网",
+        "unit_id": 15,
+        "importance": 1.756731,
+        "ppr_centrality": 0.033141,
+        "neighbor_influence": 0.129679,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 5,
+            "target_agent_name": "重庆上游新闻",
+            "weight": 0.028313,
+            "target_unit_id": 23
+          },
+          {
+            "target_agent_id": 2,
+            "target_agent_name": "央级媒体",
+            "weight": 0.027929,
+            "target_unit_id": 26
+          },
+          {
+            "target_agent_id": 28,
+            "target_agent_name": "央视网",
+            "weight": 0.027487,
+            "target_unit_id": 0
+          },
+          {
+            "target_agent_id": 22,
+            "target_agent_name": "京报网",
+            "weight": 0.027474,
+            "target_unit_id": 9
+          },
+          {
+            "target_agent_id": 0,
+            "target_agent_name": "央媒调查记者",
+            "weight": 0.026803,
+            "target_unit_id": 28
+          }
+        ]
+      },
+      {
+        "agent_id": 28,
+        "agent_name": "央视网",
+        "unit_id": 0,
+        "importance": 2.0,
+        "ppr_centrality": 0.033092,
+        "neighbor_influence": 0.14387,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 22,
+            "target_agent_name": "京报网",
+            "weight": 0.029726,
+            "target_unit_id": 9
+          },
+          {
+            "target_agent_id": 18,
+            "target_agent_name": "新华网",
+            "weight": 0.02867,
+            "target_unit_id": 0
+          },
+          {
+            "target_agent_id": 5,
+            "target_agent_name": "重庆上游新闻",
+            "weight": 0.028485,
+            "target_unit_id": 23
+          },
+          {
+            "target_agent_id": 23,
+            "target_agent_name": "央广网",
+            "weight": 0.02748,
+            "target_unit_id": 8
+          },
+          {
+            "target_agent_id": 14,
+            "target_agent_name": "南方网",
+            "weight": 0.027153,
+            "target_unit_id": 15
+          }
+        ]
+      },
+      {
+        "agent_id": 22,
+        "agent_name": "京报网",
+        "unit_id": 9,
+        "importance": 1.752205,
+        "ppr_centrality": 0.033088,
+        "neighbor_influence": 0.143824,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 28,
+            "target_agent_name": "央视网",
+            "weight": 0.029757,
+            "target_unit_id": 0
+          },
+          {
+            "target_agent_id": 18,
+            "target_agent_name": "新华网",
+            "weight": 0.028699,
+            "target_unit_id": 0
+          },
+          {
+            "target_agent_id": 5,
+            "target_agent_name": "重庆上游新闻",
+            "weight": 0.028315,
+            "target_unit_id": 23
+          },
+          {
+            "target_agent_id": 23,
+            "target_agent_name": "央广网",
+            "weight": 0.027611,
+            "target_unit_id": 8
+          },
+          {
+            "target_agent_id": 14,
+            "target_agent_name": "南方网",
+            "weight": 0.027433,
+            "target_unit_id": 15
+          }
+        ]
+      }
+    ],
+    "twitter_top_asymmetric_pairs": [
+      {
+        "dominant_source_agent_id": 3,
+        "dominant_source_agent_name": "自媒体平台",
+        "dominant_target_agent_id": 8,
+        "dominant_target_agent_name": "校方",
+        "dominant_weight": 0.129413,
+        "reverse_weight": 0.043138,
+        "delta": 0.086275,
+        "source_unit_id": 25,
+        "target_unit_id": 20
+      },
+      {
+        "dominant_source_agent_id": 7,
+        "dominant_source_agent_name": "后勤部门",
+        "dominant_target_agent_id": 12,
+        "dominant_target_agent_name": "学生",
+        "dominant_weight": 0.129026,
+        "reverse_weight": 0.043009,
+        "delta": 0.086017,
+        "source_unit_id": 21,
+        "target_unit_id": 16
+      },
+      {
+        "dominant_source_agent_id": 17,
+        "dominant_source_agent_name": "法律专家",
+        "dominant_target_agent_id": 13,
+        "dominant_target_agent_name": "管理顾问",
+        "dominant_weight": 0.130369,
+        "reverse_weight": 0.065184,
+        "delta": 0.065184,
+        "source_unit_id": 1,
+        "target_unit_id": 1
+      },
+      {
+        "dominant_source_agent_id": 29,
+        "dominant_source_agent_name": "Media Engine",
+        "dominant_target_agent_id": 13,
+        "dominant_target_agent_name": "管理顾问",
+        "dominant_weight": 0.130369,
+        "reverse_weight": 0.065184,
+        "delta": 0.065184,
+        "source_unit_id": 3,
+        "target_unit_id": 1
+      },
+      {
+        "dominant_source_agent_id": 26,
+        "dominant_source_agent_name": "肖某某",
+        "dominant_target_agent_id": 11,
+        "dominant_target_agent_name": "杨景媛",
+        "dominant_weight": 0.129652,
+        "reverse_weight": 0.064826,
+        "delta": 0.064826,
+        "source_unit_id": 5,
+        "target_unit_id": 17
+      },
+      {
+        "dominant_source_agent_id": 21,
+        "dominant_source_agent_name": "学生代表",
+        "dominant_target_agent_id": 6,
+        "dominant_target_agent_name": "校长",
+        "dominant_weight": 0.129413,
+        "reverse_weight": 0.064706,
+        "delta": 0.064706,
+        "source_unit_id": 10,
+        "target_unit_id": 22
+      },
+      {
+        "dominant_source_agent_id": 6,
+        "dominant_source_agent_name": "校长",
+        "dominant_target_agent_id": 8,
+        "dominant_target_agent_name": "校方",
+        "dominant_weight": 0.065423,
+        "reverse_weight": 0.043616,
+        "delta": 0.021808,
+        "source_unit_id": 22,
+        "target_unit_id": 20
+      },
+      {
+        "dominant_source_agent_id": 24,
+        "dominant_source_agent_name": "校领导",
+        "dominant_target_agent_id": 8,
+        "dominant_target_agent_name": "校方",
+        "dominant_weight": 0.065065,
+        "reverse_weight": 0.043377,
+        "delta": 0.021688,
+        "source_unit_id": 7,
+        "target_unit_id": 20
+      }
+    ],
+    "reddit_top_central_agents": [
+      {
+        "agent_id": 4,
+        "agent_name": "海外校友",
+        "unit_id": 24,
+        "importance": 1.14983,
+        "ppr_centrality": 0.044555,
+        "neighbor_influence": 0.018384,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 28,
+            "target_agent_name": "央视网",
+            "weight": 0.009742,
+            "target_unit_id": 4
+          },
+          {
+            "target_agent_id": 17,
+            "target_agent_name": "法律专家",
+            "weight": 0.009649,
+            "target_unit_id": 1
+          },
+          {
+            "target_agent_id": 0,
+            "target_agent_name": "央媒调查记者",
+            "weight": 0.009535,
+            "target_unit_id": 28
+          },
+          {
+            "target_agent_id": 12,
+            "target_agent_name": "学生",
+            "weight": 0.009279,
+            "target_unit_id": 16
+          },
+          {
+            "target_agent_id": 29,
+            "target_agent_name": "Media Engine",
+            "weight": 0.008872,
+            "target_unit_id": 3
+          }
+        ]
+      },
+      {
+        "agent_id": 12,
+        "agent_name": "学生",
+        "unit_id": 16,
+        "importance": 1.540687,
+        "ppr_centrality": 0.039405,
+        "neighbor_influence": -0.189899,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 20,
+            "target_agent_name": "网易号“笔杆论道”",
+            "weight": 0.015396,
+            "target_unit_id": 11
+          },
+          {
+            "target_agent_id": 4,
+            "target_agent_name": "海外校友",
+            "weight": 0.015179,
+            "target_unit_id": 24
+          },
+          {
+            "target_agent_id": 27,
+            "target_agent_name": "校友群体",
+            "weight": 0.015033,
+            "target_unit_id": 5
+          },
+          {
+            "target_agent_id": 0,
+            "target_agent_name": "央媒调查记者",
+            "weight": 0.014812,
+            "target_unit_id": 28
+          },
+          {
+            "target_agent_id": 30,
+            "target_agent_name": "湖北省教育厅",
+            "weight": 0.01447,
+            "target_unit_id": 2
+          }
+        ]
+      },
+      {
+        "agent_id": 2,
+        "agent_name": "央级媒体",
+        "unit_id": 26,
+        "importance": 1.756231,
+        "ppr_centrality": 0.039194,
+        "neighbor_influence": -0.012234,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 0,
+            "target_agent_name": "央媒调查记者",
+            "weight": 0.010771,
+            "target_unit_id": 28
+          },
+          {
+            "target_agent_id": 22,
+            "target_agent_name": "京报网",
+            "weight": 0.010469,
+            "target_unit_id": 0
+          },
+          {
+            "target_agent_id": 12,
+            "target_agent_name": "学生",
+            "weight": 0.010018,
+            "target_unit_id": 16
+          },
+          {
+            "target_agent_id": 18,
+            "target_agent_name": "新华网",
+            "weight": 0.010018,
+            "target_unit_id": 0
+          },
+          {
+            "target_agent_id": 17,
+            "target_agent_name": "法律专家",
+            "weight": 0.010018,
+            "target_unit_id": 1
+          }
+        ]
+      },
+      {
+        "agent_id": 30,
+        "agent_name": "湖北省教育厅",
+        "unit_id": 2,
+        "importance": 1.768142,
+        "ppr_centrality": 0.037124,
+        "neighbor_influence": 0.083604,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 18,
+            "target_agent_name": "新华网",
+            "weight": 0.011767,
+            "target_unit_id": 0
+          },
+          {
+            "target_agent_id": 22,
+            "target_agent_name": "京报网",
+            "weight": 0.011592,
+            "target_unit_id": 0
+          },
+          {
+            "target_agent_id": 29,
+            "target_agent_name": "Media Engine",
+            "weight": 0.011553,
+            "target_unit_id": 3
+          },
+          {
+            "target_agent_id": 23,
+            "target_agent_name": "央广网",
+            "weight": 0.011477,
+            "target_unit_id": 9
+          },
+          {
+            "target_agent_id": 5,
+            "target_agent_name": "重庆上游新闻",
+            "weight": 0.01141,
+            "target_unit_id": 23
+          }
+        ]
+      },
+      {
+        "agent_id": 17,
+        "agent_name": "法律专家",
+        "unit_id": 1,
+        "importance": 1.400628,
+        "ppr_centrality": 0.034343,
+        "neighbor_influence": 0.140656,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 29,
+            "target_agent_name": "Media Engine",
+            "weight": 0.020075,
+            "target_unit_id": 3
+          },
+          {
+            "target_agent_id": 4,
+            "target_agent_name": "海外校友",
+            "weight": 0.01999,
+            "target_unit_id": 24
+          },
+          {
+            "target_agent_id": 28,
+            "target_agent_name": "央视网",
+            "weight": 0.018824,
+            "target_unit_id": 4
+          },
+          {
+            "target_agent_id": 15,
+            "target_agent_name": "猎头公司",
+            "weight": 0.018714,
+            "target_unit_id": 14
+          },
+          {
+            "target_agent_id": 2,
+            "target_agent_name": "央级媒体",
+            "weight": 0.018624,
+            "target_unit_id": 26
+          }
+        ]
+      },
+      {
+        "agent_id": 18,
+        "agent_name": "新华网",
+        "unit_id": 0,
+        "importance": 1.984011,
+        "ppr_centrality": 0.033323,
+        "neighbor_influence": 0.100307,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 22,
+            "target_agent_name": "京报网",
+            "weight": 0.015444,
+            "target_unit_id": 0
+          },
+          {
+            "target_agent_id": 5,
+            "target_agent_name": "重庆上游新闻",
+            "weight": 0.015378,
+            "target_unit_id": 23
+          },
+          {
+            "target_agent_id": 4,
+            "target_agent_name": "海外校友",
+            "weight": 0.01515,
+            "target_unit_id": 24
+          },
+          {
+            "target_agent_id": 30,
+            "target_agent_name": "湖北省教育厅",
+            "weight": 0.01515,
+            "target_unit_id": 2
+          },
+          {
+            "target_agent_id": 23,
+            "target_agent_name": "央广网",
+            "weight": 0.015104,
+            "target_unit_id": 9
+          }
+        ]
+      },
+      {
+        "agent_id": 24,
+        "agent_name": "校领导",
+        "unit_id": 8,
+        "importance": 1.849591,
+        "ppr_centrality": 0.033105,
+        "neighbor_influence": -0.274546,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 6,
+            "target_agent_name": "校长",
+            "weight": 0.064827,
+            "target_unit_id": 22
+          },
+          {
+            "target_agent_id": 10,
+            "target_agent_name": "辛某",
+            "weight": 0.064646,
+            "target_unit_id": 18
+          },
+          {
+            "target_agent_id": 21,
+            "target_agent_name": "学生代表",
+            "weight": 0.002391,
+            "target_unit_id": 10
+          },
+          {
+            "target_agent_id": 18,
+            "target_agent_name": "新华网",
+            "weight": 0.002391,
+            "target_unit_id": 0
+          },
+          {
+            "target_agent_id": 17,
+            "target_agent_name": "法律专家",
+            "weight": 0.002391,
+            "target_unit_id": 1
+          }
+        ]
+      },
+      {
+        "agent_id": 23,
+        "agent_name": "央广网",
+        "unit_id": 9,
+        "importance": 2.0,
+        "ppr_centrality": 0.032557,
+        "neighbor_influence": 0.089536,
+        "top_outgoing_ppr": [
+          {
+            "target_agent_id": 18,
+            "target_agent_name": "新华网",
+            "weight": 0.019391,
+            "target_unit_id": 0
+          },
+          {
+            "target_agent_id": 30,
+            "target_agent_name": "湖北省教育厅",
+            "weight": 0.019388,
+            "target_unit_id": 2
+          },
+          {
+            "target_agent_id": 5,
+            "target_agent_name": "重庆上游新闻",
+            "weight": 0.019284,
+            "target_unit_id": 23
+          },
+          {
+            "target_agent_id": 22,
+            "target_agent_name": "京报网",
+            "weight": 0.018981,
+            "target_unit_id": 0
+          },
+          {
+            "target_agent_id": 12,
+            "target_agent_name": "学生",
+            "weight": 0.018457,
+            "target_unit_id": 16
+          }
+        ]
+      }
+    ],
+    "reddit_top_asymmetric_pairs": [
+      {
+        "dominant_source_agent_id": 16,
+        "dominant_source_agent_name": "985高校",
+        "dominant_target_agent_id": 4,
+        "dominant_target_agent_name": "海外校友",
+        "dominant_weight": 0.1275,
+        "reverse_weight": 0.0085,
+        "delta": 0.119,
+        "source_unit_id": 13,
+        "target_unit_id": 24
+      },
+      {
+        "dominant_source_agent_id": 7,
+        "dominant_source_agent_name": "后勤部门",
+        "dominant_target_agent_id": 12,
+        "dominant_target_agent_name": "学生",
+        "dominant_weight": 0.128366,
+        "reverse_weight": 0.014263,
+        "delta": 0.114104,
+        "source_unit_id": 21,
+        "target_unit_id": 16
+      },
+      {
+        "dominant_source_agent_id": 10,
+        "dominant_source_agent_name": "辛某",
+        "dominant_target_agent_id": 24,
+        "dominant_target_agent_name": "校领导",
+        "dominant_weight": 0.129293,
+        "reverse_weight": 0.064646,
+        "delta": 0.064646,
+        "source_unit_id": 18,
+        "target_unit_id": 8
+      },
+      {
+        "dominant_source_agent_id": 13,
+        "dominant_source_agent_name": "管理顾问",
+        "dominant_target_agent_id": 4,
+        "dominant_target_agent_name": "海外校友",
+        "dominant_weight": 0.065116,
+        "reverse_weight": 0.008686,
+        "delta": 0.05643,
+        "source_unit_id": 1,
+        "target_unit_id": 24
+      },
+      {
+        "dominant_source_agent_id": 27,
+        "dominant_source_agent_name": "校友群体",
+        "dominant_target_agent_id": 12,
+        "dominant_target_agent_name": "学生",
+        "dominant_weight": 0.066938,
+        "reverse_weight": 0.015033,
+        "delta": 0.051905,
+        "source_unit_id": 5,
+        "target_unit_id": 16
+      },
+      {
+        "dominant_source_agent_id": 13,
+        "dominant_source_agent_name": "管理顾问",
+        "dominant_target_agent_id": 17,
+        "dominant_target_agent_name": "法律专家",
+        "dominant_weight": 0.064777,
+        "reverse_weight": 0.018504,
+        "delta": 0.046273,
+        "source_unit_id": 1,
+        "target_unit_id": 1
+      },
+      {
+        "dominant_source_agent_id": 9,
+        "dominant_source_agent_name": "墩墩舆情课工作室",
+        "dominant_target_agent_id": 4,
+        "dominant_target_agent_name": "海外校友",
+        "dominant_weight": 0.043411,
+        "reverse_weight": 0.008685,
+        "delta": 0.034726,
+        "source_unit_id": 19,
+        "target_unit_id": 24
+      },
+      {
+        "dominant_source_agent_id": 3,
+        "dominant_source_agent_name": "自媒体平台",
+        "dominant_target_agent_id": 4,
+        "dominant_target_agent_name": "海外校友",
+        "dominant_weight": 0.043208,
+        "reverse_weight": 0.008642,
+        "delta": 0.034567,
+        "source_unit_id": 25,
+        "target_unit_id": 24
+      }
+    ]
+  },
+  "memory_innovation": {
+    "twitter": {
+      "latest_state": {
+        "timestamp": "2026-04-01T18:27:52.260281",
+        "platform": "twitter",
+        "round": 48,
+        "simulated_hour": 23,
+        "active_agent_ids": [
+          12,
+          28,
+          22,
+          4,
+          3,
+          18
+        ],
+        "active_agent_names": [
+          "学生",
+          "央视网",
+          "京报网",
+          "海外校友",
+          "自媒体平台",
+          "新华网"
+        ],
+        "agents_with_memory": 14,
+        "total_agent_units": 34,
+        "world_units": 24,
+        "top_agent_units": [
+          {
+            "unit_id": "twitter_m_9",
+            "agent_id": 14,
+            "agent_name": "南方网",
+            "topic": "武汉大学",
+            "salience_score": 1.0,
+            "count": 3,
+            "keywords": [
+              "17号",
+              "央视网转发",
+              "wh",
+              "v2",
+              "依法依规",
+              "符合",
+              "original_content",
+              "校方强调",
+              "7号",
+              "第十二条"
+            ],
+            "summary": "QUOTE_POST | original_content:【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。 | quote_content:【南方网政务数据看板更新】武汉大学校园交通监管案例已同步接入《粤鄂高校基建阳光监管数据看板》（v2.3.1），关联鄂建招〔2023〕89号图书馆改造工程招标文件、WH-TRAFFIC-2024-061"
+          },
+          {
+            "unit_id": "twitter_m_38",
+            "agent_id": 2,
+            "agent_name": "央级媒体",
+            "topic": "珞珈裂痕",
+            "salience_score": 1.0,
+            "count": 2,
+            "keywords": [
+              "我们不是要对抗",
+              "四方联动",
+              "检测预约",
+              "珞珈裂痕",
+              "律师团对接",
+              "是要呼吸权",
+              "媒体线索直报",
+              "症状打卡"
+            ],
+            "summary": "REPOST | original_content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕"
+          },
+          {
+            "unit_id": "twitter_m_22",
+            "agent_id": 0,
+            "agent_name": "央媒调查记者",
+            "topic": "珞珈裂痕",
+            "salience_score": 1.0,
+            "count": 2,
+            "keywords": [
+              "我们不是要对抗",
+              "四方联动",
+              "央级媒体",
+              "检测预约",
+              "珞珈裂痕",
+              "律师团对接",
+              "是要呼吸权",
+              "媒体线索直报",
+              "症状打卡"
+            ],
+            "summary": "REPOST | original_content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕"
+          },
+          {
+            "unit_id": "twitter_m_23",
+            "agent_id": 5,
+            "agent_name": "重庆上游新闻",
+            "topic": "珞珈裂痕",
+            "salience_score": 1.0,
+            "count": 2,
+            "keywords": [
+              "我们不是要对抗",
+              "四方联动",
+              "057",
+              "律师团对接",
+              "编号",
+              "wh",
+              "001",
+              "edu",
+              "检测预约",
+              "珞珈裂痕"
+            ],
+            "summary": "REPOST | original_content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕"
+          },
+          {
+            "unit_id": "twitter_m_10",
+            "agent_id": 0,
+            "agent_name": "央媒调查记者",
+            "topic": "武汉大学",
+            "salience_score": 1.0,
+            "count": 2,
+            "keywords": [
+              "cma",
+              "00前在",
+              "hb",
+              "wh",
+              "2023",
+              "比对",
+              "2023年",
+              "2018",
+              "人车分流",
+              "制度归因"
+            ],
+            "summary": "QUOTE_POST | quote_content:本协同机制已就武汉大学校园非机动车管理问题启动制度性核查：①调取该校2021—2023年《校园交通安全管理年报》（WH-TRAFFIC-ANNUAL-2021至2023）；②比对《普通高等学校学生管理规定》第53条与《武汉市非机动车管理办法》第17条关于校内通行权的适用边界；③委托第三方合规评估机构（CMA资质编号：HB-CMA-2022-089）开展管理程序正当性审查。所有核查动作"
+          },
+          {
+            "unit_id": "twitter_m_44",
+            "agent_id": 28,
+            "agent_name": "央视网",
+            "topic": "珞珈裂痕",
+            "salience_score": 1.0,
+            "count": 1,
+            "keywords": [
+              "症状打卡",
+              "检测预约",
+              "四方联动",
+              "珞珈裂痕",
+              "律师团对接",
+              "是要呼吸权",
+              "媒体线索直报",
+              "我们不是要对抗"
+            ],
+            "summary": "REPOST | original_content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕"
+          }
+        ],
+        "top_world_units": [
+          {
+            "unit_id": "twitter_m_23_world",
+            "agent_id": 5,
+            "agent_name": "重庆上游新闻",
+            "topic": "珞珈裂痕",
+            "salience_score": 1.0,
+            "count": 7,
+            "keywords": [
+              "我们不是要对抗",
+              "四方联动",
+              "057",
+              "编号",
+              "wh",
+              "edu",
+              "检测预约",
+              "珞珈裂痕",
+              "律师团对接",
+              "是要呼吸权"
+            ],
+            "summary": "REPOST | original_content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕"
+          },
+          {
+            "unit_id": "twitter_m_12_world",
+            "agent_id": 14,
+            "agent_name": "南方网",
+            "topic": "武汉大学",
+            "salience_score": 1.0,
+            "count": 3,
+            "keywords": [
+              "17号",
+              "央视网转发",
+              "wh",
+              "v2",
+              "依法依规",
+              "符合",
+              "original_content",
+              "校方强调",
+              "7号",
+              "第十二条"
+            ],
+            "summary": "QUOTE_POST | original_content:【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。 | quote_content:【南方网政务数据看板更新】武汉大学校园交通监管案例已同步接入《粤鄂高校基建阳光监管数据看板》（v2.3.1），关联鄂建招〔2023〕89号图书馆改造工程招标文件、WH-TRAFFIC-2024-061"
+          },
+          {
+            "unit_id": "twitter_m_3_world",
+            "agent_id": 12,
+            "agent_name": "学生",
+            "topic": "珞珈裂痕",
+            "salience_score": 1.0,
+            "count": 2,
+            "keywords": [
+              "我们不是要对抗",
+              "四方联动",
+              "检测预约",
+              "珞珈裂痕",
+              "律师团对接",
+              "是要呼吸权",
+              "媒体线索直报",
+              "症状打卡"
+            ],
+            "summary": "REPOST | original_content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕"
+          },
+          {
+            "unit_id": "twitter_m_10_world",
+            "agent_id": 0,
+            "agent_name": "央媒调查记者",
+            "topic": "武汉大学",
+            "salience_score": 1.0,
+            "count": 2,
+            "keywords": [
+              "cma",
+              "00前在",
+              "hb",
+              "wh",
+              "2023",
+              "比对",
+              "2023年",
+              "2018",
+              "人车分流",
+              "制度归因"
+            ],
+            "summary": "QUOTE_POST | quote_content:本协同机制已就武汉大学校园非机动车管理问题启动制度性核查：①调取该校2021—2023年《校园交通安全管理年报》（WH-TRAFFIC-ANNUAL-2021至2023）；②比对《普通高等学校学生管理规定》第53条与《武汉市非机动车管理办法》第17条关于校内通行权的适用边界；③委托第三方合规评估机构（CMA资质编号：HB-CMA-2022-089）开展管理程序正当性审查。所有核查动作"
+          },
+          {
+            "unit_id": "twitter_m_15_world",
+            "agent_id": 22,
+            "agent_name": "京报网",
+            "topic": "武汉大学",
+            "salience_score": 1.0,
+            "count": 2,
+            "keywords": [
+              "17号",
+              "编号",
+              "依法依规",
+              "校方强调",
+              "a级",
+              "whu",
+              "涉事人员辛某系校外退休职工亲属",
+              "一视同仁",
+              "原则",
+              "试行"
+            ],
+            "summary": "QUOTE_POST | original_content:【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。 | quote_content:【上游新闻核查确认】该信息已纳入我端《高校治理典型案例库·交通监管子库》（编号：WHU-TRAFFIC-20240615-001），原始信源为武汉大学官网公告（武大保〔2023〕17号），经比对教育部"
+          },
+          {
+            "unit_id": "twitter_m_41_world",
+            "agent_id": 28,
+            "agent_name": "央视网",
+            "topic": "武汉大学",
+            "salience_score": 1.0,
+            "count": 1,
+            "keywords": [
+              "原则",
+              "实现",
+              "cn",
+              "whu",
+              "edu",
+              "据教育部",
+              "分类施策",
+              "动态调整"
+            ],
+            "summary": "QUOTE_POST | quote_content:【央视网权威发布】据教育部《关于加强新时代高校治理体系和治理能力现代化的指导意见》第三章第八条，高校非机动车管理须坚持‘分类施策、动态调整、师生共治’原则。武汉大学已启用新版《校园非机动车智慧监管平台》，实现‘一车一码、轨迹可溯、申诉直达’（whu.edu.cn/smart-bike），相关数据接入国家教育管理信息系统（EMIS）实时监测。我们始终相信：程序正义是信任重建的第一基石。"
+          }
+        ]
+      },
+      "store_events": 50,
+      "retrieval_events": 284,
+      "sample_retrievals": [
+        {
+          "timestamp": "2026-04-01T18:24:59.647819",
+          "platform": "twitter",
+          "event_type": "retrieval",
+          "round": 2,
+          "agent_id": 4,
+          "agent_name": "海外校友",
+          "plan": {
+            "complexity": "HIGH",
+            "retrieval_depth": 8,
+            "recent_round_window": 24,
+            "self_k": 4,
+            "neighbor_k": 3,
+            "world_k": 3,
+            "include_world": true,
+            "query_keywords": [
+              "985滤镜破碎",
+              "prestige paradox",
+              "但当",
+              "品牌声誉",
+              "四方联动维权",
+              "学术机构公信力建设",
+              "建立校友常设治理观察团",
+              "我们曾以珞珈为荣",
+              "我们要求",
+              "校友参与式治理",
+              "校友群体联合声明",
+              "检测合格",
+              "武大甲醛宿舍",
+              "武汉大学",
+              "环境健康权保障",
+              "珞珈裂痕",
+              "程序正义缺失",
+              "立即启动甲醛事件独立调查",
+              "肖某某处分未撤销",
+              "跨国舆情治理",
+              "辛某校园危险驾驶",
+              "通报被实锤证伪",
+              "高校程序正义"
+            ],
+            "query_entities": [
+              "学术机构公信力建设",
+              "校友参与式治理",
+              "海外校友",
+              "环境健康权保障",
+              "跨国舆情治理",
+              "高校程序正义"
+            ]
+          },
+          "miss_reason": "",
+          "selected_units": [
+            {
+              "scope": "self",
+              "unit_id": "twitter_m_4",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "但当",
+                "检测合格",
+                "我们要求",
+                "通报被实锤证伪",
+                "校友群体联合声明",
+                "我们曾以珞珈为荣",
+                "建立校友常设治理观察团",
+                "立即启动甲醛事件独立调查"
+              ],
+              "salience_score": 0.7526,
+              "score": 1.093322,
+              "summary": "CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "twitter_m_4_world",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "但当",
+                "检测合格",
+                "我们要求",
+                "通报被实锤证伪",
+                "校友群体联合声明",
+                "我们曾以珞珈为荣",
+                "建立校友常设治理观察团",
+                "立即启动甲醛事件独立调查"
+              ],
+              "salience_score": 0.7526,
+              "score": 1.043625,
+              "summary": "CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "twitter_m_2_world",
+              "source_agent_id": 0,
+              "source_agent_name": "央媒调查记者",
+              "topic": "武汉大学",
+              "keywords": [
+                "校方强调",
+                "一视同仁",
+                "依法依规",
+                "央视网转发",
+                "其骑行行为已由保卫部依规处理",
+                "涉事人员辛某系校外退休职工亲属",
+                "武汉大学通报一起校内非机动车通行纠纷"
+              ],
+              "salience_score": 0.9015,
+              "score": 0.701339,
+              "summary": "CREATE_POST | content:【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "twitter_m_3_world",
+              "source_agent_id": 12,
+              "source_agent_name": "学生",
+              "topic": "珞珈裂痕",
+              "keywords": [
+                "症状打卡",
+                "检测预约",
+                "四方联动",
+                "珞珈裂痕",
+                "律师团对接",
+                "是要呼吸权",
+                "媒体线索直报",
+                "我们不是要对抗"
+              ],
+              "salience_score": 0.935,
+              "score": 0.675016,
+              "summary": "CREATE_POST | content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕"
+            }
+          ],
+          "context_preview": "[Retrieval Plan] complexity=HIGH depth=8\n[Intent Keywords] 985滤镜破碎, prestige paradox, 但当, 品牌声誉, 四方联动维权, 学术机构公信力建设, 建立校友常设治理观察团, 我们曾以珞珈为荣\n[ABSTRACT REPRESENTATIONS]\n- (self) [海外校友] [检测合格] 海外校友 @ 2026-04-01T18:24:38.508224: CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。\n- (world) [海外校友] [检测合格] 海外校友 @ 2026-04-01T18:24:38.508224: CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。\n- (world) [央媒调查记者] [武汉大学] 央媒调查记者 "
+        },
+        {
+          "timestamp": "2026-04-01T18:25:06.857094",
+          "platform": "twitter",
+          "event_type": "retrieval",
+          "round": 3,
+          "agent_id": 4,
+          "agent_name": "海外校友",
+          "plan": {
+            "complexity": "HIGH",
+            "retrieval_depth": 8,
+            "recent_round_window": 24,
+            "self_k": 4,
+            "neighbor_k": 3,
+            "world_k": 3,
+            "include_world": true,
+            "query_keywords": [
+              "985滤镜破碎",
+              "prestige paradox",
+              "但当",
+              "品牌声誉",
+              "四方联动维权",
+              "学术机构公信力建设",
+              "建立校友常设治理观察团",
+              "我们曾以珞珈为荣",
+              "我们要求",
+              "校友参与式治理",
+              "校友群体联合声明",
+              "检测合格",
+              "武大甲醛宿舍",
+              "武汉大学",
+              "环境健康权保障",
+              "珞珈裂痕",
+              "程序正义缺失",
+              "立即启动甲醛事件独立调查",
+              "肖某某处分未撤销",
+              "跨国舆情治理",
+              "辛某校园危险驾驶",
+              "通报被实锤证伪",
+              "高校程序正义"
+            ],
+            "query_entities": [
+              "学术机构公信力建设",
+              "校友参与式治理",
+              "海外校友",
+              "环境健康权保障",
+              "跨国舆情治理",
+              "高校程序正义"
+            ]
+          },
+          "miss_reason": "",
+          "selected_units": [
+            {
+              "scope": "self",
+              "unit_id": "twitter_m_4",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "但当",
+                "检测合格",
+                "我们要求",
+                "通报被实锤证伪",
+                "校友群体联合声明",
+                "我们曾以珞珈为荣",
+                "建立校友常设治理观察团",
+                "立即启动甲醛事件独立调查"
+              ],
+              "salience_score": 0.7526,
+              "score": 1.040376,
+              "summary": "CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "twitter_m_4_world",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "但当",
+                "检测合格",
+                "我们要求",
+                "通报被实锤证伪",
+                "校友群体联合声明",
+                "我们曾以珞珈为荣",
+                "建立校友常设治理观察团",
+                "立即启动甲醛事件独立调查"
+              ],
+              "salience_score": 0.7526,
+              "score": 0.993086,
+              "summary": "CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "twitter_m_2_world",
+              "source_agent_id": 0,
+              "source_agent_name": "央媒调查记者",
+              "topic": "武汉大学",
+              "keywords": [
+                "校方强调",
+                "一视同仁",
+                "依法依规",
+                "央视网转发",
+                "其骑行行为已由保卫部依规处理",
+                "涉事人员辛某系校外退休职工亲属",
+                "武汉大学通报一起校内非机动车通行纠纷"
+              ],
+              "salience_score": 0.9015,
+              "score": 0.647417,
+              "summary": "CREATE_POST | content:【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "twitter_m_3_world",
+              "source_agent_id": 12,
+              "source_agent_name": "学生",
+              "topic": "珞珈裂痕",
+              "keywords": [
+                "症状打卡",
+                "检测预约",
+                "四方联动",
+                "珞珈裂痕",
+                "律师团对接",
+                "是要呼吸权",
+                "媒体线索直报",
+                "我们不是要对抗"
+              ],
+              "salience_score": 0.935,
+              "score": 0.625421,
+              "summary": "CREATE_POST | content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕"
+            }
+          ],
+          "context_preview": "[Retrieval Plan] complexity=HIGH depth=8\n[Intent Keywords] 985滤镜破碎, prestige paradox, 但当, 品牌声誉, 四方联动维权, 学术机构公信力建设, 建立校友常设治理观察团, 我们曾以珞珈为荣\n[ABSTRACT REPRESENTATIONS]\n- (self) [海外校友] [检测合格] 海外校友 @ 2026-04-01T18:24:38.508224: CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。\n- (world) [海外校友] [检测合格] 海外校友 @ 2026-04-01T18:24:38.508224: CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。\n- (world) [央媒调查记者] [武汉大学] 央媒调查记者 "
+        },
+        {
+          "timestamp": "2026-04-01T18:25:08.110855",
+          "platform": "twitter",
+          "event_type": "retrieval",
+          "round": 4,
+          "agent_id": 4,
+          "agent_name": "海外校友",
+          "plan": {
+            "complexity": "HIGH",
+            "retrieval_depth": 8,
+            "recent_round_window": 24,
+            "self_k": 4,
+            "neighbor_k": 3,
+            "world_k": 3,
+            "include_world": true,
+            "query_keywords": [
+              "985滤镜破碎",
+              "prestige paradox",
+              "但当",
+              "品牌声誉",
+              "四方联动维权",
+              "学术机构公信力建设",
+              "建立校友常设治理观察团",
+              "我们曾以珞珈为荣",
+              "我们要求",
+              "校友参与式治理",
+              "校友群体联合声明",
+              "检测合格",
+              "武大甲醛宿舍",
+              "武汉大学",
+              "环境健康权保障",
+              "珞珈裂痕",
+              "程序正义缺失",
+              "立即启动甲醛事件独立调查",
+              "肖某某处分未撤销",
+              "跨国舆情治理",
+              "辛某校园危险驾驶",
+              "通报被实锤证伪",
+              "高校程序正义"
+            ],
+            "query_entities": [
+              "学术机构公信力建设",
+              "校友参与式治理",
+              "海外校友",
+              "环境健康权保障",
+              "跨国舆情治理",
+              "高校程序正义"
+            ]
+          },
+          "miss_reason": "",
+          "selected_units": [
+            {
+              "scope": "self",
+              "unit_id": "twitter_m_4",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "但当",
+                "检测合格",
+                "我们要求",
+                "通报被实锤证伪",
+                "校友群体联合声明",
+                "我们曾以珞珈为荣",
+                "建立校友常设治理观察团",
+                "立即启动甲醛事件独立调查"
+              ],
+              "salience_score": 0.7526,
+              "score": 0.9915,
+              "summary": "CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "twitter_m_4_world",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "但当",
+                "检测合格",
+                "我们要求",
+                "通报被实锤证伪",
+                "校友群体联合声明",
+                "我们曾以珞珈为荣",
+                "建立校友常设治理观察团",
+                "立即启动甲醛事件独立调查"
+              ],
+              "salience_score": 0.7526,
+              "score": 0.946432,
+              "summary": "CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "twitter_m_2_world",
+              "source_agent_id": 0,
+              "source_agent_name": "央媒调查记者",
+              "topic": "武汉大学",
+              "keywords": [
+                "校方强调",
+                "一视同仁",
+                "依法依规",
+                "央视网转发",
+                "其骑行行为已由保卫部依规处理",
+                "涉事人员辛某系校外退休职工亲属",
+                "武汉大学通报一起校内非机动车通行纠纷"
+              ],
+              "salience_score": 0.9015,
+              "score": 0.597642,
+              "summary": "CREATE_POST | content:【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "twitter_m_3_world",
+              "source_agent_id": 12,
+              "source_agent_name": "学生",
+              "topic": "珞珈裂痕",
+              "keywords": [
+                "症状打卡",
+                "检测预约",
+                "四方联动",
+                "珞珈裂痕",
+                "律师团对接",
+                "是要呼吸权",
+                "媒体线索直报",
+                "我们不是要对抗"
+              ],
+              "salience_score": 0.935,
+              "score": 0.579639,
+              "summary": "CREATE_POST | content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕"
+            }
+          ],
+          "context_preview": "[Retrieval Plan] complexity=HIGH depth=8\n[Intent Keywords] 985滤镜破碎, prestige paradox, 但当, 品牌声誉, 四方联动维权, 学术机构公信力建设, 建立校友常设治理观察团, 我们曾以珞珈为荣\n[ABSTRACT REPRESENTATIONS]\n- (self) [海外校友] [检测合格] 海外校友 @ 2026-04-01T18:24:38.508224: CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。\n- (world) [海外校友] [检测合格] 海外校友 @ 2026-04-01T18:24:38.508224: CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。\n- (world) [央媒调查记者] [武汉大学] 央媒调查记者 "
+        },
+        {
+          "timestamp": "2026-04-01T18:25:09.348738",
+          "platform": "twitter",
+          "event_type": "retrieval",
+          "round": 6,
+          "agent_id": 4,
+          "agent_name": "海外校友",
+          "plan": {
+            "complexity": "HIGH",
+            "retrieval_depth": 8,
+            "recent_round_window": 24,
+            "self_k": 4,
+            "neighbor_k": 3,
+            "world_k": 3,
+            "include_world": true,
+            "query_keywords": [
+              "985滤镜破碎",
+              "prestige paradox",
+              "但当",
+              "品牌声誉",
+              "四方联动维权",
+              "学术机构公信力建设",
+              "建立校友常设治理观察团",
+              "我们曾以珞珈为荣",
+              "我们要求",
+              "校友参与式治理",
+              "校友群体联合声明",
+              "检测合格",
+              "武大甲醛宿舍",
+              "武汉大学",
+              "环境健康权保障",
+              "珞珈裂痕",
+              "程序正义缺失",
+              "立即启动甲醛事件独立调查",
+              "肖某某处分未撤销",
+              "跨国舆情治理",
+              "辛某校园危险驾驶",
+              "通报被实锤证伪",
+              "高校程序正义"
+            ],
+            "query_entities": [
+              "学术机构公信力建设",
+              "校友参与式治理",
+              "海外校友",
+              "环境健康权保障",
+              "跨国舆情治理",
+              "高校程序正义"
+            ]
+          },
+          "miss_reason": "",
+          "selected_units": [
+            {
+              "scope": "self",
+              "unit_id": "twitter_m_4",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "但当",
+                "检测合格",
+                "我们要求",
+                "通报被实锤证伪",
+                "校友群体联合声明",
+                "我们曾以珞珈为荣",
+                "建立校友常设治理观察团",
+                "立即启动甲醛事件独立调查"
+              ],
+              "salience_score": 0.7526,
+              "score": 0.904733,
+              "summary": "CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "twitter_m_4_world",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "但当",
+                "检测合格",
+                "我们要求",
+                "通报被实锤证伪",
+                "校友群体联合声明",
+                "我们曾以珞珈为荣",
+                "建立校友常设治理观察团",
+                "立即启动甲醛事件独立调查"
+              ],
+              "salience_score": 0.7526,
+              "score": 0.863609,
+              "summary": "CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "twitter_m_2_world",
+              "source_agent_id": 0,
+              "source_agent_name": "央媒调查记者",
+              "topic": "武汉大学",
+              "keywords": [
+                "校方强调",
+                "一视同仁",
+                "依法依规",
+                "央视网转发",
+                "其骑行行为已由保卫部依规处理",
+                "涉事人员辛某系校外退休职工亲属",
+                "武汉大学通报一起校内非机动车通行纠纷"
+              ],
+              "salience_score": 0.9015,
+              "score": 0.509277,
+              "summary": "CREATE_POST | content:【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "twitter_m_3_world",
+              "source_agent_id": 12,
+              "source_agent_name": "学生",
+              "topic": "珞珈裂痕",
+              "keywords": [
+                "症状打卡",
+                "检测预约",
+                "四方联动",
+                "珞珈裂痕",
+                "律师团对接",
+                "是要呼吸权",
+                "媒体线索直报",
+                "我们不是要对抗"
+              ],
+              "salience_score": 0.935,
+              "score": 0.498363,
+              "summary": "CREATE_POST | content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕"
+            }
+          ],
+          "context_preview": "[Retrieval Plan] complexity=HIGH depth=8\n[Intent Keywords] 985滤镜破碎, prestige paradox, 但当, 品牌声誉, 四方联动维权, 学术机构公信力建设, 建立校友常设治理观察团, 我们曾以珞珈为荣\n[ABSTRACT REPRESENTATIONS]\n- (self) [海外校友] [检测合格] 海外校友 @ 2026-04-01T18:24:38.508224: CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。\n- (world) [海外校友] [检测合格] 海外校友 @ 2026-04-01T18:24:38.508224: CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。\n- (world) [央媒调查记者] [武汉大学] 央媒调查记者 "
+        },
+        {
+          "timestamp": "2026-04-01T18:25:10.777221",
+          "platform": "twitter",
+          "event_type": "retrieval",
+          "round": 9,
+          "agent_id": 22,
+          "agent_name": "京报网",
+          "plan": {
+            "complexity": "HIGH",
+            "retrieval_depth": 8,
+            "recent_round_window": 24,
+            "self_k": 4,
+            "neighbor_k": 3,
+            "world_k": 3,
+            "include_world": true,
+            "query_keywords": [
+              "985滤镜破碎",
+              "prestige paradox",
+              "公共政策解读",
+              "品牌声誉",
+              "四方联动维权",
+              "学术诚信",
+              "教育公平",
+              "数据新闻",
+              "武大甲醛宿舍",
+              "武汉大学",
+              "珞珈裂痕",
+              "程序正义缺失",
+              "肖某某处分未撤销",
+              "舆情分析",
+              "辛某校园危险驾驶",
+              "高校治理"
+            ],
+            "query_entities": [
+              "京报网",
+              "公共政策解读",
+              "学术诚信",
+              "教育公平",
+              "数据新闻",
+              "舆情分析",
+              "高校治理"
+            ]
+          },
+          "miss_reason": "",
+          "selected_units": [
+            {
+              "scope": "world",
+              "unit_id": "twitter_m_6_world",
+              "source_agent_id": 0,
+              "source_agent_name": "央媒调查记者",
+              "topic": "溯源发现",
+              "keywords": [
+                "溯源发现",
+                "央媒调查记者独家",
+                "检测机构签约方为校后勤集团下属公司",
+                "武大枫园宿舍委托检测报告原始数据遭篡改",
+                "学生提供的封存样本与校方公示版本存在3处关键参数不一致"
+              ],
+              "salience_score": 0.8015,
+              "score": 0.5822,
+              "summary": "CREATE_POST | content:【央媒调查记者独家】武大枫园宿舍委托检测报告原始数据遭篡改？学生提供的封存样本与校方公示版本存在3处关键参数不一致。溯源发现：检测机构签约方为校后勤集团下属公司。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "twitter_m_3_world",
+              "source_agent_id": 12,
+              "source_agent_name": "学生",
+              "topic": "珞珈裂痕",
+              "keywords": [
+                "症状打卡",
+                "检测预约",
+                "四方联动",
+                "珞珈裂痕",
+                "律师团对接",
+                "是要呼吸权",
+                "媒体线索直报",
+                "我们不是要对抗"
+              ],
+              "salience_score": 0.935,
+              "score": 0.407531,
+              "summary": "CREATE_POST | content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕"
+            },
+            {
+              "scope": "world",
+              "unit_id": "twitter_m_2_world",
+              "source_agent_id": 0,
+              "source_agent_name": "央媒调查记者",
+              "topic": "武汉大学",
+              "keywords": [
+                "校方强调",
+                "一视同仁",
+                "依法依规",
+                "央视网转发",
+                "其骑行行为已由保卫部依规处理",
+                "涉事人员辛某系校外退休职工亲属",
+                "武汉大学通报一起校内非机动车通行纠纷"
+              ],
+              "salience_score": 0.9015,
+              "score": 0.400611,
+              "summary": "CREATE_POST | content:【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校外退休职工亲属，其骑行行为已由保卫部依规处理。校方强调‘一视同仁、依法依规’。"
+            }
+          ],
+          "context_preview": "[Retrieval Plan] complexity=HIGH depth=8\n[Intent Keywords] 985滤镜破碎, prestige paradox, 公共政策解读, 品牌声誉, 四方联动维权, 学术诚信, 教育公平, 数据新闻\n[ABSTRACT REPRESENTATIONS]\n- (world) [央媒调查记者] [溯源发现] 央媒调查记者 @ 2026-04-02T00:24:38.508224: CREATE_POST | content:【央媒调查记者独家】武大枫园宿舍委托检测报告原始数据遭篡改？学生提供的封存样本与校方公示版本存在3处关键参数不一致。溯源发现：检测机构签约方为校后勤集团下属公司。\n- (world) [学生] [珞珈裂痕] 学生 @ 2026-04-01T18:24:38.508224: CREATE_POST | content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕\n- (world) [央媒调查记者] [武汉大学] 央媒调查记者 @ 2026-04-01T18:24:38.508224: CREATE_POST | content:【央视网转发】武汉大学通报一起校内非机动车通行纠纷：涉事人员辛某系校"
+        }
+      ]
+    },
+    "reddit": {
+      "latest_state": {
+        "timestamp": "2026-04-01T18:38:56.349573",
+        "platform": "reddit",
+        "round": 48,
+        "simulated_hour": 23,
+        "active_agent_ids": [
+          4,
+          3,
+          12,
+          23,
+          22
+        ],
+        "active_agent_names": [
+          "海外校友",
+          "自媒体平台",
+          "学生",
+          "央广网",
+          "京报网"
+        ],
+        "agents_with_memory": 28,
+        "total_agent_units": 108,
+        "world_units": 65,
+        "top_agent_units": [
+          {
+            "unit_id": "reddit_m_3",
+            "agent_id": 12,
+            "agent_name": "学生",
+            "topic": "珞珈裂痕",
+            "salience_score": 0.9399,
+            "count": 1,
+            "keywords": [
+              "症状打卡",
+              "检测预约",
+              "四方联动",
+              "珞珈裂痕",
+              "律师团对接",
+              "是要呼吸权",
+              "媒体线索直报",
+              "我们不是要对抗"
+            ],
+            "summary": "CREATE_POST | content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕"
+          },
+          {
+            "unit_id": "reddit_m_15",
+            "agent_id": 23,
+            "agent_name": "央广网",
+            "topic": "武汉大学",
+            "salience_score": 0.9026,
+            "count": 20,
+            "keywords": [
+              "第十条",
+              "本台记者核实",
+              "第八条",
+              "cnas",
+              "15号",
+              "央广网综合报道",
+              "本台记者调查发现",
+              "仪器未校准等问题",
+              "第三项",
+              "坚持"
+            ],
+            "summary": "CREATE_COMMENT | content:【央广网权威发布】本台记者经新华社、央视新闻、湖北广电及国家认监委官网三方交叉核验，并同步调阅湖北省教育厅《关于武汉大学学生公寓甲醛检测相关情况的说明》（鄂教高函〔2026〕15号）、省级行政执法全过程记录备案系统（备案号：HBEE-2026-DR-0017），现就关键事实终审确认如下：\n\n1. 涉事检测机构CMA认证编号（CNAS LXXXXX）确于2023年10月31日失效，其复检报"
+          },
+          {
+            "unit_id": "reddit_m_16",
+            "agent_id": 18,
+            "agent_name": "新华网",
+            "topic": "武汉大学",
+            "salience_score": 0.902,
+            "count": 8,
+            "keywords": [
+              "15",
+              "三审制",
+              "15号",
+              "2条及",
+              "将依据",
+              "校园安全",
+              "依据",
+              "流程",
+              "新华网",
+              "第三项"
+            ],
+            "summary": "CREATE_COMMENT | content:【新华网权威核实】本网记者经向教育部、湖北省教育厅及武汉大学校方三方联合核验，并同步调阅《关于武汉大学学生公寢甲醛检测相关情况的说明》（鄂教高函〔2026〕15号）、湖北省行政执法全过程记录备案系统（备案号：HBEE-2026-DR-0017），现就关键事实终审确认如下：\n\n1. 涉事检测机构CMA认证编号（CNAS LXXXXX）确于2023年10月31日失效，其复检报告不符合《GB/"
+          },
+          {
+            "unit_id": "reddit_m_24",
+            "agent_id": 28,
+            "agent_name": "央视网",
+            "topic": "武汉大学",
+            "salience_score": 0.8981,
+            "count": 15,
+            "keywords": [
+              "第十条",
+              "19",
+              "cnas",
+              "专栏",
+              "与教育部",
+              "目前",
+              "aq",
+              "依据",
+              "第五十二条",
+              "央视网记者核实"
+            ],
+            "summary": "CREATE_COMMENT | content:【央视网编者按】该帖提出的三项技术性前提，与教育部《高等学校信息公开办法》第十条、《普通高等学校学生管理规定》第五十二条关于‘涉及学生重大权益事项须保障知情权、参与权、监督权’的要求高度契合。我们注意到，武汉大学已于今日（2026年4月1日）19:00前向教育厅提交初步核查说明，但尚未依法公开原始检测数据谱图及采样时空链存证。央视网将持续依据《新华社新闻信息报道中的禁用词和慎用词》及中央"
+          },
+          {
+            "unit_id": "reddit_m_1",
+            "agent_id": 6,
+            "agent_name": "校长",
+            "topic": "武汉大学",
+            "salience_score": 0.8971,
+            "count": 1,
+            "keywords": [
+              "08mg",
+              "18883",
+              "2022标准",
+              "经第三方机构复检",
+              "枫园研究生公寓1",
+              "仪器未校准等问题",
+              "感谢广大同学监督",
+              "武汉大学后勤集团通报"
+            ],
+            "summary": "CREATE_POST | content:【武汉大学后勤集团通报】经第三方机构复检，枫园研究生公寓1-4栋室内空气甲醛浓度均符合GB/T 18883-2022标准（≤0.08mg/m³）。此前学生自发检测存在采样不规范、仪器未校准等问题。感谢广大同学监督。"
+          },
+          {
+            "unit_id": "reddit_m_20",
+            "agent_id": 5,
+            "agent_name": "重庆上游新闻",
+            "topic": "武汉大学",
+            "salience_score": 0.8962,
+            "count": 3,
+            "keywords": [
+              "31失效",
+              "交叉印证",
+              "依据gb",
+              "cnas",
+              "query",
+              "非仅结论",
+              "武汉大学",
+              "川渝版",
+              "18883",
+              "规避"
+            ],
+            "summary": "LIKE_POST | post_content:【珞珈校友合规支持小组·程序备忘录#3】\n\n关于启动独立调查的三项技术性前提（依据GB/T 18883-2022与《武汉大学章程》）：\n1. 检测方资质复核：已确认通报所引CMA编号（CNAS LXXXXX）于2023-10-31失效，须由校学术委员会指定新检测机构（需同步公示其CNAS证书及近一年能力验证报告）；\n2. 样本链存证：学生自采样本须经公证处‘时空双锁定’（GPS坐标+区块"
+          }
+        ],
+        "top_world_units": [
+          {
+            "unit_id": "reddit_m_3_world",
+            "agent_id": 12,
+            "agent_name": "学生",
+            "topic": "珞珈裂痕",
+            "salience_score": 0.9399,
+            "count": 1,
+            "keywords": [
+              "症状打卡",
+              "检测预约",
+              "四方联动",
+              "珞珈裂痕",
+              "律师团对接",
+              "是要呼吸权",
+              "媒体线索直报",
+              "我们不是要对抗"
+            ],
+            "summary": "CREATE_POST | content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕"
+          },
+          {
+            "unit_id": "reddit_m_117_world",
+            "agent_id": 23,
+            "agent_name": "央广网",
+            "topic": "武汉大学",
+            "salience_score": 0.9026,
+            "count": 11,
+            "keywords": [
+              "第八条",
+              "15号",
+              "wh",
+              "第三项",
+              "坚持",
+              "18883",
+              "备案号",
+              "其中",
+              "第5",
+              "dr"
+            ],
+            "summary": "CREATE_COMMENT | content:【央广网权威发布】本台记者经新华社、央视新闻、湖北广电及国家认监委官网三方交叉核验，并同步调阅湖北省教育厅《关于武汉大学学生公寓甲醛检测相关情况的说明》（鄂教高函〔2026〕15号）、省级行政执法全过程记录备案系统（备案号：HBEE-2026-DR-0017），现就关键事实终审确认如下：\n\n1. 涉事检测机构CMA认证编号（CNAS LXXXXX）确于2023年10月31日失效，其复检报"
+          },
+          {
+            "unit_id": "reddit_m_15_world",
+            "agent_id": 23,
+            "agent_name": "央广网",
+            "topic": "武汉大学",
+            "salience_score": 0.9025,
+            "count": 2,
+            "keywords": [
+              "第十条",
+              "本台记者核实",
+              "cnas",
+              "央广网综合报道",
+              "本台记者调查发现",
+              "仪器未校准等问题",
+              "18883",
+              "教育公平",
+              "lxxxxx",
+              "08mg"
+            ],
+            "summary": "CREATE_COMMENT | content:【央广网权威核查】本台记者核实：涉事检测机构CMA认证编号（CNAS LXXXXX）已于2023年10月31日失效，其出具报告不符合GB/T 18883-2022第5.2条关于检测机构资质有效性要求。依据教育部《高等学校信息公开办法》第十条，涉及学生健康的重大检测结果应依法公开原始数据、采样记录及资质证明。目前武汉大学尚未依规公开上述完整材料。央广网将持续跟进权威信源，坚持事实为基、法治"
+          },
+          {
+            "unit_id": "reddit_m_108_world",
+            "agent_id": 2,
+            "agent_name": "央级媒体",
+            "topic": "武汉大学",
+            "salience_score": 0.902,
+            "count": 9,
+            "keywords": [
+              "15",
+              "15号",
+              "18883",
+              "备案号",
+              "第5",
+              "央视网",
+              "dr",
+              "原则",
+              "gb",
+              "2026"
+            ],
+            "summary": "CREATE_COMMENT | content:【新华网权威核实】本网记者经向教育部、湖北省教育厅及武汉大学校方三方联合核验，并同步调阅《关于武汉大学学生公寢甲醛检测相关情况的说明》（鄂教高函〔2026〕15号）、湖北省行政执法全过程记录备案系统（备案号：HBEE-2026-DR-0017），现就关键事实终审确认如下：\n\n1. 涉事检测机构CMA认证编号（CNAS LXXXXX）确于2023年10月31日失效，其复检报告不符合《GB/"
+          },
+          {
+            "unit_id": "reddit_m_17_world",
+            "agent_id": 18,
+            "agent_name": "新华网",
+            "topic": "武汉大学",
+            "salience_score": 0.9019,
+            "count": 2,
+            "keywords": [
+              "三审制",
+              "2条及",
+              "将依据",
+              "校园安全",
+              "依据",
+              "流程",
+              "18883",
+              "第5",
+              "00",
+              "2022"
+            ],
+            "summary": "CREATE_COMMENT | content:【新华网核实通报】本网记者经向教育部、湖北省教育厅及武汉大学校方核实，截至2026年4月1日19:00，联合调查组已启动专项核查程序。依据《GB/T 18883-2022 室内空气质量标准》第5.2条及《高等学校基础设施建设监管办法》第二十一条，检测机构资质有效性、采样过程规范性、原始数据可溯性为本次核查三大核心维度。后续进展将严格遵循‘三审制’流程，确保信息发布的政治性、专业性与人民性"
+          },
+          {
+            "unit_id": "reddit_m_72_world",
+            "agent_id": 28,
+            "agent_name": "央视网",
+            "topic": "武汉大学",
+            "salience_score": 0.8981,
+            "count": 4,
+            "keywords": [
+              "第五十二条",
+              "专栏",
+              "cnas",
+              "依据",
+              "aq",
+              "央视网记者核实",
+              "已逾期逾四个月",
+              "教发",
+              "同时",
+              "8号"
+            ],
+            "summary": "CREATE_POST | content:【央视网记者核实】关于武汉大学宿舍空气质量检测资质问题的权威说明：经国家认监委官网及湖北省市场监管局计量认证处双重核验，涉事检测机构CMA认证编号（CNAS LXXXXX）确于2023年10月31日失效，截至今日（2026年4月1日）已逾期逾四个月。依据《普通高等学校学生管理规定》第五十二条，校方须在48小时内就资质状态及补正路径向申诉学生出具书面说明。央视网已确认该校后勤保障部于今日15:0"
+          }
+        ]
+      },
+      "store_events": 245,
+      "retrieval_events": 267,
+      "sample_retrievals": [
+        {
+          "timestamp": "2026-04-01T18:25:05.961314",
+          "platform": "reddit",
+          "event_type": "retrieval",
+          "round": 3,
+          "agent_id": 4,
+          "agent_name": "海外校友",
+          "plan": {
+            "complexity": "HIGH",
+            "retrieval_depth": 8,
+            "recent_round_window": 24,
+            "self_k": 4,
+            "neighbor_k": 3,
+            "world_k": 3,
+            "include_world": true,
+            "query_keywords": [
+              "02",
+              "10",
+              "18883",
+              "2条",
+              "31",
+              "985滤镜破碎",
+              "cnas",
+              "prestige paradox",
+              "依据gb",
+              "品牌声誉",
+              "四方联动维权",
+              "学术机构公信力建设",
+              "校友参与式治理",
+              "武大甲醛宿舍",
+              "武汉大学",
+              "环境健康权保障",
+              "珞珈裂痕",
+              "程序正义缺失",
+              "肖某某处分未撤销",
+              "见2024",
+              "跨国舆情治理",
+              "辛某校园危险驾驶",
+              "高校程序正义"
+            ],
+            "query_entities": [
+              "学术机构公信力建设",
+              "校友参与式治理",
+              "海外校友",
+              "环境健康权保障",
+              "跨国舆情治理",
+              "高校程序正义"
+            ]
+          },
+          "miss_reason": "",
+          "selected_units": [
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_9",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "cnas",
+              "keywords": [
+                "10",
+                "31",
+                "02",
+                "2条",
+                "cnas",
+                "依据gb",
+                "见2024",
+                "18883"
+              ],
+              "salience_score": 0.5901,
+              "score": 1.044787,
+              "summary": "CREATE_COMMENT | content:已核查该通报中引用的CMA认证编号（CNAS LXXXXX），在国家认监委官网显示其资质有效期截至2023-10-31（见2024-02-17校友群原始截图）。依据GB/T 18883-2022第5.2条，检测机构须具备有效资质方可出具具有证明效力的报告。程序失当不否定结果本身，但构成启动独立复核的充分理由。（参照德国Studentenwerk对检测方资质的双年度强制复审机制）"
+            },
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_4",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "我们曾以珞珈为荣",
+                "我们要求",
+                "立即启动甲醛事件独立调查",
+                "建立校友常设治理观察团",
+                "海外校友",
+                "检测合格",
+                "通报被实锤证伪",
+                "但当",
+                "校友群体联合声明"
+              ],
+              "salience_score": 0.7601,
+              "score": 0.725493,
+              "summary": "LIKE_POST | post_content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。 | post_author_name:海外校友"
+            },
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_7",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "珞珈裂痕",
+              "keywords": [
+                "学生",
+                "症状打卡",
+                "检测预约",
+                "四方联动",
+                "珞珈裂痕",
+                "律师团对接",
+                "是要呼吸权",
+                "媒体线索直报"
+              ],
+              "salience_score": 0.5301,
+              "score": 0.717782,
+              "summary": "LIKE_POST | post_content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕 | post_author_name:学生"
+            },
+            {
+              "scope": "world",
+              "unit_id": "reddit_m_1_world",
+              "source_agent_id": 6,
+              "source_agent_name": "校长",
+              "topic": "武汉大学",
+              "keywords": [
+                "08mg",
+                "18883",
+                "2022标准",
+                "经第三方机构复检",
+                "枫园研究生公寓1",
+                "仪器未校准等问题",
+                "感谢广大同学监督",
+                "武汉大学后勤集团通报"
+              ],
+              "salience_score": 0.8971,
+              "score": 0.668648,
+              "summary": "CREATE_POST | content:【武汉大学后勤集团通报】经第三方机构复检，枫园研究生公寓1-4栋室内空气甲醛浓度均符合GB/T 18883-2022标准（≤0.08mg/m³）。此前学生自发检测存在采样不规范、仪器未校准等问题。感谢广大同学监督。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "reddit_m_4_world",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "但当",
+                "检测合格",
+                "我们要求",
+                "通报被实锤证伪",
+                "校友群体联合声明",
+                "我们曾以珞珈为荣",
+                "建立校友常设治理观察团",
+                "立即启动甲醛事件独立调查"
+              ],
+              "salience_score": 0.7601,
+              "score": 0.661038,
+              "summary": "CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "reddit_m_3_world",
+              "source_agent_id": 12,
+              "source_agent_name": "学生",
+              "topic": "珞珈裂痕",
+              "keywords": [
+                "症状打卡",
+                "检测预约",
+                "四方联动",
+                "珞珈裂痕",
+                "律师团对接",
+                "是要呼吸权",
+                "媒体线索直报",
+                "我们不是要对抗"
+              ],
+              "salience_score": 0.9399,
+              "score": 0.637426,
+              "summary": "CREATE_POST | content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕"
+            },
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_6",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "query",
+              "keywords": [
+                "query",
+                "珞珈校友合规支持小组"
+              ],
+              "salience_score": 0.3501,
+              "score": 0.607291,
+              "summary": "SEARCH_USER | query:珞珈校友合规支持小组"
+            }
+          ],
+          "context_preview": "[Retrieval Plan] complexity=HIGH depth=8\n[Intent Keywords] 02, 10, 18883, 2条, 31, 985滤镜破碎, cnas, prestige paradox\n[ABSTRACT REPRESENTATIONS]\n- (self) [海外校友] [cnas] 海外校友 @ 2026-04-01T18:24:38.508224: CREATE_COMMENT | content:已核查该通报中引用的CMA认证编号（CNAS LXXXXX），在国家认监委官网显示其资质有效期截至2023-10-31（见2024-02-17校友群原始截图）。依据GB/T 18883-2022第5.2条，检测机构须具备有效资质方可出具具有证明效力的报告。程序失当不否定结果本身，但构成启动独立复核的充分理\n- (self) [海外校友] [检测合格] 海外校友 @ 2026-04-01T18:24:38.508224: LIKE_POST | post_content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。 | post_author_name"
+        },
+        {
+          "timestamp": "2026-04-01T18:25:10.586277",
+          "platform": "reddit",
+          "event_type": "retrieval",
+          "round": 4,
+          "agent_id": 4,
+          "agent_name": "海外校友",
+          "plan": {
+            "complexity": "HIGH",
+            "retrieval_depth": 8,
+            "recent_round_window": 24,
+            "self_k": 4,
+            "neighbor_k": 3,
+            "world_k": 3,
+            "include_world": true,
+            "query_keywords": [
+              "18883",
+              "985滤镜破碎",
+              "prestige paradox",
+              "参照",
+              "含gb",
+              "品牌声誉",
+              "四方联动维权",
+              "学术机构公信力建设",
+              "支持三项诉求",
+              "机制",
+              "校友参与式治理",
+              "武大甲醛宿舍",
+              "武汉大学",
+              "牵头",
+              "环境健康权保障",
+              "珞珈裂痕",
+              "程序正义缺失",
+              "第32条",
+              "肖某某处分未撤销",
+              "跨国舆情治理",
+              "辛某校园危险驾驶",
+              "附件",
+              "高校程序正义"
+            ],
+            "query_entities": [
+              "学术机构公信力建设",
+              "校友参与式治理",
+              "海外校友",
+              "环境健康权保障",
+              "跨国舆情治理",
+              "高校程序正义"
+            ]
+          },
+          "miss_reason": "",
+          "selected_units": [
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_10",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "武汉大学",
+              "keywords": [
+                "牵头",
+                "参照",
+                "机制",
+                "附件",
+                "含gb",
+                "第32条",
+                "18883",
+                "支持三项诉求"
+              ],
+              "salience_score": 0.6901,
+              "score": 1.132687,
+              "summary": "CREATE_COMMENT | content:支持三项诉求。补充一点程序性建议：独立调查应由校学术委员会（非后勤集团隶属部门）牵头，参照《武汉大学章程》第32条‘重大事项听证’机制，邀请学生代表、校外环境健康专家（含GB/T 18883-2022标准起草组成员）、以及欧盟高校Studentenwerk合规官三方列席。声望资本reputational capital的修复，始于程序可见性而非通报措辞。（附件：德国柏林自由大学2023年"
+            },
+            {
+              "scope": "world",
+              "unit_id": "reddit_m_10_world",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "武汉大学",
+              "keywords": [
+                "牵头",
+                "参照",
+                "机制",
+                "附件",
+                "含gb",
+                "第32条",
+                "18883",
+                "支持三项诉求"
+              ],
+              "salience_score": 0.6901,
+              "score": 1.081201,
+              "summary": "CREATE_COMMENT | content:支持三项诉求。补充一点程序性建议：独立调查应由校学术委员会（非后勤集团隶属部门）牵头，参照《武汉大学章程》第32条‘重大事项听证’机制，邀请学生代表、校外环境健康专家（含GB/T 18883-2022标准起草组成员）、以及欧盟高校Studentenwerk合规官三方列席。声望资本reputational capital的修复，始于程序可见性而非通报措辞。（附件：德国柏林自由大学2023年"
+            },
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_4",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "我们曾以珞珈为荣",
+                "我们要求",
+                "立即启动甲醛事件独立调查",
+                "建立校友常设治理观察团",
+                "海外校友",
+                "检测合格",
+                "通报被实锤证伪",
+                "但当",
+                "校友群体联合声明"
+              ],
+              "salience_score": 0.7601,
+              "score": 0.675322,
+              "summary": "LIKE_POST | post_content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。 | post_author_name:海外校友"
+            },
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_7",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "珞珈裂痕",
+              "keywords": [
+                "学生",
+                "症状打卡",
+                "检测预约",
+                "四方联动",
+                "珞珈裂痕",
+                "律师团对接",
+                "是要呼吸权",
+                "媒体线索直报"
+              ],
+              "salience_score": 0.5301,
+              "score": 0.669631,
+              "summary": "LIKE_POST | post_content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕 | post_author_name:学生"
+            },
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_9",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "cnas",
+              "keywords": [
+                "10",
+                "31",
+                "02",
+                "2条",
+                "cnas",
+                "依据gb",
+                "见2024",
+                "18883"
+              ],
+              "salience_score": 0.5901,
+              "score": 0.641461,
+              "summary": "CREATE_COMMENT | content:已核查该通报中引用的CMA认证编号（CNAS LXXXXX），在国家认监委官网显示其资质有效期截至2023-10-31（见2024-02-17校友群原始截图）。依据GB/T 18883-2022第5.2条，检测机构须具备有效资质方可出具具有证明效力的报告。程序失当不否定结果本身，但构成启动独立复核的充分理由。（参照德国Studentenwerk对检测方资质的双年度强制复审机制）"
+            },
+            {
+              "scope": "world",
+              "unit_id": "reddit_m_1_world",
+              "source_agent_id": 6,
+              "source_agent_name": "校长",
+              "topic": "武汉大学",
+              "keywords": [
+                "08mg",
+                "18883",
+                "2022标准",
+                "经第三方机构复检",
+                "枫园研究生公寓1",
+                "仪器未校准等问题",
+                "感谢广大同学监督",
+                "武汉大学后勤集团通报"
+              ],
+              "salience_score": 0.8971,
+              "score": 0.619701,
+              "summary": "CREATE_POST | content:【武汉大学后勤集团通报】经第三方机构复检，枫园研究生公寓1-4栋室内空气甲醛浓度均符合GB/T 18883-2022标准（≤0.08mg/m³）。此前学生自发检测存在采样不规范、仪器未校准等问题。感谢广大同学监督。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "reddit_m_4_world",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "但当",
+                "检测合格",
+                "我们要求",
+                "通报被实锤证伪",
+                "校友群体联合声明",
+                "我们曾以珞珈为荣",
+                "建立校友常设治理观察团",
+                "立即启动甲醛事件独立调查"
+              ],
+              "salience_score": 0.7601,
+              "score": 0.615324,
+              "summary": "CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。"
+            }
+          ],
+          "context_preview": "[Retrieval Plan] complexity=HIGH depth=8\n[Intent Keywords] 18883, 985滤镜破碎, prestige paradox, 参照, 含gb, 品牌声誉, 四方联动维权, 学术机构公信力建设\n[ABSTRACT REPRESENTATIONS]\n- (self) [海外校友] [武汉大学] 海外校友 @ 2026-04-01T20:24:38.508224: CREATE_COMMENT | content:支持三项诉求。补充一点程序性建议：独立调查应由校学术委员会（非后勤集团隶属部门）牵头，参照《武汉大学章程》第32条‘重大事项听证’机制，邀请学生代表、校外环境健康专家（含GB/T 18883-2022标准起草组成员）、以及欧盟高校Studentenwerk合规官三方列席。声望资本reputational \n- (world) [海外校友] [武汉大学] 海外校友 @ 2026-04-01T20:24:38.508224: CREATE_COMMENT | content:支持三项诉求。补充一点程序性建议：独立调查应由校学术委员会（非后勤集团隶属部门）牵头，参照《武汉大学章程》第32条‘重大事项听证’机制，邀请学生代表、校外环境健康专家（含GB/T 18883-2022标准起草组成员）、以及欧盟高校Studentenwe"
+        },
+        {
+          "timestamp": "2026-04-01T18:25:18.548595",
+          "platform": "reddit",
+          "event_type": "retrieval",
+          "round": 5,
+          "agent_id": 4,
+          "agent_name": "海外校友",
+          "plan": {
+            "complexity": "HIGH",
+            "retrieval_depth": 8,
+            "recent_round_window": 24,
+            "self_k": 4,
+            "neighbor_k": 3,
+            "world_k": 3,
+            "include_world": true,
+            "query_keywords": [
+              "18883",
+              "31失效",
+              "985滤镜破碎",
+              "cnas",
+              "prestige paradox",
+              "参照",
+              "含gb",
+              "品牌声誉",
+              "四方联动维权",
+              "学术机构公信力建设",
+              "机制",
+              "校友参与式治理",
+              "武大甲醛宿舍",
+              "武汉大学",
+              "牵头",
+              "环境健康权保障",
+              "珞珈裂痕",
+              "程序正义缺失",
+              "第32条",
+              "肖某某处分未撤销",
+              "规避",
+              "跨国舆情治理",
+              "辛某校园危险驾驶",
+              "非仅结论",
+              "高校程序正义"
+            ],
+            "query_entities": [
+              "学术机构公信力建设",
+              "校友参与式治理",
+              "海外校友",
+              "环境健康权保障",
+              "跨国舆情治理",
+              "高校程序正义"
+            ]
+          },
+          "miss_reason": "",
+          "selected_units": [
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_10",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "武汉大学",
+              "keywords": [
+                "31失效",
+                "第32条",
+                "cnas",
+                "非仅结论",
+                "牵头",
+                "机制",
+                "含gb",
+                "18883",
+                "参照",
+                "规避"
+              ],
+              "salience_score": 0.8601,
+              "score": 1.305619,
+              "summary": "CREATE_POST | content:【珞珈校友合规支持小组·程序备忘录#3】\n\n关于启动独立调查的三项技术性前提（依据GB/T 18883-2022与《武汉大学章程》）：\n1. 检测方资质复核：已确认通报所引CMA编号（CNAS LXXXXX）于2023-10-31失效，须由校学术委员会指定新检测机构（需同步公示其CNAS证书及近一年能力验证报告）；\n2. 样本链存证：学生自采样本须经公证处‘时空双锁定’（GPS坐标+区块链时间"
+            },
+            {
+              "scope": "world",
+              "unit_id": "reddit_m_10_world",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "武汉大学",
+              "keywords": [
+                "31失效",
+                "第32条",
+                "cnas",
+                "非仅结论",
+                "牵头",
+                "机制",
+                "含gb",
+                "18883",
+                "参照",
+                "规避"
+              ],
+              "salience_score": 0.8601,
+              "score": 1.246272,
+              "summary": "CREATE_POST | content:【珞珈校友合规支持小组·程序备忘录#3】\n\n关于启动独立调查的三项技术性前提（依据GB/T 18883-2022与《武汉大学章程》）：\n1. 检测方资质复核：已确认通报所引CMA编号（CNAS LXXXXX）于2023-10-31失效，须由校学术委员会指定新检测机构（需同步公示其CNAS证书及近一年能力验证报告）；\n2. 样本链存证：学生自采样本须经公证处‘时空双锁定’（GPS坐标+区块链时间"
+            },
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_9",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "cnas",
+              "keywords": [
+                "10",
+                "31",
+                "02",
+                "2条",
+                "cnas",
+                "依据gb",
+                "见2024",
+                "18883"
+              ],
+              "salience_score": 0.5901,
+              "score": 0.677505,
+              "summary": "CREATE_COMMENT | content:已核查该通报中引用的CMA认证编号（CNAS LXXXXX），在国家认监委官网显示其资质有效期截至2023-10-31（见2024-02-17校友群原始截图）。依据GB/T 18883-2022第5.2条，检测机构须具备有效资质方可出具具有证明效力的报告。程序失当不否定结果本身，但构成启动独立复核的充分理由。（参照德国Studentenwerk对检测方资质的双年度强制复审机制）"
+            },
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_4",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "我们曾以珞珈为荣",
+                "我们要求",
+                "立即启动甲醛事件独立调查",
+                "建立校友常设治理观察团",
+                "海外校友",
+                "检测合格",
+                "通报被实锤证伪",
+                "但当",
+                "校友群体联合声明"
+              ],
+              "salience_score": 0.7601,
+              "score": 0.629008,
+              "summary": "LIKE_POST | post_content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。 | post_author_name:海外校友"
+            },
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_7",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "珞珈裂痕",
+              "keywords": [
+                "学生",
+                "症状打卡",
+                "检测预约",
+                "四方联动",
+                "珞珈裂痕",
+                "律师团对接",
+                "是要呼吸权",
+                "媒体线索直报"
+              ],
+              "salience_score": 0.5301,
+              "score": 0.623213,
+              "summary": "LIKE_POST | post_content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕 | post_author_name:学生"
+            },
+            {
+              "scope": "world",
+              "unit_id": "reddit_m_4_world",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "但当",
+                "检测合格",
+                "我们要求",
+                "通报被实锤证伪",
+                "校友群体联合声明",
+                "我们曾以珞珈为荣",
+                "建立校友常设治理观察团",
+                "立即启动甲醛事件独立调查"
+              ],
+              "salience_score": 0.7601,
+              "score": 0.573125,
+              "summary": "CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "reddit_m_1_world",
+              "source_agent_id": 6,
+              "source_agent_name": "校长",
+              "topic": "武汉大学",
+              "keywords": [
+                "08mg",
+                "18883",
+                "2022标准",
+                "经第三方机构复检",
+                "枫园研究生公寓1",
+                "仪器未校准等问题",
+                "感谢广大同学监督",
+                "武汉大学后勤集团通报"
+              ],
+              "salience_score": 0.8971,
+              "score": 0.572517,
+              "summary": "CREATE_POST | content:【武汉大学后勤集团通报】经第三方机构复检，枫园研究生公寓1-4栋室内空气甲醛浓度均符合GB/T 18883-2022标准（≤0.08mg/m³）。此前学生自发检测存在采样不规范、仪器未校准等问题。感谢广大同学监督。"
+            }
+          ],
+          "context_preview": "[Retrieval Plan] complexity=HIGH depth=8\n[Intent Keywords] 18883, 31失效, 985滤镜破碎, cnas, prestige paradox, 参照, 含gb, 品牌声誉\n[ABSTRACT REPRESENTATIONS]\n- (self) [海外校友] [武汉大学] 海外校友 @ 2026-04-01T21:24:38.508224: CREATE_POST | content:【珞珈校友合规支持小组·程序备忘录#3】\n\n关于启动独立调查的三项技术性前提（依据GB/T 18883-2022与《武汉大学章程》）：\n1. 检测方资质复核：已确认通报所引CMA编号（CNAS LXXXXX）于2023-10-31失效，须由校学术委员会指定新检测机构（需同步公示其CNAS证书及近一年能力验证报告\n- (world) [海外校友] [武汉大学] 海外校友 @ 2026-04-01T21:24:38.508224: CREATE_POST | content:【珞珈校友合规支持小组·程序备忘录#3】\n\n关于启动独立调查的三项技术性前提（依据GB/T 18883-2022与《武汉大学章程》）：\n1. 检测方资质复核：已确认通报所引CMA编号（CNAS LXXXXX）于2023-10-31失效，须由校学术委员会指定新检测机构（需同"
+        },
+        {
+          "timestamp": "2026-04-01T18:25:21.043071",
+          "platform": "reddit",
+          "event_type": "retrieval",
+          "round": 6,
+          "agent_id": 4,
+          "agent_name": "海外校友",
+          "plan": {
+            "complexity": "HIGH",
+            "retrieval_depth": 8,
+            "recent_round_window": 24,
+            "self_k": 4,
+            "neighbor_k": 3,
+            "world_k": 3,
+            "include_world": true,
+            "query_keywords": [
+              "18883",
+              "31失效",
+              "985滤镜破碎",
+              "cnas",
+              "prestige paradox",
+              "参照",
+              "含gb",
+              "品牌声誉",
+              "四方联动维权",
+              "学术机构公信力建设",
+              "机制",
+              "校友参与式治理",
+              "武大甲醛宿舍",
+              "武汉大学",
+              "牵头",
+              "环境健康权保障",
+              "珞珈裂痕",
+              "程序正义缺失",
+              "第32条",
+              "肖某某处分未撤销",
+              "规避",
+              "跨国舆情治理",
+              "辛某校园危险驾驶",
+              "非仅结论",
+              "高校程序正义"
+            ],
+            "query_entities": [
+              "学术机构公信力建设",
+              "校友参与式治理",
+              "海外校友",
+              "环境健康权保障",
+              "跨国舆情治理",
+              "高校程序正义"
+            ]
+          },
+          "miss_reason": "",
+          "selected_units": [
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_10",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "武汉大学",
+              "keywords": [
+                "31失效",
+                "第32条",
+                "cnas",
+                "非仅结论",
+                "牵头",
+                "机制",
+                "含gb",
+                "18883",
+                "参照",
+                "规避"
+              ],
+              "salience_score": 0.8601,
+              "score": 1.364965,
+              "summary": "LIKE_POST | post_content:【珞珈校友合规支持小组·程序备忘录#3】\n\n关于启动独立调查的三项技术性前提（依据GB/T 18883-2022与《武汉大学章程》）：\n1. 检测方资质复核：已确认通报所引CMA编号（CNAS LXXXXX）于2023-10-31失效，须由校学术委员会指定新检测机构（需同步公示其CNAS证书及近一年能力验证报告）；\n2. 样本链存证：学生自采样本须经公证处‘时空双锁定’（GPS坐标+区块"
+            },
+            {
+              "scope": "world",
+              "unit_id": "reddit_m_10_world",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "武汉大学",
+              "keywords": [
+                "31失效",
+                "第32条",
+                "cnas",
+                "非仅结论",
+                "牵头",
+                "机制",
+                "含gb",
+                "18883",
+                "参照",
+                "规避"
+              ],
+              "salience_score": 0.8601,
+              "score": 1.188561,
+              "summary": "CREATE_POST | content:【珞珈校友合规支持小组·程序备忘录#3】\n\n关于启动独立调查的三项技术性前提（依据GB/T 18883-2022与《武汉大学章程》）：\n1. 检测方资质复核：已确认通报所引CMA编号（CNAS LXXXXX）于2023-10-31失效，须由校学术委员会指定新检测机构（需同步公示其CNAS证书及近一年能力验证报告）；\n2. 样本链存证：学生自采样本须经公证处‘时空双锁定’（GPS坐标+区块链时间"
+            },
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_9",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "cnas",
+              "keywords": [
+                "10",
+                "31",
+                "02",
+                "2条",
+                "cnas",
+                "依据gb",
+                "见2024",
+                "18883"
+              ],
+              "salience_score": 0.5901,
+              "score": 0.635679,
+              "summary": "CREATE_COMMENT | content:已核查该通报中引用的CMA认证编号（CNAS LXXXXX），在国家认监委官网显示其资质有效期截至2023-10-31（见2024-02-17校友群原始截图）。依据GB/T 18883-2022第5.2条，检测机构须具备有效资质方可出具具有证明效力的报告。程序失当不否定结果本身，但构成启动独立复核的充分理由。（参照德国Studentenwerk对检测方资质的双年度强制复审机制）"
+            },
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_4",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "我们曾以珞珈为荣",
+                "我们要求",
+                "立即启动甲醛事件独立调查",
+                "建立校友常设治理观察团",
+                "海外校友",
+                "检测合格",
+                "通报被实锤证伪",
+                "但当",
+                "校友群体联合声明"
+              ],
+              "salience_score": 0.7601,
+              "score": 0.586255,
+              "summary": "LIKE_POST | post_content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。 | post_author_name:海外校友"
+            },
+            {
+              "scope": "self",
+              "unit_id": "reddit_m_7",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "珞珈裂痕",
+              "keywords": [
+                "学生",
+                "症状打卡",
+                "检测预约",
+                "四方联动",
+                "珞珈裂痕",
+                "律师团对接",
+                "是要呼吸权",
+                "媒体线索直报"
+              ],
+              "salience_score": 0.5301,
+              "score": 0.582181,
+              "summary": "LIKE_POST | post_content:1937名武大学生正在协同填写《武大甲醛互助文档》——症状打卡、检测预约、律师团对接、媒体线索直报。我们不是要对抗，是要呼吸权、知情权与程序正义。#四方联动 #珞珈裂痕 | post_author_name:学生"
+            },
+            {
+              "scope": "world",
+              "unit_id": "reddit_m_4_world",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "检测合格",
+              "keywords": [
+                "但当",
+                "检测合格",
+                "我们要求",
+                "通报被实锤证伪",
+                "校友群体联合声明",
+                "我们曾以珞珈为荣",
+                "建立校友常设治理观察团",
+                "立即启动甲醛事件独立调查"
+              ],
+              "salience_score": 0.7601,
+              "score": 0.53417,
+              "summary": "CREATE_POST | content:【校友群体联合声明】我们曾以珞珈为荣，但当‘检测合格’通报被实锤证伪、当肖某某案判决已明而处分岿然不动，这份荣誉正被行政惰性持续透支。我们要求：1. 立即启动甲醛事件独立调查；2. 公开肖某某处分撤销听证流程；3. 建立校友常设治理观察团。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "reddit_m_1_world",
+              "source_agent_id": 6,
+              "source_agent_name": "校长",
+              "topic": "武汉大学",
+              "keywords": [
+                "08mg",
+                "18883",
+                "2022标准",
+                "经第三方机构复检",
+                "枫园研究生公寓1",
+                "仪器未校准等问题",
+                "感谢广大同学监督",
+                "武汉大学后勤集团通报"
+              ],
+              "salience_score": 0.8971,
+              "score": 0.530807,
+              "summary": "CREATE_POST | content:【武汉大学后勤集团通报】经第三方机构复检，枫园研究生公寓1-4栋室内空气甲醛浓度均符合GB/T 18883-2022标准（≤0.08mg/m³）。此前学生自发检测存在采样不规范、仪器未校准等问题。感谢广大同学监督。"
+            }
+          ],
+          "context_preview": "[Retrieval Plan] complexity=HIGH depth=8\n[Intent Keywords] 18883, 31失效, 985滤镜破碎, cnas, prestige paradox, 参照, 含gb, 品牌声誉\n[ABSTRACT REPRESENTATIONS]\n- (self) [海外校友] [武汉大学] 海外校友 @ 2026-04-01T22:24:38.508224: LIKE_POST | post_content:【珞珈校友合规支持小组·程序备忘录#3】\n\n关于启动独立调查的三项技术性前提（依据GB/T 18883-2022与《武汉大学章程》）：\n1. 检测方资质复核：已确认通报所引CMA编号（CNAS LXXXXX）于2023-10-31失效，须由校学术委员会指定新检测机构（需同步公示其CNAS证书及近一年能力验\n- (world) [海外校友] [武汉大学] 海外校友 @ 2026-04-01T21:24:38.508224: CREATE_POST | content:【珞珈校友合规支持小组·程序备忘录#3】\n\n关于启动独立调查的三项技术性前提（依据GB/T 18883-2022与《武汉大学章程》）：\n1. 检测方资质复核：已确认通报所引CMA编号（CNAS LXXXXX）于2023-10-31失效，须由校学术委员会指定新检测机构（需同"
+        },
+        {
+          "timestamp": "2026-04-01T18:25:26.899210",
+          "platform": "reddit",
+          "event_type": "retrieval",
+          "round": 9,
+          "agent_id": 23,
+          "agent_name": "央广网",
+          "plan": {
+            "complexity": "HIGH",
+            "retrieval_depth": 8,
+            "recent_round_window": 24,
+            "self_k": 4,
+            "neighbor_k": 3,
+            "world_k": 3,
+            "include_world": true,
+            "query_keywords": [
+              "985滤镜破碎",
+              "prestige paradox",
+              "品牌声誉",
+              "四方联动维权",
+              "媒体融合",
+              "教育改革",
+              "时政要闻",
+              "武大甲醛宿舍",
+              "武汉大学",
+              "民生政策",
+              "珞珈裂痕",
+              "社会治理",
+              "程序正义缺失",
+              "肖某某处分未撤销",
+              "舆论引导",
+              "辛某校园危险驾驶",
+              "高校治理"
+            ],
+            "query_entities": [
+              "央广网",
+              "媒体融合",
+              "教育改革",
+              "时政要闻",
+              "民生政策",
+              "社会治理",
+              "舆论引导",
+              "高校治理"
+            ]
+          },
+          "miss_reason": "",
+          "selected_units": [
+            {
+              "scope": "world",
+              "unit_id": "reddit_m_14_world",
+              "source_agent_id": 0,
+              "source_agent_name": "央媒调查记者",
+              "topic": "溯源发现",
+              "keywords": [
+                "溯源发现",
+                "央媒调查记者独家",
+                "检测机构签约方为校后勤集团下属公司",
+                "武大枫园宿舍委托检测报告原始数据遭篡改",
+                "学生提供的封存样本与校方公示版本存在3处关键参数不一致"
+              ],
+              "salience_score": 0.7891,
+              "score": 0.555471,
+              "summary": "CREATE_POST | content:【央媒调查记者独家】武大枫园宿舍委托检测报告原始数据遭篡改？学生提供的封存样本与校方公示版本存在3处关键参数不一致。溯源发现：检测机构签约方为校后勤集团下属公司。"
+            },
+            {
+              "scope": "world",
+              "unit_id": "reddit_m_13_world",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "prestige paradox",
+              "keywords": [
+                "附件",
+                "第4",
+                "2条",
+                "第三方",
+                "这恰是",
+                "精准诊断",
+                "补充一点",
+                "而在重建"
+              ],
+              "salience_score": 0.6901,
+              "score": 0.483605,
+              "summary": "CREATE_COMMENT | content:精准诊断。补充一点：' prestige paradox' 在高校治理中常表现为‘程序外包化’——将问责嵌入行政流程（如‘已按规章处理’），却剥离其公共性内核（如学生健康权的实质保障）。修复路径不在强化通报修辞，而在重建‘校-生-第三方’三角制衡的数据主权架构。这恰是#WHUAccountability 的底层逻辑。（附件：UNESCO《高等教育危机响应指南》第4.2条‘数据共治原则’）"
+            },
+            {
+              "scope": "world",
+              "unit_id": "reddit_m_10_world",
+              "source_agent_id": 4,
+              "source_agent_name": "海外校友",
+              "topic": "武汉大学",
+              "keywords": [
+                "31失效",
+                "第32条",
+                "cnas",
+                "非仅结论",
+                "牵头",
+                "机制",
+                "含gb",
+                "18883",
+                "参照",
+                "规避"
+              ],
+              "salience_score": 0.8601,
+              "score": 0.454228,
+              "summary": "CREATE_POST | content:【珞珈校友合规支持小组·程序备忘录#3】\n\n关于启动独立调查的三项技术性前提（依据GB/T 18883-2022与《武汉大学章程》）：\n1. 检测方资质复核：已确认通报所引CMA编号（CNAS LXXXXX）于2023-10-31失效，须由校学术委员会指定新检测机构（需同步公示其CNAS证书及近一年能力验证报告）；\n2. 样本链存证：学生自采样本须经公证处‘时空双锁定’（GPS坐标+区块链时间"
+            }
+          ],
+          "context_preview": "[Retrieval Plan] complexity=HIGH depth=8\n[Intent Keywords] 985滤镜破碎, prestige paradox, 品牌声誉, 四方联动维权, 媒体融合, 教育改革, 时政要闻, 武大甲醛宿舍\n[ABSTRACT REPRESENTATIONS]\n- (world) [央媒调查记者] [溯源发现] 央媒调查记者 @ 2026-04-02T00:24:38.508224: CREATE_POST | content:【央媒调查记者独家】武大枫园宿舍委托检测报告原始数据遭篡改？学生提供的封存样本与校方公示版本存在3处关键参数不一致。溯源发现：检测机构签约方为校后勤集团下属公司。\n- (world) [海外校友] [prestige paradox] 海外校友 @ 2026-04-01T23:24:38.508224: CREATE_COMMENT | content:精准诊断。补充一点：' prestige paradox' 在高校治理中常表现为‘程序外包化’——将问责嵌入行政流程（如‘已按规章处理’），却剥离其公共性内核（如学生健康权的实质保障）。修复路径不在强化通报修辞，而在重建‘校-生-第三方’三角制衡的数据主权架构。这恰是#WHUAcc\n- (world) [海外校友] [武汉大学] 海外校友 @ 2026-04-01T2"
+        }
+      ]
+    }
+  },
+  "behavior_summary": {
+    "twitter": {
+      "total_actions": 292,
+      "action_type_counts": {
+        "DO_NOTHING": 237,
+        "QUOTE_POST": 27,
+        "CREATE_POST": 14,
+        "REPOST": 12,
+        "LIKE_POST": 2
+      },
+      "top_agents": [
+        {
+          "agent_name": "新华网",
+          "actions": 24
+        },
+        {
+          "agent_name": "央视网",
+          "actions": 20
+        },
+        {
+          "agent_name": "央媒调查记者",
+          "actions": 18
+        },
+        {
+          "agent_name": "海外校友",
+          "actions": 18
+        },
+        {
+          "agent_name": "央广网",
+          "actions": 18
+        },
+        {
+          "agent_name": "香港01",
+          "actions": 17
+        },
+        {
+          "agent_name": "京报网",
+          "actions": 16
+        },
+        {
+          "agent_name": "学生",
+          "actions": 15
+        },
+        {
+          "agent_name": "央级媒体",
+          "actions": 15
+        },
+        {
+          "agent_name": "Media Engine",
+          "actions": 14
+        }
+      ],
+      "rounds_observed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48
+      ]
+    },
+    "reddit": {
+      "total_actions": 272,
+      "action_type_counts": {
+        "CREATE_COMMENT": 93,
+        "LIKE_POST": 85,
+        "CREATE_POST": 49,
+        "SEARCH_POSTS": 21,
+        "DO_NOTHING": 10,
+        "LIKE_COMMENT": 8,
+        "SEARCH_USER": 3,
+        "FOLLOW": 2,
+        "DISLIKE_POST": 1
+      },
+      "top_agents": [
+        {
+          "agent_name": "央媒调查记者",
+          "actions": 25
+        },
+        {
+          "agent_name": "央广网",
+          "actions": 23
+        },
+        {
+          "agent_name": "海外校友",
+          "actions": 18
+        },
+        {
+          "agent_name": "新华网",
+          "actions": 18
+        },
+        {
+          "agent_name": "央视网",
+          "actions": 17
+        },
+        {
+          "agent_name": "重庆上游新闻",
+          "actions": 16
+        },
+        {
+          "agent_name": "学生",
+          "actions": 15
+        },
+        {
+          "agent_name": "央级媒体",
+          "actions": 13
+        },
+        {
+          "agent_name": "墩墩舆情课工作室",
+          "actions": 10
+        },
+        {
+          "agent_name": "Media Engine",
+          "actions": 10
+        }
+      ],
+      "rounds_observed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48
+      ]
+    }
+  },
+  "artifacts": {
+    "experiment_dir": "/home/shulun/project/LightWorld/backend/uploads/experiments/exp_20260401_180640_武汉大学品牌声誉深度分析报告",
+    "pipeline_result": "/home/shulun/project/LightWorld/backend/uploads/experiments/exp_20260401_180640_武汉大学品牌声誉深度分析报告/pipeline_result.json",
+    "prepare_state": "/home/shulun/project/LightWorld/backend/uploads/experiments/exp_20260401_180640_武汉大学品牌声誉深度分析报告/prepare_state.json",
+    "scaled_config": "/home/shulun/project/LightWorld/backend/uploads/experiments/exp_20260401_180640_武汉大学品牌声誉深度分析报告/scaled_simulation_config.json",
+    "simulation_config": "/home/shulun/project/LightWorld/backend/uploads/simulations/sim_706dbfc1acac/simulation_config.json",
+    "entity_prompts": "/home/shulun/project/LightWorld/backend/uploads/simulations/sim_706dbfc1acac/entity_prompts.json",
+    "entity_graph_snapshot": "/home/shulun/project/LightWorld/backend/uploads/simulations/sim_706dbfc1acac/entity_graph_snapshot.json",
+    "social_relation_graph": "/home/shulun/project/LightWorld/backend/uploads/simulations/sim_706dbfc1acac/social_relation_graph.json",
+    "twitter_topology": "/home/shulun/project/LightWorld/backend/uploads/simulations/sim_706dbfc1acac/artifacts/topology/twitter/latest_topology.json",
+    "reddit_topology": "/home/shulun/project/LightWorld/backend/uploads/simulations/sim_706dbfc1acac/artifacts/topology/reddit/latest_topology.json",
+    "twitter_memory": "/home/shulun/project/LightWorld/backend/uploads/simulations/sim_706dbfc1acac/simplemem_twitter.json",
+    "reddit_memory": "/home/shulun/project/LightWorld/backend/uploads/simulations/sim_706dbfc1acac/simplemem_reddit.json",
+    "twitter_actions": "/home/shulun/project/LightWorld/backend/uploads/simulations/sim_706dbfc1acac/twitter/actions.jsonl",
+    "reddit_actions": "/home/shulun/project/LightWorld/backend/uploads/simulations/sim_706dbfc1acac/reddit/actions.jsonl"
+  }
+}

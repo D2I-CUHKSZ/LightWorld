@@ -1,0 +1,405 @@
+{
+  "project_id": "proj_6d56e4817baf",
+  "name": "qwen-plus-zep-real-smoke",
+  "status": "graph_completed",
+  "created_at": "2026-03-31T09:29:03.514683",
+  "updated_at": "2026-03-31T09:31:40.764008",
+  "files": [
+    {
+      "filename": "README.md",
+      "size": 10561
+    }
+  ],
+  "total_text_length": 9432,
+  "ontology": {
+    "entity_types": [
+      {
+        "name": "SocialMediaInfluencer",
+        "description": "A verified or high-follower individual on platforms like X/Twitter who shapes public narratives.",
+        "attributes": [
+          {
+            "name": "full_name",
+            "type": "text",
+            "description": "The influencer's publicly known name"
+          },
+          {
+            "name": "platform_handle",
+            "type": "text",
+            "description": "Their social media handle (e.g., @username)"
+          },
+          {
+            "name": "follower_count",
+            "type": "text",
+            "description": "Approximate number of followers"
+          }
+        ],
+        "examples": [
+          "@TechEthicsLab",
+          "Dr. Lena Chen",
+          "ThePolicyMeme"
+        ]
+      },
+      {
+        "name": "CitizenUser",
+        "description": "An ordinary social media user with personal account, low-to-moderate reach, representing grassroo...",
+        "attributes": [
+          {
+            "name": "full_name",
+            "type": "text",
+            "description": "Optional real or pseudonymous name"
+          },
+          {
+            "name": "engagement_level",
+            "type": "text",
+            "description": "Typical activity intensity (low/medium/high)"
+          },
+          {
+            "name": "stance_score",
+            "type": "text",
+            "description": "Numerical stance polarity (-1.0 to +1.0) on key issues"
+          }
+        ],
+        "examples": [
+          "Alex Rivera",
+          "MidwestMom22",
+          "StudentActivist_42"
+        ]
+      },
+      {
+        "name": "BotAccount",
+        "description": "Automated or coordinated account designed to amplify, suppress, or distort narratives at scale.",
+        "attributes": [
+          {
+            "name": "bot_type",
+            "type": "text",
+            "description": "Category: 'amplifier', 'disruptor', 'coordinator', 'sleeper'"
+          },
+          {
+            "name": "coordination_network",
+            "type": "text",
+            "description": "Associated swarm or command node (e.g., 'Cluster-7')"
+          },
+          {
+            "name": "weight_score",
+            "type": "text",
+            "description": "Influence weight in propagation models (0.0–1.0)"
+          }
+        ],
+        "examples": [
+          "BotNet_Alpha_03",
+          "TrendBoost_88",
+          "EchoSwarm_Gamma"
+        ]
+      },
+      {
+        "name": "MediaOutlet",
+        "description": "News organization or digital publisher that produces and distributes narrative content.",
+        "attributes": [
+          {
+            "name": "org_name",
+            "type": "text",
+            "description": "Official name of the outlet"
+          },
+          {
+            "name": "media_type",
+            "type": "text",
+            "description": "e.g., 'national_news', 'local_blog', 'independent_video', 'satire'"
+          },
+          {
+            "name": "bias_orientation",
+            "type": "text",
+            "description": "Documented or modeled editorial leaning"
+          }
+        ],
+        "examples": [
+          "Veritas Daily",
+          "MetroWire News",
+          "SignalFrame Video"
+        ]
+      },
+      {
+        "name": "GovernmentAgency",
+        "description": "Official public institution issuing policy statements, advisories, or regulatory actions.",
+        "attributes": [
+          {
+            "name": "org_name",
+            "type": "text",
+            "description": "Formal agency name"
+          },
+          {
+            "name": "jurisdiction",
+            "type": "text",
+            "description": "Geographic or functional scope (e.g., 'federal', 'state_health')"
+          },
+          {
+            "name": "intervention_role",
+            "type": "text",
+            "description": "e.g., 'regulator', 'investigator', 'public_communicator'"
+          }
+        ],
+        "examples": [
+          "Federal Digital Integrity Unit",
+          "State Cyber Safety Board",
+          "National Media Ethics Council"
+        ]
+      },
+      {
+        "name": "AcademicResearcher",
+        "description": "Scholar or expert publishing analysis, debunking, or modeling related to social dynamics or misin...",
+        "attributes": [
+          {
+            "name": "full_name",
+            "type": "text",
+            "description": "Name and academic title"
+          },
+          {
+            "name": "affiliation",
+            "type": "text",
+            "description": "Primary university or research lab"
+          },
+          {
+            "name": "domain_expertise",
+            "type": "text",
+            "description": "e.g., 'computational_social_science', 'misinformation_forensics'"
+          }
+        ],
+        "examples": [
+          "Dr. Kenji Tanaka",
+          "Prof. Amina Diallo",
+          "Dr. Rajiv Mehta (MIT Media Lab)"
+        ]
+      },
+      {
+        "name": "CivilSocietyGroup",
+        "description": "Organized non-governmental collective advocating for transparency, accountability, or community r...",
+        "attributes": [
+          {
+            "name": "org_name",
+            "type": "text",
+            "description": "Group's public-facing name"
+          },
+          {
+            "name": "mission_focus",
+            "type": "text",
+            "description": "Core issue area (e.g., 'digital_rights', 'election_integrity', 'science_literacy')"
+          },
+          {
+            "name": "network_size",
+            "type": "text",
+            "description": "Estimated active members or reach tier"
+          }
+        ],
+        "examples": [
+          "TruthGuard Coalition",
+          "CivicSignal Alliance",
+          "FactFirst Student Network"
+        ]
+      },
+      {
+        "name": "PlatformProvider",
+        "description": "Social media or content platform operator responsible for infrastructure, moderation policies, an...",
+        "attributes": [
+          {
+            "name": "org_name",
+            "type": "text",
+            "description": "Company or platform name"
+          },
+          {
+            "name": "moderation_policy_version",
+            "type": "text",
+            "description": "Current enforcement framework (e.g., 'v4.2_CrisisMode')"
+          },
+          {
+            "name": "user_base_estimate",
+            "type": "text",
+            "description": "Scale of active users (e.g., '500M+', '12M+ regional')"
+          }
+        ],
+        "examples": [
+          "NexusFeed",
+          "ChronoLink",
+          "VoxSphere"
+        ]
+      },
+      {
+        "name": "Person",
+        "description": "Any natural person not covered by more specific types (e.g., anonymous commenter, unaffiliated ex...",
+        "attributes": [
+          {
+            "name": "full_name",
+            "type": "text",
+            "description": "Real or self-identified name"
+          },
+          {
+            "name": "role",
+            "type": "text",
+            "description": "Contextual role (e.g., 'eyewitness', 'parent', 'retired_teacher')"
+          },
+          {
+            "name": "location",
+            "type": "text",
+            "description": "Geographic or community context"
+          }
+        ],
+        "examples": [
+          "Maria G.",
+          "Anonymous_Edu_Prof",
+          "Seattle Resident"
+        ]
+      },
+      {
+        "name": "Organization",
+        "description": "Any formal or informal group not captured by specific types (e.g., local business, ad-hoc coaliti...",
+        "attributes": [
+          {
+            "name": "org_name",
+            "type": "text",
+            "description": "Official or commonly used name"
+          },
+          {
+            "name": "sector",
+            "type": "text",
+            "description": "e.g., 'tech_startup', 'local_business', 'faith_community', 'professional_association'"
+          },
+          {
+            "name": "description",
+            "type": "text",
+            "description": "Brief functional summary"
+          }
+        ],
+        "examples": [
+          "Veridian Labs",
+          "Maple Street PTA",
+          "Global Health Innovators"
+        ]
+      }
+    ],
+    "edge_types": [
+      {
+        "name": "FOLLOWS",
+        "description": "Directed social attention: one entity follows another’s content feed.",
+        "source_targets": [
+          {
+            "source": "CitizenUser",
+            "target": "SocialMediaInfluencer"
+          },
+          {
+            "source": "CitizenUser",
+            "target": "MediaOutlet"
+          },
+          {
+            "source": "CitizenUser",
+            "target": "PlatformProvider"
+          },
+          {
+            "source": "Person",
+            "target": "AcademicResearcher"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "REPOSTS",
+        "description": "Content amplification via sharing, retweeting, or cross-posting.",
+        "source_targets": [
+          {
+            "source": "BotAccount",
+            "target": "SocialMediaInfluencer"
+          },
+          {
+            "source": "CitizenUser",
+            "target": "MediaOutlet"
+          },
+          {
+            "source": "CivilSocietyGroup",
+            "target": "AcademicResearcher"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "REPORTS_ON",
+        "description": "Media outlet publishes coverage or analysis about an entity or event.",
+        "source_targets": [
+          {
+            "source": "MediaOutlet",
+            "target": "GovernmentAgency"
+          },
+          {
+            "source": "MediaOutlet",
+            "target": "AcademicResearcher"
+          },
+          {
+            "source": "MediaOutlet",
+            "target": "CivilSocietyGroup"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "AFFILIATED_WITH",
+        "description": "Formal or operational association (e.g., employment, membership, funding, collaboration).",
+        "source_targets": [
+          {
+            "source": "AcademicResearcher",
+            "target": "University"
+          },
+          {
+            "source": "CivilSocietyGroup",
+            "target": "Organization"
+          },
+          {
+            "source": "SocialMediaInfluencer",
+            "target": "MediaOutlet"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "RESPONDS_TO",
+        "description": "Public reaction or rebuttal to a claim, action, or narrative from another entity.",
+        "source_targets": [
+          {
+            "source": "AcademicResearcher",
+            "target": "MediaOutlet"
+          },
+          {
+            "source": "GovernmentAgency",
+            "target": "CivilSocietyGroup"
+          },
+          {
+            "source": "CivilSocietyGroup",
+            "target": "PlatformProvider"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "REGULATES",
+        "description": "Formal authority to set rules, enforce standards, or sanction behavior within a domain.",
+        "source_targets": [
+          {
+            "source": "GovernmentAgency",
+            "target": "PlatformProvider"
+          },
+          {
+            "source": "GovernmentAgency",
+            "target": "MediaOutlet"
+          },
+          {
+            "source": "GovernmentAgency",
+            "target": "Organization"
+          }
+        ],
+        "attributes": []
+      }
+    ]
+  },
+  "analysis_summary": "文档描述了一个用于模拟社交媒体舆论演化的轻量级多模态引擎，核心围绕真实主体（如KOL、普通用户、机器人账号、媒体、政府机构、学者、公民组织、平台方）之间的互动建模。实体设计聚焦于可发声、可行动、可被影响的现实角色，排除抽象概念；前8个类型对应文档中明确出现或隐含的关键参与方（如'kol_01'、'group_a_01'、'bot_01'、'Debunk Counterwave'背后的学者、'Policy Intervention'对应的监管机构等），后2个为通用兜底类型，确保图谱覆盖完整性。",
+  "graph_id": "mirofish_9f0d1c84b2164adf",
+  "graph_build_task_id": null,
+  "simulation_requirement": "用 README 内容做一次最小舆论模拟图谱构建测试",
+  "chunk_size": 500,
+  "chunk_overlap": 50,
+  "error": null
+}

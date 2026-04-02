@@ -1,0 +1,25 @@
+{
+  "simulation_id": "sim_571b95ef504b",
+  "project_id": "proj_6d56e4817baf",
+  "graph_id": "mirofish_9f0d1c84b2164adf",
+  "enable_twitter": true,
+  "enable_reddit": false,
+  "status": "failed",
+  "entities_count": 6,
+  "profiles_count": 0,
+  "entity_types": [
+    "MediaOutlet",
+    "BotAccount",
+    "CitizenUser",
+    "Person",
+    "Organization"
+  ],
+  "config_generated": false,
+  "config_reasoning": "",
+  "current_round": 0,
+  "twitter_status": "not_started",
+  "reddit_status": "not_started",
+  "created_at": "2026-03-31T09:54:44.119682",
+  "updated_at": "2026-03-31T09:54:45.392947",
+  "error": "name 'current' is not defined"
+}

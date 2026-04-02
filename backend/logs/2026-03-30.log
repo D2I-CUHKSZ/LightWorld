@@ -1,0 +1,12 @@
+[2026-03-30 21:45:49] INFO [mirofish.create_app:38] ==================================================
+[2026-03-30 21:45:49] INFO [mirofish.create_app:39] MiroFish Backend 启动中...
+[2026-03-30 21:45:49] INFO [mirofish.create_app:40] ==================================================
+[2026-03-30 21:45:49] INFO [mirofish.create_app:49] 已注册模拟进程清理函数
+[2026-03-30 21:45:49] INFO [mirofish.create_app:77] MiroFish Backend 启动完成
+[2026-03-30 21:46:14] INFO [mirofish.create_app:38] ==================================================
+[2026-03-30 21:46:14] INFO [mirofish.create_app:39] MiroFish Backend 启动中...
+[2026-03-30 21:46:14] INFO [mirofish.create_app:40] ==================================================
+[2026-03-30 21:46:14] INFO [mirofish.create_app:49] 已注册模拟进程清理函数
+[2026-03-30 21:46:14] INFO [mirofish.create_app:77] MiroFish Backend 启动完成
+[2026-03-30 21:46:35] DEBUG [mirofish.request.log_request:55] 请求: GET /health
+[2026-03-30 21:46:35] DEBUG [mirofish.request.log_response:62] 响应: 200

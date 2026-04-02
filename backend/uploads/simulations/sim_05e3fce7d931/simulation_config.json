@@ -1,0 +1,307 @@
+{
+  "simulation_id": "sim_05e3fce7d931",
+  "project_id": "proj_6d56e4817baf",
+  "graph_id": "mirofish_9f0d1c84b2164adf",
+  "simulation_requirement": "验证 richer twitter profiles 能进入 OASIS 提示与运行时字段",
+  "time_config": {
+    "total_simulation_hours": 72,
+    "minutes_per_round": 60,
+    "agents_per_hour_min": 3,
+    "agents_per_hour_max": 4,
+    "peak_hours": [
+      19,
+      20,
+      21,
+      22
+    ],
+    "peak_activity_multiplier": 1.5,
+    "off_peak_hours": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "off_peak_activity_multiplier": 0.05,
+    "morning_hours": [
+      6,
+      7,
+      8
+    ],
+    "morning_activity_multiplier": 0.4,
+    "work_hours": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "work_activity_multiplier": 0.7
+  },
+  "agent_configs": [
+    {
+      "agent_id": 0,
+      "entity_uuid": "e50b9516-d55b-4fdd-81e8-28ab7b855c98",
+      "entity_name": "bot_01",
+      "entity_type": "BotAccount",
+      "activity_level": 0.75,
+      "posts_per_hour": 2.4,
+      "comments_per_hour": 0.8,
+      "active_hours": [
+        19,
+        20,
+        21,
+        22
+      ],
+      "response_delay_min": 2,
+      "response_delay_max": 12,
+      "sentiment_bias": 0.3,
+      "stance": "supportive",
+      "influence_weight": 1.1
+    },
+    {
+      "agent_id": 1,
+      "entity_uuid": "de15ecdb-fab1-4e1b-8a27-f6a8bf0ce1ce",
+      "entity_name": "CAMEL-AI",
+      "entity_type": "Organization",
+      "activity_level": 0.22,
+      "posts_per_hour": 0.3,
+      "comments_per_hour": 0.1,
+      "active_hours": [
+        9,
+        10,
+        11,
+        14,
+        15,
+        16
+      ],
+      "response_delay_min": 90,
+      "response_delay_max": 210,
+      "sentiment_bias": 0.6,
+      "stance": "supportive",
+      "influence_weight": 2.8
+    },
+    {
+      "agent_id": 2,
+      "entity_uuid": "db2417d4-1555-4b2a-9cdf-95462e2f4ec1",
+      "entity_name": "group_a_01",
+      "entity_type": "CitizenUser",
+      "activity_level": 0.82,
+      "posts_per_hour": 1.8,
+      "comments_per_hour": 1.5,
+      "active_hours": [
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "response_delay_min": 3,
+      "response_delay_max": 10,
+      "sentiment_bias": 0.4,
+      "stance": "supportive",
+      "influence_weight": 1.05
+    },
+    {
+      "agent_id": 3,
+      "entity_uuid": "b8485b3c-29d4-4774-a55b-69e0fe11b803",
+      "entity_name": "News",
+      "entity_type": "MediaOutlet",
+      "activity_level": 0.5,
+      "posts_per_hour": 3.2,
+      "comments_per_hour": 0.6,
+      "active_hours": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "response_delay_min": 8,
+      "response_delay_max": 25,
+      "sentiment_bias": 0.1,
+      "stance": "neutral",
+      "influence_weight": 2.3
+    },
+    {
+      "agent_id": 4,
+      "entity_uuid": "65f06893-76ab-4a1a-89e3-c0b583c0909c",
+      "entity_name": "666ghj",
+      "entity_type": "Person",
+      "activity_level": 0.88,
+      "posts_per_hour": 1.5,
+      "comments_per_hour": 2.0,
+      "active_hours": [
+        19,
+        20,
+        21,
+        22
+      ],
+      "response_delay_min": 1,
+      "response_delay_max": 8,
+      "sentiment_bias": 0.5,
+      "stance": "supportive",
+      "influence_weight": 1.15
+    },
+    {
+      "agent_id": 5,
+      "entity_uuid": "2d6bce10-b5f3-41ed-a9c1-4b0c52b43b54",
+      "entity_name": "Blogs",
+      "entity_type": "MediaOutlet",
+      "activity_level": 0.45,
+      "posts_per_hour": 2.6,
+      "comments_per_hour": 0.4,
+      "active_hours": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "response_delay_min": 10,
+      "response_delay_max": 28,
+      "sentiment_bias": 0.2,
+      "stance": "neutral",
+      "influence_weight": 2.15
+    }
+  ],
+  "event_config": {
+    "initial_posts": [
+      {
+        "content": "OASIS is now live as the core social reasoning layer in LightWorld. It ingests not just handles & edges — but full Twitter profile semantics: pinned tweets, link-in-bio provenance, description embeddings, and verification signals. Richer profiles = richer prompts = sharper emergent dynamics. #OASIS #LightWorld",
+        "poster_type": "Organization",
+        "poster_agent_id": 1
+      },
+      {
+        "content": "Just verified that bot_01’s runtime state now includes extended profile fields: 'profile_interpretability_score=0.87', 'bio_entity_density=3.2', 'verified_via=CAMEL-AI'. Confirmed end-to-end injection into prompt templates and attention routing. RT if you’re testing richer profiles too.",
+        "poster_type": "BotAccount",
+        "poster_agent_id": 0
+      },
+      {
+        "content": "Following @CAMEL-AI and @bot_01 closely — seeing how enriched profile signals change repost cascade thresholds. My local swarm shows 22% faster consensus onset when 'bio_coherence' > 0.75. Real-world grounding matters.",
+        "poster_type": "CitizenUser",
+        "poster_agent_id": 2
+      }
+    ],
+    "scheduled_events": [
+      {
+        "event_type": "create_post",
+        "trigger_hour": 6,
+        "content": "BREAKING: OASIS v0.4.2 patch deployed — now surfaces 'account_age_normalized' and 'external_link_trust_score' in all agent context windows. Runtime fields confirmed active for group_a_01 and bot_01.",
+        "poster_type": "Organization",
+        "hot_topics_add": [],
+        "hot_topics_remove": [],
+        "poster_agent_id": 1
+      },
+      {
+        "event_type": "hot_topics_update",
+        "trigger_hour": 12,
+        "hot_topics_add": [
+          "profile_interpretability_score",
+          "bio_entity_density"
+        ],
+        "hot_topics_remove": [
+          "lightworld"
+        ]
+      }
+    ],
+    "hot_topics": [
+      "OASIS",
+      "richer twitter profiles",
+      "social simulation",
+      "lightworld"
+    ],
+    "narrative_direction": "Technical community discourse shifts from conceptual interest in LightWorld to concrete validation of OASIS integration with enriched Twitter profile metadata — emphasizing field-level fidelity (e.g., verified status, bio richness, follower velocity) in prompts and runtime agent state."
+  },
+  "twitter_config": {
+    "platform": "twitter",
+    "recency_weight": 0.4,
+    "popularity_weight": 0.3,
+    "relevance_weight": 0.3,
+    "viral_threshold": 10,
+    "echo_chamber_strength": 0.5
+  },
+  "reddit_config": null,
+  "topology_aware": {
+    "enabled": true,
+    "coordination_enabled": true,
+    "differentiation_enabled": true,
+    "similarity_threshold": 0.9,
+    "top_pairs_ratio": 0.03,
+    "min_unit_size": 2,
+    "extra_member_prob": 0.12,
+    "importance_alpha": 0.7,
+    "sentiment_diff_threshold": 0.35,
+    "opinion_threshold": 0.5,
+    "stubbornness_threshold": 0.5,
+    "influence_threshold": 0.5,
+    "ppr_alpha": 0.85,
+    "ppr_eps": 0.0001,
+    "semantic_threshold": 0.1,
+    "keyword_jaccard_threshold": 0.12,
+    "keyword_overlap_min": 1,
+    "graph_prior_similarity_boost": 0.35,
+    "graph_prior_extra_ratio": 0.25,
+    "dynamic_update_enabled": true,
+    "dynamic_update_interval": 4,
+    "dynamic_update_min_events": 8,
+    "dynamic_interaction_min_weight": 0.25,
+    "dynamic_neighbors_per_agent": 6,
+    "initial_follow_max_per_agent": 3,
+    "initial_follow_max_total": 0,
+    "social_link_sync_enabled": true,
+    "social_link_sync_interval": 6,
+    "social_link_sync_max_total": 20
+  },
+  "simplemem": {
+    "enabled": true,
+    "max_units_per_agent": 120,
+    "retrieval_topk": 5,
+    "merge_jaccard_threshold": 0.45,
+    "max_injected_chars": 1200,
+    "recency_decay": 0.08
+  },
+  "light_mode": {
+    "enabled": false,
+    "agent_ratio": 0.6
+  },
+  "llm_model": "qwen-plus",
+  "llm_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "generated_at": "2026-04-01T15:39:07.595839",
+  "generation_reasoning": "时间配置: 模拟聚焦于中文社交媒体环境下的OASIS项目认知扩散与richer Twitter profile验证，核心实体含公民用户（group_a_01）、Bot（bot_01）、KOL（kol_01）及媒体源（News/Blogs）。中国用户夜间19-22点为内容消费与互动高峰，符合 repost/follow 等社交动作高频时段；早间6-8点轻度唤醒（通勤阅读）；工作时间9-18点中等活跃（办公场景下碎片化浏览）；凌晨0-5点极低活跃，适合作为低扰动基线期。Bot_01与group_a_01的repost关系、group_a_01对kol_01的follow行为，在晚间高峰更易触发级联传播，利于验证OASIS提示字段（如influence_weight、source_trust_score）与运行时字段（如realtime_engagement_rate、cross_source_amplification）的动态注入效果。 | 事件配置: The simulation validates richer Twitter profiles entering OASIS by anchoring initial posts to entities with explicit graph roles (bot_01 reposts from group_a_01; CAMEL-AI owns OASIS; group_a_01 follows kol_01), while using precise technical terminology from the README (e.g., 'prompt templates', 'attention routing', 'runtime fields'). Scheduled events reinforce temporal validation: a patch announcement at hour 6 confirms deployment, and a hot topics update at hour 12 shifts focus to newly exposed profile metrics — ensuring both prompt surface and runtime state are exercised. | Agent配置: 成功生成 6 个 | 初始帖子分配: 3 个帖子已分配发布者",
+  "entity_prompts_file": "entity_prompts.json",
+  "entity_prompts_count": 6,
+  "entity_graph_file": "entity_graph_snapshot.json",
+  "entity_graph_entity_count": 6,
+  "entity_graph_edge_count": 4,
+  "social_relation_graph_file": "social_relation_graph.json",
+  "social_relation_graph_edge_count": 1
+}

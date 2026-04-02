@@ -1,0 +1,29 @@
+{
+  "simulation_id": "sim_706dbfc1acac",
+  "project_id": "proj_f3fa5d99c95c",
+  "graph_id": "mirofish_f5f917771d814bfd",
+  "enable_twitter": true,
+  "enable_reddit": true,
+  "status": "ready",
+  "entities_count": 31,
+  "profiles_count": 31,
+  "entity_types": [
+    "Alumni",
+    "PeerUniversity",
+    "Student",
+    "Person",
+    "UniversityStaff",
+    "RegulatoryAgency",
+    "SelfMediaCreator",
+    "MediaOutlet",
+    "Organization"
+  ],
+  "config_generated": true,
+  "config_reasoning": "时间配置: 模拟覆盖多轮次品牌声誉演化全周期（7天），需支撑PPR影响力衰减建模、memory跨轮次闭环及cluster unit协调粒度验证。高峰延至23点因学生/校友夜间活跃（QQ群协同维权、海外校友跨时区响应）、自媒体深度分析多发布于晚间（如网易号‘笔杆论道’常于21-23点发长文）；凌晨0-4点设为严格低谷（活跃度系数0.05），符合中国网民真实静默期；工作时段保留9-18点完整覆盖校方、教育厅、媒体编辑部等机构性主体的响应窗口；agents_per_hour_min/max设为8-27以匹配31个实体在聚类+keywords检索下的动态激活需求（如甲醛事件中1937名学生协同需分批次unit触发，媒体与监管机构则按信源权威性非对称触发），确保PPR权重分配与memory写入密度可验证。 | 事件配置: 配置严格遵循四大创新点：1) hot_topics 显式注入 keywords（如' prestige paradox' '四方联动维权'），全部可被聚类与检索；2) 所有 initial_posts 和 scheduled_events 均以 unit（即单个实体类型）为协调粒度，确保 cluster 内 agent 行为可追溯；3) poster_type 分布天然体现非对称影响力（如 MediaOutlet 触发二次传播、Alumni 驱动情感迁移、RegulatoryAgency 实现权威闭环），PPR 权重可基于该结构建模；4) scheduled_events 中的 trigger_hour 序列+hot_topics_update 构成跨轮次 memory 机制，使后续轮次能感知前期 topic 演化与 agent 行为痕迹，形成记忆闭环。所有实体类型均来自可用列表，无扩展或模糊匹配。 | Agent配置: 成功生成 31 个 | 初始帖子分配: 5 个帖子已分配发布者",
+  "current_round": 0,
+  "twitter_status": "not_started",
+  "reddit_status": "not_started",
+  "created_at": "2026-04-01T18:16:13.324820",
+  "updated_at": "2026-04-01T18:24:38.522987",
+  "error": null
+}

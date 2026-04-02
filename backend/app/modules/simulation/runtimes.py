@@ -3,6 +3,7 @@
 Extracted from run_parallel_simulation.py to keep entry script thin and maintainable.
 """
 
+import ast
 import csv
 import json
 import math
@@ -10,7 +11,7 @@ import os
 import random
 import re
 from collections import defaultdict, deque
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 def _safe_float(value: Any, default: float = 0.0) -> float:
@@ -121,6 +122,8 @@ class TopologyAwareRuntime:
         self.graph_pair_strength: Dict[Tuple[int, int], float] = {}
         self.graph_prior_pairs: set = set()
         self.graph_prior_directed: Dict[Tuple[int, int], float] = {}
+        self.social_relation_directed: Dict[Tuple[int, int], Dict[str, float]] = {}
+        self.social_relation_pair_metrics: Dict[Tuple[int, int], Dict[str, float]] = {}
         self.known_follow_pairs: set = set()
         self.dynamic_interaction_neighbors: Dict[int, Dict[int, float]] = defaultdict(dict)
         self._dynamic_events_since_refresh = 0
@@ -128,6 +131,11 @@ class TopologyAwareRuntime:
         self.units: List[List[int]] = []
         self.unit_id_by_agent: Dict[int, int] = {}
         self.unit_repr_by_id: Dict[int, int] = {}
+        self.topology_artifact_dir = os.path.join(simulation_dir, "artifacts", "topology", platform)
+        self.topology_snapshot_dir = os.path.join(self.topology_artifact_dir, "snapshots")
+        self.topology_trace_file = os.path.join(self.topology_artifact_dir, "topology_trace.jsonl")
+        self.topology_latest_file = os.path.join(self.topology_artifact_dir, "latest_topology.json")
+        os.makedirs(self.topology_snapshot_dir, exist_ok=True)
 
         self._build_runtime()
 
@@ -135,6 +143,7 @@ class TopologyAwareRuntime:
         self._index_agent_configs()
         self.profile_by_agent_id = self._load_platform_profiles()
         self._rebuild_agent_name_index()
+        self._load_social_relation_graph()
         self._load_graph_prior()
         self._load_entity_prompts()
         self._build_structure_vectors()
@@ -151,6 +160,184 @@ class TopologyAwareRuntime:
                 f"units={len(self.units)}, avg_unit_size={avg_unit:.2f}, "
                 f"light={self.light_enabled}, top_pairs={len(self.top_pairs)}"
             )
+        self.record_round_state(round_num=0, simulated_hour=None, reason="initial")
+
+    def _write_json(self, path: str, payload: Dict[str, Any]):
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+
+    def _append_jsonl(self, path: str, payload: Dict[str, Any]):
+        with open(path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(payload, ensure_ascii=False) + "\n")
+
+    def _agent_display_name(self, agent_id: int) -> str:
+        if agent_id in self.agent_entity_name and self.agent_entity_name.get(agent_id):
+            return str(self.agent_entity_name.get(agent_id))
+        profile = self.profile_by_agent_id.get(agent_id, {}) or {}
+        for key in ["name", "user_name", "username"]:
+            value = str(profile.get(key, "") or "").strip()
+            if value:
+                return value
+        return f"Agent_{agent_id}"
+
+    def _top_outgoing_ppr(self, agent_id: int, limit: int = 5) -> List[Dict[str, Any]]:
+        scores = self.ppr_scores.get(agent_id, {}) or {}
+        items = []
+        for target, weight in scores.items():
+            if target == agent_id or weight <= 0.0:
+                continue
+            items.append({
+                "target_agent_id": target,
+                "target_agent_name": self._agent_display_name(target),
+                "weight": round(float(weight), 6),
+                "target_unit_id": self.unit_id_by_agent.get(target),
+            })
+        items.sort(key=lambda x: x["weight"], reverse=True)
+        return items[:limit]
+
+    def _top_asymmetric_pairs(self, limit: int = 12) -> List[Dict[str, Any]]:
+        agent_ids = sorted(self.agent_cfg_by_id.keys())
+        records: List[Dict[str, Any]] = []
+        for idx, aid in enumerate(agent_ids):
+            for bid in agent_ids[idx + 1:]:
+                ab = float((self.ppr_scores.get(aid, {}) or {}).get(bid, 0.0))
+                ba = float((self.ppr_scores.get(bid, {}) or {}).get(aid, 0.0))
+                if ab <= 0.0 and ba <= 0.0:
+                    continue
+                dominant_source, dominant_target, dominant, weaker = (
+                    (aid, bid, ab, ba) if ab >= ba else (bid, aid, ba, ab)
+                )
+                records.append({
+                    "dominant_source_agent_id": dominant_source,
+                    "dominant_source_agent_name": self._agent_display_name(dominant_source),
+                    "dominant_target_agent_id": dominant_target,
+                    "dominant_target_agent_name": self._agent_display_name(dominant_target),
+                    "dominant_weight": round(dominant, 6),
+                    "reverse_weight": round(weaker, 6),
+                    "delta": round(abs(dominant - weaker), 6),
+                    "source_unit_id": self.unit_id_by_agent.get(dominant_source),
+                    "target_unit_id": self.unit_id_by_agent.get(dominant_target),
+                })
+        records.sort(key=lambda x: (x["delta"], x["dominant_weight"]), reverse=True)
+        return records[:limit]
+
+    def _unit_records(self) -> List[Dict[str, Any]]:
+        records: List[Dict[str, Any]] = []
+        for unit_id, members in enumerate(self.units):
+            representative = self.unit_repr_by_id.get(unit_id, members[0] if members else -1)
+            member_records = []
+            for aid in members:
+                member_records.append({
+                    "agent_id": aid,
+                    "agent_name": self._agent_display_name(aid),
+                    "importance": round(float(self.importance_scaled.get(aid, 1.0)), 6),
+                    "ppr_centrality": round(float(self.ppr_centrality.get(aid, 0.0)), 6),
+                    "neighbor_influence": round(float(self.neighbor_influence.get(aid, 0.0)), 6),
+                    "keywords": sorted(self.agent_semantic_keywords.get(aid, set()))[:8],
+                })
+            records.append({
+                "unit_id": unit_id,
+                "size": len(members),
+                "representative_agent_id": representative,
+                "representative_agent_name": self._agent_display_name(representative),
+                "members": member_records,
+            })
+        return records
+
+    def build_state_snapshot(
+        self,
+        round_num: int,
+        simulated_hour: Optional[int],
+        reason: str = "round",
+        active_agent_ids: Optional[List[int]] = None,
+    ) -> Dict[str, Any]:
+        unit_sizes = [len(unit) for unit in self.units]
+        largest_units = sorted(self._unit_records(), key=lambda x: (x["size"], x["unit_id"]), reverse=True)[:8]
+        top_central_agents = sorted(
+            self.agent_cfg_by_id.keys(),
+            key=lambda aid: (
+                self.ppr_centrality.get(aid, 0.0),
+                self.importance_scaled.get(aid, 0.0),
+            ),
+            reverse=True,
+        )[:12]
+
+        return {
+            "platform": self.platform,
+            "generated_at": datetime.now().isoformat(),
+            "round": round_num,
+            "simulated_hour": simulated_hour,
+            "reason": reason,
+            "enabled": self.enabled,
+            "coordination_enabled": self.coordination_enabled,
+            "differentiation_enabled": self.differentiation_enabled,
+            "agent_count": len(self.agent_cfg_by_id),
+            "active_agent_ids": [int(aid) for aid in (active_agent_ids or [])],
+            "active_agent_names": [self._agent_display_name(int(aid)) for aid in (active_agent_ids or [])],
+            "unit_count": len(self.units),
+            "unit_size_distribution": unit_sizes,
+            "avg_unit_size": round(sum(unit_sizes) / max(len(unit_sizes), 1), 4) if unit_sizes else 0.0,
+            "largest_unit_size": max(unit_sizes) if unit_sizes else 0,
+            "singleton_units": sum(1 for size in unit_sizes if size == 1),
+            "largest_units": largest_units,
+            "top_pairs": [
+                {
+                    "source_agent_id": int(a),
+                    "source_agent_name": self._agent_display_name(int(a)),
+                    "target_agent_id": int(b),
+                    "target_agent_name": self._agent_display_name(int(b)),
+                    "distance": round(float(dist), 6),
+                }
+                for a, b, dist in sorted(self.top_pair_records, key=lambda x: x[2])[:24]
+            ],
+            "top_central_agents": [
+                {
+                    "agent_id": aid,
+                    "agent_name": self._agent_display_name(aid),
+                    "unit_id": self.unit_id_by_agent.get(aid),
+                    "importance": round(float(self.importance_scaled.get(aid, 1.0)), 6),
+                    "ppr_centrality": round(float(self.ppr_centrality.get(aid, 0.0)), 6),
+                    "neighbor_influence": round(float(self.neighbor_influence.get(aid, 0.0)), 6),
+                    "top_outgoing_ppr": self._top_outgoing_ppr(aid),
+                }
+                for aid in top_central_agents
+            ],
+            "top_asymmetric_pairs": self._top_asymmetric_pairs(),
+        }
+
+    def record_round_state(
+        self,
+        round_num: int,
+        simulated_hour: Optional[int],
+        reason: str = "round",
+        active_agent_ids: Optional[List[int]] = None,
+    ):
+        snapshot = self.build_state_snapshot(
+            round_num=round_num,
+            simulated_hour=simulated_hour,
+            reason=reason,
+            active_agent_ids=active_agent_ids,
+        )
+        filename = f"round_{int(round_num):04d}_{reason}.json"
+        snapshot_path = os.path.join(self.topology_snapshot_dir, filename)
+        self._write_json(snapshot_path, snapshot)
+
+        trace_entry = {
+            "platform": self.platform,
+            "generated_at": snapshot["generated_at"],
+            "round": round_num,
+            "simulated_hour": simulated_hour,
+            "reason": reason,
+            "agent_count": snapshot["agent_count"],
+            "unit_count": snapshot["unit_count"],
+            "avg_unit_size": snapshot["avg_unit_size"],
+            "largest_unit_size": snapshot["largest_unit_size"],
+            "singleton_units": snapshot["singleton_units"],
+            "top_central_agents": snapshot["top_central_agents"][:5],
+            "top_asymmetric_pairs": snapshot["top_asymmetric_pairs"][:5],
+        }
+        self._append_jsonl(self.topology_trace_file, trace_entry)
+        self._write_json(self.topology_latest_file, snapshot)
 
     def _index_agent_configs(self):
         for item in self.config.get("agent_configs", []):
@@ -202,6 +389,25 @@ class TopologyAwareRuntime:
                         agent_id = row.get("user_id")
                         if agent_id is None:
                             continue
+                        topics = row.get("interested_topics")
+                        if isinstance(topics, str) and topics.strip():
+                            try:
+                                parsed = json.loads(topics)
+                            except Exception:
+                                try:
+                                    parsed = ast.literal_eval(topics)
+                                except Exception:
+                                    parsed = [x.strip() for x in re.split(r"[，,;；]+", topics) if x.strip()]
+                            if isinstance(parsed, list):
+                                row["interested_topics"] = parsed
+                        for key in ["age", "friend_count", "follower_count", "statuses_count"]:
+                            val = row.get(key)
+                            if val is None or val == "":
+                                continue
+                            try:
+                                row[key] = int(float(val))
+                            except Exception:
+                                pass
                         data[int(agent_id)] = row
             except Exception as e:
                 self.log(f"读取twitter_profiles.csv失败: {e}")
@@ -315,10 +521,6 @@ class TopologyAwareRuntime:
         - graph_prior_directed: 有向关系及强度（用于初始follow）
         - graph_prior_pairs / graph_pair_strength: 无向关系（用于相似图先验）
         """
-        self.graph_pair_strength = {}
-        self.graph_prior_pairs = set()
-        self.graph_prior_directed = {}
-
         graph_file = self.config.get("entity_graph_file", "entity_graph_snapshot.json")
         path = os.path.join(self.simulation_dir, graph_file)
         if not os.path.exists(path):
@@ -374,6 +576,92 @@ class TopologyAwareRuntime:
             self.log(
                 f"已加载图谱关系先验: directed={len(self.graph_prior_directed)}, "
                 f"undirected={len(self.graph_prior_pairs)}"
+            )
+
+    def _load_social_relation_graph(self):
+        relation_file = self.config.get("social_relation_graph_file", "social_relation_graph.json")
+        path = os.path.join(self.simulation_dir, relation_file)
+        if not os.path.exists(path):
+            return
+
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                payload = json.load(f)
+        except Exception as e:
+            self.log(f"读取显式社交关系图失败: {e}")
+            return
+
+        edges = payload.get("edges", []) if isinstance(payload, dict) else []
+        if not isinstance(edges, list):
+            return
+
+        mapped = 0
+        for edge in edges:
+            if not isinstance(edge, dict):
+                continue
+
+            try:
+                src = int(edge.get("source_agent_id", -1))
+                dst = int(edge.get("target_agent_id", -1))
+            except Exception:
+                continue
+
+            if src < 0 or dst < 0 or src == dst:
+                continue
+
+            metrics = {
+                "exposure_weight": max(0.0, min(1.0, _safe_float(edge.get("exposure_weight", 0.0), 0.0))),
+                "trust_weight": max(0.0, min(1.0, _safe_float(edge.get("trust_weight", 0.0), 0.0))),
+                "hostility_weight": max(0.0, min(1.0, _safe_float(edge.get("hostility_weight", 0.0), 0.0))),
+                "alliance_weight": max(0.0, min(1.0, _safe_float(edge.get("alliance_weight", 0.0), 0.0))),
+                "interaction_prior": max(-1.0, min(1.0, _safe_float(edge.get("interaction_prior", 0.0), 0.0))),
+            }
+            self.social_relation_directed[(src, dst)] = metrics
+
+            pair = (min(src, dst), max(src, dst))
+            pair_metrics = self.social_relation_pair_metrics.setdefault(
+                pair,
+                {
+                    "exposure_weight": 0.0,
+                    "trust_weight": 0.0,
+                    "hostility_weight": 0.0,
+                    "alliance_weight": 0.0,
+                    "interaction_prior": -1.0,
+                },
+            )
+            for key in ["exposure_weight", "trust_weight", "hostility_weight", "alliance_weight"]:
+                pair_metrics[key] = max(pair_metrics[key], metrics[key])
+            pair_metrics["interaction_prior"] = max(
+                pair_metrics["interaction_prior"],
+                abs(metrics["interaction_prior"]),
+            )
+
+            positive_prior = max(
+                0.0,
+                0.45 * metrics["exposure_weight"]
+                + 0.25 * metrics["trust_weight"]
+                + 0.20 * metrics["alliance_weight"]
+                + 0.10 * max(0.0, metrics["interaction_prior"])
+                - 0.20 * metrics["hostility_weight"],
+            )
+            self.graph_prior_directed[(src, dst)] = max(
+                self.graph_prior_directed.get((src, dst), 0.0),
+                positive_prior,
+            )
+            self.graph_pair_strength[pair] = max(
+                self.graph_pair_strength.get(pair, 0.0),
+                positive_prior,
+                pair_metrics["exposure_weight"],
+                pair_metrics["trust_weight"],
+                pair_metrics["alliance_weight"],
+            )
+            self.graph_prior_pairs.add(pair)
+            mapped += 1
+
+        if mapped > 0:
+            self.log(
+                f"已加载显式社交关系图: directed={len(self.social_relation_directed)}, "
+                f"undirected={len(self.social_relation_pair_metrics)}"
             )
 
     def _build_importance_scores(self):
@@ -546,6 +834,20 @@ class TopologyAwareRuntime:
                     boost = self.graph_prior_similarity_boost * min(1.0, prior_strength)
                     dist *= max(0.15, 1.0 - boost)
 
+                relation_metrics = self.social_relation_pair_metrics.get(pair)
+                if relation_metrics:
+                    positive = max(
+                        relation_metrics.get("exposure_weight", 0.0),
+                        relation_metrics.get("trust_weight", 0.0),
+                        relation_metrics.get("alliance_weight", 0.0),
+                        max(0.0, relation_metrics.get("interaction_prior", 0.0)),
+                    )
+                    hostility = relation_metrics.get("hostility_weight", 0.0)
+                    if positive > 0.0:
+                        dist *= max(0.12, 1.0 - 0.45 * min(1.0, positive))
+                    if hostility > 0.0:
+                        dist *= (1.0 + 0.35 * min(1.0, hostility))
+
                 pair = (aid, bid, dist)
                 backup_records.append(pair)
                 pair_dist[(min(aid, bid), max(aid, bid))] = dist
@@ -678,6 +980,15 @@ class TopologyAwareRuntime:
             return False
         if inf1 * inf2 < 0:
             return False
+
+        pair = (min(n1, n2), max(n1, n2))
+        relation_metrics = self.social_relation_pair_metrics.get(pair)
+        if relation_metrics:
+            hostility = relation_metrics.get("hostility_weight", 0.0)
+            alliance = relation_metrics.get("alliance_weight", 0.0)
+            trust = relation_metrics.get("trust_weight", 0.0)
+            if hostility >= 0.60 and max(alliance, trust) < 0.30:
+                return False
 
         # 工程增强：当两侧都有语义信息时，加一层语义一致性约束
         has_semantic = (
@@ -912,6 +1223,28 @@ class TopologyAwareRuntime:
 
         by_src: Dict[int, List[Tuple[int, float, str]]] = defaultdict(list)
 
+        for (src, dst), metrics in self.social_relation_directed.items():
+            if src == dst:
+                continue
+            if (src, dst) in self.known_follow_pairs:
+                continue
+
+            exposure = metrics.get("exposure_weight", 0.0)
+            trust = metrics.get("trust_weight", 0.0)
+            alliance = metrics.get("alliance_weight", 0.0)
+            hostility = metrics.get("hostility_weight", 0.0)
+            prior = metrics.get("interaction_prior", 0.0)
+            score = (
+                0.38 * exposure
+                + 0.24 * trust
+                + 0.20 * alliance
+                + 0.18 * max(0.0, prior)
+                - 0.28 * hostility
+            )
+            if score <= 0.05:
+                continue
+            by_src[src].append((dst, score, "social_relation_graph"))
+
         for (src, dst), rel_strength in self.graph_prior_directed.items():
             if src == dst:
                 continue
@@ -1106,6 +1439,8 @@ class SimpleMemRuntime:
     """
 
     MEM_MARKER = "\n\n[SimpleMem Retrieved]\n"
+    ABSTRACT_HEADER = "[ABSTRACT REPRESENTATIONS]"
+    DETAIL_HEADER = "[DETAILED MEMORY UNITS]"
 
     def __init__(
         self,
@@ -1130,11 +1465,33 @@ class SimpleMemRuntime:
         )
         self.max_injected_chars = max(300, int(mem_cfg.get("max_injected_chars", 1200)))
         self.recency_decay = max(0.001, _safe_float(mem_cfg.get("recency_decay", 0.08), 0.08))
+        self.min_salience_to_store = min(
+            1.0, max(0.0, _safe_float(mem_cfg.get("min_salience_to_store", 0.28), 0.28))
+        )
+        self.world_salience_threshold = min(
+            1.0, max(0.0, _safe_float(mem_cfg.get("world_salience_threshold", 0.60), 0.60))
+        )
+        self.merge_compare_window = max(4, int(mem_cfg.get("merge_compare_window", 12)))
+        self.max_world_units = max(20, int(mem_cfg.get("max_world_units", 120)))
+        self.abstract_topk = max(1, int(mem_cfg.get("abstract_topk", 3)))
+        self.detail_topk = max(1, int(mem_cfg.get("detail_topk", 4)))
+        self.self_scope_max = max(1, int(mem_cfg.get("self_scope_max", 3)))
+        self.neighbor_scope_max = max(1, int(mem_cfg.get("neighbor_scope_max", 2)))
+        self.world_scope_max = max(1, int(mem_cfg.get("world_scope_max", 2)))
+        self.enable_world_memory = bool(mem_cfg.get("enable_world_memory", True))
 
         self.memory_file = os.path.join(simulation_dir, f"simplemem_{platform}.json")
+        self.memory_artifact_dir = os.path.join(simulation_dir, "artifacts", "memory", platform)
+        self.memory_trace_file = os.path.join(self.memory_artifact_dir, "memory_trace.jsonl")
+        self.retrieval_trace_file = os.path.join(self.memory_artifact_dir, "retrieval_trace.jsonl")
+        self.memory_state_file = os.path.join(self.memory_artifact_dir, "memory_state.jsonl")
+        self.memory_latest_file = os.path.join(self.memory_artifact_dir, "latest_memory_state.json")
+        os.makedirs(self.memory_artifact_dir, exist_ok=True)
         self.per_agent_units: Dict[int, List[Dict[str, Any]]] = {}
+        self.world_units: List[Dict[str, Any]] = []
         self._agent_base_cache: Dict[Tuple[int, str], str] = {}
         self._seq = 0
+        self._sim_start = self._resolve_simulation_start()
 
         if self.enabled:
             self._load()
@@ -1157,10 +1514,14 @@ class SimpleMemRuntime:
                 except Exception:
                     continue
                 if isinstance(v, list):
-                    self.per_agent_units[aid] = v
+                    self.per_agent_units[aid] = [self._normalize_loaded_unit(unit, aid) for unit in v]
+            raw_world = data.get("world_units", [])
+            if isinstance(raw_world, list):
+                self.world_units = [self._normalize_loaded_unit(unit, None) for unit in raw_world]
         except Exception as e:
             self.log(f"加载SimpleMem失败，使用空记忆: {e}")
             self.per_agent_units = {}
+            self.world_units = []
             self._seq = 0
 
     def _save(self):
@@ -1169,12 +1530,71 @@ class SimpleMemRuntime:
             "updated_at": datetime.now().isoformat(),
             "seq": self._seq,
             "per_agent_units": self.per_agent_units,
+            "world_units": self.world_units,
         }
         try:
             with open(self.memory_file, "w", encoding="utf-8") as f:
                 json.dump(payload, f, ensure_ascii=False, indent=2)
         except Exception as e:
             self.log(f"保存SimpleMem失败: {e}")
+
+    def _append_jsonl(self, path: str, payload: Dict[str, Any]):
+        with open(path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(payload, ensure_ascii=False) + "\n")
+
+    def _write_json(self, path: str, payload: Dict[str, Any]):
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+
+    def _agent_display_name(self, agent_id: int) -> str:
+        if self.topology_runtime:
+            return self.topology_runtime._agent_display_name(agent_id)
+        return f"Agent_{agent_id}"
+
+    def _resolve_simulation_start(self) -> datetime:
+        raw = self.config.get("generated_at") or self.config.get("created_at")
+        if isinstance(raw, str) and raw.strip():
+            try:
+                return datetime.fromisoformat(raw.strip())
+            except Exception:
+                pass
+        return datetime.now()
+
+    def _make_timestamp(self, round_num: int) -> str:
+        minutes_per_round = max(1, int((self.config.get("time_config", {}) or {}).get("minutes_per_round", 60)))
+        offset_minutes = max(0, round_num - 1) * minutes_per_round
+        return (self._sim_start + timedelta(minutes=offset_minutes)).isoformat()
+
+    def _coerce_int(self, value: Any, default: Optional[int] = None) -> Optional[int]:
+        try:
+            if value is None or value == "":
+                return default
+            return int(value)
+        except (TypeError, ValueError):
+            return default
+
+    def _dedup_texts(self, values: List[Any], limit: int) -> List[str]:
+        results: List[str] = []
+        seen = set()
+        for raw in values:
+            text = str(raw or "").strip()
+            if not text:
+                continue
+            key = text.lower()
+            if key in seen:
+                continue
+            seen.add(key)
+            results.append(text)
+            if len(results) >= limit:
+                break
+        return results
+
+    def _salience_label(self, score: float) -> str:
+        if score >= 0.75:
+            return "high"
+        if score >= 0.45:
+            return "medium"
+        return "low"
 
     def _extract_keywords(self, text: str, max_count: int = 8) -> List[str]:
         tokens = re.findall(r"[a-zA-Z0-9_\u4e00-\u9fff]{2,}", (text or "").lower())
@@ -1209,29 +1629,605 @@ class SimpleMemRuntime:
 
         return " | ".join(fragments)
 
+    def _extract_entities(self, action_data: Dict[str, Any]) -> List[str]:
+        args = action_data.get("action_args", {}) or {}
+        values = [action_data.get("agent_name", "")]
+        for key in [
+            "target_user_name",
+            "post_author_name",
+            "comment_author_name",
+            "original_author_name",
+        ]:
+            values.append(args.get(key, ""))
+        return self._dedup_texts(values, limit=6)
+
+    def _extract_target_agent_ids(self, action_data: Dict[str, Any]) -> List[int]:
+        ids: List[int] = []
+        args = action_data.get("action_args", {}) or {}
+        for key in [
+            "target_agent_id",
+            "post_author_agent_id",
+            "comment_author_agent_id",
+            "original_author_agent_id",
+        ]:
+            val = self._coerce_int(args.get(key))
+            if val is not None:
+                ids.append(val)
+        if self.topology_runtime and hasattr(self.topology_runtime, "_extract_target_agent_ids"):
+            try:
+                ids.extend(self.topology_runtime._extract_target_agent_ids(args))
+            except Exception:
+                pass
+        dedup: List[int] = []
+        seen = set()
+        for aid in ids:
+            if aid in seen:
+                continue
+            seen.add(aid)
+            dedup.append(aid)
+        return dedup
+
+    def _infer_topic(self, action_data: Dict[str, Any], summary: str, keywords: List[str]) -> str:
+        text = summary.lower()
+        event_cfg = self.config.get("event_config", {}) or {}
+        hot_topics = [str(x).strip() for x in (event_cfg.get("hot_topics", []) or []) if str(x).strip()]
+        matched_topics = [topic for topic in hot_topics if topic.lower() in text]
+        if matched_topics:
+            return " / ".join(matched_topics[:2])
+
+        action_type = str(action_data.get("action_type", "") or "").upper()
+        topical_keywords = [kw for kw in keywords if len(kw) >= 3]
+        if action_type in {"FOLLOW", "MUTE"}:
+            return "social_relation"
+        if action_type in {"REPOST", "QUOTE_POST"}:
+            return topical_keywords[0] if topical_keywords else "content_amplification"
+        if action_type == "CREATE_COMMENT":
+            return topical_keywords[0] if topical_keywords else "discussion"
+        if action_type == "CREATE_POST":
+            return topical_keywords[0] if topical_keywords else "new_post"
+        return topical_keywords[0] if topical_keywords else "general"
+
+    def _estimate_salience(
+        self,
+        action_data: Dict[str, Any],
+        topic: str,
+        target_agent_ids: List[int],
+        keywords: List[str],
+    ) -> float:
+        action_type = str(action_data.get("action_type", "") or "").upper()
+        base = {
+            "CREATE_POST": 0.75,
+            "QUOTE_POST": 0.80,
+            "REPOST": 0.72,
+            "FOLLOW": 0.64,
+            "CREATE_COMMENT": 0.58,
+            "SEARCH_USER": 0.34,
+            "LIKE_POST": 0.28,
+            "LIKE_COMMENT": 0.26,
+            "DISLIKE_POST": 0.34,
+            "DISLIKE_COMMENT": 0.32,
+            "MUTE": 0.55,
+        }.get(action_type, 0.20)
+
+        event_cfg = self.config.get("event_config", {}) or {}
+        hot_topics = {str(x).strip().lower() for x in (event_cfg.get("hot_topics", []) or []) if str(x).strip()}
+        if topic and topic.lower() in hot_topics:
+            base += 0.10
+        if any(kw.lower() in hot_topics for kw in keywords):
+            base += 0.06
+        if target_agent_ids:
+            base += 0.08
+
+        source_agent = self._coerce_int(action_data.get("agent_id"), -1)
+        if self.topology_runtime and source_agent is not None and source_agent >= 0:
+            base += 0.05 * max(0.0, self.topology_runtime.importance_scaled.get(source_agent, 1.0) - 1.0)
+            base += 0.08 * min(1.0, self.topology_runtime.ppr_centrality.get(source_agent, 0.0))
+
+        return max(0.0, min(1.0, base))
+
+    def _synthesize_abstract_summary(self, unit: Dict[str, Any]) -> str:
+        topic = str(unit.get("topic", "general") or "general").strip()
+        entities = self._dedup_texts(unit.get("entities", []) or [], limit=4)
+        entity_text = ", ".join(entities) if entities else "unknown entities"
+        latest_summary = str(unit.get("summary", "") or "").strip()
+        latest_summary = latest_summary[:180]
+        timestamp = str(unit.get("timestamp", "") or "").strip()
+        prefix = f"[{topic}] {entity_text}"
+        if timestamp:
+            prefix += f" @ {timestamp}"
+        if latest_summary:
+            return f"{prefix}: {latest_summary}"
+        return prefix
+
+    def _normalize_loaded_unit(self, unit: Dict[str, Any], fallback_agent_id: Optional[int]) -> Dict[str, Any]:
+        if not isinstance(unit, dict):
+            unit = {}
+        summary = str(unit.get("summary", "") or "").strip()
+        summaries = unit.get("summaries", [])
+        if not isinstance(summaries, list):
+            summaries = []
+        detail_units = unit.get("detail_units", [])
+        if not isinstance(detail_units, list):
+            detail_units = []
+
+        if not summaries and summary:
+            summaries = [summary]
+        if not detail_units and summaries:
+            detail_units = [
+                {
+                    "id": unit.get("id"),
+                    "summary": s,
+                    "timestamp": unit.get("timestamp", ""),
+                    "action_type": unit.get("action_type", ""),
+                    "agent_name": unit.get("agent_name", ""),
+                }
+                for s in summaries[-6:]
+            ]
+
+        agent_id = self._coerce_int(unit.get("agent_id"), fallback_agent_id if fallback_agent_id is not None else -1)
+        entities = unit.get("entities", [])
+        if not isinstance(entities, list):
+            entities = []
+        if not entities and unit.get("agent_name"):
+            entities = [unit.get("agent_name")]
+
+        keywords = unit.get("keywords", [])
+        if not isinstance(keywords, list):
+            keywords = []
+
+        normalized = {
+            "id": unit.get("id", f"{self.platform}_legacy_{self._seq + 1}"),
+            "agent_id": agent_id,
+            "source_agent_id": self._coerce_int(unit.get("source_agent_id"), agent_id),
+            "agent_name": unit.get("agent_name", f"Agent_{agent_id}"),
+            "source_agent_name": unit.get("source_agent_name", unit.get("agent_name", f"Agent_{agent_id}")),
+            "action_type": unit.get("action_type", ""),
+            "content": unit.get("content", summary),
+            "summary": summary,
+            "abstract_summary": unit.get("abstract_summary", self._synthesize_abstract_summary({
+                **unit,
+                "summary": summary,
+                "entities": entities,
+                "topic": unit.get("topic", "general"),
+                "timestamp": unit.get("timestamp", ""),
+            })),
+            "summaries": summaries[-6:],
+            "detail_units": detail_units[-6:],
+            "keywords": self._dedup_texts(keywords, limit=10),
+            "entities": self._dedup_texts(entities, limit=8),
+            "topic": unit.get("topic", "general"),
+            "timestamp": unit.get("timestamp", ""),
+            "salience": unit.get("salience", "medium"),
+            "salience_score": _safe_float(unit.get("salience_score", 0.5), 0.5),
+            "first_round": self._coerce_int(unit.get("first_round"), 0) or 0,
+            "last_round": self._coerce_int(unit.get("last_round"), 0) or 0,
+            "last_hour": self._coerce_int(unit.get("last_hour"), 0) or 0,
+            "count": self._coerce_int(unit.get("count"), 1) or 1,
+            "target_agent_ids": unit.get("target_agent_ids", []) or [],
+            "supporting_ids": unit.get("supporting_ids", [unit.get("id")]) or [unit.get("id")],
+            "scope": unit.get("scope", "self"),
+        }
+        return normalized
+
     def _unit_similarity(self, a: Dict[str, Any], b: Dict[str, Any]) -> float:
         ak = set(a.get("keywords", []) or [])
         bk = set(b.get("keywords", []) or [])
-        if not ak or not bk:
-            return 0.0
-        inter = len(ak & bk)
-        union = len(ak | bk)
-        return inter / union if union > 0 else 0.0
+        kw_sim = 0.0
+        if ak and bk:
+            inter = len(ak & bk)
+            union = len(ak | bk)
+            kw_sim = inter / union if union > 0 else 0.0
+
+        ae = {str(x).strip().lower() for x in (a.get("entities", []) or []) if str(x).strip()}
+        be = {str(x).strip().lower() for x in (b.get("entities", []) or []) if str(x).strip()}
+        ent_sim = 0.0
+        if ae and be:
+            inter = len(ae & be)
+            union = len(ae | be)
+            ent_sim = inter / union if union > 0 else 0.0
+
+        topic_sim = 1.0 if str(a.get("topic", "")).strip().lower() == str(b.get("topic", "")).strip().lower() and str(a.get("topic", "")).strip() else 0.0
+        return 0.5 * kw_sim + 0.3 * ent_sim + 0.2 * topic_sim
 
     def _merge_unit(self, base: Dict[str, Any], new_unit: Dict[str, Any]):
         base_keywords = set(base.get("keywords", []) or [])
         base_keywords.update(new_unit.get("keywords", []) or [])
-        base["keywords"] = list(base_keywords)[:10]
+        base["keywords"] = self._dedup_texts(list(base_keywords), limit=10)
+
+        merged_entities = list(base.get("entities", []) or []) + list(new_unit.get("entities", []) or [])
+        base["entities"] = self._dedup_texts(merged_entities, limit=8)
+
+        merged_targets = list(base.get("target_agent_ids", []) or []) + list(new_unit.get("target_agent_ids", []) or [])
+        dedup_targets = []
+        seen_targets = set()
+        for aid in merged_targets:
+            try:
+                val = int(aid)
+            except Exception:
+                continue
+            if val in seen_targets:
+                continue
+            seen_targets.add(val)
+            dedup_targets.append(val)
+        base["target_agent_ids"] = dedup_targets
+
         base["last_round"] = new_unit.get("last_round", base.get("last_round", 0))
         base["last_hour"] = new_unit.get("last_hour", base.get("last_hour", 0))
+        base["timestamp"] = new_unit.get("timestamp", base.get("timestamp", ""))
         base["count"] = int(base.get("count", 1)) + int(new_unit.get("count", 1))
+        base["salience_score"] = max(
+            _safe_float(base.get("salience_score", 0.0), 0.0),
+            _safe_float(new_unit.get("salience_score", 0.0), 0.0),
+        )
+        base["salience"] = self._salience_label(_safe_float(base.get("salience_score", 0.0), 0.0))
 
-        summaries = base.get("summaries", []) or []
-        text = new_unit.get("summary", "")
+        summaries = list(base.get("summaries", []) or [])
+        text = str(new_unit.get("summary", "") or "")
         if text and text not in summaries:
             summaries.append(text)
-        base["summaries"] = summaries[-4:]
+        base["summaries"] = summaries[-6:]
         base["summary"] = summaries[-1] if summaries else base.get("summary", "")
+
+        detail_units = list(base.get("detail_units", []) or [])
+        detail_unit = {
+            "id": new_unit.get("id"),
+            "summary": new_unit.get("summary", ""),
+            "timestamp": new_unit.get("timestamp", ""),
+            "action_type": new_unit.get("action_type", ""),
+            "agent_name": new_unit.get("source_agent_name", new_unit.get("agent_name", "")),
+        }
+        if detail_unit["summary"]:
+            detail_units.append(detail_unit)
+        base["detail_units"] = detail_units[-6:]
+
+        supporting_ids = list(base.get("supporting_ids", []) or []) + list(new_unit.get("supporting_ids", []) or [new_unit.get("id")])
+        base["supporting_ids"] = self._dedup_texts(supporting_ids, limit=20)
+
+        if not str(base.get("topic", "")).strip() and str(new_unit.get("topic", "")).strip():
+            base["topic"] = new_unit.get("topic")
+
+        base["abstract_summary"] = self._synthesize_abstract_summary(base)
+
+    def _estimate_unit_complexity(self, query_keywords: set, agent_id: int) -> str:
+        score = len(query_keywords)
+        if self.per_agent_units.get(agent_id):
+            score += min(2, len(self.per_agent_units.get(agent_id, [])[-2:]))
+        hot_topics = (self.config.get("event_config", {}) or {}).get("hot_topics", []) or []
+        if len(hot_topics) >= 3:
+            score += 1
+        if score >= 6:
+            return "HIGH"
+        if score >= 3:
+            return "MEDIUM"
+        return "LOW"
+
+    def _build_retrieval_plan(self, agent_id: int, current_round: int) -> Dict[str, Any]:
+        query_keywords = self._build_intent_keywords(agent_id)
+        query_entities = set()
+        if self.topology_runtime:
+            entity_name = self.topology_runtime.agent_entity_name.get(agent_id, "")
+            if entity_name:
+                query_entities.add(str(entity_name).strip().lower())
+        profile = {}
+        if self.topology_runtime:
+            profile = self.topology_runtime.profile_by_agent_id.get(agent_id, {}) or {}
+        for topic in profile.get("interested_topics", []) or []:
+            if topic:
+                query_entities.add(str(topic).strip().lower())
+
+        complexity = self._estimate_unit_complexity(query_keywords, agent_id)
+        if complexity == "HIGH":
+            depth = min(max(self.retrieval_topk, 8), self.max_units_per_agent)
+            self_k = min(self.self_scope_max + 1, depth)
+            neighbor_k = min(self.neighbor_scope_max + 1, depth)
+            world_k = min(self.world_scope_max + 1, depth)
+            recent_window = 24
+        elif complexity == "MEDIUM":
+            depth = max(self.retrieval_topk, 5)
+            self_k = self.self_scope_max
+            neighbor_k = self.neighbor_scope_max
+            world_k = self.world_scope_max
+            recent_window = 12
+        else:
+            depth = max(3, self.retrieval_topk)
+            self_k = max(1, self.self_scope_max - 1)
+            neighbor_k = max(1, self.neighbor_scope_max - 1)
+            world_k = 1
+            recent_window = 6
+
+        return {
+            "complexity": complexity,
+            "retrieval_depth": depth,
+            "query_keywords": query_keywords,
+            "query_entities": query_entities,
+            "recent_round_window": recent_window,
+            "self_k": self_k,
+            "neighbor_k": neighbor_k,
+            "world_k": world_k,
+            "include_world": self.enable_world_memory and (complexity != "LOW" or bool((self.config.get("event_config", {}) or {}).get("hot_topics"))),
+        }
+
+    def _unit_score(
+        self,
+        unit: Dict[str, Any],
+        plan: Dict[str, Any],
+        current_round: int,
+        for_agent_id: int,
+        scope: str,
+    ) -> float:
+        query_keywords = plan.get("query_keywords", set()) or set()
+        query_entities = plan.get("query_entities", set()) or set()
+        unit_keywords = set(unit.get("keywords", []) or [])
+        keyword_sim = 0.0
+        if query_keywords and unit_keywords:
+            inter = len(query_keywords & unit_keywords)
+            union = len(query_keywords | unit_keywords)
+            keyword_sim = inter / union if union > 0 else 0.0
+
+        unit_entities = {str(x).strip().lower() for x in (unit.get("entities", []) or []) if str(x).strip()}
+        entity_sim = 0.0
+        if query_entities and unit_entities:
+            inter = len(query_entities & unit_entities)
+            union = len(query_entities | unit_entities)
+            entity_sim = inter / union if union > 0 else 0.0
+
+        age = max(0, current_round - int(unit.get("last_round", current_round)))
+        recency = math.exp(-self.recency_decay * age)
+        if age > int(plan.get("recent_round_window", 12)):
+            recency *= 0.7
+
+        source_agent = int(unit.get("source_agent_id", unit.get("agent_id", -1)))
+        source_weight = 1.0
+        if self.topology_runtime and source_agent >= 0:
+            source_weight += 0.25 * self.topology_runtime.importance_scaled.get(source_agent, 1.0)
+            source_weight += 0.15 * self.topology_runtime.ppr_centrality.get(source_agent, 0.0)
+
+        salience_score = _safe_float(unit.get("salience_score", 0.5), 0.5)
+        salience_bonus = 0.9 + 0.35 * salience_score
+        local_bonus = 1.2 if source_agent == for_agent_id else 1.0
+        scope_bonus = {
+            "self": 1.10,
+            "neighbor": 1.0,
+            "world": 0.95 if plan.get("complexity") == "LOW" else 1.05,
+        }.get(scope, 1.0)
+        count_bonus = 1.0 + 0.05 * min(6, int(unit.get("count", 1)))
+        topic_bonus = 1.08 if str(unit.get("topic", "")).strip().lower() in query_keywords else 1.0
+
+        return (
+            (0.45 * keyword_sim + 0.20 * entity_sim + 0.35 * recency)
+            * source_weight
+            * salience_bonus
+            * local_bonus
+            * scope_bonus
+            * count_bonus
+            * topic_bonus
+        )
+
+    def _build_world_unit(self, unit: Dict[str, Any]) -> Dict[str, Any]:
+        world_unit = dict(unit)
+        world_unit["scope"] = "world"
+        world_unit["id"] = f"{unit.get('id')}_world"
+        world_unit["supporting_ids"] = list(unit.get("supporting_ids", []) or [unit.get("id")])
+        return world_unit
+
+    def _ingest_world_unit(self, unit: Dict[str, Any]) -> Dict[str, Any]:
+        result = {
+            "stored": False,
+            "merged": False,
+            "world_unit_id": None,
+        }
+        if not self.enable_world_memory:
+            return result
+        if _safe_float(unit.get("salience_score", 0.0), 0.0) < self.world_salience_threshold:
+            return result
+
+        world_unit = self._build_world_unit(unit)
+        merged = False
+        for old in reversed(self.world_units[-self.merge_compare_window:]):
+            sim = self._unit_similarity(old, world_unit)
+            if sim >= self.merge_jaccard_threshold:
+                self._merge_unit(old, world_unit)
+                merged = True
+                result["stored"] = True
+                result["merged"] = True
+                result["world_unit_id"] = old.get("id")
+                break
+        if not merged:
+            self.world_units.append(world_unit)
+            result["stored"] = True
+            result["world_unit_id"] = world_unit.get("id")
+        if len(self.world_units) > self.max_world_units:
+            self.world_units = self.world_units[-self.max_world_units:]
+        return result
+
+    def _record_memory_store(
+        self,
+        round_num: int,
+        simulated_hour: int,
+        unit: Dict[str, Any],
+        merged: bool,
+        merged_into_id: Optional[str],
+        world_result: Dict[str, Any],
+    ):
+        payload = {
+            "timestamp": datetime.now().isoformat(),
+            "platform": self.platform,
+            "event_type": "memory_store",
+            "round": round_num,
+            "simulated_hour": simulated_hour,
+            "agent_id": unit.get("agent_id"),
+            "agent_name": unit.get("agent_name"),
+            "unit_id": unit.get("id"),
+            "topic": unit.get("topic"),
+            "keywords": unit.get("keywords", []) or [],
+            "entities": unit.get("entities", []) or [],
+            "salience": unit.get("salience"),
+            "salience_score": unit.get("salience_score"),
+            "merged": bool(merged),
+            "merged_into_id": merged_into_id,
+            "world_stored": bool(world_result.get("stored")),
+            "world_merged": bool(world_result.get("merged")),
+            "world_unit_id": world_result.get("world_unit_id"),
+            "summary": str(unit.get("summary", "") or "")[:300],
+        }
+        self._append_jsonl(self.memory_trace_file, payload)
+
+    def _record_retrieval_trace(
+        self,
+        agent_id: int,
+        current_round: int,
+        plan: Dict[str, Any],
+        selected: List[Tuple[str, Dict[str, Any], float]],
+        memory_context: str,
+        miss_reason: str = "",
+    ):
+        query_keywords = sorted(plan.get("query_keywords", set()) or set())
+        query_entities = sorted(plan.get("query_entities", set()) or set())
+        payload = {
+            "timestamp": datetime.now().isoformat(),
+            "platform": self.platform,
+            "event_type": "retrieval",
+            "round": current_round,
+            "agent_id": agent_id,
+            "agent_name": self._agent_display_name(agent_id),
+            "plan": {
+                "complexity": plan.get("complexity"),
+                "retrieval_depth": plan.get("retrieval_depth"),
+                "recent_round_window": plan.get("recent_round_window"),
+                "self_k": plan.get("self_k"),
+                "neighbor_k": plan.get("neighbor_k"),
+                "world_k": plan.get("world_k"),
+                "include_world": plan.get("include_world"),
+                "query_keywords": query_keywords,
+                "query_entities": query_entities,
+            },
+            "miss_reason": miss_reason,
+            "selected_units": [
+                {
+                    "scope": scope,
+                    "unit_id": unit.get("id"),
+                    "source_agent_id": unit.get("source_agent_id", unit.get("agent_id")),
+                    "source_agent_name": unit.get("source_agent_name", unit.get("agent_name")),
+                    "topic": unit.get("topic"),
+                    "keywords": unit.get("keywords", []) or [],
+                    "salience_score": unit.get("salience_score"),
+                    "score": round(float(score), 6),
+                    "summary": str(unit.get("summary", "") or "")[:220],
+                }
+                for scope, unit, score in selected[:8]
+            ],
+            "context_preview": memory_context[:600],
+        }
+        self._append_jsonl(self.retrieval_trace_file, payload)
+
+    def _top_units(self, units: List[Dict[str, Any]], limit: int = 6) -> List[Dict[str, Any]]:
+        ranked = sorted(
+            units,
+            key=lambda u: (
+                _safe_float(u.get("salience_score", 0.0), 0.0),
+                int(u.get("count", 1) or 1),
+                int(u.get("last_round", 0) or 0),
+            ),
+            reverse=True,
+        )
+        return [
+            {
+                "unit_id": unit.get("id"),
+                "agent_id": unit.get("agent_id"),
+                "agent_name": unit.get("agent_name"),
+                "topic": unit.get("topic"),
+                "salience_score": round(float(_safe_float(unit.get("salience_score", 0.0), 0.0)), 6),
+                "count": int(unit.get("count", 1) or 1),
+                "keywords": unit.get("keywords", []) or [],
+                "summary": str(unit.get("summary", "") or "")[:220],
+            }
+            for unit in ranked[:limit]
+        ]
+
+    def record_round_state(
+        self,
+        round_num: int,
+        simulated_hour: int,
+        active_agent_ids: Optional[List[int]] = None,
+    ):
+        all_units: List[Dict[str, Any]] = []
+        for units in self.per_agent_units.values():
+            all_units.extend(units)
+
+        payload = {
+            "timestamp": datetime.now().isoformat(),
+            "platform": self.platform,
+            "round": round_num,
+            "simulated_hour": simulated_hour,
+            "active_agent_ids": [int(aid) for aid in (active_agent_ids or [])],
+            "active_agent_names": [self._agent_display_name(int(aid)) for aid in (active_agent_ids or [])],
+            "agents_with_memory": len(self.per_agent_units),
+            "total_agent_units": sum(len(units) for units in self.per_agent_units.values()),
+            "world_units": len(self.world_units),
+            "top_agent_units": self._top_units(all_units),
+            "top_world_units": self._top_units(self.world_units),
+        }
+        self._append_jsonl(self.memory_state_file, payload)
+        self._write_json(self.memory_latest_file, payload)
+
+    def _build_memory_unit(
+        self,
+        action_data: Dict[str, Any],
+        round_num: int,
+        simulated_hour: int,
+    ) -> Optional[Dict[str, Any]]:
+        agent_id = self._coerce_int(action_data.get("agent_id"), -1)
+        if agent_id is None or agent_id < 0:
+            return None
+
+        summary = self._build_memory_text(action_data)
+        if not summary:
+            return None
+
+        keywords = self._extract_keywords(summary, max_count=8)
+        entities = self._extract_entities(action_data)
+        target_agent_ids = self._extract_target_agent_ids(action_data)
+        topic = self._infer_topic(action_data, summary, keywords)
+        salience_score = self._estimate_salience(action_data, topic, target_agent_ids, keywords)
+        if salience_score < self.min_salience_to_store:
+            return None
+
+        self._seq += 1
+        unit = {
+            "id": f"{self.platform}_m_{self._seq}",
+            "agent_id": agent_id,
+            "source_agent_id": agent_id,
+            "agent_name": action_data.get("agent_name", f"Agent_{agent_id}"),
+            "source_agent_name": action_data.get("agent_name", f"Agent_{agent_id}"),
+            "action_type": action_data.get("action_type", ""),
+            "content": summary[:500],
+            "summary": summary[:500],
+            "summaries": [summary[:500]],
+            "detail_units": [],
+            "keywords": keywords,
+            "entities": entities,
+            "topic": topic,
+            "timestamp": self._make_timestamp(round_num),
+            "salience": self._salience_label(salience_score),
+            "salience_score": round(salience_score, 4),
+            "first_round": round_num,
+            "last_round": round_num,
+            "last_hour": simulated_hour,
+            "count": 1,
+            "target_agent_ids": target_agent_ids,
+            "supporting_ids": [],
+            "scope": "self",
+        }
+        unit["detail_units"] = [{
+            "id": unit["id"],
+            "summary": unit["summary"],
+            "timestamp": unit["timestamp"],
+            "action_type": unit["action_type"],
+            "agent_name": unit["source_agent_name"],
+        }]
+        unit["supporting_ids"] = [unit["id"]]
+        unit["abstract_summary"] = self._synthesize_abstract_summary(unit)
+        return unit
 
     def ingest_round_actions(
         self,
@@ -1243,44 +2239,36 @@ class SimpleMemRuntime:
             return
 
         for action in actions:
-            agent_id = int(action.get("agent_id", -1))
-            if agent_id < 0:
+            unit = self._build_memory_unit(action, round_num, simulated_hour)
+            if unit is None:
                 continue
 
-            summary = self._build_memory_text(action)
-            if not summary:
-                continue
-            keywords = self._extract_keywords(summary, max_count=8)
-
-            self._seq += 1
-            new_unit = {
-                "id": f"{self.platform}_m_{self._seq}",
-                "agent_id": agent_id,
-                "agent_name": action.get("agent_name", f"Agent_{agent_id}"),
-                "action_type": action.get("action_type", ""),
-                "summary": summary[:500],
-                "summaries": [summary[:500]],
-                "keywords": keywords,
-                "first_round": round_num,
-                "last_round": round_num,
-                "last_hour": simulated_hour,
-                "count": 1,
-            }
-
+            agent_id = int(unit.get("agent_id", -1))
             bucket = self.per_agent_units.setdefault(agent_id, [])
             merged = False
-            # 在线语义合并：只看最近若干条，保持增量成本
-            for old in reversed(bucket[-12:]):
-                sim = self._unit_similarity(old, new_unit)
+            merged_into_id = None
+            for old in reversed(bucket[-self.merge_compare_window:]):
+                sim = self._unit_similarity(old, unit)
                 if sim >= self.merge_jaccard_threshold:
-                    self._merge_unit(old, new_unit)
+                    self._merge_unit(old, unit)
                     merged = True
+                    merged_into_id = str(old.get("id", "") or "")
                     break
             if not merged:
-                bucket.append(new_unit)
+                bucket.append(unit)
 
             if len(bucket) > self.max_units_per_agent:
                 self.per_agent_units[agent_id] = bucket[-self.max_units_per_agent:]
+
+            world_result = self._ingest_world_unit(unit)
+            self._record_memory_store(
+                round_num=round_num,
+                simulated_hour=simulated_hour,
+                unit=unit,
+                merged=merged,
+                merged_into_id=merged_into_id,
+                world_result=world_result,
+            )
 
         self._save()
 
@@ -1306,69 +2294,109 @@ class SimpleMemRuntime:
 
         return {x for x in intent if x}
 
-    def _candidate_units(self, agent_id: int) -> List[Dict[str, Any]]:
-        candidates = list(self.per_agent_units.get(agent_id, []))
+    def _candidate_units(self, agent_id: int, plan: Dict[str, Any]) -> Dict[str, List[Dict[str, Any]]]:
+        buckets: Dict[str, List[Dict[str, Any]]] = {
+            "self": list(self.per_agent_units.get(agent_id, [])),
+            "neighbor": [],
+            "world": list(self.world_units) if plan.get("include_world") else [],
+        }
         if self.topology_runtime:
             neighbors = self.topology_runtime.synthetic_adj.get(agent_id, []) or []
-            # 只拿局部邻域，控制成本
             for nb in neighbors[:12]:
                 units = self.per_agent_units.get(nb, [])
                 if units:
-                    candidates.extend(units[-8:])
-        return candidates
-
-    def _unit_score(
-        self,
-        unit: Dict[str, Any],
-        query_keywords: set,
-        current_round: int,
-        for_agent_id: int
-    ) -> float:
-        unit_keywords = set(unit.get("keywords", []) or [])
-        if query_keywords and unit_keywords:
-            inter = len(query_keywords & unit_keywords)
-            union = len(query_keywords | unit_keywords)
-            semantic = inter / union if union > 0 else 0.0
-        else:
-            semantic = 0.0
-
-        age = max(0, current_round - int(unit.get("last_round", current_round)))
-        recency = math.exp(-self.recency_decay * age)
-
-        source_agent = int(unit.get("agent_id", -1))
-        source_weight = 1.0
-        if self.topology_runtime and source_agent >= 0:
-            source_weight += 0.25 * self.topology_runtime.importance_scaled.get(source_agent, 1.0)
-            source_weight += 0.15 * self.topology_runtime.ppr_centrality.get(source_agent, 0.0)
-
-        local_bonus = 1.2 if source_agent == for_agent_id else 1.0
-        count_bonus = 1.0 + 0.05 * min(6, int(unit.get("count", 1)))
-        return (0.55 * semantic + 0.45 * recency) * source_weight * local_bonus * count_bonus
+                    buckets["neighbor"].extend(units[-8:])
+        return buckets
 
     def build_memory_context(self, agent_id: int, current_round: int) -> str:
         if not self.enabled:
             return ""
 
-        query_keywords = self._build_intent_keywords(agent_id)
-        candidates = self._candidate_units(agent_id)
-        if not candidates:
+        plan = self._build_retrieval_plan(agent_id, current_round)
+        candidate_buckets = self._candidate_units(agent_id, plan)
+        if not any(candidate_buckets.values()):
+            self._record_retrieval_trace(
+                agent_id=agent_id,
+                current_round=current_round,
+                plan=plan,
+                selected=[],
+                memory_context="",
+                miss_reason="no_candidate_units",
+            )
             return ""
 
-        ranked = sorted(
-            candidates,
-            key=lambda u: self._unit_score(u, query_keywords, current_round, agent_id),
-            reverse=True
-        )
+        selected: List[Tuple[str, Dict[str, Any], float]] = []
+        for scope, limit_key in [("self", "self_k"), ("neighbor", "neighbor_k"), ("world", "world_k")]:
+            scope_units = candidate_buckets.get(scope, [])
+            if not scope_units:
+                continue
+            ranked = sorted(
+                scope_units,
+                key=lambda u: self._unit_score(u, plan, current_round, agent_id, scope),
+                reverse=True,
+            )
+            for unit in ranked[: int(plan.get(limit_key, 0) or 0)]:
+                score = self._unit_score(unit, plan, current_round, agent_id, scope)
+                selected.append((scope, unit, score))
 
-        selected = ranked[:self.retrieval_topk]
-        lines: List[str] = []
-        for u in selected:
+        if not selected:
+            self._record_retrieval_trace(
+                agent_id=agent_id,
+                current_round=current_round,
+                plan=plan,
+                selected=[],
+                memory_context="",
+                miss_reason="no_selected_units",
+            )
+            return ""
+
+        selected.sort(key=lambda x: x[2], reverse=True)
+
+        seen = set()
+        dedup_selected: List[Tuple[str, Dict[str, Any], float]] = []
+        for scope, unit, score in selected:
+            uid = unit.get("id")
+            if uid in seen:
+                continue
+            seen.add(uid)
+            dedup_selected.append((scope, unit, score))
+
+        abstracts: List[str] = []
+        details: List[str] = []
+        for idx, (scope, u, _) in enumerate(dedup_selected):
             src_name = u.get("agent_name", f"Agent_{u.get('agent_id', '')}")
-            action_type = u.get("action_type", "")
-            summary = str(u.get("summary", ""))[:180]
-            lines.append(f"- [{src_name}] {action_type}: {summary}")
+            abstract = str(u.get("abstract_summary", "") or "")[:220]
+            detail = str(u.get("summary", "") or "")[:180]
+            timestamp = str(u.get("timestamp", "") or "")
+            action_type = str(u.get("action_type", "") or "")
+            salience = str(u.get("salience", "") or "")
+            if idx < self.abstract_topk and abstract:
+                abstracts.append(f"- ({scope}) [{src_name}] {abstract}")
+            if idx < self.detail_topk and detail:
+                details.append(f"- ({scope}) [{src_name}] {action_type} @ {timestamp} [{salience}]: {detail}")
 
-        return "\n".join(lines)[:self.max_injected_chars]
+        lines: List[str] = [
+            f"[Retrieval Plan] complexity={plan.get('complexity')} depth={plan.get('retrieval_depth')}",
+        ]
+        query_keywords = sorted(plan.get("query_keywords", set()) or set())
+        if query_keywords:
+            lines.append(f"[Intent Keywords] {', '.join(query_keywords[:8])}")
+        if abstracts:
+            lines.append(self.ABSTRACT_HEADER)
+            lines.extend(abstracts)
+        if details:
+            lines.append(self.DETAIL_HEADER)
+            lines.extend(details)
+
+        memory_context = "\n".join(lines)[:self.max_injected_chars]
+        self._record_retrieval_trace(
+            agent_id=agent_id,
+            current_round=current_round,
+            plan=plan,
+            selected=dedup_selected,
+            memory_context=memory_context,
+        )
+        return memory_context
 
     def inject_context_into_agent(self, agent: Any, memory_context: str):
         if not self.enabled or not memory_context:

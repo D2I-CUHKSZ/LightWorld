@@ -41,11 +41,33 @@ class Config:
     # Files
     MAX_CONTENT_LENGTH = 50 * 1024 * 1024  # 50MB
     UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), "../../uploads")
-    ALLOWED_EXTENSIONS = {"pdf", "md", "txt", "markdown"}
+    DOCUMENT_EXTENSIONS = {"pdf", "md", "txt", "markdown"}
+    IMAGE_EXTENSIONS = {"png", "jpg", "jpeg", "bmp", "gif", "webp", "tiff", "tif"}
+    VIDEO_EXTENSIONS = {"mp4", "mov", "avi", "mkv", "webm", "m4v"}
+    ALLOWED_EXTENSIONS = DOCUMENT_EXTENSIONS | IMAGE_EXTENSIONS | VIDEO_EXTENSIONS
 
     # Text processing
     DEFAULT_CHUNK_SIZE = 500
     DEFAULT_CHUNK_OVERLAP = 50
+
+    # Multimodal ingestion
+    MULTIMODAL_VISION_MODEL_NAME = os.environ.get(
+        "MULTIMODAL_VISION_MODEL_NAME",
+        LLM_MODEL_NAME,
+    )
+    MULTIMODAL_AUDIO_MODEL_NAME = os.environ.get(
+        "MULTIMODAL_AUDIO_MODEL_NAME",
+        "whisper-1",
+    )
+    MULTIMODAL_VIDEO_SEGMENT_SECONDS = int(
+        os.environ.get("MULTIMODAL_VIDEO_SEGMENT_SECONDS", "30")
+    )
+    MULTIMODAL_VIDEO_FRAMES_PER_SEGMENT = int(
+        os.environ.get("MULTIMODAL_VIDEO_FRAMES_PER_SEGMENT", "4")
+    )
+    MULTIMODAL_MAX_VIDEO_SEGMENTS = int(
+        os.environ.get("MULTIMODAL_MAX_VIDEO_SEGMENTS", "12")
+    )
 
     # OASIS simulation
     OASIS_DEFAULT_MAX_ROUNDS = int(os.environ.get("OASIS_DEFAULT_MAX_ROUNDS", "10"))

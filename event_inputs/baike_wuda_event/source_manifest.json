@@ -1,0 +1,397 @@
+{
+  "fetched_at": "2026-04-01T21:30:19.133421",
+  "source_url": "https://baike.baidu.com/item/10%C2%B711%E6%AD%A6%E5%A4%A7%E7%94%B7%E7%94%9F%E8%A2%AB%E6%8C%87%E6%80%A7%E9%AA%9A%E6%89%B0%E4%BA%8B%E4%BB%B6/63585559",
+  "lemma_title": "10·11武大男生被指性骚扰事件",
+  "lemma_id": 63585559,
+  "catalog": [
+    {
+      "level": 1,
+      "title": "事件背景",
+      "index": "1",
+      "uuid": "tSqYpnPTaX3S",
+      "height": 28
+    },
+    {
+      "level": 1,
+      "title": "事件经过",
+      "index": "2",
+      "uuid": "tSqYpnPc0xYg",
+      "height": 28
+    },
+    {
+      "level": 1,
+      "title": "事件处置",
+      "index": "3",
+      "uuid": "tStznpi2oPni",
+      "height": 28
+    },
+    {
+      "level": 2,
+      "title": "进行调查",
+      "index": "3-1",
+      "uuid": "uRYcO8RRSTko",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "给予处分",
+      "index": "3-2",
+      "uuid": "uRYcOrvfNJqA",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "一审宣判",
+      "index": "3-3",
+      "uuid": "uRYcOPTqejvk",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "取消处分",
+      "index": "3-4",
+      "uuid": "uXjo3YdhikFr",
+      "height": 21
+    },
+    {
+      "level": 1,
+      "title": "事件影响",
+      "index": "4",
+      "uuid": "uXiA2D7j3Kkw",
+      "height": 28
+    },
+    {
+      "level": 2,
+      "title": "肖某某被确诊“创伤后应激障碍”",
+      "index": "4-1",
+      "uuid": "uUXrvaFLQrIN",
+      "height": 37
+    },
+    {
+      "level": 2,
+      "title": "杨某信息被泄露",
+      "index": "4-2",
+      "uuid": "uUXry7TgglCh",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "杨某媛论文突然下架",
+      "index": "4-3",
+      "uuid": "uWmcLJkbQy3w",
+      "height": 21
+    },
+    {
+      "level": 1,
+      "title": "事件回应",
+      "index": "5",
+      "uuid": "uSwPSozZ1RnH",
+      "height": 28
+    },
+    {
+      "level": 2,
+      "title": "涉事男生母亲",
+      "index": "5-1",
+      "uuid": "uUXrs7fd3yJT",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "涉事男生皮肤科医生",
+      "index": "5-2",
+      "uuid": "uUXrJwRAJMyo",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "涉事男生代理律师",
+      "index": "5-3",
+      "uuid": "uUXrLP3z3XEG",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "涉事女生",
+      "index": "5-4",
+      "uuid": "uUXrSn7vQFIk",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "香港浸会大学",
+      "index": "5-5",
+      "uuid": "uUXrV9TZeSzj",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "武汉大学",
+      "index": "5-6",
+      "uuid": "uUXrYBHGTaLp",
+      "height": 21
+    },
+    {
+      "level": 1,
+      "title": "律师解读",
+      "index": "6",
+      "uuid": "uUqH3hrTDFEC",
+      "height": 28
+    },
+    {
+      "level": 1,
+      "title": "社会评论",
+      "index": "7",
+      "uuid": "uUWsD8PjlOvT",
+      "height": 28
+    },
+    {
+      "level": 1,
+      "title": "相关事件",
+      "index": "8",
+      "uuid": "uUWs6ZrKqDeO",
+      "height": 28
+    },
+    {
+      "level": 2,
+      "title": "社会舆论",
+      "index": "8-1",
+      "uuid": "uV2F3ay47DCd",
+      "height": 21
+    },
+    {
+      "level": 2,
+      "title": "网民冒充当事人的同学",
+      "index": "8-2",
+      "uuid": "uV2DYj8bGLeD",
+      "height": 37
+    },
+    {
+      "level": 2,
+      "title": "企业家校友的公共表达困境",
+      "index": "8-3",
+      "uuid": "uV2FYyUKJhAZ",
+      "height": 37
+    }
+  ],
+  "downloaded_images": [
+    {
+      "album_desc": "概述图册",
+      "title": "概述图册",
+      "url": "https://bkimg.cdn.bcebos.com/pic/ac4bd11373f082025aafb32ff4acecedab64034fadde",
+      "src": "ac4bd11373f082025aafb32ff4acecedab64034fadde",
+      "width": 858,
+      "height": 504,
+      "uuid": "tStAoDvIy3cs",
+      "saved_path": "images/image_01.jpg",
+      "status": "saved",
+      "error": ""
+    },
+    {
+      "album_desc": "网帖",
+      "title": "网帖",
+      "url": "https://bkimg.cdn.bcebos.com/pic/b3119313b07eca8065380220d17880dda144ac3425fb",
+      "src": "b3119313b07eca8065380220d17880dda144ac3425fb",
+      "width": 1015,
+      "height": 1592,
+      "uuid": "uUXlgXZbtYSy",
+      "saved_path": "images/image_02.jpg",
+      "status": "saved",
+      "error": ""
+    },
+    {
+      "album_desc": "网帖",
+      "title": "网帖",
+      "url": "https://bkimg.cdn.bcebos.com/pic/0b46f21fbe096b63f62486964c689044ebf81b4c06fb",
+      "src": "0b46f21fbe096b63f62486964c689044ebf81b4c06fb",
+      "width": 578,
+      "height": 730,
+      "uuid": "uUXliaZcw3YD",
+      "saved_path": "images/image_03.jpg",
+      "status": "saved",
+      "error": ""
+    },
+    {
+      "album_desc": "词条图片",
+      "title": "其中一份病历",
+      "url": "https://bkimg.cdn.bcebos.com/pic/cdbf6c81800a19d8bc3ee90808a2958ba61ea8d3e83c?x-bce-process=image/resize,m_lfit,w_220,h_220,limit_1",
+      "src": "cdbf6c81800a19d8bc3ee90808a2958ba61ea8d3e83c",
+      "width": 734,
+      "height": 825,
+      "uuid": "u3im5ZSm0sKe",
+      "saved_path": "images/image_04.jpg",
+      "status": "saved",
+      "error": ""
+    },
+    {
+      "album_desc": "词条图片",
+      "title": "病历",
+      "url": "https://bkimg.cdn.bcebos.com/pic/95eef01f3a292df5e0feda1887694b6034a85edfd53c?x-bce-process=image/resize,m_lfit,w_220,h_220,limit_1",
+      "src": "95eef01f3a292df5e0feda1887694b6034a85edfd53c",
+      "width": 960,
+      "height": 1280,
+      "uuid": "u3ilMgBCP3rD",
+      "saved_path": "images/image_05.jpg",
+      "status": "saved",
+      "error": ""
+    },
+    {
+      "album_desc": "词条图片",
+      "title": "香港浸会大学回应",
+      "url": "https://bkimg.cdn.bcebos.com/pic/9a504fc2d5628535e5dda212b9b461c6a7efce1bc5f7?x-bce-process=image/resize,m_lfit,w_220,h_220,limit_1",
+      "src": "9a504fc2d5628535e5dda212b9b461c6a7efce1bc5f7",
+      "width": 657,
+      "height": 621,
+      "uuid": "uSNycS65pf4E",
+      "saved_path": "images/image_06.jpg",
+      "status": "saved",
+      "error": ""
+    }
+  ],
+  "videos": [
+    {
+      "form": 2,
+      "mountType": 1,
+      "nid": "3445017984987331942",
+      "secondId": 0,
+      "source": 105,
+      "style": 1,
+      "title": "",
+      "uuid": "uSwErs5HAOcR"
+    },
+    {
+      "form": 2,
+      "mountType": 1,
+      "nid": "130275894393355833",
+      "secondId": 0,
+      "source": 101,
+      "style": 1,
+      "title": "",
+      "uuid": "uSBliyIlfc4T"
+    },
+    {
+      "form": 2,
+      "mountType": 1,
+      "nid": "12660852853714326039",
+      "secondId": 0,
+      "source": 100,
+      "style": 1,
+      "title": "",
+      "uuid": "uSwErs5nrkQK"
+    },
+    {
+      "form": 2,
+      "mountType": 1,
+      "nid": "5664246089230657137",
+      "secondId": 0,
+      "source": 101,
+      "style": 1,
+      "title": "",
+      "uuid": "uSAcBqDrXpRJ"
+    },
+    {
+      "form": 2,
+      "mountType": 1,
+      "nid": "12746061947441374425",
+      "secondId": 0,
+      "source": 101,
+      "style": 1,
+      "title": "",
+      "uuid": "uXoxsSL7sRMU"
+    },
+    {
+      "form": 2,
+      "mountType": 1,
+      "nid": "11526974303779598783",
+      "secondId": 0,
+      "source": 101,
+      "style": 1,
+      "title": "",
+      "uuid": "uXiBRR3W21Sw"
+    },
+    {
+      "form": 2,
+      "mountType": 1,
+      "nid": "15620982055945781919",
+      "secondId": 0,
+      "source": 105,
+      "style": 1,
+      "title": "",
+      "uuid": "uSxLKGTGRZAc"
+    },
+    {
+      "form": 2,
+      "mountType": 1,
+      "nid": "7402544413212768338",
+      "secondId": 0,
+      "source": 100,
+      "style": 1,
+      "title": "",
+      "uuid": "uSAASdcQpUHR"
+    },
+    {
+      "form": 2,
+      "mountType": 1,
+      "nid": "18189669483648957698",
+      "secondId": 0,
+      "source": 105,
+      "style": 1,
+      "title": "",
+      "uuid": "uSCbn1W4tsEK"
+    },
+    {
+      "form": 2,
+      "mountType": 1,
+      "nid": "14261258909694057910",
+      "secondId": 0,
+      "source": 101,
+      "style": 1,
+      "title": "",
+      "uuid": "uUvbWrOpIKYg"
+    },
+    {
+      "form": 2,
+      "mountType": 1,
+      "nid": "4429196904573573670",
+      "secondId": 0,
+      "source": 101,
+      "style": 1,
+      "title": "",
+      "uuid": "uUvbWrO8Np8R"
+    },
+    {
+      "form": 2,
+      "mountType": 1,
+      "nid": "14939333719524332427",
+      "secondId": 0,
+      "source": 100,
+      "style": 1,
+      "title": "",
+      "uuid": "uXoxsSLlh7RQ"
+    },
+    {
+      "form": 2,
+      "mountType": 1,
+      "nid": "4244580956789861159",
+      "secondId": 0,
+      "source": 101,
+      "style": 1,
+      "title": "",
+      "uuid": "uSwmOgSF7qHH"
+    },
+    {
+      "form": 2,
+      "mountType": 1,
+      "nid": "6090386255501006075",
+      "secondId": 0,
+      "source": 101,
+      "style": 1,
+      "title": "",
+      "uuid": "uSwmOgSS8lEC"
+    }
+  ],
+  "notes": [
+    "event_overview.md / event_timeline.txt / video_entries.txt 可直接作为 LightWorld 的文本输入。",
+    "images/ 下保存了页面图册图片，可与文本一起作为 LightWorld 多模态输入。",
+    "页面内嵌视频条目已抓取元数据，但未自动下载视频文件；Baidu 视频接口触发了安全验证。"
+  ]
+}

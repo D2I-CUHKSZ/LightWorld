@@ -1,0 +1,89 @@
+2026-04-01 18:24:48 - INFO - ============================================================
+2026-04-01 18:24:48 - INFO - OASIS 双平台并行模拟
+2026-04-01 18:24:48 - INFO - 配置文件: /home/shulun/project/LightWorld/backend/uploads/simulations/sim_706dbfc1acac/simulation_config.json
+2026-04-01 18:24:48 - INFO - 模拟ID: sim_706dbfc1acac
+2026-04-01 18:24:48 - INFO - 等待命令模式: 禁用
+2026-04-01 18:24:48 - INFO - light模式: 禁用
+2026-04-01 18:24:48 - INFO - topology-aware: 启用
+2026-04-01 18:24:48 - INFO - simplemem: 启用
+2026-04-01 18:24:48 - INFO - ============================================================
+2026-04-01 18:24:48 - INFO - 模拟参数:
+2026-04-01 18:24:48 - INFO -   - 总模拟时长: 48小时
+2026-04-01 18:24:48 - INFO -   - 每轮时间: 60分钟
+2026-04-01 18:24:48 - INFO -   - 配置总轮数: 48
+2026-04-01 18:24:48 - INFO -   - Agent数量: 31
+2026-04-01 18:24:48 - INFO - 日志结构:
+2026-04-01 18:24:48 - INFO -   - 主日志: simulation.log
+2026-04-01 18:24:48 - INFO -   - Twitter动作: twitter/actions.jsonl
+2026-04-01 18:24:48 - INFO -   - Reddit动作: reddit/actions.jsonl
+2026-04-01 18:24:48 - INFO - ============================================================
+2026-04-01 18:24:48 - INFO - [Twitter] 初始化...
+2026-04-01 18:24:53 - INFO - [Twitter] 已加载显式社交关系图: directed=6, undirected=6
+2026-04-01 18:24:53 - INFO - [Twitter] 已加载图谱关系先验: directed=6, undirected=6
+2026-04-01 18:24:53 - INFO - [Twitter] Topology-aware已启用: coordination=True, differentiation=True, units=29, avg_unit_size=1.07, light=False, top_pairs=25
+2026-04-01 18:24:53 - INFO - [Twitter] SimpleMem已启用: platform=twitter, agents=0, retrieval_topk=6, max_units_per_agent=160
+2026-04-01 18:24:53 - INFO - [Twitter] 平台配置未能映射到OASIS对象属性，继续使用平台默认参数
+2026-04-01 18:24:53 - INFO - [Reddit] 初始化...
+2026-04-01 18:24:54 - INFO - [Reddit] 已加载显式社交关系图: directed=6, undirected=6
+2026-04-01 18:24:54 - INFO - [Reddit] 已加载图谱关系先验: directed=6, undirected=6
+2026-04-01 18:24:54 - INFO - [Reddit] Topology-aware已启用: coordination=True, differentiation=True, units=29, avg_unit_size=1.07, light=False, top_pairs=25
+2026-04-01 18:24:54 - INFO - [Reddit] SimpleMem已启用: platform=reddit, agents=0, retrieval_topk=6, max_units_per_agent=160
+2026-04-01 18:24:54 - INFO - [Reddit] 平台配置未能映射到OASIS对象属性，继续使用平台默认参数
+2026-04-01 18:24:54 - INFO - [Twitter] 环境已启动
+2026-04-01 18:24:54 - INFO - [Twitter] 平台配置未能映射到OASIS对象属性，继续使用平台默认参数
+2026-04-01 18:24:54 - INFO - [Twitter] 已注入初始社交关系: db_follow_edges=44
+2026-04-01 18:24:54 - INFO - [Reddit] 环境已启动
+2026-04-01 18:24:54 - INFO - [Reddit] 平台配置未能映射到OASIS对象属性，继续使用平台默认参数
+2026-04-01 18:24:54 - INFO - [Reddit] 已注入初始社交关系: db_follow_edges=48
+2026-04-01 18:24:54 - INFO - [Twitter] 已发布 5 条初始帖子
+2026-04-01 18:24:57 - INFO - [Reddit] 已发布 5 条初始帖子
+2026-04-01 18:25:09 - INFO - [Twitter] 已注入初始社交关系: db_follow_edges=4
+2026-04-01 18:25:10 - INFO - [Twitter] 已执行定时事件帖子: round=7, count=1
+2026-04-01 18:25:18 - INFO - [Reddit] 已注入初始社交关系: db_follow_edges=2
+2026-04-01 18:25:26 - INFO - [Reddit] 已执行定时事件帖子: round=7, count=1
+2026-04-01 18:25:32 - INFO - [Twitter] Topology-aware 动态更新: 新增交互边=1, units=29
+2026-04-01 18:25:32 - INFO - [Twitter] 已注入初始社交关系: db_follow_edges=4
+2026-04-01 18:25:32 - INFO - [Twitter] 已执行定时事件帖子: round=13, count=1
+2026-04-01 18:26:02 - INFO - [Reddit] Topology-aware 动态更新: 新增交互边=14, units=29
+2026-04-01 18:26:02 - INFO - [Reddit] 已注入初始社交关系: db_follow_edges=14
+2026-04-01 18:26:02 - INFO - [Reddit] 已执行定时事件帖子: round=13, count=1
+2026-04-01 18:26:05 - INFO - [Twitter] 触发定时事件: hot_topics_update round=19, topics=12
+2026-04-01 18:26:18 - INFO - [Twitter] Topology-aware 动态更新: 新增交互边=1, units=29
+2026-04-01 18:26:18 - INFO - [Twitter] 已注入初始社交关系: db_follow_edges=2
+2026-04-01 18:26:18 - INFO - [Twitter] Day 1, 19:00 - Round 20/48 (41.7%)
+2026-04-01 18:26:37 - INFO - [Twitter] 已执行定时事件帖子: round=25, count=1
+2026-04-01 18:26:47 - INFO - [Reddit] 已注入初始社交关系: db_follow_edges=5
+2026-04-01 18:26:59 - INFO - [Twitter] 触发定时事件: hot_topics_update round=37, topics=13
+2026-04-01 18:27:07 - INFO - [Reddit] 触发定时事件: hot_topics_update round=19, topics=13
+2026-04-01 18:27:15 - INFO - [Twitter] Day 2, 15:00 - Round 40/48 (83.3%)
+2026-04-01 18:27:34 - INFO - [Twitter] Topology-aware 动态更新: 新增交互边=1, units=29
+2026-04-01 18:27:34 - INFO - [Twitter] 已注入初始社交关系: db_follow_edges=2
+2026-04-01 18:27:41 - INFO - [Reddit] Topology-aware 动态更新: 新增交互边=16, units=29
+2026-04-01 18:27:41 - INFO - [Reddit] 已注入初始社交关系: db_follow_edges=14
+2026-04-01 18:27:41 - INFO - [Reddit] Day 1, 19:00 - Round 20/48 (41.7%)
+2026-04-01 18:27:52 - INFO - [Twitter] 模拟循环完成! 耗时: 177.5秒, 总动作: 292
+2026-04-01 18:28:59 - INFO - [Reddit] Topology-aware 动态更新: 新增交互边=9, units=29
+2026-04-01 18:28:59 - INFO - [Reddit] 已注入初始社交关系: db_follow_edges=15
+2026-04-01 18:28:59 - INFO - [Reddit] 已执行定时事件帖子: round=25, count=1
+2026-04-01 18:30:53 - INFO - [Reddit] Topology-aware 动态更新: 新增交互边=8, units=29
+2026-04-01 18:30:53 - INFO - [Reddit] 已注入初始社交关系: db_follow_edges=16
+2026-04-01 18:30:53 - INFO - [Reddit] 触发定时事件: hot_topics_update round=37, topics=13
+2026-04-01 18:32:50 - INFO - [Reddit] Topology-aware 动态更新: 新增交互边=3, units=29
+2026-04-01 18:32:50 - INFO - [Reddit] 已注入初始社交关系: db_follow_edges=11
+2026-04-01 18:32:50 - INFO - [Reddit] Day 2, 15:00 - Round 40/48 (83.3%)
+2026-04-01 18:35:26 - INFO - [Reddit] Topology-aware 动态更新: 新增交互边=1, units=29
+2026-04-01 18:35:26 - INFO - [Reddit] 已注入初始社交关系: db_follow_edges=4
+2026-04-01 18:38:56 - INFO - [Reddit] Topology-aware 动态更新: 新增交互边=2, units=29
+2026-04-01 18:38:56 - INFO - [Reddit] 已注入初始社交关系: db_follow_edges=6
+2026-04-01 18:38:56 - INFO - [Reddit] 模拟循环完成! 耗时: 838.5秒, 总动作: 272
+2026-04-01 18:38:56 - INFO - ============================================================
+2026-04-01 18:38:56 - INFO - 模拟循环完成! 总耗时: 848.2秒
+2026-04-01 18:38:56 - INFO - [Twitter] 环境已关闭
+2026-04-01 18:38:56 - INFO - [Reddit] 环境已关闭
+2026-04-01 18:38:56 - INFO - ============================================================
+2026-04-01 18:38:56 - INFO - 全部完成!
+2026-04-01 18:38:56 - INFO - 日志文件:
+2026-04-01 18:38:56 - INFO -   - /home/shulun/project/LightWorld/backend/uploads/simulations/sim_706dbfc1acac/simulation.log
+2026-04-01 18:38:56 - INFO -   - /home/shulun/project/LightWorld/backend/uploads/simulations/sim_706dbfc1acac/twitter/actions.jsonl
+2026-04-01 18:38:56 - INFO -   - /home/shulun/project/LightWorld/backend/uploads/simulations/sim_706dbfc1acac/reddit/actions.jsonl
+2026-04-01 18:38:56 - INFO - ============================================================
