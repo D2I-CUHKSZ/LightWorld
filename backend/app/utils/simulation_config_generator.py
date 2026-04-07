@@ -167,6 +167,9 @@ class TopologyAwareConfig:
     semantic_threshold: float = 0.1
     keyword_jaccard_threshold: float = 0.12
     keyword_overlap_min: int = 1
+    threshold_cluster_enabled: bool = False
+    llm_keyword_cluster_enabled: bool = False
+    cluster_mode: str = "disabled"
 
     # 图谱关系先验注入
     graph_prior_similarity_boost: float = 0.35

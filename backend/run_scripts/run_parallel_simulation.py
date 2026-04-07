@@ -181,6 +181,7 @@ from app.modules.simulation.platform_runner import (
     TWITTER_SPEC,
     run_platform_simulation,
 )
+from app.modules.simulation.cluster_flags import normalize_topology_cluster_config
 
 
 # IPC相关常量
@@ -1219,6 +1220,12 @@ async def main():
         topo_cfg = config.get("topology_aware", {}) or {}
         topo_cfg["enabled"] = True
         config["topology_aware"] = topo_cfg
+    try:
+        topo_cfg = normalize_topology_cluster_config(config)
+    except ValueError as exc:
+        print(f"Configuration error: {exc}")
+        status_handler.update_status("failed")
+        sys.exit(2)
     
     # 初始化日志配置（禁用 OASIS 日志，清理旧文件）
     init_logging_for_simulation(simulation_dir)
@@ -1235,6 +1242,11 @@ async def main():
     log_manager.info(f"等待命令模式: {'启用' if wait_for_commands else '禁用'}")
     log_manager.info(f"light模式: {'启用' if (config.get('light_mode', {}) or {}).get('enabled', False) else '禁用'}")
     log_manager.info(f"topology-aware: {'启用' if (config.get('topology_aware', {}) or {}).get('enabled', False) else '禁用'}")
+    log_manager.info(
+        "cluster features: threshold=%s, llm_keyword=%s",
+        bool(topo_cfg.get("threshold_cluster_enabled", False)),
+        bool(topo_cfg.get("llm_keyword_cluster_enabled", False)),
+    )
     log_manager.info(f"simplemem: {'启用' if (config.get('simplemem', {}) or {}).get('enabled', True) else '禁用'}")
     log_manager.info("=" * 60)
     

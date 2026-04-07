@@ -29,7 +29,9 @@
         "minutes_per_round": 60
       },
       "topology_aware": {
-        "enabled": true
+        "enabled": true,
+        "threshold_cluster_enabled": false,
+        "llm_keyword_cluster_enabled": false
       },
       "simplemem": {
         "enabled": true

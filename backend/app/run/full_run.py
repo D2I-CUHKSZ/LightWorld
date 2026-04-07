@@ -25,6 +25,7 @@ from app.utils.simulation_manager import SimulationManager
 from app.setting.settings import Config
 from app.domain.project import ProjectManager
 from app.modules.graph.local_pipeline import LocalGraphPipeline, LocalPipelineOptions
+from app.modules.simulation.cluster_flags import normalize_topology_cluster_config
 
 
 BACKEND_DIR = Path(__file__).resolve().parents[2]
@@ -273,7 +274,9 @@ def apply_simulation_config_overrides(simulation_dir: Path, run_dir: Path, confi
         if not backup_path.exists():
             shutil.copy2(config_path, backup_path)
         current_config = deep_merge(current_config, config_overrides)
-        write_json(config_path, current_config)
+
+    normalize_topology_cluster_config(current_config)
+    write_json(config_path, current_config)
 
     write_json(run_dir / "simulation_config.final.json", current_config)
 

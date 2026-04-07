@@ -1,10 +1,11 @@
-"""Simulation runtimes (Strategy-style components).
+﻿"""Simulation runtimes (Strategy-style components).
 
 Extracted from run_parallel_simulation.py to keep entry script thin and maintainable.
 """
 
 import ast
 import csv
+import hashlib
 import json
 import math
 import os
@@ -12,12 +13,9 @@ import random
 import re
 from collections import defaultdict, deque
 from datetime import datetime, timedelta
-from typing import Any, Callable, Dict, List, Optional, Set, Tuple
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
-from .memory_keywords import MemoryKeywordExtractor
-from .cluster_flags import resolve_cluster_feature_flags
 from ...infrastructure.llm_client import LLMClient
-
 
 def _safe_float(value: Any, default: float = 0.0) -> float:
     try:
@@ -79,42 +77,19 @@ class TopologyAwareRuntime:
         self.ppr_alpha = min(0.99, max(0.01, _safe_float(topo_cfg.get("ppr_alpha", 0.85), 0.85)))
         self.ppr_eps = max(1e-8, _safe_float(topo_cfg.get("ppr_eps", 1e-4), 1e-4))
         self.semantic_threshold = min(1.0, max(0.0, _safe_float(topo_cfg.get("semantic_threshold", 0.1), 0.1)))
-        self.keyword_jaccard_threshold = min(
-            1.0, max(0.0, _safe_float(topo_cfg.get("keyword_jaccard_threshold", 0.12), 0.12))
-        )
+        self.keyword_jaccard_threshold = min(1.0, max(0.0, _safe_float(topo_cfg.get("keyword_jaccard_threshold", 0.12), 0.12)))
         self.keyword_overlap_min = max(0, int(topo_cfg.get("keyword_overlap_min", 1)))
-        threshold_cluster_enabled, llm_keyword_cluster_enabled = resolve_cluster_feature_flags(topo_cfg)
-        self.threshold_cluster_enabled = bool(threshold_cluster_enabled)
-        self.llm_keyword_cluster_enabled = bool(llm_keyword_cluster_enabled)
-        if self.llm_keyword_cluster_enabled:
-            self.cluster_mode = "llm_keyword_consistency"
-        elif self.threshold_cluster_enabled:
-            self.cluster_mode = "threshold_only"
-        else:
-            self.cluster_mode = "disabled"
-        self.keyword_consistency_threshold = min(
-            1.0,
-            max(
-                0.0,
-                _safe_float(
-                    topo_cfg.get("keyword_consistency_threshold", self.keyword_jaccard_threshold),
-                    self.keyword_jaccard_threshold,
-                ),
-            ),
+        self.topic_keyword_similarity_enabled = bool(topo_cfg.get("topic_keyword_similarity_enabled", True))
+        self.topic_keyword_similarity_threshold = min(
+            1.0, max(0.0, _safe_float(topo_cfg.get("topic_keyword_similarity_threshold", self.keyword_jaccard_threshold), self.keyword_jaccard_threshold))
         )
-        self.keyword_llm_max_terms = max(12, int(topo_cfg.get("keyword_llm_max_terms", 80)))
-        self.graph_prior_similarity_boost = min(
-            0.8, max(0.0, _safe_float(topo_cfg.get("graph_prior_similarity_boost", 0.35), 0.35))
-        )
-        self.graph_prior_extra_ratio = min(
-            1.0, max(0.0, _safe_float(topo_cfg.get("graph_prior_extra_ratio", 0.25), 0.25))
-        )
+        self.topic_keyword_max_terms = max(12, int(topo_cfg.get("topic_keyword_max_terms", 120)))
+        self.graph_prior_similarity_boost = min( 0.8, max(0.0, _safe_float(topo_cfg.get("graph_prior_similarity_boost", 0.35), 0.35)))
+        self.graph_prior_extra_ratio = min(1.0, max(0.0, _safe_float(topo_cfg.get("graph_prior_extra_ratio", 0.25), 0.25)))
         self.dynamic_update_enabled = bool(topo_cfg.get("dynamic_update_enabled", True))
         self.dynamic_update_interval = max(1, int(topo_cfg.get("dynamic_update_interval", 4)))
         self.dynamic_update_min_events = max(1, int(topo_cfg.get("dynamic_update_min_events", 6)))
-        self.dynamic_interaction_min_weight = max(
-            0.05, _safe_float(topo_cfg.get("dynamic_interaction_min_weight", 0.25), 0.25)
-        )
+        self.dynamic_interaction_min_weight = max(0.05, _safe_float(topo_cfg.get("dynamic_interaction_min_weight", 0.25), 0.25))
         self.dynamic_neighbors_per_agent = max(1, int(topo_cfg.get("dynamic_neighbors_per_agent", 6)))
         self.initial_follow_max_per_agent = max(1, int(topo_cfg.get("initial_follow_max_per_agent", 3)))
         self.initial_follow_max_total = max(0, int(topo_cfg.get("initial_follow_max_total", 0)))
@@ -143,10 +118,9 @@ class TopologyAwareRuntime:
         self.agent_entity_name: Dict[int, str] = {}
         self.agent_semantic_keywords: Dict[int, set] = {}
         self.agent_semantic_text: Dict[int, str] = {}
+        self.topic_keyword_groups: Dict[str, List[Dict[str, Any]]] = {}
+        self.topic_keyword_failed_topics: set = set()
         self._llm_client: Optional[LLMClient] = None
-        self._keyword_consistency_round: Optional[int] = None
-        self._keyword_consistency_groups: List[Dict[str, Any]] = []
-        self._keyword_consistency_index: Dict[str, List[Tuple[int, float]]] = {}
         self.agent_id_by_name: Dict[str, int] = {}
         self.graph_pair_strength: Dict[Tuple[int, int], float] = {}
         self.graph_prior_pairs: set = set()
@@ -164,7 +138,9 @@ class TopologyAwareRuntime:
         self.topology_snapshot_dir = os.path.join(self.topology_artifact_dir, "snapshots")
         self.topology_trace_file = os.path.join(self.topology_artifact_dir, "topology_trace.jsonl")
         self.topology_latest_file = os.path.join(self.topology_artifact_dir, "latest_topology.json")
+        self.topic_keyword_cache_file = os.path.join(self.topology_artifact_dir, "topic_keyword_semantics.json")
         os.makedirs(self.topology_snapshot_dir, exist_ok=True)
+        self._load_topic_keyword_cache()
 
         self._build_runtime()
 
@@ -175,7 +151,7 @@ class TopologyAwareRuntime:
         self._load_social_relation_graph()
         self._load_graph_prior()
         self._load_entity_prompts()
-        self._refresh_keyword_consistency_groups(round_num=None, actions=None)
+        self._ensure_topic_keyword_semantics()
         self._build_structure_vectors()
         self._build_similarity_graph()
         self._build_neighbor_influence_with_ppr()
@@ -188,10 +164,7 @@ class TopologyAwareRuntime:
                 f"Topology-aware已启用: coordination={self.coordination_enabled}, "
                 f"differentiation={self.differentiation_enabled}, "
                 f"units={len(self.units)}, avg_unit_size={avg_unit:.2f}, "
-                f"light={self.light_enabled}, top_pairs={len(self.top_pairs)}, "
-                f"cluster_mode={self.cluster_mode}, "
-                f"threshold_cluster_enabled={self.threshold_cluster_enabled}, "
-                f"llm_keyword_cluster_enabled={self.llm_keyword_cluster_enabled}"
+                f"light={self.light_enabled}, top_pairs={len(self.top_pairs)}"
             )
         self.record_round_state(round_num=0, simulated_hour=None, reason="initial")
 
@@ -519,6 +492,199 @@ class TopologyAwareRuntime:
             self.agent_semantic_keywords[aid] = keywords
             self.agent_semantic_text[aid] = semantic_text
 
+    def _active_topic_keys(self) -> List[str]:
+        event_cfg = self.config.get("event_config", {}) or {}
+        hot_topics = [str(x).strip().lower() for x in (event_cfg.get("hot_topics", []) or []) if str(x).strip()]
+        if not hot_topics:
+            return ["__global__"]
+        seen = set()
+        ordered: List[str] = []
+        for topic in hot_topics:
+            if topic in seen:
+                continue
+            seen.add(topic)
+            ordered.append(topic)
+        return ordered
+
+    def _normalize_keywords_for_topic(self, keywords: set) -> List[str]:
+        normalized = sorted({str(k).strip().lower() for k in (keywords or set()) if str(k).strip()})
+        if len(normalized) <= self.topic_keyword_max_terms:
+            return normalized
+        return normalized[: self.topic_keyword_max_terms]
+
+    def _load_topic_keyword_cache(self):
+        if not os.path.exists(self.topic_keyword_cache_file):
+            return
+        try:
+            with open(self.topic_keyword_cache_file, "r", encoding="utf-8") as f:
+                payload = json.load(f)
+        except Exception:
+            return
+        if not isinstance(payload, dict):
+            return
+        data = payload.get("topics", {})
+        if not isinstance(data, dict):
+            return
+
+        for topic, groups in data.items():
+            if not isinstance(groups, list):
+                continue
+            normalized_groups: List[Dict[str, Any]] = []
+            for item in groups:
+                if not isinstance(item, dict):
+                    continue
+                kws = item.get("keywords", []) or []
+                cohesion = _safe_float(item.get("cohesion", 0.75), 0.75)
+                if isinstance(kws, list):
+                    cleaned = sorted({str(x).strip().lower() for x in kws if str(x).strip()})
+                    if cleaned:
+                        normalized_groups.append({
+                            "keywords": cleaned,
+                            "cohesion": min(1.0, max(0.0, cohesion)),
+                        })
+            if normalized_groups:
+                self.topic_keyword_groups[str(topic).strip().lower()] = normalized_groups
+
+    def _save_topic_keyword_cache(self):
+        payload = {"generated_at": datetime.now().isoformat(), "topics": self.topic_keyword_groups}
+        self._write_json(self.topic_keyword_cache_file, payload)
+
+    def _get_llm_client(self) -> Optional[LLMClient]:
+        if self._llm_client is not None:
+            return self._llm_client
+        try:
+            self._llm_client = LLMClient()
+        except Exception as e:
+            self.log(f"topic-keyword semantic enhancement unavailable; fallback to overlap: {e}")
+            self._llm_client = None
+        return self._llm_client
+
+    def _infer_topic_keyword_groups_with_llm(self, topic: str, keywords: List[str]) -> List[Dict[str, Any]]:
+        client = self._get_llm_client()
+        if client is None or not keywords:
+            return []
+
+        prompt = {
+            "task": "group_keywords_by_topic_semantic_similarity",
+            "topic": topic,
+            "keywords": keywords,
+            "requirements": [
+                "Group by topic-specific semantic/stance/role proximity, not only lexical similarity.",
+                "Every keyword must appear at least once. Single-item groups are allowed.",
+                "Return strict JSON.",
+            ],
+            "output_schema": {"groups": [{"keywords": ["kw1", "kw2"], "cohesion": 0.0}]},
+        }
+        messages = [
+            {"role": "system", "content": "You are a strict JSON generator for topic-specific keyword semantic grouping."},
+            {"role": "user", "content": json.dumps(prompt, ensure_ascii=False)},
+        ]
+        try:
+            result = client.chat_json(messages=messages, temperature=0.1, max_tokens=3000)
+        except Exception as e:
+            self.log(f"topic-keyword LLM inference failed(topic={topic}): {e}")
+            return []
+
+        groups = result.get("groups", []) if isinstance(result, dict) else []
+        if not isinstance(groups, list):
+            return []
+        known = set(keywords)
+        normalized_groups: List[Dict[str, Any]] = []
+        covered = set()
+        for item in groups:
+            if not isinstance(item, dict):
+                continue
+            kws = item.get("keywords", []) or []
+            if not isinstance(kws, list):
+                continue
+            cleaned = sorted({str(x).strip().lower() for x in kws if str(x).strip().lower() in known})
+            if not cleaned:
+                continue
+            cohesion = min(1.0, max(0.0, _safe_float(item.get("cohesion", 0.75), 0.75)))
+            normalized_groups.append({"keywords": cleaned, "cohesion": cohesion})
+            covered.update(cleaned)
+        for kw in keywords:
+            if kw not in covered:
+                normalized_groups.append({"keywords": [kw], "cohesion": 1.0})
+        return normalized_groups
+
+    def _ensure_topic_keyword_semantics(self, topics: Optional[List[str]] = None):
+        if not self.topic_keyword_similarity_enabled:
+            return
+        requested_topics = topics or self._active_topic_keys()
+        all_keywords = set()
+        for kws in self.agent_semantic_keywords.values():
+            all_keywords.update({str(k).strip().lower() for k in kws if str(k).strip()})
+        normalized_keywords = self._normalize_keywords_for_topic(all_keywords)
+        if len(normalized_keywords) < 2:
+            return
+
+        changed = False
+        for topic in requested_topics:
+            topic_key = str(topic).strip().lower()
+            if not topic_key or topic_key in self.topic_keyword_groups or topic_key in self.topic_keyword_failed_topics:
+                continue
+            groups = self._infer_topic_keyword_groups_with_llm(topic_key, normalized_keywords)
+            if groups:
+                self.topic_keyword_groups[topic_key] = groups
+                changed = True
+                self.log(f"topic-keyword semantics built: topic={topic_key}, groups={len(groups)}")
+            else:
+                self.topic_keyword_failed_topics.add(topic_key)
+        if changed:
+            self._save_topic_keyword_cache()
+
+    def _topic_keyword_semantic_similarity(self, n1: int, n2: int) -> float:
+        if not self.topic_keyword_similarity_enabled:
+            return 0.0
+
+        kws_a = self.agent_semantic_keywords.get(n1, set())
+        kws_b = self.agent_semantic_keywords.get(n2, set())
+        if not kws_a or not kws_b:
+            return 0.0
+
+        active_topics = self._active_topic_keys()
+        self._ensure_topic_keyword_semantics(active_topics)
+        topic_scores: List[float] = []
+
+        for topic in active_topics:
+            groups = self.topic_keyword_groups.get(topic, [])
+            if not groups:
+                continue
+
+            group_index: Dict[str, List[Tuple[int, float]]] = defaultdict(list)
+            for gid, group in enumerate(groups):
+                cohesion = min(1.0, max(0.0, _safe_float(group.get("cohesion", 0.75), 0.75)))
+                for kw in (group.get("keywords", []) or []):
+                    group_index[str(kw).strip().lower()].append((gid, cohesion))
+
+            def kw_pair_score(kw1: str, kw2: str) -> float:
+                if kw1 == kw2:
+                    return 1.0
+                g1 = group_index.get(kw1, [])
+                g2 = group_index.get(kw2, [])
+                if not g1 or not g2:
+                    return 0.0
+                best = 0.0
+                for gid1, coh1 in g1:
+                    for gid2, coh2 in g2:
+                        if gid1 == gid2:
+                            best = max(best, min(max(coh1, coh2), 0.95))
+                return best
+
+            a = {str(x).strip().lower() for x in kws_a if str(x).strip()}
+            b = {str(x).strip().lower() for x in kws_b if str(x).strip()}
+            if not a or not b:
+                continue
+            best_a = [max(kw_pair_score(kw, other) for other in b) for kw in a]
+            best_b = [max(kw_pair_score(kw, other) for other in a) for kw in b]
+            score = 0.5 * ((sum(best_a) / max(1, len(best_a))) + (sum(best_b) / max(1, len(best_b))))
+            topic_scores.append(score)
+
+        if not topic_scores:
+            return 0.0
+        return max(topic_scores)
+
     def _edge_prior_strength(self, edge_name: str, fact: str) -> float:
         text = f"{edge_name} {fact}".lower()
         score = 0.45
@@ -832,178 +998,6 @@ class TopologyAwareRuntime:
             return 0.7 * key_sim + 0.3 * txt_sim
         return max(key_sim, txt_sim)
 
-    def _normalize_keyword_term(self, term: Any) -> str:
-        text = str(term or "").strip().lower()
-        text = re.sub(r"\s+", " ", text)
-        text = text.strip(" \t\r\n\"'`[]{}()<>.,;:!?")
-        return text
-
-    def _collect_round_behavior_keywords(self, actions: Optional[List[Dict[str, Any]]]) -> List[str]:
-        counter: Dict[str, int] = defaultdict(int)
-        for aid in sorted(self.agent_semantic_keywords.keys()):
-            for kw in self.agent_semantic_keywords.get(aid, set()):
-                key = self._normalize_keyword_term(kw)
-                if key:
-                    counter[key] += 1
-
-        for topic in (self.config.get("event_config", {}) or {}).get("hot_topics", []) or []:
-            key = self._normalize_keyword_term(topic)
-            if key:
-                counter[key] += 2
-
-        if actions:
-            for row in actions:
-                if not isinstance(row, dict):
-                    continue
-                action_type = self._normalize_keyword_term(row.get("action_type", ""))
-                if action_type:
-                    counter[action_type] += 1
-                args = row.get("action_args", {}) or {}
-                if not isinstance(args, dict):
-                    continue
-                for value in args.values():
-                    if isinstance(value, str):
-                        for token in re.findall(r"[a-zA-Z0-9_\u4e00-\u9fff]{2,}", value.lower()):
-                            key = self._normalize_keyword_term(token)
-                            if key:
-                                counter[key] += 1
-
-        ranked = sorted(counter.items(), key=lambda item: (-item[1], len(item[0]), item[0]))
-        return [item[0] for item in ranked[: self.keyword_llm_max_terms]]
-
-    def _get_llm_client(self) -> Optional[LLMClient]:
-        if self._llm_client is not None:
-            return self._llm_client
-        try:
-            self._llm_client = LLMClient()
-        except Exception as e:
-            self.log(f"Keyword consistency LLM unavailable, fallback to lexical overlap: {e}")
-            self._llm_client = None
-        return self._llm_client
-
-    def _infer_keyword_groups_with_llm(self, round_num: Optional[int], keywords: List[str]) -> List[Dict[str, Any]]:
-        client = self._get_llm_client()
-        if client is None or not keywords:
-            return []
-
-        hot_topics = (self.config.get("event_config", {}) or {}).get("hot_topics", []) or []
-        prompt = {
-            "task": "cluster_behavior_consistent_keywords_for_simulation_round",
-            "round": round_num,
-            "hot_topics": [str(x) for x in hot_topics],
-            "keywords": keywords,
-            "requirements": [
-                "Cluster keywords by behavioral consistency and stance proximity.",
-                "Each keyword must appear in at least one cluster.",
-                "Single-keyword clusters are allowed.",
-                "Return strict JSON only.",
-            ],
-            "output_schema": {"groups": [{"keywords": ["kw1", "kw2"], "cohesion": 0.0}]},
-        }
-        messages = [
-            {"role": "system", "content": "You are a strict JSON generator for keyword clustering."},
-            {"role": "user", "content": json.dumps(prompt, ensure_ascii=False)},
-        ]
-        try:
-            result = client.chat_json(messages=messages, temperature=0.1, max_tokens=2800)
-        except Exception as e:
-            self.log(f"Keyword consistency LLM call failed(round={round_num}): {e}")
-            return []
-
-        groups = result.get("groups", []) if isinstance(result, dict) else []
-        if not isinstance(groups, list):
-            return []
-
-        known = set(keywords)
-        normalized_groups: List[Dict[str, Any]] = []
-        covered: Set[str] = set()
-        for item in groups:
-            if not isinstance(item, dict):
-                continue
-            kws = item.get("keywords", []) or []
-            if not isinstance(kws, list):
-                continue
-            cleaned = sorted(
-                {
-                    self._normalize_keyword_term(x)
-                    for x in kws
-                    if self._normalize_keyword_term(x) in known
-                }
-            )
-            if not cleaned:
-                continue
-            cohesion = min(1.0, max(0.0, _safe_float(item.get("cohesion", 0.75), 0.75)))
-            normalized_groups.append({"keywords": cleaned, "cohesion": cohesion})
-            covered.update(cleaned)
-
-        for kw in keywords:
-            if kw not in covered:
-                normalized_groups.append({"keywords": [kw], "cohesion": 1.0})
-
-        return normalized_groups
-
-    def _compile_keyword_group_index(self):
-        index: Dict[str, List[Tuple[int, float]]] = defaultdict(list)
-        for gid, group in enumerate(self._keyword_consistency_groups):
-            cohesion = min(1.0, max(0.0, _safe_float(group.get("cohesion", 0.75), 0.75)))
-            for kw in group.get("keywords", []) or []:
-                key = self._normalize_keyword_term(kw)
-                if key:
-                    index[key].append((gid, cohesion))
-        self._keyword_consistency_index = dict(index)
-
-    def _refresh_keyword_consistency_groups(self, round_num: Optional[int], actions: Optional[List[Dict[str, Any]]]):
-        if not self.llm_keyword_cluster_enabled:
-            return
-        if round_num is not None and self._keyword_consistency_round == round_num:
-            return
-        if round_num is None and self._keyword_consistency_groups:
-            return
-
-        keywords = self._collect_round_behavior_keywords(actions)
-        if len(keywords) < 2:
-            self._keyword_consistency_groups = []
-            self._keyword_consistency_index = {}
-            self._keyword_consistency_round = round_num
-            return
-
-        groups = self._infer_keyword_groups_with_llm(round_num=round_num, keywords=keywords)
-        if not groups:
-            groups = [{"keywords": [kw], "cohesion": 1.0} for kw in keywords]
-        self._keyword_consistency_groups = groups
-        self._compile_keyword_group_index()
-        self._keyword_consistency_round = round_num
-
-    def _keyword_consistency_similarity(self, n1: int, n2: int) -> float:
-        kws_a = {self._normalize_keyword_term(x) for x in self.agent_semantic_keywords.get(n1, set()) if self._normalize_keyword_term(x)}
-        kws_b = {self._normalize_keyword_term(x) for x in self.agent_semantic_keywords.get(n2, set()) if self._normalize_keyword_term(x)}
-        if not kws_a or not kws_b:
-            return 0.0
-
-        if not self._keyword_consistency_index:
-            _, jaccard = self._keyword_overlap(n1, n2)
-            return jaccard
-
-        def pair_score(kw1: str, kw2: str) -> float:
-            if kw1 == kw2:
-                return 1.0
-            g1 = self._keyword_consistency_index.get(kw1, [])
-            g2 = self._keyword_consistency_index.get(kw2, [])
-            if not g1 or not g2:
-                return 0.0
-            best = 0.0
-            for gid1, coh1 in g1:
-                for gid2, coh2 in g2:
-                    if gid1 == gid2:
-                        best = max(best, min(max(coh1, coh2), 0.95))
-            return best
-
-        best_a = [max(pair_score(kw, other) for other in kws_b) for kw in kws_a]
-        best_b = [max(pair_score(kw, other) for other in kws_a) for kw in kws_b]
-        if not best_a or not best_b:
-            return 0.0
-        return 0.5 * ((sum(best_a) / len(best_a)) + (sum(best_b) / len(best_b)))
-
     def _build_similarity_graph(self):
         """参考 struc2vec_cluster: 基于向量距离选取 top-k 候选对。"""
         agent_ids = sorted(self.structure_vec.keys())
@@ -1168,10 +1162,7 @@ class TopologyAwareRuntime:
             self.ppr_centrality[aid] = incoming_mass.get(aid, 0.0) / denom
 
     def _is_similar_struc2vec_style(self, n1: int, n2: int) -> bool:
-        """Cluster gate with selectable modes."""
-        if not self.threshold_cluster_enabled and not self.llm_keyword_cluster_enabled:
-            return True
-
+        """参考 cluster.py 的三重过滤：opinion/stubbornness/PPR影响。"""
         op1 = self.opinion_by_agent.get(n1, 0.0)
         op2 = self.opinion_by_agent.get(n2, 0.0)
         if abs(op1 - op2) >= max(self.opinion_threshold, self.sentiment_diff_threshold):
@@ -1189,18 +1180,39 @@ class TopologyAwareRuntime:
         if inf1 * inf2 < 0:
             return False
 
-        if self.threshold_cluster_enabled:
-            return True
+        pair = (min(n1, n2), max(n1, n2))
+        relation_metrics = self.social_relation_pair_metrics.get(pair)
+        if relation_metrics:
+            hostility = relation_metrics.get("hostility_weight", 0.0)
+            alliance = relation_metrics.get("alliance_weight", 0.0)
+            trust = relation_metrics.get("trust_weight", 0.0)
+            if hostility >= 0.60 and max(alliance, trust) < 0.30:
+                return False
 
-        if self.llm_keyword_cluster_enabled:
+        # 工程增强：当两侧都有语义信息时，加一层语义一致性约束
+        has_semantic = (
+            (n1 in self.agent_semantic_keywords or n1 in self.agent_semantic_text)
+            and (n2 in self.agent_semantic_keywords or n2 in self.agent_semantic_text)
+        )
+        if has_semantic:
             overlap_count, overlap_jaccard = self._keyword_overlap(n1, n2)
-            semantic_score = self._keyword_consistency_similarity(n1, n2)
-            effective_score = max(overlap_jaccard, semantic_score)
+            topic_keyword_sim = self._topic_keyword_semantic_similarity(n1, n2)
+            effective_keyword_sim = max(overlap_jaccard, topic_keyword_sim)
+            # 关键词硬门槛：有关键词时必须满足最小重叠
             if self.keyword_overlap_min > 0:
-                both_have_keywords = bool(self.agent_semantic_keywords.get(n1)) and bool(self.agent_semantic_keywords.get(n2))
-                if both_have_keywords and overlap_count < self.keyword_overlap_min and effective_score < self.keyword_consistency_threshold:
-                    return False
-            if effective_score < self.keyword_consistency_threshold:
+                has_keywords_both = (
+                    bool(self.agent_semantic_keywords.get(n1))
+                    and bool(self.agent_semantic_keywords.get(n2))
+                )
+                if has_keywords_both:
+                    if (
+                        overlap_count < self.keyword_overlap_min
+                        and effective_keyword_sim < self.topic_keyword_similarity_threshold
+                    ):
+                        return False
+                    if effective_keyword_sim < self.topic_keyword_similarity_threshold:
+                        return False
+            if self._semantic_similarity(n1, n2) < self.semantic_threshold:
                 return False
 
         return True
@@ -1573,15 +1585,7 @@ class TopologyAwareRuntime:
             self.log(f"Topology-aware 动态更新: 新增交互边={added}, units={len(self.units)}")
 
     def ingest_round_actions(self, round_num: int, actions: List[Dict[str, Any]]):
-        if not self.enabled:
-            return
-        if self.llm_keyword_cluster_enabled:
-            self._refresh_keyword_consistency_groups(round_num=round_num, actions=actions)
-            self._build_coordination_units()
-            self._build_importance_scores()
-        if not actions:
-            return
-        if not self.dynamic_update_enabled:
+        if not self.enabled or not self.dynamic_update_enabled or not actions:
             return
 
         touched = 0
@@ -1631,6 +1635,347 @@ class TopologyAwareRuntime:
             self._refresh_topology_from_interactions()
 
 
+class EventFocusRuntime:
+    """
+    Event-focus runtime (parallel to topology-aware).
+    For broad story/event simulation, use event signals to focus active agents on key participants.
+    """
+
+    def __init__(
+        self,
+        config: Dict[str, Any],
+        simulation_dir: str,
+        platform: str,
+        logger: Optional[Callable[[str], None]] = None,
+    ):
+        self.config = config
+        self.simulation_dir = simulation_dir
+        self.platform = platform
+        self.log = logger or (lambda _: None)
+
+        focus_cfg = config.get("event_focus", {}) or {}
+        self.enabled = bool(focus_cfg.get("enabled", False))
+        self.use_llm = bool(focus_cfg.get("use_llm", True))
+        self.strict_mode = bool(focus_cfg.get("strict_mode", True))
+        self.max_focus_agents = max(2, int(focus_cfg.get("max_focus_agents", 20)))
+        self.min_focus_agents = max(1, int(focus_cfg.get("min_focus_agents", 4)))
+        self.keyword_min_overlap = max(1, int(focus_cfg.get("keyword_min_overlap", 1)))
+        self.topic_weight = min(1.0, max(0.0, _safe_float(focus_cfg.get("topic_weight", 0.35), 0.35)))
+
+        self.agent_cfg_by_id: Dict[int, Dict[str, Any]] = {}
+        self.agent_keyword_bag: Dict[int, set] = {}
+        self.agent_semantic_text: Dict[int, str] = {}
+        self._llm_client: Optional[LLMClient] = None
+        self._focus_cache: Dict[str, Dict[str, Any]] = {}
+        self.event_focus_cache_file = os.path.join(
+            simulation_dir, "artifacts", "topology", platform, "event_focus_cache.json"
+        )
+
+        if self.enabled:
+            self._index_agent_configs()
+            self._build_agent_semantics()
+            self._load_cache()
+            self.log(
+                f"Event-focus enabled: platform={platform}, agents={len(self.agent_cfg_by_id)}, "
+                f"use_llm={self.use_llm}, strict={self.strict_mode}"
+            )
+
+    def _index_agent_configs(self):
+        for item in self.config.get("agent_configs", []) or []:
+            if not isinstance(item, dict):
+                continue
+            agent_id = item.get("agent_id")
+            if agent_id is None:
+                continue
+            try:
+                aid = int(agent_id)
+            except Exception:
+                continue
+            self.agent_cfg_by_id[aid] = item
+
+    def _load_entity_prompt_rows(self) -> Dict[str, Dict[str, Any]]:
+        path = os.path.join(self.simulation_dir, self.config.get("entity_prompts_file", "entity_prompts.json"))
+        if not os.path.exists(path):
+            return {}
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                rows = json.load(f)
+        except Exception:
+            return {}
+        if not isinstance(rows, list):
+            return {}
+        by_name: Dict[str, Dict[str, Any]] = {}
+        for row in rows:
+            if not isinstance(row, dict):
+                continue
+            name = str(row.get("entity_name", "") or "").strip().lower()
+            if name:
+                by_name[name] = row
+        return by_name
+
+    def _build_agent_semantics(self):
+        prompts = self._load_entity_prompt_rows()
+        for aid, cfg in self.agent_cfg_by_id.items():
+            bag = set()
+            text_parts: List[str] = []
+
+            entity_name = str(cfg.get("entity_name", "") or "").strip().lower()
+            entity_type = str(cfg.get("entity_type", "") or "").strip().lower()
+            if entity_name:
+                bag.update(re.findall(r"[a-zA-Z0-9_\u4e00-\u9fff]{2,}", entity_name))
+                text_parts.append(entity_name)
+            if entity_type:
+                bag.add(entity_type)
+                text_parts.append(entity_type)
+
+            prompt_row = prompts.get(entity_name)
+            if prompt_row:
+                keywords = prompt_row.get("keywords", []) or []
+                if isinstance(keywords, str):
+                    keywords = re.split(r"[，,;；\s]+", keywords)
+                for kw in keywords:
+                    kwt = str(kw).strip().lower()
+                    if kwt:
+                        bag.add(kwt)
+                for key in ["description", "semantic_prompt"]:
+                    val = str(prompt_row.get(key, "") or "").strip().lower()
+                    if val:
+                        text_parts.append(val)
+
+            self.agent_keyword_bag[aid] = {x for x in bag if x}
+            self.agent_semantic_text[aid] = " ".join(text_parts)
+
+    def _event_signature(
+        self,
+        event_config: Dict[str, Any],
+        round_num: int,
+        minutes_per_round: int,
+    ) -> str:
+        hot_topics = event_config.get("hot_topics", []) or []
+        narrative_direction = str(event_config.get("narrative_direction", "") or "").strip()
+        scheduled = event_config.get("scheduled_events", []) or []
+        nearby: List[Dict[str, Any]] = []
+        for item in scheduled:
+            if not isinstance(item, dict):
+                continue
+            trigger_round = item.get("trigger_round")
+            try:
+                tr = int(trigger_round) if trigger_round is not None else None
+            except Exception:
+                tr = None
+            if tr is None:
+                trigger_hour = item.get("trigger_hour")
+                try:
+                    if trigger_hour is not None:
+                        tr = (max(0, int(trigger_hour)) * 60 // max(1, minutes_per_round)) + 1
+                except Exception:
+                    tr = None
+            if tr is None or abs(tr - (round_num + 1)) > 2:
+                continue
+            nearby.append({
+                "event_type": item.get("event_type"),
+                "content": str(item.get("content", "") or "")[:300],
+                "hot_topics_add": item.get("hot_topics_add", []) or [],
+                "hot_topics_remove": item.get("hot_topics_remove", []) or [],
+            })
+        payload = {
+            "hot_topics": hot_topics,
+            "narrative_direction": narrative_direction,
+            "nearby_events": nearby,
+        }
+        return hashlib.md5(json.dumps(payload, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
+
+    def _load_cache(self):
+        if not os.path.exists(self.event_focus_cache_file):
+            return
+        try:
+            with open(self.event_focus_cache_file, "r", encoding="utf-8") as f:
+                payload = json.load(f)
+        except Exception:
+            return
+        if isinstance(payload, dict):
+            data = payload.get("items", {})
+            if isinstance(data, dict):
+                self._focus_cache = data
+
+    def _save_cache(self):
+        os.makedirs(os.path.dirname(self.event_focus_cache_file), exist_ok=True)
+        payload = {"generated_at": datetime.now().isoformat(), "items": self._focus_cache}
+        with open(self.event_focus_cache_file, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+
+    def _get_llm_client(self) -> Optional[LLMClient]:
+        if self._llm_client is not None:
+            return self._llm_client
+        try:
+            self._llm_client = LLMClient()
+        except Exception as e:
+            self.log(f"event-focus LLM unavailable, fallback to heuristic keywords: {e}")
+            self._llm_client = None
+        return self._llm_client
+
+    def _extract_event_keywords(self, event_text: str) -> List[str]:
+        kws = re.findall(r"[a-zA-Z0-9_\u4e00-\u9fff]{2,}", (event_text or "").lower())
+        dedup: List[str] = []
+        seen = set()
+        for kw in kws:
+            if kw in seen:
+                continue
+            seen.add(kw)
+            dedup.append(kw)
+        return dedup[:40]
+
+    def _llm_extract_focus_keywords(self, event_text: str, fallback_keywords: List[str]) -> List[str]:
+        if not self.use_llm:
+            return fallback_keywords
+        client = self._get_llm_client()
+        if client is None:
+            return fallback_keywords
+        prompt = {
+            "task": "extract_participant_keywords_for_event_simulation",
+            "event_text": event_text[:2500],
+            "fallback_keywords": fallback_keywords[:40],
+            "requirements": [
+                "Return participant-role keywords useful for selecting key actors in simulation.",
+                "Focus on groups/roles/attributes, not only exact named entities.",
+                "Return strict JSON.",
+            ],
+            "output_schema": {"focus_keywords": ["keyword1", "keyword2"]},
+        }
+        messages = [
+            {"role": "system", "content": "You are a strict JSON extractor for event-participant focus keywords."},
+            {"role": "user", "content": json.dumps(prompt, ensure_ascii=False)},
+        ]
+        try:
+            result = client.chat_json(messages=messages, temperature=0.1, max_tokens=1500)
+            values = result.get("focus_keywords", []) if isinstance(result, dict) else []
+            if not isinstance(values, list):
+                return fallback_keywords
+            cleaned = []
+            seen = set()
+            for x in values:
+                t = str(x).strip().lower()
+                if not t or t in seen:
+                    continue
+                seen.add(t)
+                cleaned.append(t)
+            return cleaned[:40] or fallback_keywords
+        except Exception:
+            return fallback_keywords
+
+    def _build_event_text(self, event_config: Dict[str, Any], round_num: int, minutes_per_round: int) -> str:
+        lines: List[str] = []
+        hot_topics = [str(x).strip() for x in (event_config.get("hot_topics", []) or []) if str(x).strip()]
+        if hot_topics:
+            lines.append("hot_topics: " + ", ".join(hot_topics))
+        narrative = str(event_config.get("narrative_direction", "") or "").strip()
+        if narrative:
+            lines.append("narrative_direction: " + narrative)
+        for item in (event_config.get("scheduled_events", []) or []):
+            if not isinstance(item, dict):
+                continue
+            tr = item.get("trigger_round")
+            try:
+                tr_int = int(tr) if tr is not None else None
+            except Exception:
+                tr_int = None
+            if tr_int is None:
+                continue
+            if abs(tr_int - (round_num + 1)) > 2:
+                continue
+            event_type = str(item.get("event_type", "") or "").strip()
+            content = str(item.get("content", "") or "").strip()
+            if event_type or content:
+                lines.append(f"event(round={tr_int}, type={event_type}): {content[:300]}")
+        return "\n".join(lines).strip()
+
+    def _score_agent_for_keywords(self, agent_id: int, focus_keywords: List[str], hot_topics: List[str]) -> float:
+        bag = self.agent_keyword_bag.get(agent_id, set())
+        text = self.agent_semantic_text.get(agent_id, "")
+        if not bag and not text:
+            return 0.0
+
+        score = 0.0
+        overlap = 0
+        for kw in focus_keywords:
+            if kw in bag:
+                score += 1.0
+                overlap += 1
+            elif kw and kw in text:
+                score += 0.6
+
+        for topic in hot_topics:
+            t = str(topic).strip().lower()
+            if not t:
+                continue
+            if t in bag:
+                score += self.topic_weight
+            elif t in text:
+                score += 0.5 * self.topic_weight
+
+        if overlap >= self.keyword_min_overlap:
+            score += 0.8
+        return score
+
+    def _resolve_focus_pool(
+        self,
+        event_config: Dict[str, Any],
+        round_num: int,
+        minutes_per_round: int,
+        target_count: int,
+    ) -> List[int]:
+        signature = self._event_signature(event_config, round_num, minutes_per_round)
+        cached = self._focus_cache.get(signature)
+        if isinstance(cached, dict):
+            ids = cached.get("focus_agent_ids", []) or []
+            return [int(x) for x in ids if int(x) in self.agent_cfg_by_id]
+
+        event_text = self._build_event_text(event_config, round_num, minutes_per_round)
+        hot_topics = [str(x).strip().lower() for x in (event_config.get("hot_topics", []) or []) if str(x).strip()]
+        fallback_keywords = self._extract_event_keywords(event_text + "\n" + " ".join(hot_topics))
+        focus_keywords = self._llm_extract_focus_keywords(event_text, fallback_keywords)
+        if not focus_keywords:
+            return []
+
+        scored: List[Tuple[int, float]] = []
+        for aid in self.agent_cfg_by_id.keys():
+            s = self._score_agent_for_keywords(aid, focus_keywords, hot_topics)
+            if s > 0:
+                scored.append((aid, s))
+        scored.sort(key=lambda x: x[1], reverse=True)
+
+        max_keep = min(len(scored), max(self.min_focus_agents, min(self.max_focus_agents, target_count * 3)))
+        focus_ids = [aid for aid, _ in scored[:max_keep]]
+        self._focus_cache[signature] = {
+            "focus_keywords": focus_keywords[:30],
+            "focus_agent_ids": focus_ids,
+            "created_at": datetime.now().isoformat(),
+        }
+        self._save_cache()
+        return focus_ids
+
+    def focus_candidates(
+        self,
+        candidate_ids: List[int],
+        event_config: Dict[str, Any],
+        round_num: int,
+        minutes_per_round: int,
+        target_count: int,
+    ) -> List[int]:
+        if not self.enabled or not candidate_ids:
+            return candidate_ids
+        focus_pool = set(self._resolve_focus_pool(event_config, round_num, minutes_per_round, target_count))
+        if not focus_pool:
+            return candidate_ids
+
+        focused = [aid for aid in candidate_ids if aid in focus_pool]
+        if focused:
+            return focused
+        if self.strict_mode:
+            return []
+        return candidate_ids
+
+
 class SimpleMemRuntime:
     """
     SimpleMem 风格的轻量增量记忆：
@@ -1678,18 +2023,7 @@ class SimpleMemRuntime:
         self.self_scope_max = max(1, int(mem_cfg.get("self_scope_max", 3)))
         self.neighbor_scope_max = max(1, int(mem_cfg.get("neighbor_scope_max", 2)))
         self.world_scope_max = max(1, int(mem_cfg.get("world_scope_max", 2)))
-        self.counter_scope_max = max(0, int(mem_cfg.get("counter_scope_max", 1)))
         self.enable_world_memory = bool(mem_cfg.get("enable_world_memory", True))
-        self.counter_opinion_gap = min(
-            1.0, max(0.0, _safe_float(mem_cfg.get("counter_opinion_gap", 0.35), 0.35))
-        )
-        self.novelty_lookback = max(2, int(mem_cfg.get("novelty_lookback", 6)))
-        self.unit_repeat_penalty = min(
-            0.95, max(0.0, _safe_float(mem_cfg.get("unit_repeat_penalty", 0.35), 0.35))
-        )
-        self.topic_repeat_penalty = min(
-            0.95, max(0.0, _safe_float(mem_cfg.get("topic_repeat_penalty", 0.15), 0.15))
-        )
 
         self.memory_file = os.path.join(simulation_dir, f"simplemem_{platform}.json")
         self.memory_artifact_dir = os.path.join(simulation_dir, "artifacts", "memory", platform)
@@ -1700,15 +2034,9 @@ class SimpleMemRuntime:
         os.makedirs(self.memory_artifact_dir, exist_ok=True)
         self.per_agent_units: Dict[int, List[Dict[str, Any]]] = {}
         self.world_units: List[Dict[str, Any]] = []
-        self.recent_retrieved_unit_ids: Dict[int, deque] = defaultdict(lambda: deque(maxlen=self.novelty_lookback))
-        self.recent_retrieved_topics: Dict[int, deque] = defaultdict(lambda: deque(maxlen=self.novelty_lookback))
         self._agent_base_cache: Dict[Tuple[int, str], str] = {}
         self._seq = 0
         self._sim_start = self._resolve_simulation_start()
-        self.keyword_extractor = MemoryKeywordExtractor(
-            config=config,
-            topology_runtime=topology_runtime,
-        )
 
         if self.enabled:
             self._load()
@@ -1813,19 +2141,21 @@ class SimpleMemRuntime:
             return "medium"
         return "low"
 
-    def _extract_keywords(
-        self,
-        action_data: Dict[str, Any],
-        summary: str,
-        target_agent_ids: List[int],
-        max_count: int = 8,
-    ) -> List[str]:
-        return self.keyword_extractor.extract(
-            action_data=action_data,
-            summary=summary,
-            target_agent_ids=target_agent_ids,
-            max_count=max_count,
-        )
+    def _extract_keywords(self, text: str, max_count: int = 8) -> List[str]:
+        tokens = re.findall(r"[a-zA-Z0-9_\u4e00-\u9fff]{2,}", (text or "").lower())
+        stopwords = {
+            "create_post", "like_post", "repost", "quote_post", "follow", "do_nothing",
+            "create_comment", "like_comment", "dislike_comment", "search_posts", "search_user",
+            "trend", "refresh", "interview", "content", "post", "user", "agent",
+            "的", "了", "和", "是", "在", "对", "与", "进行", "一个"
+        }
+        freq: Dict[str, int] = {}
+        for t in tokens:
+            if t in stopwords:
+                continue
+            freq[t] = freq.get(t, 0) + 1
+        ranked = sorted(freq.items(), key=lambda x: (-x[1], len(x[0])))
+        return [k for k, _ in ranked[:max_count]]
 
     def _build_memory_text(self, action_data: Dict[str, Any]) -> str:
         action_type = str(action_data.get("action_type", ""))
@@ -2159,7 +2489,6 @@ class SimpleMemRuntime:
             "self_k": self_k,
             "neighbor_k": neighbor_k,
             "world_k": world_k,
-            "counter_k": self.counter_scope_max if complexity != "LOW" else 0,
             "include_world": self.enable_world_memory and (complexity != "LOW" or bool((self.config.get("event_config", {}) or {}).get("hot_topics"))),
         }
 
@@ -2208,14 +2537,6 @@ class SimpleMemRuntime:
         }.get(scope, 1.0)
         count_bonus = 1.0 + 0.05 * min(6, int(unit.get("count", 1)))
         topic_bonus = 1.08 if str(unit.get("topic", "")).strip().lower() in query_keywords else 1.0
-        novelty_bonus = 1.0
-        recent_units = self.recent_retrieved_unit_ids.get(for_agent_id)
-        if recent_units and unit.get("id") in recent_units:
-            novelty_bonus *= max(0.1, 1.0 - self.unit_repeat_penalty)
-        recent_topics = self.recent_retrieved_topics.get(for_agent_id)
-        unit_topic = str(unit.get("topic", "")).strip().lower()
-        if recent_topics and unit_topic and unit_topic in recent_topics:
-            novelty_bonus *= max(0.2, 1.0 - self.topic_repeat_penalty)
 
         return (
             (0.45 * keyword_sim + 0.20 * entity_sim + 0.35 * recency)
@@ -2225,83 +2546,7 @@ class SimpleMemRuntime:
             * scope_bonus
             * count_bonus
             * topic_bonus
-            * novelty_bonus
         )
-
-    def _select_counter_units(
-        self,
-        agent_id: int,
-        plan: Dict[str, Any],
-        candidate_buckets: Dict[str, List[Dict[str, Any]]],
-        already_selected_ids: Set[str],
-        current_round: int,
-    ) -> List[Tuple[str, Dict[str, Any], float]]:
-        counter_k = int(plan.get("counter_k", 0) or 0)
-        if counter_k <= 0:
-            return []
-
-        pool = list(candidate_buckets.get("neighbor", [])) + list(candidate_buckets.get("world", []))
-        if not pool:
-            return []
-
-        current_opinion = 0.0
-        if self.topology_runtime:
-            current_opinion = self.topology_runtime.opinion_by_agent.get(agent_id, 0.0)
-
-        query_keywords = plan.get("query_keywords", set()) or set()
-        ranked: List[Tuple[str, Dict[str, Any], float]] = []
-        for unit in pool:
-            uid = unit.get("id")
-            if uid in already_selected_ids:
-                continue
-            source_agent = int(unit.get("source_agent_id", unit.get("agent_id", -1)))
-            source_opinion = current_opinion
-            if self.topology_runtime and source_agent >= 0:
-                source_opinion = self.topology_runtime.opinion_by_agent.get(source_agent, current_opinion)
-
-            opinion_gap = abs(source_opinion - current_opinion)
-            unit_keywords = set(unit.get("keywords", []) or [])
-            keyword_overlap = 0.0
-            if query_keywords and unit_keywords:
-                inter = len(query_keywords & unit_keywords)
-                union = len(query_keywords | unit_keywords)
-                keyword_overlap = inter / union if union > 0 else 0.0
-
-            if opinion_gap < self.counter_opinion_gap and keyword_overlap > 0.45:
-                continue
-
-            age = max(0, current_round - int(unit.get("last_round", current_round)))
-            recency = math.exp(-self.recency_decay * age)
-            salience = _safe_float(unit.get("salience_score", 0.4), 0.4)
-            novelty = 1.0
-            recent_units = self.recent_retrieved_unit_ids.get(agent_id)
-            if recent_units and uid in recent_units:
-                novelty *= 0.7
-            score = (
-                0.45 * max(opinion_gap, 0.15)
-                + 0.25 * (1.0 - keyword_overlap)
-                + 0.20 * salience
-                + 0.10 * recency
-            ) * novelty
-            ranked.append(("counter", unit, score))
-
-        ranked.sort(key=lambda item: item[2], reverse=True)
-        return ranked[:counter_k]
-
-    def _remember_retrieval(
-        self,
-        agent_id: int,
-        selected_units: List[Tuple[str, Dict[str, Any], float]],
-    ):
-        unit_deque = self.recent_retrieved_unit_ids[agent_id]
-        topic_deque = self.recent_retrieved_topics[agent_id]
-        for _, unit, _ in selected_units:
-            unit_id = unit.get("id")
-            topic = str(unit.get("topic", "")).strip().lower()
-            if unit_id:
-                unit_deque.append(unit_id)
-            if topic:
-                topic_deque.append(topic)
 
     def _build_world_unit(self, unit: Dict[str, Any]) -> Dict[str, Any]:
         world_unit = dict(unit)
@@ -2484,9 +2729,9 @@ class SimpleMemRuntime:
         if not summary:
             return None
 
+        keywords = self._extract_keywords(summary, max_count=8)
         entities = self._extract_entities(action_data)
         target_agent_ids = self._extract_target_agent_ids(action_data)
-        keywords = self._extract_keywords(action_data, summary, target_agent_ids, max_count=8)
         topic = self._infer_topic(action_data, summary, keywords)
         salience_score = self._estimate_salience(action_data, topic, target_agent_ids, keywords)
         if salience_score < self.min_salience_to_store:
@@ -2661,24 +2906,8 @@ class SimpleMemRuntime:
             seen.add(uid)
             dedup_selected.append((scope, unit, score))
 
-        counter_selected = self._select_counter_units(
-            agent_id=agent_id,
-            plan=plan,
-            candidate_buckets=candidate_buckets,
-            already_selected_ids=seen,
-            current_round=current_round,
-        )
-        if counter_selected:
-            for scope, unit, score in counter_selected:
-                uid = unit.get("id")
-                if uid in seen:
-                    continue
-                seen.add(uid)
-                dedup_selected.append((scope, unit, score))
-
         abstracts: List[str] = []
         details: List[str] = []
-        counters: List[str] = []
         for idx, (scope, u, _) in enumerate(dedup_selected):
             src_name = u.get("agent_name", f"Agent_{u.get('agent_id', '')}")
             abstract = str(u.get("abstract_summary", "") or "")[:220]
@@ -2686,12 +2915,6 @@ class SimpleMemRuntime:
             timestamp = str(u.get("timestamp", "") or "")
             action_type = str(u.get("action_type", "") or "")
             salience = str(u.get("salience", "") or "")
-            if scope == "counter":
-                if abstract:
-                    counters.append(f"- [{src_name}] {abstract}")
-                elif detail:
-                    counters.append(f"- [{src_name}] {detail}")
-                continue
             if idx < self.abstract_topk and abstract:
                 abstracts.append(f"- ({scope}) [{src_name}] {abstract}")
             if idx < self.detail_topk and detail:
@@ -2709,12 +2932,8 @@ class SimpleMemRuntime:
         if details:
             lines.append(self.DETAIL_HEADER)
             lines.extend(details)
-        if counters:
-            lines.append("[COUNTERPOINT MEMORY]")
-            lines.extend(counters[:2])
 
         memory_context = "\n".join(lines)[:self.max_injected_chars]
-        self._remember_retrieval(agent_id, dedup_selected)
         self._record_retrieval_trace(
             agent_id=agent_id,
             current_round=current_round,
@@ -2762,6 +2981,7 @@ def safe_float(value: Any, default: float = 0.0) -> float:
 
 __all__ = [
     'TopologyAwareRuntime',
+    'EventFocusRuntime',
     'SimpleMemRuntime',
     'safe_float',
 ]
