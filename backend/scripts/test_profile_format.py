@@ -14,7 +14,7 @@ import tempfile
 # 添加项目路径
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from app.application.oasis_profile_generator import OasisProfileGenerator, OasisAgentProfile
+from core.utils.oasis_profile_generator import OasisProfileGenerator, OasisAgentProfile
 
 
 def test_profile_formats():

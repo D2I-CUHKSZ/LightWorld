@@ -87,6 +87,15 @@
     "social_link_sync_interval": 6,
     "social_link_sync_max_total": 20
   },
+  "event_focus": {
+    "enabled": false,
+    "use_llm": true,
+    "strict_mode": true,
+    "max_focus_agents": 20,
+    "min_focus_agents": 4,
+    "keyword_min_overlap": 1,
+    "topic_weight": 0.35
+  },
   "simplemem": {
     "enabled": true,
     "max_units_per_agent": 120,

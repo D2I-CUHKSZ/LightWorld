@@ -30,12 +30,12 @@ PROJECT_ROOT = BACKEND_DIR.parent
 if str(BACKEND_DIR) not in sys.path:
     sys.path.insert(0, str(BACKEND_DIR))
 
-from app.core.settings import Config  # noqa: E402
-from app.domain.project import ProjectManager  # noqa: E402
-from app.infrastructure.file_parser import FileParser  # noqa: E402
-from app.application.text_processor import TextProcessor  # noqa: E402
-from app.modules.graph.local_pipeline import LocalGraphPipeline, LocalPipelineOptions  # noqa: E402
-from app.application.simulation_manager import SimulationManager  # noqa: E402
+from core.setting.settings import Config  # noqa: E402
+from core.domain.project import ProjectManager  # noqa: E402
+from core.infrastructure.file_parser import FileParser  # noqa: E402
+from core.utils.text_processor import TextProcessor  # noqa: E402
+from core.modules.graph.local_pipeline import LocalGraphPipeline, LocalPipelineOptions  # noqa: E402
+from core.utils.simulation_manager import SimulationManager  # noqa: E402
 
 
 DEFAULT_QWEN_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"

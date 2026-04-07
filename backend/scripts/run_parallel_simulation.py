@@ -174,7 +174,7 @@ except ImportError as e:
     print("请先安装: pip install oasis-ai camel-ai")
     sys.exit(1)
 
-from app.modules.simulation.platform_runner import (
+from core.modules.simulation.platform_runner import (
     PlatformSimulation,
     REDDIT_SPEC,
     TWITTER_SPEC,

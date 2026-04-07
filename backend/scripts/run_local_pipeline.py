@@ -12,7 +12,7 @@ BACKEND_DIR = os.path.abspath(os.path.join(CURRENT_DIR, ".."))
 if BACKEND_DIR not in sys.path:
     sys.path.insert(0, BACKEND_DIR)
 
-from app.cli.local_pipeline import main
+from core.run.local_pipeline import main
 
 
 if __name__ == "__main__":
