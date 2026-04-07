@@ -1,0 +1,4 @@
+# Local secrets
+.env
+backend/.env
+backend/app/setting/settings_local.py

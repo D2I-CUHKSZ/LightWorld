@@ -31,14 +31,17 @@ class Config:
     JSON_AS_ASCII = False
 
     # LLM
-    # 文本推理与本体生成继续使用 qwen-plus
-    LLM_API_KEY = "sk-bd18a6eab44344a78ba2d59e6639a40f"
-    LLM_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
-    LLM_MODEL_NAME = "qwen-plus"
+    # Public defaults live here; secrets should come from .env or settings_local.py.
+    LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
+    LLM_BASE_URL = os.environ.get(
+        "LLM_BASE_URL",
+        "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    )
+    LLM_MODEL_NAME = os.environ.get("LLM_MODEL_NAME", "qwen-plus")
     LLM_TIMEOUT_SECONDS = float(os.environ.get("LLM_TIMEOUT_SECONDS", "90"))
 
     # Zep
-    ZEP_API_KEY = "z_1dWlkIjoiMDQ5YzkzNjQtMWFlOC00OTlmLTg0NjAtNGRlNmQyZWJhNGE5In0.Et9qkamIbRP4J-2I6ij4xAUAw_qbrxx70Yx2yuvRTl32PqsT3d2qjgFS2htFCwA-p-AqRvZ8QnQk5hy0ychsvw"
+    ZEP_API_KEY = os.environ.get("ZEP_API_KEY", "")
 
     # Files
     MAX_CONTENT_LENGTH = 100 * 1024 * 1024  # 50MB
@@ -59,8 +62,8 @@ class Config:
     # 多模态理解走 Qwen Omni，音频转写走 Qwen ASR
     MULTIMODAL_VISION_MODEL_NAME = "qwen3-omni-flash"
     MULTIMODAL_AUDIO_MODEL_NAME = "qwen3-asr-flash"
-    MULTIMODAL_AUDIO_API_KEY = LLM_API_KEY
-    MULTIMODAL_AUDIO_BASE_URL = LLM_BASE_URL
+    MULTIMODAL_AUDIO_API_KEY = os.environ.get("MULTIMODAL_AUDIO_API_KEY", "")
+    MULTIMODAL_AUDIO_BASE_URL = os.environ.get("MULTIMODAL_AUDIO_BASE_URL", "")
     MULTIMODAL_VIDEO_SEGMENT_SECONDS = int(
         os.environ.get("MULTIMODAL_VIDEO_SEGMENT_SECONDS", "30")
     )
@@ -112,3 +115,25 @@ class Config:
         if not cls.ZEP_API_KEY:
             errors.append("ZEP_API_KEY 未配置")
         return errors
+
+
+def _apply_local_overrides():
+    try:
+        from . import settings_local
+    except ImportError:
+        return
+
+    for name in dir(settings_local):
+        if name.isupper():
+            setattr(Config, name, getattr(settings_local, name))
+
+
+def _finalize_derived_settings():
+    if not Config.MULTIMODAL_AUDIO_API_KEY:
+        Config.MULTIMODAL_AUDIO_API_KEY = Config.LLM_API_KEY
+    if not Config.MULTIMODAL_AUDIO_BASE_URL:
+        Config.MULTIMODAL_AUDIO_BASE_URL = Config.LLM_BASE_URL
+
+
+_apply_local_overrides()
+_finalize_derived_settings()
