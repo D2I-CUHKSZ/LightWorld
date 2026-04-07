@@ -10,10 +10,10 @@ from flask import request, jsonify
 
 from . import graph_bp
 from ...config import Config
-from ...application.ontology_generator import OntologyGenerator
-from ...application.graph_builder import GraphBuilderService
-from ...application.multimodal_ingestion import MultimodalIngestionService
-from ...application.text_processor import TextProcessor
+from ...utils.ontology_generator import OntologyGenerator
+from ...utils.graph_builder import GraphBuilderService
+from ...utils.multimodal_ingestion import MultimodalIngestionService
+from ...utils.text_processor import TextProcessor
 from ...infrastructure.logger import get_logger
 from ...domain.task import TaskManager, TaskStatus
 from ...domain.project import ProjectManager, ProjectStatus

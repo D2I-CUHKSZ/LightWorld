@@ -3,6 +3,6 @@
 Prefer importing `Config` from `app.core.settings`.
 """
 
-from .core.settings import Config
+from .setting.settings import Config
 
 __all__ = ["Config"]

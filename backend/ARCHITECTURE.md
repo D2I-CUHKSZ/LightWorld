@@ -1,118 +1,118 @@
-# 后端架构（重构版）
+﻿# 鍚庣鏋舵瀯锛堥噸鏋勭増锛?
 
-当前仓库已经是纯后端项目。
+褰撳墠浠撳簱宸茬粡鏄函鍚庣椤圭洰銆?
 
-## 分层结构
+## 鍒嗗眰缁撴瀯
 
 - `backend/app/cli/`
-  - 标准化 CLI 入口（API、本地图谱构建、并行模拟）
+  - 鏍囧噯鍖?CLI 鍏ュ彛锛圓PI銆佹湰鍦板浘璋辨瀯寤恒€佸苟琛屾ā鎷燂級
 - `backend/app/core/`
-  - 核心配置与运行时共享基础设施
+  - 鏍稿績閰嶇疆涓庤繍琛屾椂鍏变韩鍩虹璁炬柦
 - `backend/app/adapters/http/`
-  - HTTP 适配层（Blueprint、请求处理、响应组装）
+  - HTTP 閫傞厤灞傦紙Blueprint銆佽姹傚鐞嗐€佸搷搴旂粍瑁咃級
 - `backend/app/application/`
-  - 应用服务层，供 API 与脚本复用
+  - 搴旂敤鏈嶅姟灞傦紝渚?API 涓庤剼鏈鐢?
 - `backend/app/domain/`
-  - 领域对象与状态管理（project/task/simulation）
+  - 棰嗗煙瀵硅薄涓庣姸鎬佺鐞嗭紙project/task/simulation锛?
 - `backend/app/infrastructure/`
-  - 基础设施工具（LLM client、日志、文件解析、分页、重试）
+  - 鍩虹璁炬柦宸ュ叿锛圠LM client銆佹棩蹇椼€佹枃浠惰В鏋愩€佸垎椤点€侀噸璇曪級
 - `backend/app/modules/`
-  - 以场景为中心的重构模块
+  - 浠ュ満鏅负涓績鐨勯噸鏋勬ā鍧?
 
-## 主要模块
+## 涓昏妯″潡
 
 - `backend/app/modules/graph/local_pipeline.py`
-  - `LocalGraphPipeline`：本地文档驱动的图谱构建流程
-  - `LocalPipelineOptions`：本地管线输入参数
+  - `LocalGraphPipeline`锛氭湰鍦版枃妗ｉ┍鍔ㄧ殑鍥捐氨鏋勫缓娴佺▼
+  - `LocalPipelineOptions`锛氭湰鍦扮绾胯緭鍏ュ弬鏁?
 - `backend/app/modules/simulation/runtimes.py`
-  - `TopologyAwareRuntime`：topology-aware 协调与差异化激活
-  - `SimpleMemRuntime`：轻量增量记忆与检索注入
+  - `TopologyAwareRuntime`锛歵opology-aware 鍗忚皟涓庡樊寮傚寲婵€娲?
+  - `SimpleMemRuntime`锛氳交閲忓閲忚蹇嗕笌妫€绱㈡敞鍏?
 - `backend/app/modules/simulation/platform_runner.py`
-  - `PlatformSpec`：平台差异配置
-  - `run_platform_simulation`：Twitter / Reddit 共用运行主循环
-  - `TWITTER_SPEC` / `REDDIT_SPEC`：平台规格实例
+  - `PlatformSpec`锛氬钩鍙板樊寮傞厤缃?
+  - `run_platform_simulation`锛歍witter / Reddit 鍏辩敤杩愯涓诲惊鐜?
+  - `TWITTER_SPEC` / `REDDIT_SPEC`锛氬钩鍙拌鏍煎疄渚?
 
-## 当前采用的设计模式
+## 褰撳墠閲囩敤鐨勮璁℃ā寮?
 
 - Strategy
-  - 平台差异通过 `PlatformSpec` 表达，而不是在运行主逻辑里堆分支。
+  - 骞冲彴宸紓閫氳繃 `PlatformSpec` 琛ㄨ揪锛岃€屼笉鏄湪杩愯涓婚€昏緫閲屽爢鍒嗘敮銆?
 - Application Service
-  - 复杂用例由 `LocalGraphPipeline`、`SimulationManager`、`run_platform_simulation` 负责编排。
+  - 澶嶆潅鐢ㄤ緥鐢?`LocalGraphPipeline`銆乣SimulationManager`銆乣run_platform_simulation` 璐熻矗缂栨帓銆?
 - Thin Entry Script
-  - `scripts/run_local_pipeline.py` 与 `scripts/run_parallel_simulation.py` 主要负责 CLI 与参数转发。
+  - `scripts/run_local_pipeline.py` 涓?`scripts/run_parallel_simulation.py` 涓昏璐熻矗 CLI 涓庡弬鏁拌浆鍙戙€?
 
-## 运行入口
+## 杩愯鍏ュ彛
 
-- API 服务
+- API 鏈嶅姟
   - `cd backend && uv run mirofish-api`
-- 本地图谱构建
+- 鏈湴鍥捐氨鏋勫缓
   - `cd backend && uv run mirofish-local-pipeline ...`
-- 并行模拟
+- 骞惰妯℃嫙
   - `cd backend && uv run mirofish-parallel-sim --config <path>`
 
-## 配置模板
+## 閰嶇疆妯℃澘
 
-- 完整 simulation 配置模板（包含 topology-aware、simplemem、light-mode）
+- 瀹屾暣 simulation 閰嶇疆妯℃澘锛堝寘鍚?topology-aware銆乻implemem銆乴ight-mode锛?
   - `backend/scripts/config_templates/simulation_config.full.template.json`
 
-## 兼容包装
+## 鍏煎鍖呰
 
-- `backend/run.py` 与 `backend/scripts/run_local_pipeline.py`
-  - 作为兼容入口保留。
-- `backend/scripts/run_twitter_simulation.py` 与 `backend/scripts/run_reddit_simulation.py`
-  - 现在已经改为委托统一入口 `run_parallel_simulation.py`
-  - 分别通过 `--twitter-only` / `--reddit-only` 运行单平台模拟
+- `backend/run.py` 涓?`backend/scripts/run_local_pipeline.py`
+  - 浣滀负鍏煎鍏ュ彛淇濈暀銆?
+- `backend/scripts/run_twitter_simulation.py` 涓?`backend/scripts/run_reddit_simulation.py`
+  - 鐜板湪宸茬粡鏀逛负濮旀墭缁熶竴鍏ュ彛 `run_parallel_simulation.py`
+  - 鍒嗗埆閫氳繃 `--twitter-only` / `--reddit-only` 杩愯鍗曞钩鍙版ā鎷?
 
-## 端到端数据流
+## 绔埌绔暟鎹祦
 
-当前后端的真实路径不是简单的“文档 -> 图谱”或“profile -> OASIS”，而是下面这条完整链路：
+褰撳墠鍚庣鐨勭湡瀹炶矾寰勪笉鏄畝鍗曠殑鈥滄枃妗?-> 鍥捐氨鈥濇垨鈥減rofile -> OASIS鈥濓紝鑰屾槸涓嬮潰杩欐潯瀹屾暣閾捐矾锛?
 
-1. 本地文档与 `simulation_requirement` 进入本地图谱构建管线。
-2. 管线完成文本提取、预处理、ontology 生成与 Zep 语义图谱构建。
-3. 从语义图谱中读回节点与边，并筛选出可模拟实体。
-4. 围绕这些实体继续生成：
+1. 鏈湴鏂囨。涓?`simulation_requirement` 杩涘叆鏈湴鍥捐氨鏋勫缓绠＄嚎銆?
+2. 绠＄嚎瀹屾垚鏂囨湰鎻愬彇銆侀澶勭悊銆乷ntology 鐢熸垚涓?Zep 璇箟鍥捐氨鏋勫缓銆?
+3. 浠庤涔夊浘璋变腑璇诲洖鑺傜偣涓庤竟锛屽苟绛涢€夊嚭鍙ā鎷熷疄浣撱€?
+4. 鍥寸粫杩欎簺瀹炰綋缁х画鐢熸垚锛?
    - `entity_prompts`
    - OASIS `profiles`
    - `simulation_config`
-   - 显式 `social_relation_graph`
-5. 这些中间产物再被编译进 OASIS 运行时：
-   - profile 文件用于创建 agent graph
-   - simulation config 驱动时间、事件、topology、memory
-   - social relation graph 被转成初始 `follow` 边注入 OASIS 数据库
-6. 运行时动作继续回流到：
-   - OASIS 数据库表
-   - topology-aware 更新
+   - 鏄惧紡 `social_relation_graph`
+5. 杩欎簺涓棿浜х墿鍐嶈缂栬瘧杩?OASIS 杩愯鏃讹細
+   - profile 鏂囦欢鐢ㄤ簬鍒涘缓 agent graph
+   - simulation config 椹卞姩鏃堕棿銆佷簨浠躲€乼opology銆乵emory
+   - social relation graph 琚浆鎴愬垵濮?`follow` 杈规敞鍏?OASIS 鏁版嵁搴?
+6. 杩愯鏃跺姩浣滅户缁洖娴佸埌锛?
+   - OASIS 鏁版嵁搴撹〃
+   - topology-aware 鏇存柊
    - SimpleMem
 
-### 流程图
+### 娴佺▼鍥?
 
 ```mermaid
 flowchart TD
-    A["输入
-- 本地文档
+    A["杈撳叆
+- 鏈湴鏂囨。
 - simulation_requirement
-- 环境变量"] --> B["LocalGraphPipeline"]
+- 鐜鍙橀噺"] --> B["LocalGraphPipeline"]
 
-    B --> C["文本提取与预处理"]
+    B --> C["鏂囨湰鎻愬彇涓庨澶勭悊"]
     C --> D["OntologyGenerator
 - entity_types
 - edge_types
 - analysis_summary"]
     D --> E["GraphBuilderService
-- 创建 Zep graph
-- 设置 ontology
-- 发送文本 chunks"]
-    E --> F["Zep 语义图谱
+- 鍒涘缓 Zep graph
+- 璁剧疆 ontology
+- 鍙戦€佹枃鏈?chunks"]
+    E --> F["Zep 璇箟鍥捐氨
 - nodes
 - edges"]
 
-    F --> G["项目产物
+    F --> G["椤圭洰浜х墿
 - extracted_text.txt
 - project.json"]
     F --> H["SimulationManager.prepare_simulation"]
 
     H --> I["ZepEntityReader
-- 筛选模拟实体"]
+- 绛涢€夋ā鎷熷疄浣?]
     I --> J["entity_graph_snapshot.json"]
     I --> K["EntityPromptExtractor"]
     K --> L["entity_prompts.json"]
@@ -125,7 +125,7 @@ flowchart TD
     Q --> R["social_relation_graph.json"]
 
     N --> S["run_parallel_simulation.py
-或 twitter/reddit 包装入口"]
+鎴?twitter/reddit 鍖呰鍏ュ彛"]
     P --> S
     L --> S
     J --> S
@@ -133,31 +133,31 @@ flowchart TD
 
     S --> T["TopologyAwareRuntime"]
     S --> U["SimpleMemRuntime"]
-    T --> V["编译运行时结构
+    T --> V["缂栬瘧杩愯鏃剁粨鏋?
 - structure_vec
 - synthetic_adj
 - PPR
 - units"]
     R --> V
-    T --> W["注入初始 follow 边"]
-    W --> X["OASIS 数据库
+    T --> W["娉ㄥ叆鍒濆 follow 杈?]
+    W --> X["OASIS 鏁版嵁搴?
 - user
 - post
 - follow
 - trace
 - rec"]
 
-    P --> Y["事件层
+    P --> Y["浜嬩欢灞?
 - initial_posts
 - scheduled_events
 - hot_topics_update"]
     Y --> X
 
-    X --> Z["逐轮模拟
-- 选择活跃 agent
-- memory 注入
+    X --> Z["閫愯疆妯℃嫙
+- 閫夋嫨娲昏穬 agent
+- memory 娉ㄥ叆
 - env.step()"]
-    Z --> AA["动作回流
+    Z --> AA["鍔ㄤ綔鍥炴祦
 - trace/post/follow
 - topology ingest
 - simplemem ingest"]
@@ -165,157 +165,158 @@ flowchart TD
     AA --> U
 ```
 
-## 产物文件
+## 浜х墿鏂囦欢
 
-### 项目构建阶段
+### 椤圭洰鏋勫缓闃舵
 
-产物目录：
+浜х墿鐩綍锛?
 
-- `backend/uploads/projects/<project_id>/`
+- `backend/input2graph/projects/<project_id>/`
 
-主要文件：
+涓昏鏂囦欢锛?
 
 - `extracted_text.txt`
-  - 预处理后的项目级拼接文本
+  - 棰勫鐞嗗悗鐨勯」鐩骇鎷兼帴鏂囨湰
 - `project.json`
-  - 项目状态、ontology 摘要、graph id、图谱统计信息
+  - 椤圭洰鐘舵€併€乷ntology 鎽樿銆乬raph id銆佸浘璋辩粺璁′俊鎭?
 
-### Simulation Prepare 阶段
+### Simulation Prepare 闃舵
 
-产物目录：
+浜х墿鐩綍锛?
 
-- `backend/uploads/simulations/<simulation_id>/`
+- `output/simulations/<simulation_id>/`
 
-主要文件：
+涓昏鏂囦欢锛?
 
 - `entity_graph_snapshot.json`
-  - 过滤后的实体，以及与 simulation 相关的图谱边快照
+  - 杩囨护鍚庣殑瀹炰綋锛屼互鍙婁笌 simulation 鐩稿叧鐨勫浘璋辫竟蹇収
 - `entity_prompts.json`
-  - 用于聚类 / 检索的实体语义蒸馏结果
-- `twitter_profiles.csv` 或 `reddit_profiles.json`
-  - OASIS 可直接读取的 profile 文件
+  - 鐢ㄤ簬鑱氱被 / 妫€绱㈢殑瀹炰綋璇箟钂搁缁撴灉
+- `twitter_profiles.csv` 鎴?`reddit_profiles.json`
+  - OASIS 鍙洿鎺ヨ鍙栫殑 profile 鏂囦欢
 - `simulation_config.json`
-  - 时间配置、agent 配置、事件配置、topology 配置、memory 配置
+  - 鏃堕棿閰嶇疆銆乤gent 閰嶇疆銆佷簨浠堕厤缃€乼opology 閰嶇疆銆乵emory 閰嶇疆
 - `social_relation_graph.json`
-  - 显式 agent-agent 社交关系图，包含：
+  - 鏄惧紡 agent-agent 绀句氦鍏崇郴鍥撅紝鍖呭惈锛?
     - `exposure_weight`
     - `trust_weight`
     - `hostility_weight`
     - `alliance_weight`
     - `interaction_prior`
 
-### Runtime 阶段
+### Runtime 闃舵
 
-仍然产出在相同 simulation 目录下：
+浠嶇劧浜у嚭鍦ㄧ浉鍚?simulation 鐩綍涓嬶細
 
 - `twitter_simulation.db` / `reddit_simulation.db`
-  - OASIS 运行时数据库
+  - OASIS 杩愯鏃舵暟鎹簱
 - `simulation.log`
-  - 主进程日志
+  - 涓昏繘绋嬫棩蹇?
 - `env_status.json`
-  - 环境生命周期状态
+  - 鐜鐢熷懡鍛ㄦ湡鐘舵€?
 - `twitter/actions.jsonl` / `reddit/actions.jsonl`
-  - 结构化动作日志
+  - 缁撴瀯鍖栧姩浣滄棩蹇?
 - `simplemem_twitter.json` / `simplemem_reddit.json`
-  - 压缩后的增量记忆文件
+  - 鍘嬬缉鍚庣殑澧為噺璁板繂鏂囦欢
 
-## 示例说明
+## 绀轰緥璇存槑
 
-### 示例 1：最小 README 驱动建图
+### 绀轰緥 1锛氭渶灏?README 椹卞姩寤哄浘
 
-输入：
+杈撳叆锛?
 
-- 文档：`README.md`
-- 需求：`Use README content to build a minimal public-opinion simulation`
+- 鏂囨。锛歚README.md`
+- 闇€姹傦細`Use README content to build a minimal public-opinion simulation`
 
-输出过程：
+杈撳嚭杩囩▼锛?
 
-1. `LocalGraphPipeline` 读取 `README.md`
-2. `OntologyGenerator` 基于文档文本和需求生成 ontology
-3. `GraphBuilderService` 构建 Zep 图谱
-4. `project.json` 保存生成的 `graph_id`
+1. `LocalGraphPipeline` 璇诲彇 `README.md`
+2. `OntologyGenerator` 鍩轰簬鏂囨。鏂囨湰鍜岄渶姹傜敓鎴?ontology
+3. `GraphBuilderService` 鏋勫缓 Zep 鍥捐氨
+4. `project.json` 淇濆瓨鐢熸垚鐨?`graph_id`
 
-一次成功运行得到：
+涓€娆℃垚鍔熻繍琛屽緱鍒帮細
 
-- project 目录
-  - `/home/shulun/project/LightWorld/backend/uploads/projects/proj_6d56e4817baf`
+- project 鐩綍
+  - `/home/shulun/project/LightWorld/backend/input2graph/projects/proj_6d56e4817baf`
 - graph id
   - `mirofish_9f0d1c84b2164adf`
 
-### 示例 2：基于该图谱准备 simulation
+### 绀轰緥 2锛氬熀浜庤鍥捐氨鍑嗗 simulation
 
-输入：
+杈撳叆锛?
 
 - `project_id = proj_6d56e4817baf`
 - `graph_id = mirofish_9f0d1c84b2164adf`
-- 一个最小 Twitter smoke test 的 simulation requirement
+- 涓€涓渶灏?Twitter smoke test 鐨?simulation requirement
 
-prepare 阶段产物：
+prepare 闃舵浜х墿锛?
 
-- simulation 目录
-  - `/home/shulun/project/LightWorld/backend/uploads/simulations/sim_826a7c28a5eb`
-- 关键文件
-  - [`entity_graph_snapshot.json`](/home/shulun/project/LightWorld/backend/uploads/simulations/sim_826a7c28a5eb/entity_graph_snapshot.json)
-  - [`entity_prompts.json`](/home/shulun/project/LightWorld/backend/uploads/simulations/sim_826a7c28a5eb/entity_prompts.json)
-  - [`twitter_profiles.csv`](/home/shulun/project/LightWorld/backend/uploads/simulations/sim_826a7c28a5eb/twitter_profiles.csv)
-  - [`simulation_config.json`](/home/shulun/project/LightWorld/backend/uploads/simulations/sim_826a7c28a5eb/simulation_config.json)
-  - [`social_relation_graph.json`](/home/shulun/project/LightWorld/backend/uploads/simulations/sim_826a7c28a5eb/social_relation_graph.json)
+- simulation 鐩綍
+  - `/home/shulun/project/LightWorld/output/simulations/sim_826a7c28a5eb`
+- 鍏抽敭鏂囦欢
+  - [`entity_graph_snapshot.json`](/home/shulun/project/LightWorld/output/simulations/sim_826a7c28a5eb/entity_graph_snapshot.json)
+  - [`entity_prompts.json`](/home/shulun/project/LightWorld/output/simulations/sim_826a7c28a5eb/entity_prompts.json)
+  - [`twitter_profiles.csv`](/home/shulun/project/LightWorld/output/simulations/sim_826a7c28a5eb/twitter_profiles.csv)
+  - [`simulation_config.json`](/home/shulun/project/LightWorld/output/simulations/sim_826a7c28a5eb/simulation_config.json)
+  - [`social_relation_graph.json`](/home/shulun/project/LightWorld/output/simulations/sim_826a7c28a5eb/social_relation_graph.json)
 
-这些文件各自的作用：
+杩欎簺鏂囦欢鍚勮嚜鐨勪綔鐢細
 
 - `entity_graph_snapshot.json`
-  - 语义图谱到 simulation 的桥接文件
+  - 璇箟鍥捐氨鍒?simulation 鐨勬ˉ鎺ユ枃浠?
 - `entity_prompts.json`
-  - 为 runtime 提供语义相似度与记忆检索提示
+  - 涓?runtime 鎻愪緵璇箟鐩镐技搴︿笌璁板繂妫€绱㈡彁绀?
 - `twitter_profiles.csv`
-  - OASIS 创建 agents 时直接读取
+  - OASIS 鍒涘缓 agents 鏃剁洿鎺ヨ鍙?
 - `simulation_config.json`
-  - LightWorld 自己读取，用于驱动时间、事件、runtime 行为
+  - LightWorld 鑷繁璇诲彇锛岀敤浜庨┍鍔ㄦ椂闂淬€佷簨浠躲€乺untime 琛屼负
 - `social_relation_graph.json`
-  - LightWorld 显式社交关系先验，后续会被编译成初始 follow 边
+  - LightWorld 鏄惧紡绀句氦鍏崇郴鍏堥獙锛屽悗缁細琚紪璇戞垚鍒濆 follow 杈?
 
-### 示例 3：运行时如何编译进 OASIS DB
+### 绀轰緥 3锛氳繍琛屾椂濡備綍缂栬瘧杩?OASIS DB
 
-当 runtime 启动时，流程是：
+褰?runtime 鍚姩鏃讹紝娴佺▼鏄細
 
-1. `twitter_profiles.csv` 被加载成 OASIS agent graph
-2. `simulation_config.json` 启用：
+1. `twitter_profiles.csv` 琚姞杞芥垚 OASIS agent graph
+2. `simulation_config.json` 鍚敤锛?
    - topology-aware runtime
    - simple memory
    - initial posts
    - scheduled events
-3. `social_relation_graph.json` 被 `TopologyAwareRuntime` 读取
-4. 初始社交边被写入 OASIS 的 `follow` 表
-5. 运行时动作继续写入：
+3. `social_relation_graph.json` 琚?`TopologyAwareRuntime` 璇诲彇
+4. 鍒濆绀句氦杈硅鍐欏叆 OASIS 鐨?`follow` 琛?
+5. 杩愯鏃跺姩浣滅户缁啓鍏ワ細
    - `post`
    - `follow`
    - `trace`
    - `rec`
 
-一次已经验证成功的单平台运行产生了：
+涓€娆″凡缁忛獙璇佹垚鍔熺殑鍗曞钩鍙拌繍琛屼骇鐢熶簡锛?
 
 - runtime DB
-  - [`twitter_simulation.db`](/home/shulun/project/LightWorld/backend/uploads/simulations/sim_826a7c28a5eb/twitter_simulation.db)
-- 环境状态文件
-  - [`env_status.json`](/home/shulun/project/LightWorld/backend/uploads/simulations/sim_826a7c28a5eb/env_status.json)
-- 主日志
-  - [`simulation.log`](/home/shulun/project/LightWorld/backend/uploads/simulations/sim_826a7c28a5eb/simulation.log)
+  - [`twitter_simulation.db`](/home/shulun/project/LightWorld/output/simulations/sim_826a7c28a5eb/twitter_simulation.db)
+- 鐜鐘舵€佹枃浠?
+  - [`env_status.json`](/home/shulun/project/LightWorld/output/simulations/sim_826a7c28a5eb/env_status.json)
+- 涓绘棩蹇?
+  - [`simulation.log`](/home/shulun/project/LightWorld/output/simulations/sim_826a7c28a5eb/simulation.log)
 
-这次验证中可以明确看到：
+杩欐楠岃瘉涓彲浠ユ槑纭湅鍒帮細
 
-- 初始 follow 边在 round loop 开始前已经被注入数据库
-- 一个 `scheduled create_post` 事件被触发，并且真实写入了 `post` 表
-- 一个 `hot_topics_update` 事件在运行时被触发
+- 鍒濆 follow 杈瑰湪 round loop 寮€濮嬪墠宸茬粡琚敞鍏ユ暟鎹簱
+- 涓€涓?`scheduled create_post` 浜嬩欢琚Е鍙戯紝骞朵笖鐪熷疄鍐欏叆浜?`post` 琛?
+- 涓€涓?`hot_topics_update` 浜嬩欢鍦ㄨ繍琛屾椂琚Е鍙?
 
-## 实际理解方式
+## 瀹為檯鐞嗚В鏂瑰紡
 
-要正确理解这套系统，最重要的是区分两类对象：
+瑕佹纭悊瑙ｈ繖濂楃郴缁燂紝鏈€閲嶈鐨勬槸鍖哄垎涓ょ被瀵硅薄锛?
 
 - `social_relation_graph.json`
-  - LightWorld 自己维护的显式关系先验文件
+  - LightWorld 鑷繁缁存姢鐨勬樉寮忓叧绯诲厛楠屾枃浠?
 - `twitter_simulation.db` / `reddit_simulation.db`
-  - OASIS 真正执行时的世界状态数据库
+  - OASIS 鐪熸鎵ц鏃剁殑涓栫晫鐘舵€佹暟鎹簱
 
-运行时不是“把 JSON 直接喂给 OASIS 就结束了”。
-更准确地说，LightWorld 先把自己的中间产物编译进 OASIS 状态里，
-而真正执行模拟的底层世界，是数据库中的运行时状态。
+杩愯鏃朵笉鏄€滄妸 JSON 鐩存帴鍠傜粰 OASIS 灏辩粨鏉熶簡鈥濄€?
+鏇村噯纭湴璇达紝LightWorld 鍏堟妸鑷繁鐨勪腑闂翠骇鐗╃紪璇戣繘 OASIS 鐘舵€侀噷锛?
+鑰岀湡姝ｆ墽琛屾ā鎷熺殑搴曞眰涓栫晫锛屾槸鏁版嵁搴撲腑鐨勮繍琛屾椂鐘舵€併€?
+

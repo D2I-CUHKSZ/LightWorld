@@ -10,8 +10,8 @@ from flask import request, jsonify, send_file
 
 from . import report_bp
 from ...config import Config
-from ...application.report_agent import ReportAgent, ReportManager, ReportStatus
-from ...application.simulation_manager import SimulationManager
+from ...utils.report_agent import ReportAgent, ReportManager, ReportStatus
+from ...utils.simulation_manager import SimulationManager
 from ...domain.project import ProjectManager
 from ...domain.task import TaskManager, TaskStatus
 from ...infrastructure.logger import get_logger
@@ -952,7 +952,7 @@ def search_graph_tool():
                 "error": "请提供 graph_id 和 query"
             }), 400
         
-        from ...application.zep_tools import ZepToolsService
+        from ...utils.zep_tools import ZepToolsService
         
         tools = ZepToolsService()
         result = tools.search_graph(
@@ -996,7 +996,7 @@ def get_graph_statistics_tool():
                 "error": "请提供 graph_id"
             }), 400
         
-        from ...application.zep_tools import ZepToolsService
+        from ...utils.zep_tools import ZepToolsService
         
         tools = ZepToolsService()
         result = tools.get_graph_statistics(graph_id)

@@ -9,10 +9,10 @@ from flask import request, jsonify, send_file
 
 from . import simulation_bp
 from ...config import Config
-from ...application.zep_entity_reader import ZepEntityReader
-from ...application.oasis_profile_generator import OasisProfileGenerator
-from ...application.simulation_manager import SimulationManager, SimulationStatus
-from ...application.simulation_runner import SimulationRunner, RunnerStatus
+from ...utils.zep_entity_reader import ZepEntityReader
+from ...utils.oasis_profile_generator import OasisProfileGenerator
+from ...utils.simulation_manager import SimulationManager, SimulationStatus
+from ...utils.simulation_runner import SimulationRunner, RunnerStatus
 from ...infrastructure.logger import get_logger
 from ...domain.project import ProjectManager
 
@@ -825,9 +825,8 @@ def _get_report_id_for_simulation(simulation_id: str) -> str:
     import json
     from datetime import datetime
     
-    # reports 目录路径：backend/uploads/reports
-    # __file__ 是 app/adapters/http/simulation.py，需要向上三级到 backend/
-    reports_dir = os.path.join(os.path.dirname(__file__), '../../uploads/reports')
+    # reports 目录路径：./output/reports
+    reports_dir = Config.REPORTS_DIR
     if not os.path.exists(reports_dir):
         return None
     

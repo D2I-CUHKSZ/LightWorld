@@ -9,12 +9,12 @@ import traceback
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
-from ...core.settings import Config
+from ...setting.settings import Config
 from ...domain.project import ProjectManager, ProjectStatus
-from ...application.graph_builder import GraphBuilderService
-from ...application.multimodal_ingestion import MultimodalIngestionService
-from ...application.ontology_generator import OntologyGenerator
-from ...application.text_processor import TextProcessor
+from ...utils.graph_builder import GraphBuilderService
+from ...utils.multimodal_ingestion import MultimodalIngestionService
+from ...utils.ontology_generator import OntologyGenerator
+from ...utils.text_processor import TextProcessor
 
 
 @dataclass

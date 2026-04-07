@@ -12,7 +12,7 @@ warnings.filterwarnings("ignore", message=".*resource_tracker.*")
 from flask import Flask, request
 from flask_cors import CORS
 
-from .core.settings import Config
+from .setting.settings import Config
 from .infrastructure.logger import setup_logger, get_logger
 
 
@@ -43,7 +43,7 @@ def create_app(config_class=Config):
     CORS(app, resources={r"/api/*": {"origins": "*"}})
     
     # 注册模拟进程清理函数（确保服务器关闭时终止所有模拟进程）
-    from .application.simulation_runner import SimulationRunner
+    from .utils.simulation_runner import SimulationRunner
     SimulationRunner.register_cleanup()
     if should_log_startup:
         logger.info("已注册模拟进程清理函数")
