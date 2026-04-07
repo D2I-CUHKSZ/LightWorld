@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import base64
 import hashlib
+import importlib.util
 import json
 import math
 import mimetypes
@@ -158,10 +159,17 @@ class MultimodalIngestionService:
         self,
         model_name: Optional[str] = None,
         audio_model_name: Optional[str] = None,
+        use_remote_analysis: Optional[bool] = None,
     ):
         self.model_name = model_name or Config.MULTIMODAL_VISION_MODEL_NAME
         self.audio_model_name = audio_model_name or Config.MULTIMODAL_AUDIO_MODEL_NAME
+        self.use_remote_analysis = (
+            Config.MULTIMODAL_USE_REMOTE_ANALYSIS
+            if use_remote_analysis is None
+            else bool(use_remote_analysis)
+        )
         self._llm_client: Optional[LLMClient] = None
+        self._audio_llm_client: Optional[LLMClient] = None
 
     def ingest_files(
         self,
@@ -417,6 +425,8 @@ class MultimodalIngestionService:
             "social_signals": [],
             "evidence_text": f"Image file: {display_name}",
         }
+        if not self.use_remote_analysis:
+            return fallback
         try:
             client = self._get_llm_client()
         except Exception as exc:
@@ -495,6 +505,8 @@ additional_context:
             "social_signals": [],
             "evidence_text": transcript.strip(),
         }
+        if not self.use_remote_analysis:
+            return fallback
         try:
             client = self._get_llm_client()
         except Exception as exc:
@@ -568,6 +580,15 @@ transcript:
             self._llm_client = LLMClient(model=self.model_name)
         return self._llm_client
 
+    def _get_audio_llm_client(self) -> LLMClient:
+        if self._audio_llm_client is None:
+            self._audio_llm_client = LLMClient(
+                api_key=Config.MULTIMODAL_AUDIO_API_KEY,
+                base_url=Config.MULTIMODAL_AUDIO_BASE_URL,
+                model=self.audio_model_name,
+            )
+        return self._audio_llm_client
+
     def _normalize_file_descriptor(self, item: Any) -> Dict[str, str]:
         if isinstance(item, str):
             return {"path": item, "display_name": os.path.basename(item)}
@@ -605,8 +626,14 @@ transcript:
         file_path: str,
         cache_dir: str,
     ) -> List[_VideoSegmentPayload]:
-        ffmpeg_path = shutil.which("ffmpeg")
-        ffprobe_path = shutil.which("ffprobe")
+        ffmpeg_path = _resolve_binary_path(
+            "ffmpeg",
+            Config.MULTIMODAL_FFMPEG_PATH,
+        )
+        ffprobe_path = _resolve_binary_path(
+            "ffprobe",
+            Config.MULTIMODAL_FFPROBE_PATH,
+        )
         if not ffmpeg_path or not ffprobe_path:
             raise RuntimeError("ffmpeg/ffprobe 不可用")
 
@@ -849,12 +876,19 @@ transcript:
     def _transcribe_audio(self, audio_path: Optional[str]) -> str:
         if not audio_path or not os.path.exists(audio_path):
             return ""
+        if not self.use_remote_analysis:
+            return ""
 
         try:
-            client = self._get_llm_client()
+            client = self._get_audio_llm_client()
             return client.transcribe_audio(audio_path, model=self.audio_model_name)
         except Exception as exc:
-            logger.warning(f"音频转写失败: {exc}")
+            logger.warning(
+                "音频转写失败: "
+                f"{exc}. 当前配置为 "
+                f"base_url={Config.MULTIMODAL_AUDIO_BASE_URL}, "
+                f"model={self.audio_model_name}"
+            )
             return ""
 
     def _build_segment_windows(self, duration: float) -> List[tuple[float, float]]:
@@ -926,3 +960,44 @@ def _sample_timestamps(start: float, end: float, count: int) -> List[float]:
 
     step = duration / count
     return [start + (idx + 0.5) * step for idx in range(count)]
+
+
+def _resolve_binary_path(binary_name: str, configured_path: str = "") -> Optional[str]:
+    candidates: List[str] = []
+    configured_path = str(configured_path or "").strip()
+    if configured_path:
+        candidates.append(configured_path)
+
+    env_keys = {
+        "ffmpeg": ["FFMPEG_BINARY", "IMAGEIO_FFMPEG_EXE"],
+        "ffprobe": ["FFPROBE_BINARY"],
+    }.get(binary_name, [])
+    for key in env_keys:
+        value = str(os.environ.get(key, "") or "").strip()
+        if value:
+            candidates.append(value)
+
+    path_hit = shutil.which(binary_name)
+    if path_hit:
+        candidates.append(path_hit)
+
+    home = os.path.expanduser("~")
+    candidates.extend(
+        [
+            os.path.join(home, "ENTER/envs/oasis-venv/bin", binary_name),
+            os.path.join(home, ".local/bin", binary_name),
+            f"/usr/bin/{binary_name}",
+            f"/usr/local/bin/{binary_name}",
+            f"/opt/homebrew/bin/{binary_name}",
+            f"/opt/local/bin/{binary_name}",
+        ]
+    )
+
+    seen = set()
+    for candidate in candidates:
+        if not candidate or candidate in seen:
+            continue
+        seen.add(candidate)
+        if os.path.exists(candidate) and os.access(candidate, os.X_OK):
+            return candidate
+    return None

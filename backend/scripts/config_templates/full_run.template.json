@@ -1,0 +1,52 @@
+{
+  "project_name": "My LightWorld Run",
+  "graph_name": "My LightWorld Graph",
+  "simulation_requirement": "请围绕输入材料生成实体、关系与舆情传播结构，并完成双平台社交模拟。",
+  "additional_context": "",
+  "files": [
+    "../../event_inputs/baike_wuda_event/event_overview.md"
+  ],
+  "files_from": "",
+  "pipeline": {
+    "chunk_size": 500,
+    "chunk_overlap": 50,
+    "batch_size": 3,
+    "light_mode": false,
+    "light_text_max_chars": 120000,
+    "light_ontology_max_chars": 80000,
+    "light_max_chunks": 120,
+    "light_chunk_size": 1200,
+    "light_chunk_overlap": 40
+  },
+  "simulation": {
+    "enable_twitter": true,
+    "enable_reddit": true,
+    "use_llm_for_profiles": true,
+    "parallel_profile_count": 3,
+    "config_overrides": {
+      "time_config": {
+        "total_simulation_hours": 24,
+        "minutes_per_round": 60
+      },
+      "topology_aware": {
+        "enabled": true
+      },
+      "simplemem": {
+        "enabled": true
+      }
+    }
+  },
+  "run": {
+    "no_wait": true,
+    "light_mode": false,
+    "topology_aware": false,
+    "max_rounds": null,
+    "twitter_only": false,
+    "reddit_only": false
+  },
+  "report": {
+    "generate": false,
+    "report_id": ""
+  },
+  "output_dir": ""
+}

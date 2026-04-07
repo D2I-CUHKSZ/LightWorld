@@ -1996,10 +1996,7 @@ def get_simulation_posts(simulation_id: str):
         limit = request.args.get('limit', 50, type=int)
         offset = request.args.get('offset', 0, type=int)
         
-        sim_dir = os.path.join(
-            os.path.dirname(__file__),
-            f'../../uploads/simulations/{simulation_id}'
-        )
+        sim_dir = os.path.join(Config.OASIS_SIMULATION_DATA_DIR, simulation_id)
         
         db_file = f"{platform}_simulation.db"
         db_path = os.path.join(sim_dir, db_file)
@@ -2072,10 +2069,7 @@ def get_simulation_comments(simulation_id: str):
         limit = request.args.get('limit', 50, type=int)
         offset = request.args.get('offset', 0, type=int)
         
-        sim_dir = os.path.join(
-            os.path.dirname(__file__),
-            f'../../uploads/simulations/{simulation_id}'
-        )
+        sim_dir = os.path.join(Config.OASIS_SIMULATION_DATA_DIR, simulation_id)
         
         db_path = os.path.join(sim_dir, "reddit_simulation.db")
         
@@ -2109,6 +2103,38 @@ def get_simulation_comments(simulation_id: str):
                 """, (limit, offset))
             
             comments = [dict(row) for row in cursor.fetchall()]
+
+            # OASIS 原始 comment 表不带 parent_comment_id，这里基于同帖时间顺序构造轻量线程信息，
+            # 让前端和分析层至少能看到“回复链”而不是完全平铺。
+            comments_by_post = {}
+            cursor.execute("""
+                SELECT * FROM comment
+                ORDER BY post_id ASC, created_at ASC, comment_id ASC
+            """)
+            for row in cursor.fetchall():
+                item = dict(row)
+                comments_by_post.setdefault(item.get("post_id"), []).append(item)
+
+            thread_index = {}
+            for items in comments_by_post.values():
+                previous_comment_id = None
+                previous_depth = 0
+                for item in items:
+                    current_id = item.get("comment_id")
+                    parent_comment_id = previous_comment_id
+                    depth = (previous_depth + 1) if parent_comment_id is not None else 0
+                    depth = min(depth, 3)
+                    thread_index[current_id] = {
+                        "parent_comment_id": parent_comment_id,
+                        "depth": depth,
+                    }
+                    previous_comment_id = current_id
+                    previous_depth = depth
+
+            for item in comments:
+                thread_info = thread_index.get(item.get("comment_id"), {})
+                item["parent_comment_id"] = thread_info.get("parent_comment_id")
+                item["depth"] = thread_info.get("depth", 0)
             
         except sqlite3.OperationalError:
             comments = []

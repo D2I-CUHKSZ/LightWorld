@@ -1,0 +1,17 @@
+# 文本输入
+event_overview.md
+event_timeline.txt
+
+# 图片输入
+images/image_01.jpg
+images/image_02.jpg
+images/image_03.jpg
+images/image_04.jpg
+images/image_05.jpg
+images/image_06.jpg
+
+# 视频输入
+videos/video_01_official_response.mp4
+videos/video_02_news_report.mp4
+videos/video_03_student_clip.mp4
+videos/video_04_followup_commentary.mp4

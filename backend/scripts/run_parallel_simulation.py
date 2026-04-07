@@ -165,6 +165,7 @@ from action_logger import SimulationLogManager, PlatformActionLogger
 try:
     from camel.models import ModelFactory
     from camel.types import ModelPlatformType
+    from camel.utils import BaseTokenCounter
     from oasis import (
         ActionType,
         ManualAction,
@@ -581,6 +582,39 @@ class ParallelIPCHandler:
             return True
 
 
+class OfflineApproxTokenCounter(BaseTokenCounter):
+    """离线近似 token counter，避免 tiktoken 在受限网络环境下下载编码文件。"""
+
+    def count_tokens_from_messages(self, messages):
+        total = 0
+        for message in messages or []:
+            if not isinstance(message, dict):
+                total += len(self.encode(str(message)))
+                continue
+            for value in message.values():
+                if isinstance(value, list):
+                    for item in value:
+                        if isinstance(item, dict) and item.get("type") == "text":
+                            total += len(self.encode(str(item.get("text", ""))))
+                        else:
+                            total += len(self.encode(str(item)))
+                else:
+                    total += len(self.encode(str(value)))
+            total += 4
+        return total + 3
+
+    def encode(self, text: str):
+        text = str(text or "")
+        if not text:
+            return []
+        # 用字符块近似 token 数：中文按字、英文按单词/数字块切分。
+        parts = re.findall(r"[\u4e00-\u9fff]|[A-Za-z0-9_]+|[^\s]", text)
+        return list(range(len(parts)))
+
+    def decode(self, token_ids):
+        return "<offline-token-counter>"
+
+
 def load_config(config_path: str) -> Dict[str, Any]:
     """加载配置文件"""
     with open(config_path, 'r', encoding='utf-8') as f:
@@ -836,6 +870,19 @@ def _enrich_action_context(
         
         # 发表评论：补充所评论的帖子信息
         elif action_type == 'CREATE_COMMENT':
+            comment_id = action_args.get('comment_id')
+            if comment_id:
+                comment_info = _get_comment_info(cursor, comment_id, agent_names)
+                if comment_info:
+                    action_args['comment_content'] = comment_info.get('content', '')
+                    action_args['comment_author_name'] = comment_info.get('author_name', '')
+                    action_args['post_id'] = comment_info.get('post_id')
+                    if comment_info.get('parent_comment_id') is not None:
+                        action_args['parent_comment_id'] = comment_info.get('parent_comment_id')
+                    if comment_info.get('parent_author_name'):
+                        action_args['parent_author_name'] = comment_info.get('parent_author_name')
+                    if comment_info.get('agent_id') is not None:
+                        action_args['comment_author_agent_id'] = comment_info.get('agent_id')
             post_id = action_args.get('post_id')
             if post_id:
                 post_info = _get_post_info(cursor, post_id, agent_names)
@@ -967,7 +1014,7 @@ def _get_comment_info(
     """
     try:
         cursor.execute("""
-            SELECT c.content, c.user_id, u.agent_id
+            SELECT c.content, c.user_id, u.agent_id, c.post_id, c.created_at
             FROM comment c
             LEFT JOIN user u ON c.user_id = u.user_id
             WHERE c.comment_id = ?
@@ -977,6 +1024,8 @@ def _get_comment_info(
             content = row[0] or ''
             user_id = row[1]
             agent_id = row[2]
+            post_id = row[3]
+            created_at = row[4]
             
             # 优先使用 agent_names 中的名称
             author_name = ''
@@ -988,8 +1037,40 @@ def _get_comment_info(
                 user_row = cursor.fetchone()
                 if user_row:
                     author_name = user_row[0] or user_row[1] or ''
-            
-            return {'content': content, 'author_name': author_name, 'agent_id': agent_id}
+
+            parent_comment_id = None
+            parent_author_name = ''
+            if post_id is not None:
+                cursor.execute("""
+                    SELECT c.comment_id, c.user_id, u.agent_id
+                    FROM comment c
+                    LEFT JOIN user u ON c.user_id = u.user_id
+                    WHERE c.post_id = ? AND c.comment_id < ?
+                    ORDER BY c.comment_id DESC
+                    LIMIT 1
+                """, (post_id, comment_id))
+                parent_row = cursor.fetchone()
+                if parent_row:
+                    parent_comment_id = parent_row[0]
+                    parent_user_id = parent_row[1]
+                    parent_agent_id = parent_row[2]
+                    if parent_agent_id is not None and parent_agent_id in agent_names:
+                        parent_author_name = agent_names[parent_agent_id]
+                    elif parent_user_id:
+                        cursor.execute("SELECT name, user_name FROM user WHERE user_id = ?", (parent_user_id,))
+                        parent_user_row = cursor.fetchone()
+                        if parent_user_row:
+                            parent_author_name = parent_user_row[0] or parent_user_row[1] or ''
+
+            return {
+                'content': content,
+                'author_name': author_name,
+                'agent_id': agent_id,
+                'post_id': post_id,
+                'created_at': created_at,
+                'parent_comment_id': parent_comment_id,
+                'parent_author_name': parent_author_name,
+            }
     except Exception:
         pass
     return None
@@ -1014,6 +1095,11 @@ def create_model(config: Dict[str, Any], use_boost: bool = False):
     boost_base_url = os.environ.get("LLM_BOOST_BASE_URL", "")
     boost_model = os.environ.get("LLM_BOOST_MODEL_NAME", "")
     has_boost_config = bool(boost_api_key)
+
+    try:
+        from app.core.settings import Config as AppConfig
+    except Exception:
+        AppConfig = None
     
     # 根据参数和配置情况选择使用哪个 LLM
     if use_boost and has_boost_config:
@@ -1027,6 +1113,10 @@ def create_model(config: Dict[str, Any], use_boost: bool = False):
         llm_api_key = os.environ.get("LLM_API_KEY", "")
         llm_base_url = os.environ.get("LLM_BASE_URL", "")
         llm_model = os.environ.get("LLM_MODEL_NAME", "")
+        if AppConfig is not None:
+            llm_api_key = llm_api_key or getattr(AppConfig, "LLM_API_KEY", "")
+            llm_base_url = llm_base_url or getattr(AppConfig, "LLM_BASE_URL", "")
+            llm_model = llm_model or getattr(AppConfig, "LLM_MODEL_NAME", "")
         config_label = "[通用LLM]"
     
     # 如果 .env 中没有模型名，则使用 config 作为备用
@@ -1042,12 +1132,16 @@ def create_model(config: Dict[str, Any], use_boost: bool = False):
     
     if llm_base_url:
         os.environ["OPENAI_API_BASE_URL"] = llm_base_url
+
+    # 避免 camel/tiktoken 在初始化 token_counter 时联网下载编码文件。
+    token_counter = OfflineApproxTokenCounter()
     
     print(f"{config_label} model={llm_model}, base_url={llm_base_url[:40] if llm_base_url else '默认'}...")
     
     return ModelFactory.create(
         model_platform=ModelPlatformType.OPENAI,
         model_type=llm_model,
+        token_counter=token_counter,
     )
 
 

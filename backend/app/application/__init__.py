@@ -8,6 +8,7 @@ from .text_processor import TextProcessor
 from .zep_entity_reader import ZepEntityReader, EntityNode, FilteredEntities
 from .oasis_profile_generator import OasisProfileGenerator, OasisAgentProfile
 from .entity_prompt_extractor import EntityPromptExtractor
+from .simulation_population import SimulationPopulationBuilder, PopulationPreparationResult
 from .simulation_manager import SimulationManager, SimulationState, SimulationStatus
 from .simulation_config_generator import (
     SimulationConfigGenerator, 
@@ -48,6 +49,8 @@ __all__ = [
     'OasisProfileGenerator',
     'OasisAgentProfile',
     'EntityPromptExtractor',
+    'SimulationPopulationBuilder',
+    'PopulationPreparationResult',
     'SimulationManager',
     'SimulationState',
     'SimulationStatus',

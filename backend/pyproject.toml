@@ -33,6 +33,7 @@ dependencies = [
     # 工具库
     "python-dotenv>=1.0.0",
     "pydantic>=2.0.0",
+    "socksio>=1.0.0",
 ]
 
 [project.optional-dependencies]
@@ -46,6 +47,7 @@ dev = [
 mirofish-api = "app.cli.api:main"
 mirofish-local-pipeline = "app.cli.local_pipeline:main"
 mirofish-parallel-sim = "app.cli.parallel_simulation:main"
+mirofish-full-run = "app.cli.full_run:main"
 
 [build-system]
 requires = ["hatchling"]

@@ -5,8 +5,11 @@ LLM客户端封装
 
 import json
 import re
+import base64
+import mimetypes
 from typing import Optional, Dict, Any, List
 from openai import OpenAI
+from openai import NotFoundError
 
 from ..config import Config
 
@@ -29,7 +32,8 @@ class LLMClient:
         
         self.client = OpenAI(
             api_key=self.api_key,
-            base_url=self.base_url
+            base_url=self.base_url,
+            timeout=Config.LLM_TIMEOUT_SECONDS,
         )
     
     def chat(
@@ -116,13 +120,68 @@ class LLMClient:
         Returns:
             转写后的文本
         """
-        with open(audio_path, "rb") as audio_file:
-            response = self.client.audio.transcriptions.create(
-                model=model,
-                file=audio_file,
-            )
+        if self._should_use_dashscope_chat_asr(model):
+            return self._transcribe_audio_with_dashscope_chat(audio_path, model)
+
+        try:
+            with open(audio_path, "rb") as audio_file:
+                response = self.client.audio.transcriptions.create(
+                    model=model,
+                    file=audio_file,
+                )
+        except NotFoundError as exc:
+            raise RuntimeError(
+                "当前音频转写服务返回 404。"
+                "通常表示所配置的 base_url 不支持 /audio/transcriptions 接口，"
+                f"或模型 `{model}` 在该服务中不存在。"
+            ) from exc
 
         text = getattr(response, "text", "")
         if not text and isinstance(response, dict):
             text = str(response.get("text", "") or "")
         return str(text or "").strip()
+
+    def _should_use_dashscope_chat_asr(self, model: str) -> bool:
+        base_url = (self.base_url or "").lower()
+        model_name = (model or "").lower()
+        return "dashscope.aliyuncs.com" in base_url and model_name.startswith("qwen")
+
+    def _transcribe_audio_with_dashscope_chat(self, audio_path: str, model: str) -> str:
+        mime_type = mimetypes.guess_type(audio_path)[0] or "audio/mpeg"
+        with open(audio_path, "rb") as audio_file:
+            encoded_audio = base64.b64encode(audio_file.read()).decode("utf-8")
+        data_uri = f"data:{mime_type};base64,{encoded_audio}"
+
+        response = self.client.chat.completions.create(
+            model=model,
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "input_audio",
+                            "input_audio": {
+                                "data": data_uri,
+                            },
+                        }
+                    ],
+                }
+            ],
+            extra_body={
+                "asr_options": {
+                    "enable_itn": False,
+                }
+            },
+        )
+        content = response.choices[0].message.content
+        if isinstance(content, str):
+            return content.strip()
+        if isinstance(content, list):
+            parts: List[str] = []
+            for item in content:
+                if isinstance(item, dict):
+                    text = str(item.get("text", "") or "").strip()
+                    if text:
+                        parts.append(text)
+            return "\n".join(parts).strip()
+        return str(content or "").strip()

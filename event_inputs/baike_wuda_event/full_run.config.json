@@ -1,0 +1,49 @@
+{
+  "project_name": "WHU Baike Event Demo",
+  "graph_name": "WHU Baike Event Graph",
+  "simulation_requirement": "请围绕“武汉大学相关舆情事件”构建多模态图谱，并在 Twitter 与 Reddit 两个平台上模拟事件传播、观点碰撞、回应扩散和舆情演化过程。需要覆盖校方、学生、媒体、自媒体、公众等关键主体。",
+  "additional_context": "这是仓库自带的演示数据，目标是验证从多模态输入到社交模拟的端到端流程。",
+  "files_from": "input_files.txt",
+  "pipeline": {
+    "chunk_size": 500,
+    "chunk_overlap": 50,
+    "batch_size": 3,
+    "light_mode": true,
+    "light_text_max_chars": 120000,
+    "light_ontology_max_chars": 80000,
+    "light_max_chunks": 120,
+    "light_chunk_size": 1200,
+    "light_chunk_overlap": 40
+  },
+  "simulation": {
+    "enable_twitter": true,
+    "enable_reddit": true,
+    "use_llm_for_profiles": true,
+    "parallel_profile_count": 4,
+    "config_overrides": {
+      "time_config": {
+        "total_simulation_hours": 24,
+        "minutes_per_round": 60
+      },
+      "topology_aware": {
+        "enabled": true
+      },
+      "simplemem": {
+        "enabled": true
+      }
+    }
+  },
+  "run": {
+    "no_wait": true,
+    "light_mode": false,
+    "topology_aware": true,
+    "max_rounds": null,
+    "twitter_only": false,
+    "reddit_only": false
+  },
+  "report": {
+    "generate": true,
+    "report_id": ""
+  },
+  "output_dir": ""
+}

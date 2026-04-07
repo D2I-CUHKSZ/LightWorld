@@ -1,0 +1,6 @@
+{
+  "simulation_id": "sim_xxx",
+  "use_llm_for_profiles": false,
+  "parallel_profile_count": 3,
+  "force_regenerate": false
+}

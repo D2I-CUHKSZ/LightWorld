@@ -32,7 +32,9 @@ from .runtimes import SimpleMemRuntime, TopologyAwareRuntime, safe_float
 
 TWITTER_ACTIONS = [
     ActionType.CREATE_POST,
+    ActionType.CREATE_COMMENT,
     ActionType.LIKE_POST,
+    ActionType.LIKE_COMMENT,
     ActionType.REPOST,
     ActionType.FOLLOW,
     ActionType.DO_NOTHING,
@@ -72,7 +74,7 @@ TWITTER_SPEC = PlatformSpec(
     use_boost_model=False,
     oasis_platform=oasis.DefaultPlatformType.TWITTER,
     available_actions=TWITTER_ACTIONS,
-    allow_multi_initial_posts_per_agent=False,
+    allow_multi_initial_posts_per_agent=True,
 )
 
 REDDIT_SPEC = PlatformSpec(
@@ -121,7 +123,13 @@ def get_active_agents_for_round(
     if topology_runtime:
         target_count = topology_runtime.adjust_target_count(target_count)
 
+    def is_ordinary_agent(cfg: Dict[str, Any]) -> bool:
+        entity_type = str(cfg.get("entity_type", "") or "").strip().lower()
+        entity_uuid = str(cfg.get("entity_uuid", "") or "").strip().lower()
+        return entity_type in {"person", "student"} or entity_uuid.startswith("synthetic_")
+
     candidates: List[int] = []
+    ordinary_candidates: List[int] = []
     for cfg in agent_configs:
         agent_id = cfg.get("agent_id", 0)
         active_hours = cfg.get("active_hours", list(range(8, 23)))
@@ -137,11 +145,27 @@ def get_active_agents_for_round(
 
         if random.random() < activity_level:
             candidates.append(agent_id)
+            if is_ordinary_agent(cfg):
+                ordinary_candidates.append(agent_id)
 
     if topology_runtime:
         selected_ids = topology_runtime.select_agent_ids(candidates, target_count)
     else:
         selected_ids = random.sample(candidates, min(target_count, len(candidates))) if candidates else []
+
+    if selected_ids and ordinary_candidates:
+        ordinary_set = set(ordinary_candidates)
+        ordinary_selected = [aid for aid in selected_ids if aid in ordinary_set]
+        ordinary_target = max(1, int(round(min(len(selected_ids), target_count) * 0.4)))
+        if len(ordinary_selected) < ordinary_target:
+            available_ordinary = [aid for aid in ordinary_candidates if aid not in selected_ids]
+            shortage = min(len(available_ordinary), ordinary_target - len(ordinary_selected))
+            if shortage > 0:
+                elite_selected = [aid for aid in selected_ids if aid not in ordinary_set]
+                selected_ids = (
+                    selected_ids[: len(selected_ids) - min(shortage, len(elite_selected))]
+                    + available_ordinary[:shortage]
+                )
 
     active_agents: List[Tuple[int, Any]] = []
     for agent_id in selected_ids:
@@ -301,9 +325,95 @@ def _resolve_scheduled_event_round(event: Dict[str, Any], minutes_per_round: int
     return (total_minutes // max(1, minutes_per_round)) + 1
 
 
+def _get_latest_post_id_for_agent(db_path: str, agent_id: int) -> Optional[int]:
+    if not os.path.exists(db_path):
+        return None
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+            SELECT p.post_id
+            FROM post p
+            LEFT JOIN user u ON p.user_id = u.user_id
+            WHERE u.agent_id = ?
+            ORDER BY p.created_at DESC, p.post_id DESC
+            LIMIT 1
+            """,
+            (agent_id,),
+        )
+        row = cursor.fetchone()
+        conn.close()
+        if row:
+            return int(row[0])
+    except Exception:
+        return None
+    return None
+
+
+def _get_latest_hot_post_id(db_path: str) -> Optional[int]:
+    if not os.path.exists(db_path):
+        return None
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+            SELECT post_id
+            FROM post
+            ORDER BY (num_shares * 2 + num_likes) DESC, created_at DESC, post_id DESC
+            LIMIT 1
+            """
+        )
+        row = cursor.fetchone()
+        conn.close()
+        if row:
+            return int(row[0])
+    except Exception:
+        return None
+    return None
+
+
+def _resolve_target_post_id(
+    db_path: str,
+    config: Dict[str, Any],
+    event: Dict[str, Any],
+    poster_agent_id: int,
+) -> Optional[int]:
+    explicit_post_id = _coerce_positive_int(event.get("target_post_id"))
+    if explicit_post_id is not None:
+        return explicit_post_id
+
+    target_agent_id = _coerce_positive_int(
+        event.get("target_poster_agent_id", event.get("target_agent_id"))
+    )
+    strategy = str(event.get("target_post_strategy", "") or "latest_hot_post").strip().lower()
+    if strategy in {"latest_post_by_agent", "latest_post_by_type", "latest_target_post"} and target_agent_id is not None:
+        return _get_latest_post_id_for_agent(db_path, target_agent_id)
+    if strategy == "latest_self_post":
+        return _get_latest_post_id_for_agent(db_path, poster_agent_id)
+
+    if strategy == "latest_hot_post":
+        hot_post = _get_latest_hot_post_id(db_path)
+        if hot_post is not None:
+            return hot_post
+
+    # Fallback: target agent -> latest hot post -> poster latest post
+    if target_agent_id is not None:
+        target_post = _get_latest_post_id_for_agent(db_path, target_agent_id)
+        if target_post is not None:
+            return target_post
+    hot_post = _get_latest_hot_post_id(db_path)
+    if hot_post is not None:
+        return hot_post
+    return _get_latest_post_id_for_agent(db_path, poster_agent_id)
+
+
 async def _apply_scheduled_events_for_round(
     spec: PlatformSpec,
     env: Any,
+    config: Dict[str, Any],
+    db_path: str,
     event_config: Dict[str, Any],
     round_num: int,
     minutes_per_round: int,
@@ -314,8 +424,13 @@ async def _apply_scheduled_events_for_round(
     if not isinstance(scheduled_events, list):
         return 0
 
-    manual_actions: Dict[Any, Any] = {}
+    post_actions: Dict[Any, Any] = {}
+    comment_actions: Dict[Any, Any] = {}
     scheduled_action_count = 0
+
+    post_events: List[Dict[str, Any]] = []
+    comment_events: List[Dict[str, Any]] = []
+    thread_events: List[Dict[str, Any]] = []
 
     for idx, event in enumerate(scheduled_events):
         if idx in triggered_event_ids or not isinstance(event, dict):
@@ -346,37 +461,130 @@ async def _apply_scheduled_events_for_round(
             )
             continue
 
-        if event_type != "create_post":
+        if event_type == "create_post":
+            post_events.append(event)
+            continue
+        if event_type == "create_comment":
+            comment_events.append(event)
+            continue
+        if event_type == "create_thread":
+            thread_events.append(event)
+            continue
+
+        if event_type not in {"create_post", "create_comment", "create_thread"}:
             log_info(f"跳过不支持的定时事件类型: {event_type}")
             continue
 
+    for event in post_events:
         content = str(event.get("content", "") or "").strip()
         poster_agent_id = _coerce_positive_int(event.get("poster_agent_id"))
         if not content or poster_agent_id is None:
             log_info(f"定时发帖事件缺少内容或发布者，已跳过: round={round_num}")
             continue
-
         try:
             agent = env.agent_graph.get_agent(poster_agent_id)
         except Exception:
             log_info(f"定时发帖事件找不到Agent: agent_id={poster_agent_id}")
             continue
-
-        action = ManualAction(
-            action_type=ActionType.CREATE_POST,
-            action_args={"content": content},
-        )
         _append_initial_action(
-            initial_actions=manual_actions,
+            initial_actions=post_actions,
             agent=agent,
-            action=action,
+            action=ManualAction(
+                action_type=ActionType.CREATE_POST,
+                action_args={"content": content},
+            ),
             allow_multiple=spec.allow_multi_initial_posts_per_agent,
         )
         scheduled_action_count += 1
 
-    if manual_actions:
-        await env.step(manual_actions)
-        log_info(f"已执行定时事件帖子: round={round_num}, count={scheduled_action_count}")
+    for event in thread_events:
+        root_content = str(event.get("root_content", "") or "").strip()
+        poster_agent_id = _coerce_positive_int(event.get("poster_agent_id"))
+        if not root_content or poster_agent_id is None:
+            log_info(f"定时 thread 事件缺少主帖内容或发布者，已跳过: round={round_num}")
+            continue
+        try:
+            agent = env.agent_graph.get_agent(poster_agent_id)
+        except Exception:
+            log_info(f"定时 thread 事件找不到Agent: agent_id={poster_agent_id}")
+            continue
+        _append_initial_action(
+            initial_actions=post_actions,
+            agent=agent,
+            action=ManualAction(
+                action_type=ActionType.CREATE_POST,
+                action_args={"content": root_content},
+            ),
+            allow_multiple=True,
+        )
+        scheduled_action_count += 1
+
+    if post_actions:
+        await env.step(post_actions)
+        if post_events:
+            log_info(f"已执行定时事件帖子: round={round_num}, count={len(post_events)}")
+        if thread_events:
+            log_info(f"已执行定时线程主帖: round={round_num}, count={len(thread_events)}")
+
+    for event in thread_events:
+        poster_agent_id = _coerce_positive_int(event.get("poster_agent_id"))
+        if poster_agent_id is None:
+            continue
+        thread_post_id = _get_latest_post_id_for_agent(db_path, poster_agent_id)
+        if thread_post_id is None:
+            continue
+        try:
+            agent = env.agent_graph.get_agent(poster_agent_id)
+        except Exception:
+            continue
+        for reply in event.get("replies", []) or []:
+            reply_text = str(reply or "").strip()
+            if not reply_text:
+                continue
+            _append_initial_action(
+                initial_actions=comment_actions,
+                agent=agent,
+                action=ManualAction(
+                    action_type=ActionType.CREATE_COMMENT,
+                    action_args={"post_id": thread_post_id, "content": reply_text},
+                ),
+                allow_multiple=True,
+            )
+            scheduled_action_count += 1
+
+    for event in comment_events:
+        content = str(event.get("content", "") or "").strip()
+        poster_agent_id = _coerce_positive_int(event.get("poster_agent_id"))
+        if not content or poster_agent_id is None:
+            log_info(f"定时评论事件缺少内容或发布者，已跳过: round={round_num}")
+            continue
+        target_post_id = _resolve_target_post_id(
+            db_path=db_path,
+            config=config,
+            event=event,
+            poster_agent_id=poster_agent_id,
+        )
+        if target_post_id is None:
+            log_info(f"定时评论事件未找到目标帖子，已跳过: round={round_num}")
+            continue
+        try:
+            agent = env.agent_graph.get_agent(poster_agent_id)
+        except Exception:
+            continue
+        _append_initial_action(
+            initial_actions=comment_actions,
+            agent=agent,
+            action=ManualAction(
+                action_type=ActionType.CREATE_COMMENT,
+                action_args={"post_id": target_post_id, "content": content},
+            ),
+            allow_multiple=True,
+        )
+        scheduled_action_count += 1
+
+    if comment_actions:
+        await env.step(comment_actions)
+        log_info(f"已执行定时评论/回复: round={round_num}, count={len(comment_actions)}")
 
     return scheduled_action_count
 
@@ -934,6 +1142,8 @@ async def run_platform_simulation(
         scheduled_action_count = await _apply_scheduled_events_for_round(
             spec=spec,
             env=result.env,
+            config=config,
+            db_path=db_path,
             event_config=event_config,
             round_num=round_num + 1,
             minutes_per_round=minutes_per_round,

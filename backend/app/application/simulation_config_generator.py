@@ -198,6 +198,11 @@ class SimpleMemConfig:
     merge_jaccard_threshold: float = 0.45
     max_injected_chars: int = 1200
     recency_decay: float = 0.08
+    counter_scope_max: int = 1
+    counter_opinion_gap: float = 0.35
+    novelty_lookback: int = 6
+    unit_repeat_penalty: float = 0.35
+    topic_repeat_penalty: float = 0.15
 
 
 @dataclass
@@ -757,21 +762,39 @@ class SimulationConfigGenerator:
         请生成事件配置JSON：
         - 提取热点话题关键词
         - 描述舆论发展方向
-        - 设计初始帖子内容，**每个帖子必须指定 poster_type（发布者类型）**
+        - 设计具有冲突和分歧的初始内容，**每个帖子必须指定 poster_type（发布者类型）**
         - 如果需要中途注入事件，可生成 `scheduled_events`
+
+        请优先覆盖以下社会传播结构：
+        - 至少1条官方/机构通报
+        - 至少1条媒体追问或核查
+        - 至少1条普通用户/学生情绪表达
+        - 至少1条立场相反或质疑前帖的回应
+        - 至少1条推动热点升级或转向的新信息
 
         `scheduled_events` 当前支持两类事件：
         1. `create_post`
            - 必须包含 `trigger_hour`
            - 必须包含 `content`
            - 必须包含 `poster_type`
-        2. `hot_topics_update`
+        2. `create_comment`
+           - 必须包含 `trigger_hour`
+           - 必须包含 `content`
+           - 必须包含 `poster_type`
+           - 必须包含 `target_poster_type` 或 `target_post_strategy`
+        3. `create_thread`
+           - 必须包含 `trigger_hour`
+           - 必须包含 `poster_type`
+           - 必须包含 `root_content`
+           - 必须包含 `replies`（1-3条字符串）
+        4. `hot_topics_update`
            - 必须包含 `trigger_hour`
            - 可以包含 `hot_topics_add`
            - 可以包含 `hot_topics_remove`
 
 **重要**: poster_type 必须从上面的"可用实体类型"中选择，这样初始帖子才能分配给合适的 Agent 发布。
 例如：官方声明应由 Official/University 类型发布，新闻由 MediaOutlet 发布，学生观点由 Student 发布。
+请避免把所有初始内容都写成通稿；至少一半内容应具有明确态度、追问、争议或情绪张力。
 
 返回JSON格式（不要markdown）：
         {{
@@ -787,6 +810,21 @@ class SimulationConfigGenerator:
                     "trigger_hour": 6,
                     "content": "定时帖子内容",
                     "poster_type": "实体类型（必须从可用类型中选择）"
+                }},
+                {{
+                    "event_type": "create_comment",
+                    "trigger_hour": 8,
+                    "content": "对已有帖子进行回应/质疑/补充",
+                    "poster_type": "实体类型（必须从可用类型中选择）",
+                    "target_poster_type": "被回应帖子的发布者类型",
+                    "target_post_strategy": "latest_post_by_type"
+                }},
+                {{
+                    "event_type": "create_thread",
+                    "trigger_hour": 12,
+                    "poster_type": "实体类型（必须从可用类型中选择）",
+                    "root_content": "线程主帖内容",
+                    "replies": ["补充1", "补充2"]
                 }},
                 {{
                     "event_type": "hot_topics_update",
@@ -849,6 +887,22 @@ class SimulationConfigGenerator:
                 if not isinstance(value, list):
                     value = []
                 normalized[key] = [str(x).strip() for x in value if str(x).strip()]
+
+            if event_type == "create_thread":
+                replies = normalized.get("replies", [])
+                if isinstance(replies, str):
+                    replies = [x.strip() for x in re.split(r"[|｜\n]+", replies) if x.strip()]
+                if not isinstance(replies, list):
+                    replies = []
+                normalized["replies"] = [str(x).strip() for x in replies if str(x).strip()][:3]
+            if event_type == "create_comment":
+                target_strategy = str(normalized.get("target_post_strategy", "") or "").strip()
+                if not target_strategy:
+                    if normalized.get("target_poster_type"):
+                        target_strategy = "latest_post_by_type"
+                    else:
+                        target_strategy = "latest_hot_post"
+                normalized["target_post_strategy"] = target_strategy
 
             normalized_scheduled_events.append(normalized)
 
@@ -924,6 +978,46 @@ class SimulationConfigGenerator:
             })
 
         return updated_posts
+
+    def _match_agent_id_by_type(
+        self,
+        poster_type: str,
+        agent_configs: List[AgentActivityConfig],
+        used_indices: Optional[Dict[str, int]] = None,
+    ) -> Optional[int]:
+        agents_by_type: Dict[str, List[AgentActivityConfig]] = {}
+        for agent in agent_configs:
+            etype = agent.entity_type.lower()
+            agents_by_type.setdefault(etype, []).append(agent)
+
+        type_aliases = {
+            "official": ["official", "university", "governmentagency", "government"],
+            "university": ["university", "official"],
+            "mediaoutlet": ["mediaoutlet", "media"],
+            "student": ["student", "person"],
+            "professor": ["professor", "expert", "teacher"],
+            "alumni": ["alumni", "person"],
+            "organization": ["organization", "ngo", "company", "group"],
+            "person": ["person", "student", "alumni"],
+        }
+
+        used_indices = used_indices if used_indices is not None else {}
+        poster_type = str(poster_type or "").lower()
+        if poster_type in agents_by_type:
+            agents = agents_by_type[poster_type]
+            idx = used_indices.get(poster_type, 0) % len(agents)
+            used_indices[poster_type] = idx + 1
+            return agents[idx].agent_id
+
+        for alias_key, aliases in type_aliases.items():
+            if poster_type in aliases or alias_key == poster_type:
+                for alias in aliases:
+                    if alias in agents_by_type:
+                        agents = agents_by_type[alias]
+                        idx = used_indices.get(alias, 0) % len(agents)
+                        used_indices[alias] = idx + 1
+                        return agents[idx].agent_id
+        return None
     
     def _assign_initial_post_agents(
         self,
@@ -963,6 +1057,26 @@ class SimulationConfigGenerator:
                 f"poster_type='{str(event.get('poster_type', '')).lower()}' "
                 f"-> agent_id={event.get('poster_agent_id')}"
             )
+
+        used_target_indices: Dict[str, int] = {}
+        for event in passthrough_events:
+            event_type = str(event.get("event_type", "")).lower()
+            if event_type in {"create_comment", "create_thread"}:
+                poster_agent_id = self._match_agent_id_by_type(
+                    event.get("poster_type", ""),
+                    agent_configs,
+                )
+                if poster_agent_id is not None:
+                    event["poster_agent_id"] = poster_agent_id
+                target_type = str(event.get("target_poster_type", "") or "")
+                if target_type:
+                    target_agent_id = self._match_agent_id_by_type(
+                        target_type,
+                        agent_configs,
+                        used_indices=used_target_indices,
+                    )
+                    if target_agent_id is not None:
+                        event["target_poster_agent_id"] = target_agent_id
 
         event_config.scheduled_events = scheduled_post_events + passthrough_events
         return event_config

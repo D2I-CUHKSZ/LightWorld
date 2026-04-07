@@ -31,15 +31,17 @@ class Config:
     JSON_AS_ASCII = False
 
     # LLM
-    LLM_API_KEY = os.environ.get("LLM_API_KEY")
-    LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "https://api.openai.com/v1")
-    LLM_MODEL_NAME = os.environ.get("LLM_MODEL_NAME", "gpt-4o-mini")
+    # 文本推理与本体生成继续使用 qwen-plus
+    LLM_API_KEY = "sk-bd18a6eab44344a78ba2d59e6639a40f"
+    LLM_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    LLM_MODEL_NAME = "qwen-plus"
+    LLM_TIMEOUT_SECONDS = float(os.environ.get("LLM_TIMEOUT_SECONDS", "90"))
 
     # Zep
-    ZEP_API_KEY = os.environ.get("ZEP_API_KEY")
+    ZEP_API_KEY = "z_1dWlkIjoiMDQ5YzkzNjQtMWFlOC00OTlmLTg0NjAtNGRlNmQyZWJhNGE5In0.Et9qkamIbRP4J-2I6ij4xAUAw_qbrxx70Yx2yuvRTl32PqsT3d2qjgFS2htFCwA-p-AqRvZ8QnQk5hy0ychsvw"
 
     # Files
-    MAX_CONTENT_LENGTH = 50 * 1024 * 1024  # 50MB
+    MAX_CONTENT_LENGTH = 100 * 1024 * 1024  # 50MB
     UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), "../../uploads")
     DOCUMENT_EXTENSIONS = {"pdf", "md", "txt", "markdown"}
     IMAGE_EXTENSIONS = {"png", "jpg", "jpeg", "bmp", "gif", "webp", "tiff", "tif"}
@@ -51,14 +53,11 @@ class Config:
     DEFAULT_CHUNK_OVERLAP = 50
 
     # Multimodal ingestion
-    MULTIMODAL_VISION_MODEL_NAME = os.environ.get(
-        "MULTIMODAL_VISION_MODEL_NAME",
-        LLM_MODEL_NAME,
-    )
-    MULTIMODAL_AUDIO_MODEL_NAME = os.environ.get(
-        "MULTIMODAL_AUDIO_MODEL_NAME",
-        "whisper-1",
-    )
+    # 多模态理解走 Qwen Omni，音频转写走 Qwen ASR
+    MULTIMODAL_VISION_MODEL_NAME = "qwen3-omni-flash"
+    MULTIMODAL_AUDIO_MODEL_NAME = "qwen3-asr-flash"
+    MULTIMODAL_AUDIO_API_KEY = LLM_API_KEY
+    MULTIMODAL_AUDIO_BASE_URL = LLM_BASE_URL
     MULTIMODAL_VIDEO_SEGMENT_SECONDS = int(
         os.environ.get("MULTIMODAL_VIDEO_SEGMENT_SECONDS", "30")
     )
@@ -68,13 +67,20 @@ class Config:
     MULTIMODAL_MAX_VIDEO_SEGMENTS = int(
         os.environ.get("MULTIMODAL_MAX_VIDEO_SEGMENTS", "12")
     )
+    MULTIMODAL_FFMPEG_PATH = os.environ.get("MULTIMODAL_FFMPEG_PATH", "")
+    MULTIMODAL_FFPROBE_PATH = os.environ.get("MULTIMODAL_FFPROBE_PATH", "")
+    MULTIMODAL_USE_REMOTE_ANALYSIS = os.environ.get(
+        "MULTIMODAL_USE_REMOTE_ANALYSIS",
+        "true",
+    ).lower() == "true"
 
     # OASIS simulation
     OASIS_DEFAULT_MAX_ROUNDS = int(os.environ.get("OASIS_DEFAULT_MAX_ROUNDS", "10"))
     OASIS_SIMULATION_DATA_DIR = os.path.join(os.path.dirname(__file__), "../../uploads/simulations")
 
     OASIS_TWITTER_ACTIONS = [
-        "CREATE_POST", "LIKE_POST", "REPOST", "FOLLOW", "DO_NOTHING", "QUOTE_POST"
+        "CREATE_POST", "CREATE_COMMENT", "LIKE_POST", "LIKE_COMMENT",
+        "REPOST", "FOLLOW", "DO_NOTHING", "QUOTE_POST"
     ]
     OASIS_REDDIT_ACTIONS = [
         "LIKE_POST", "DISLIKE_POST", "CREATE_POST", "CREATE_COMMENT",
@@ -86,6 +92,12 @@ class Config:
     REPORT_AGENT_MAX_TOOL_CALLS = int(os.environ.get("REPORT_AGENT_MAX_TOOL_CALLS", "5"))
     REPORT_AGENT_MAX_REFLECTION_ROUNDS = int(os.environ.get("REPORT_AGENT_MAX_REFLECTION_ROUNDS", "2"))
     REPORT_AGENT_TEMPERATURE = float(os.environ.get("REPORT_AGENT_TEMPERATURE", "0.5"))
+
+    # Simulation preparation
+    SIMULATION_ENTITY_PROMPTS_USE_LLM = os.environ.get(
+        "SIMULATION_ENTITY_PROMPTS_USE_LLM",
+        "true",
+    ).lower() == "true"
 
     @classmethod
     def validate(cls):

@@ -19,6 +19,7 @@ from .oasis_profile_generator import OasisProfileGenerator, OasisAgentProfile
 from .entity_prompt_extractor import EntityPromptExtractor
 from .social_relation_graph import SocialRelationGraphCompiler
 from .simulation_config_generator import SimulationConfigGenerator, SimulationParameters
+from .simulation_population import SimulationPopulationBuilder
 
 logger = get_logger('mirofish.simulation')
 
@@ -284,23 +285,41 @@ class SimulationManager:
                 defined_entity_types=defined_entity_types,
                 enrich_with_edges=True
             )
-            
-            state.entities_count = filtered.filtered_count
-            state.entity_types = list(filtered.entity_types)
+
+            population_builder = SimulationPopulationBuilder()
+            population_result = population_builder.prepare(
+                filtered.entities,
+                simulation_requirement=simulation_requirement,
+            )
+            prepared_entities = population_result.entities
+            prepared_entity_types = {
+                entity.get_entity_type() or "Entity"
+                for entity in prepared_entities
+                if entity.get_entity_type() or "Entity"
+            }
+            state.entities_count = len(prepared_entities)
+            state.entity_types = sorted(prepared_entity_types)
             
             if progress_callback:
                 progress_callback(
                     "reading", 100, 
-                    f"完成，共 {filtered.filtered_count} 个实体",
-                    current=filtered.filtered_count,
-                    total=filtered.filtered_count
+                    f"完成，共 {len(prepared_entities)} 个实体（含别名合并与普通用户补充）",
+                    current=len(prepared_entities),
+                    total=len(prepared_entities)
                 )
             
-            if filtered.filtered_count == 0:
+            if len(prepared_entities) == 0:
                 state.status = SimulationStatus.FAILED
                 state.error = "没有找到符合条件的实体，请检查图谱是否正确构建"
                 self._save_simulation_state(state)
                 return state
+
+            population_adjustments_file = os.path.join(sim_dir, "population_adjustments.json")
+            try:
+                with open(population_adjustments_file, "w", encoding="utf-8") as f:
+                    json.dump(population_result.to_dict(), f, ensure_ascii=False, indent=2)
+            except Exception as e:
+                logger.warning(f"保存 population adjustments 失败，继续后续流程: {e}")
 
             # ========== 额外步骤: 保存图谱实体快照（供runtime编译初始社交关系） ==========
             entity_graph_edge_count = 0
@@ -308,22 +327,30 @@ class SimulationManager:
             try:
                 edge_seen = set()
                 graph_edges: List[Dict[str, Any]] = []
-                for entity in filtered.entities:
+                uuid_alias_map = population_result.alias_map or {}
+
+                def canonical_uuid(raw_uuid: str) -> str:
+                    value = str(raw_uuid or "").strip()
+                    return uuid_alias_map.get(value, value)
+
+                for entity in prepared_entities:
                     for edge in (entity.related_edges or []):
                         if not isinstance(edge, dict):
                             continue
                         direction = str(edge.get("direction", "") or "").lower()
-                        source_uuid = str(edge.get("source_node_uuid", "") or "")
-                        target_uuid = str(edge.get("target_node_uuid", "") or "")
+                        source_uuid = canonical_uuid(edge.get("source_node_uuid", ""))
+                        target_uuid = canonical_uuid(edge.get("target_node_uuid", ""))
                         if direction == "outgoing":
-                            source_uuid = source_uuid or entity.uuid
+                            source_uuid = source_uuid or canonical_uuid(entity.uuid)
                         elif direction == "incoming":
-                            target_uuid = target_uuid or entity.uuid
+                            target_uuid = target_uuid or canonical_uuid(entity.uuid)
                         edge_name = str(edge.get("name", "") or "")
                         if not edge_name:
                             edge_name = str(edge.get("edge_name", "") or "")
                         fact = str(edge.get("fact", "") or "")
                         uuid = str(edge.get("uuid", "") or "")
+                        if source_uuid == target_uuid and source_uuid:
+                            continue
                         key = (
                             uuid
                             or f"{source_uuid}->{target_uuid}|{edge_name}|{fact[:200]}"
@@ -345,16 +372,17 @@ class SimulationManager:
                     "simulation_id": simulation_id,
                     "graph_id": state.graph_id,
                     "generated_at": datetime.now().isoformat(),
-                    "entity_count": len(filtered.entities),
+                    "entity_count": len(prepared_entities),
                     "edge_count": entity_graph_edge_count,
-                    "entities": [e.to_dict() for e in filtered.entities],
+                    "entities": [e.to_dict() for e in prepared_entities],
                     "edges": graph_edges,
+                    "population_adjustments_file": os.path.basename(population_adjustments_file),
                 }
                 with open(entity_graph_file, "w", encoding="utf-8") as f:
                     json.dump(graph_payload, f, ensure_ascii=False, indent=2)
                 logger.info(
                     f"已保存图谱实体快照: {entity_graph_file}, "
-                    f"entities={len(filtered.entities)}, edges={entity_graph_edge_count}"
+                    f"entities={len(prepared_entities)}, edges={entity_graph_edge_count}"
                 )
             except Exception as e:
                 logger.warning(f"保存图谱实体快照失败，继续后续流程: {e}")
@@ -363,10 +391,10 @@ class SimulationManager:
             entity_prompts: List[Dict[str, Any]] = []
             entity_prompts_file = os.path.join(sim_dir, "entity_prompts.json")
             try:
-                logger.info(f"开始提取实体语义prompts: count={filtered.filtered_count}")
+                logger.info(f"开始提取实体语义prompts: count={len(prepared_entities)}")
                 extractor = EntityPromptExtractor()
                 entity_prompts = extractor.extract_prompts(
-                    entities=filtered.entities,
+                    entities=prepared_entities,
                     simulation_requirement=simulation_requirement
                 )
                 extractor.save_prompts(entity_prompts, entity_prompts_file)
@@ -374,7 +402,7 @@ class SimulationManager:
                 logger.warning(f"提取实体语义prompts失败，继续后续流程: {e}")
             
             # ========== 阶段2: 生成Agent Profile ==========
-            total_entities = len(filtered.entities)
+            total_entities = len(prepared_entities)
             
             if progress_callback:
                 progress_callback(
@@ -409,7 +437,7 @@ class SimulationManager:
                 realtime_platform = "twitter"
             
             profiles = generator.generate_profiles_from_entities(
-                entities=filtered.entities,
+                entities=prepared_entities,
                 use_llm=use_llm_for_profiles,
                 progress_callback=profile_progress,
                 graph_id=state.graph_id,  # 传入graph_id用于Zep检索
@@ -478,7 +506,7 @@ class SimulationManager:
                 graph_id=state.graph_id,
                 simulation_requirement=simulation_requirement,
                 document_text=document_text,
-                entities=filtered.entities,
+                entities=prepared_entities,
                 enable_twitter=state.enable_twitter,
                 enable_reddit=state.enable_reddit
             )
@@ -520,8 +548,10 @@ class SimulationManager:
                 config_data["entity_prompts_count"] = len(entity_prompts)
             if os.path.exists(entity_graph_file):
                 config_data["entity_graph_file"] = "entity_graph_snapshot.json"
-                config_data["entity_graph_entity_count"] = len(filtered.entities)
+                config_data["entity_graph_entity_count"] = len(prepared_entities)
                 config_data["entity_graph_edge_count"] = entity_graph_edge_count
+            if os.path.exists(population_adjustments_file):
+                config_data["population_adjustments_file"] = "population_adjustments.json"
             if os.path.exists(social_relation_graph_file):
                 config_data["social_relation_graph_file"] = "social_relation_graph.json"
                 config_data["social_relation_graph_edge_count"] = social_relation_edge_count

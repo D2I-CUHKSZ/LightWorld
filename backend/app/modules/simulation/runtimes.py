@@ -12,7 +12,10 @@ import random
 import re
 from collections import defaultdict, deque
 from datetime import datetime, timedelta
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional, Set, Tuple
+
+from .memory_keywords import MemoryKeywordExtractor
+
 
 def _safe_float(value: Any, default: float = 0.0) -> float:
     try:
@@ -1478,7 +1481,18 @@ class SimpleMemRuntime:
         self.self_scope_max = max(1, int(mem_cfg.get("self_scope_max", 3)))
         self.neighbor_scope_max = max(1, int(mem_cfg.get("neighbor_scope_max", 2)))
         self.world_scope_max = max(1, int(mem_cfg.get("world_scope_max", 2)))
+        self.counter_scope_max = max(0, int(mem_cfg.get("counter_scope_max", 1)))
         self.enable_world_memory = bool(mem_cfg.get("enable_world_memory", True))
+        self.counter_opinion_gap = min(
+            1.0, max(0.0, _safe_float(mem_cfg.get("counter_opinion_gap", 0.35), 0.35))
+        )
+        self.novelty_lookback = max(2, int(mem_cfg.get("novelty_lookback", 6)))
+        self.unit_repeat_penalty = min(
+            0.95, max(0.0, _safe_float(mem_cfg.get("unit_repeat_penalty", 0.35), 0.35))
+        )
+        self.topic_repeat_penalty = min(
+            0.95, max(0.0, _safe_float(mem_cfg.get("topic_repeat_penalty", 0.15), 0.15))
+        )
 
         self.memory_file = os.path.join(simulation_dir, f"simplemem_{platform}.json")
         self.memory_artifact_dir = os.path.join(simulation_dir, "artifacts", "memory", platform)
@@ -1489,9 +1503,15 @@ class SimpleMemRuntime:
         os.makedirs(self.memory_artifact_dir, exist_ok=True)
         self.per_agent_units: Dict[int, List[Dict[str, Any]]] = {}
         self.world_units: List[Dict[str, Any]] = []
+        self.recent_retrieved_unit_ids: Dict[int, deque] = defaultdict(lambda: deque(maxlen=self.novelty_lookback))
+        self.recent_retrieved_topics: Dict[int, deque] = defaultdict(lambda: deque(maxlen=self.novelty_lookback))
         self._agent_base_cache: Dict[Tuple[int, str], str] = {}
         self._seq = 0
         self._sim_start = self._resolve_simulation_start()
+        self.keyword_extractor = MemoryKeywordExtractor(
+            config=config,
+            topology_runtime=topology_runtime,
+        )
 
         if self.enabled:
             self._load()
@@ -1596,21 +1616,19 @@ class SimpleMemRuntime:
             return "medium"
         return "low"
 
-    def _extract_keywords(self, text: str, max_count: int = 8) -> List[str]:
-        tokens = re.findall(r"[a-zA-Z0-9_\u4e00-\u9fff]{2,}", (text or "").lower())
-        stopwords = {
-            "create_post", "like_post", "repost", "quote_post", "follow", "do_nothing",
-            "create_comment", "like_comment", "dislike_comment", "search_posts", "search_user",
-            "trend", "refresh", "interview", "content", "post", "user", "agent",
-            "的", "了", "和", "是", "在", "对", "与", "进行", "一个"
-        }
-        freq: Dict[str, int] = {}
-        for t in tokens:
-            if t in stopwords:
-                continue
-            freq[t] = freq.get(t, 0) + 1
-        ranked = sorted(freq.items(), key=lambda x: (-x[1], len(x[0])))
-        return [k for k, _ in ranked[:max_count]]
+    def _extract_keywords(
+        self,
+        action_data: Dict[str, Any],
+        summary: str,
+        target_agent_ids: List[int],
+        max_count: int = 8,
+    ) -> List[str]:
+        return self.keyword_extractor.extract(
+            action_data=action_data,
+            summary=summary,
+            target_agent_ids=target_agent_ids,
+            max_count=max_count,
+        )
 
     def _build_memory_text(self, action_data: Dict[str, Any]) -> str:
         action_type = str(action_data.get("action_type", ""))
@@ -1944,6 +1962,7 @@ class SimpleMemRuntime:
             "self_k": self_k,
             "neighbor_k": neighbor_k,
             "world_k": world_k,
+            "counter_k": self.counter_scope_max if complexity != "LOW" else 0,
             "include_world": self.enable_world_memory and (complexity != "LOW" or bool((self.config.get("event_config", {}) or {}).get("hot_topics"))),
         }
 
@@ -1992,6 +2011,14 @@ class SimpleMemRuntime:
         }.get(scope, 1.0)
         count_bonus = 1.0 + 0.05 * min(6, int(unit.get("count", 1)))
         topic_bonus = 1.08 if str(unit.get("topic", "")).strip().lower() in query_keywords else 1.0
+        novelty_bonus = 1.0
+        recent_units = self.recent_retrieved_unit_ids.get(for_agent_id)
+        if recent_units and unit.get("id") in recent_units:
+            novelty_bonus *= max(0.1, 1.0 - self.unit_repeat_penalty)
+        recent_topics = self.recent_retrieved_topics.get(for_agent_id)
+        unit_topic = str(unit.get("topic", "")).strip().lower()
+        if recent_topics and unit_topic and unit_topic in recent_topics:
+            novelty_bonus *= max(0.2, 1.0 - self.topic_repeat_penalty)
 
         return (
             (0.45 * keyword_sim + 0.20 * entity_sim + 0.35 * recency)
@@ -2001,7 +2028,83 @@ class SimpleMemRuntime:
             * scope_bonus
             * count_bonus
             * topic_bonus
+            * novelty_bonus
         )
+
+    def _select_counter_units(
+        self,
+        agent_id: int,
+        plan: Dict[str, Any],
+        candidate_buckets: Dict[str, List[Dict[str, Any]]],
+        already_selected_ids: Set[str],
+        current_round: int,
+    ) -> List[Tuple[str, Dict[str, Any], float]]:
+        counter_k = int(plan.get("counter_k", 0) or 0)
+        if counter_k <= 0:
+            return []
+
+        pool = list(candidate_buckets.get("neighbor", [])) + list(candidate_buckets.get("world", []))
+        if not pool:
+            return []
+
+        current_opinion = 0.0
+        if self.topology_runtime:
+            current_opinion = self.topology_runtime.opinion_by_agent.get(agent_id, 0.0)
+
+        query_keywords = plan.get("query_keywords", set()) or set()
+        ranked: List[Tuple[str, Dict[str, Any], float]] = []
+        for unit in pool:
+            uid = unit.get("id")
+            if uid in already_selected_ids:
+                continue
+            source_agent = int(unit.get("source_agent_id", unit.get("agent_id", -1)))
+            source_opinion = current_opinion
+            if self.topology_runtime and source_agent >= 0:
+                source_opinion = self.topology_runtime.opinion_by_agent.get(source_agent, current_opinion)
+
+            opinion_gap = abs(source_opinion - current_opinion)
+            unit_keywords = set(unit.get("keywords", []) or [])
+            keyword_overlap = 0.0
+            if query_keywords and unit_keywords:
+                inter = len(query_keywords & unit_keywords)
+                union = len(query_keywords | unit_keywords)
+                keyword_overlap = inter / union if union > 0 else 0.0
+
+            if opinion_gap < self.counter_opinion_gap and keyword_overlap > 0.45:
+                continue
+
+            age = max(0, current_round - int(unit.get("last_round", current_round)))
+            recency = math.exp(-self.recency_decay * age)
+            salience = _safe_float(unit.get("salience_score", 0.4), 0.4)
+            novelty = 1.0
+            recent_units = self.recent_retrieved_unit_ids.get(agent_id)
+            if recent_units and uid in recent_units:
+                novelty *= 0.7
+            score = (
+                0.45 * max(opinion_gap, 0.15)
+                + 0.25 * (1.0 - keyword_overlap)
+                + 0.20 * salience
+                + 0.10 * recency
+            ) * novelty
+            ranked.append(("counter", unit, score))
+
+        ranked.sort(key=lambda item: item[2], reverse=True)
+        return ranked[:counter_k]
+
+    def _remember_retrieval(
+        self,
+        agent_id: int,
+        selected_units: List[Tuple[str, Dict[str, Any], float]],
+    ):
+        unit_deque = self.recent_retrieved_unit_ids[agent_id]
+        topic_deque = self.recent_retrieved_topics[agent_id]
+        for _, unit, _ in selected_units:
+            unit_id = unit.get("id")
+            topic = str(unit.get("topic", "")).strip().lower()
+            if unit_id:
+                unit_deque.append(unit_id)
+            if topic:
+                topic_deque.append(topic)
 
     def _build_world_unit(self, unit: Dict[str, Any]) -> Dict[str, Any]:
         world_unit = dict(unit)
@@ -2184,9 +2287,9 @@ class SimpleMemRuntime:
         if not summary:
             return None
 
-        keywords = self._extract_keywords(summary, max_count=8)
         entities = self._extract_entities(action_data)
         target_agent_ids = self._extract_target_agent_ids(action_data)
+        keywords = self._extract_keywords(action_data, summary, target_agent_ids, max_count=8)
         topic = self._infer_topic(action_data, summary, keywords)
         salience_score = self._estimate_salience(action_data, topic, target_agent_ids, keywords)
         if salience_score < self.min_salience_to_store:
@@ -2361,8 +2464,24 @@ class SimpleMemRuntime:
             seen.add(uid)
             dedup_selected.append((scope, unit, score))
 
+        counter_selected = self._select_counter_units(
+            agent_id=agent_id,
+            plan=plan,
+            candidate_buckets=candidate_buckets,
+            already_selected_ids=seen,
+            current_round=current_round,
+        )
+        if counter_selected:
+            for scope, unit, score in counter_selected:
+                uid = unit.get("id")
+                if uid in seen:
+                    continue
+                seen.add(uid)
+                dedup_selected.append((scope, unit, score))
+
         abstracts: List[str] = []
         details: List[str] = []
+        counters: List[str] = []
         for idx, (scope, u, _) in enumerate(dedup_selected):
             src_name = u.get("agent_name", f"Agent_{u.get('agent_id', '')}")
             abstract = str(u.get("abstract_summary", "") or "")[:220]
@@ -2370,6 +2489,12 @@ class SimpleMemRuntime:
             timestamp = str(u.get("timestamp", "") or "")
             action_type = str(u.get("action_type", "") or "")
             salience = str(u.get("salience", "") or "")
+            if scope == "counter":
+                if abstract:
+                    counters.append(f"- [{src_name}] {abstract}")
+                elif detail:
+                    counters.append(f"- [{src_name}] {detail}")
+                continue
             if idx < self.abstract_topk and abstract:
                 abstracts.append(f"- ({scope}) [{src_name}] {abstract}")
             if idx < self.detail_topk and detail:
@@ -2387,8 +2512,12 @@ class SimpleMemRuntime:
         if details:
             lines.append(self.DETAIL_HEADER)
             lines.extend(details)
+        if counters:
+            lines.append("[COUNTERPOINT MEMORY]")
+            lines.extend(counters[:2])
 
         memory_context = "\n".join(lines)[:self.max_injected_chars]
+        self._remember_retrieval(agent_id, dedup_selected)
         self._record_retrieval_trace(
             agent_id=agent_id,
             current_round=current_round,

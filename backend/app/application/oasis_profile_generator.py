@@ -10,6 +10,7 @@ OASIS Agent Profile生成器
 
 import json
 import random
+import re
 import time
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, field
@@ -176,6 +177,9 @@ class OasisProfileGenerator:
         "university", "governmentagency", "organization", "ngo", 
         "mediaoutlet", "company", "institution", "group", "community"
     ]
+    PERSONA_CHAR_MIN = 300
+    PERSONA_CHAR_MAX = 600
+    BIO_CHAR_MAX = 120
     
     def __init__(
         self, 
@@ -233,8 +237,17 @@ class OasisProfileGenerator:
         
         # 构建上下文信息
         context = self._build_entity_context(entity)
-        
-        if use_llm:
+
+        is_synthetic_population = bool((entity.attributes or {}).get("synthetic_population"))
+
+        if is_synthetic_population:
+            profile_data = self._generate_synthetic_population_profile(
+                entity_name=name,
+                entity_type=entity_type,
+                entity_summary=entity.summary,
+                entity_attributes=entity.attributes,
+            )
+        elif use_llm:
             # 使用LLM生成详细人设
             profile_data = self._generate_profile_with_llm(
                 entity_name=name,
@@ -251,6 +264,13 @@ class OasisProfileGenerator:
                 entity_summary=entity.summary,
                 entity_attributes=entity.attributes
             )
+        profile_data = self._normalize_profile_data(
+            entity_name=name,
+            entity_type=entity_type,
+            entity_summary=entity.summary,
+            entity_attributes=entity.attributes,
+            profile_data=profile_data,
+        )
         
         return OasisAgentProfile(
             user_id=user_id,
@@ -670,7 +690,12 @@ class OasisProfileGenerator:
     
     def _get_system_prompt(self, is_individual: bool) -> str:
         """获取系统提示词"""
-        base_prompt = "你是社交媒体用户画像生成专家。生成详细、真实的人设用于舆论模拟,最大程度还原已有现实情况。必须返回有效的JSON格式，所有字符串值不能包含未转义的换行符。使用中文。"
+        base_prompt = (
+            "你是社交媒体用户画像生成专家。"
+            "目标不是写人物小传，而是生成短而稳定、可驱动行为差异的人设卡。"
+            "请避免臆造精确文号、详细履历、过长背景故事和无法从上下文支持的细节。"
+            "必须返回有效JSON，所有字符串值不能包含未转义换行符。使用中文。"
+        )
         return base_prompt
     
     def _build_individual_persona_prompt(
@@ -686,7 +711,7 @@ class OasisProfileGenerator:
         attrs_str = json.dumps(entity_attributes, ensure_ascii=False) if entity_attributes else "无"
         context_str = context[:3000] if context else "无额外上下文"
         
-        return f"""为实体生成详细的社交媒体用户人设,最大程度还原已有现实情况。
+        return f"""为实体生成用于舆论模拟的个人账号人设卡，要求真实、克制、可区分，不要写成长篇传记。
 
 实体名称: {entity_name}
 实体类型: {entity_type}
@@ -698,21 +723,20 @@ class OasisProfileGenerator:
 
 请生成JSON，包含以下字段:
 
-1. bio: 社交媒体简介，200字
-2. persona: 详细人设描述（2000字的纯文本），需包含:
-   - 基本信息（年龄、职业、教育背景、所在地）
-   - 人物背景（重要经历、与事件的关联、社会关系）
-   - 性格特征（MBTI类型、核心性格、情绪表达方式）
-   - 社交媒体行为（发帖频率、内容偏好、互动风格、语言特点）
-   - 立场观点（对话题的态度、可能被激怒/感动的内容）
-   - 独特特征（口头禅、特殊经历、个人爱好）
-   - 个人记忆（人设的重要部分，要介绍这个个体与事件的关联，以及这个个体在事件中的已有动作与反应）
+1. bio: 社交媒体简介，60-120字
+2. persona: 300-600字的纯文本，重点包含：
+   - 身份与角色定位
+   - 对事件的既有立场/偏好
+   - 发言风格与常见表达方式
+   - 互动习惯（更爱发帖、回复、转发、求证还是围观）
+   - 容易被什么触发，看到什么会沉默
+   - 与事件相关的1-2个记忆锚点
 3. age: 年龄数字（必须是整数）
 4. gender: 性别，必须是英文: "male" 或 "female"
 5. mbti: MBTI类型（如INTJ、ENFP等）
 6. country: 国家（使用中文，如"中国"）
 7. profession: 职业
-8. interested_topics: 感兴趣话题数组
+8. interested_topics: 感兴趣话题数组（4-7个）
 
 重要:
 - 所有字段值必须是字符串或数字，不要使用换行符
@@ -720,6 +744,8 @@ class OasisProfileGenerator:
 - 使用中文（除了gender字段必须用英文male/female）
 - 内容要与实体信息保持一致
 - age必须是有效的整数，gender必须是"male"或"female"
+- 不要虚构过细的教育/家庭/履历细节
+- 不要把账号写成法律评论长文生成器
 """
 
     def _build_group_persona_prompt(
@@ -735,7 +761,7 @@ class OasisProfileGenerator:
         attrs_str = json.dumps(entity_attributes, ensure_ascii=False) if entity_attributes else "无"
         context_str = context[:3000] if context else "无额外上下文"
         
-        return f"""为机构/群体实体生成详细的社交媒体账号设定,最大程度还原已有现实情况。
+        return f"""为机构/群体实体生成用于舆论模拟的账号设定，要求专业、克制、区分度清晰，不要写成长篇机构史。
 
 实体名称: {entity_name}
 实体类型: {entity_type}
@@ -747,28 +773,167 @@ class OasisProfileGenerator:
 
 请生成JSON，包含以下字段:
 
-1. bio: 官方账号简介，200字，专业得体
-2. persona: 详细账号设定描述（2000字的纯文本），需包含:
-   - 机构基本信息（正式名称、机构性质、成立背景、主要职能）
-   - 账号定位（账号类型、目标受众、核心功能）
-   - 发言风格（语言特点、常用表达、禁忌话题）
-   - 发布内容特点（内容类型、发布频率、活跃时间段）
-   - 立场态度（对核心话题的官方立场、面对争议的处理方式）
-   - 特殊说明（代表的群体画像、运营习惯）
-   - 机构记忆（机构人设的重要部分，要介绍这个机构与事件的关联，以及这个机构在事件中的已有动作与反应）
+1. bio: 官方账号简介，60-120字，专业得体
+2. persona: 300-600字的纯文本，重点包含:
+   - 账号定位与面向人群
+   - 发言风格与禁忌表达
+   - 对争议的默认处理方式
+   - 更偏好发布、转引、回应还是沉默
+   - 与当前事件相关的1-2个机构记忆锚点
 3. age: 固定填30（机构账号的虚拟年龄）
 4. gender: 固定填"other"（机构账号使用other表示非个人）
 5. mbti: MBTI类型，用于描述账号风格，如ISTJ代表严谨保守
 6. country: 国家（使用中文，如"中国"）
 7. profession: 机构职能描述
-8. interested_topics: 关注领域数组
+8. interested_topics: 关注领域数组（4-7个）
 
 重要:
 - 所有字段值必须是字符串或数字，不允许null值
 - persona必须是一段连贯的文字描述，不要使用换行符
 - 使用中文（除了gender字段必须用英文"other"）
 - age必须是整数30，gender必须是字符串"other"
-- 机构账号发言要符合其身份定位"""
+- 机构账号发言要符合其身份定位
+- 不要写成长篇制度评论或虚构完整组织史"""
+
+    def _normalize_profile_data(
+        self,
+        entity_name: str,
+        entity_type: str,
+        entity_summary: str,
+        entity_attributes: Dict[str, Any],
+        profile_data: Dict[str, Any],
+    ) -> Dict[str, Any]:
+        result = dict(profile_data or {})
+
+        def clean_text(value: Any) -> str:
+            return re.sub(r"\s+", " ", str(value or "")).strip()
+
+        bio = clean_text(result.get("bio", ""))
+        persona = clean_text(result.get("persona", ""))
+        if not bio:
+            bio = clean_text(entity_summary[: self.BIO_CHAR_MAX] or f"{entity_type}: {entity_name}")
+        if len(bio) > self.BIO_CHAR_MAX:
+            bio = bio[: self.BIO_CHAR_MAX].rstrip("，,。；; ")
+
+        if not persona:
+            persona = clean_text(
+                entity_summary
+                or f"{entity_name}是与{entity_type}相关的参与者，发言风格谨慎，关注事件进展。"
+            )
+        if len(persona) < self.PERSONA_CHAR_MIN:
+            extra_bits = [
+                f"账号定位是{clean_text(result.get('profession', '') or entity_type)}。",
+                "表达倾向简洁，不会长篇堆砌背景细节。",
+                "面对争议更看重事实来源、互动反馈和自身立场边界。",
+            ]
+            persona = clean_text(persona + " " + " ".join(extra_bits))
+        if len(persona) > self.PERSONA_CHAR_MAX:
+            persona = persona[: self.PERSONA_CHAR_MAX].rstrip("，,。；; ")
+
+        topics = result.get("interested_topics", []) or []
+        if isinstance(topics, str):
+            topics = [x.strip() for x in re.split(r"[，,;；\s]+", topics) if x.strip()]
+        if not isinstance(topics, list):
+            topics = []
+        dedup_topics: List[str] = []
+        seen = set()
+        for item in topics:
+            text = clean_text(item)
+            if not text:
+                continue
+            key = text.lower()
+            if key in seen:
+                continue
+            seen.add(key)
+            dedup_topics.append(text[:24])
+            if len(dedup_topics) >= 7:
+                break
+        if not dedup_topics:
+            dedup_topics = self._infer_topics_from_entity(entity_name, entity_summary, entity_attributes)
+
+        result["bio"] = bio
+        result["persona"] = persona
+        result["interested_topics"] = dedup_topics[:7]
+        if result.get("profession") is None:
+            result["profession"] = entity_type
+        return result
+
+    def _infer_topics_from_entity(
+        self,
+        entity_name: str,
+        entity_summary: str,
+        entity_attributes: Dict[str, Any],
+    ) -> List[str]:
+        candidates = [entity_name]
+        candidates.extend(re.findall(r"[\u4e00-\u9fff]{2,8}", entity_summary or ""))
+        for value in (entity_attributes or {}).values():
+            if isinstance(value, str):
+                candidates.extend(re.findall(r"[\u4e00-\u9fff]{2,8}", value))
+        dedup: List[str] = []
+        seen = set()
+        for item in candidates:
+            text = str(item or "").strip()
+            if len(text) < 2:
+                continue
+            if text in {"实体", "相关信息", "事件相关"}:
+                continue
+            if text.lower() in seen:
+                continue
+            seen.add(text.lower())
+            dedup.append(text)
+            if len(dedup) >= 6:
+                break
+        return dedup or ["公共议题", "事实核查", "平台互动"]
+
+    def _generate_synthetic_population_profile(
+        self,
+        entity_name: str,
+        entity_type: str,
+        entity_summary: str,
+        entity_attributes: Dict[str, Any],
+    ) -> Dict[str, Any]:
+        segment = str((entity_attributes or {}).get("population_segment", "ordinary_user"))
+        stance = str((entity_attributes or {}).get("stance_anchor", "neutral"))
+        topics = list((entity_attributes or {}).get("topic_hints", []) or [])[:5]
+        profession_map = {
+            "campus_observer": "普通在校学生",
+            "fact_checker": "普通网民",
+            "emotional_bystander": "围观型社交媒体用户",
+            "alumni_like": "校友型观察者",
+            "parent_view": "家长视角用户",
+            "amplifier": "热点转发型用户",
+        }
+        speech_map = {
+            "campus_observer": "会短评、跟帖，也会转发同学观点",
+            "fact_checker": "偏好追问信源、时间线和证据截图",
+            "emotional_bystander": "表达更情绪化，容易快速站队",
+            "alumni_like": "会提出制度层面的建议，表达相对克制",
+            "parent_view": "更关心安全与秩序，对网暴敏感",
+            "amplifier": "重视热点速度，愿意扩散但不一定深挖",
+        }
+        bio = f"{profession_map.get(segment, '普通社交平台用户')}，关注{('、'.join(topics[:3]) or '事件进展')}。"
+        persona = (
+            f"{entity_name}是一个{profession_map.get(segment, '普通社交平台用户')}，"
+            f"围绕当前事件的默认立场偏{stance}。"
+            f"其发言通常不长，更像平台里的真实路人：{speech_map.get(segment, '根据看到的帖子做即时反应')}。"
+            f"在争议升级时，他/她会优先跟随热帖和熟人讨论，而不是独立展开长篇论证；"
+            f"如果看到涉及{'、'.join(topics[:2]) or '程序正义'}的内容，会更愿意参与回复、转发或追问。"
+            "记忆锚点主要来自平台上的高热帖子、同伴互动和个人情绪反应，而不是系统化资料整理。"
+        )
+        return {
+            "bio": bio,
+            "persona": persona,
+            "age": random.randint(20, 38),
+            "gender": random.choice(["male", "female"]),
+            "mbti": random.choice(self.MBTI_TYPES),
+            "country": "中国",
+            "profession": profession_map.get(segment, entity_type),
+            "interested_topics": topics or ["事件进展", "平台讨论", "事实核查"],
+            "friend_count": random.randint(30, 220),
+            "follower_count": random.randint(20, 260),
+            "statuses_count": random.randint(80, 1200),
+            "karma": random.randint(80, 1600),
+        }
     
     def _generate_profile_rule_based(
         self,
@@ -784,63 +949,63 @@ class OasisProfileGenerator:
         
         if entity_type_lower in ["student", "alumni"]:
             return {
-                "bio": f"{entity_type} with interests in academics and social issues.",
-                "persona": f"{entity_name} is a {entity_type.lower()} who is actively engaged in academic and social discussions. They enjoy sharing perspectives and connecting with peers.",
+                "bio": f"{entity_name}，{entity_type}身份，关注校园议题与公共讨论。",
+                "persona": f"{entity_name}以{entity_type}身份参与讨论，表达直接但不过度铺陈，更愿意围绕身边经验、同伴反馈和事件进展发言，常在看到与教育、公平或舆情相关内容时参与回复或转发。",
                 "age": random.randint(18, 30),
                 "gender": random.choice(["male", "female"]),
                 "mbti": random.choice(self.MBTI_TYPES),
-                "country": random.choice(self.COUNTRIES),
-                "profession": "Student",
-                "interested_topics": ["Education", "Social Issues", "Technology"],
+                "country": "中国",
+                "profession": "学生",
+                "interested_topics": ["教育公平", "校园议题", "公共讨论"],
             }
         
         elif entity_type_lower in ["publicfigure", "expert", "faculty"]:
             return {
-                "bio": f"Expert and thought leader in their field.",
-                "persona": f"{entity_name} is a recognized {entity_type.lower()} who shares insights and opinions on important matters. They are known for their expertise and influence in public discourse.",
+                "bio": f"{entity_name}，在公共议题上有稳定发言影响力。",
+                "persona": f"{entity_name}更像专业评论者或意见领袖，通常从专业角度切入事件，善于提炼观点、设置议题，但会保留一定判断距离，不会把每次发言都写成长文。",
                 "age": random.randint(35, 60),
                 "gender": random.choice(["male", "female"]),
                 "mbti": random.choice(["ENTJ", "INTJ", "ENTP", "INTP"]),
-                "country": random.choice(self.COUNTRIES),
-                "profession": entity_attributes.get("occupation", "Expert"),
-                "interested_topics": ["Politics", "Economics", "Culture & Society"],
+                "country": "中国",
+                "profession": entity_attributes.get("occupation", "专家"),
+                "interested_topics": ["公共议题", "制度讨论", "媒体评论"],
             }
         
         elif entity_type_lower in ["mediaoutlet", "socialmediaplatform"]:
             return {
-                "bio": f"Official account for {entity_name}. News and updates.",
-                "persona": f"{entity_name} is a media entity that reports news and facilitates public discourse. The account shares timely updates and engages with the audience on current events.",
+                "bio": f"{entity_name}官方/媒体账号，负责发布消息、转载进展与简短评论。",
+                "persona": f"{entity_name}的发言更偏新闻通报、事实更新和引用传播，通常不会深写个人情绪，更倾向于快速发布、跟进、引用和有限回应，在热点升高时会强化转引与追踪。",
                 "age": 30,  # 机构虚拟年龄
                 "gender": "other",  # 机构使用other
                 "mbti": "ISTJ",  # 机构风格：严谨保守
                 "country": "中国",
-                "profession": "Media",
-                "interested_topics": ["General News", "Current Events", "Public Affairs"],
+                "profession": "媒体账号",
+                "interested_topics": ["新闻更新", "事件进展", "公共议题"],
             }
         
         elif entity_type_lower in ["university", "governmentagency", "ngo", "organization"]:
             return {
-                "bio": f"Official account of {entity_name}.",
-                "persona": f"{entity_name} is an institutional entity that communicates official positions, announcements, and engages with stakeholders on relevant matters.",
+                "bio": f"{entity_name}官方账号，发布正式说明、公告和机构立场。",
+                "persona": f"{entity_name}作为机构账号，更偏好正式表达、公告式沟通和有限回应。面对争议时通常强调程序、规则和后续安排，互动节奏保守，少做情绪化对抗。",
                 "age": 30,  # 机构虚拟年龄
                 "gender": "other",  # 机构使用other
                 "mbti": "ISTJ",  # 机构风格：严谨保守
                 "country": "中国",
                 "profession": entity_type,
-                "interested_topics": ["Public Policy", "Community", "Official Announcements"],
+                "interested_topics": ["官方公告", "制度回应", "机构治理"],
             }
         
         else:
             # 默认人设
             return {
                 "bio": entity_summary[:150] if entity_summary else f"{entity_type}: {entity_name}",
-                "persona": entity_summary or f"{entity_name} is a {entity_type.lower()} participating in social discussions.",
+                "persona": entity_summary or f"{entity_name}会围绕与自身相关的话题参与讨论，表达方式较简洁，更多依据看到的帖子和有限上下文做出反应。",
                 "age": random.randint(25, 50),
                 "gender": random.choice(["male", "female"]),
                 "mbti": random.choice(self.MBTI_TYPES),
-                "country": random.choice(self.COUNTRIES),
+                "country": "中国",
                 "profession": entity_type,
-                "interested_topics": ["General", "Social Issues"],
+                "interested_topics": ["公共讨论", "事件进展", "社会议题"],
             }
     
     def set_graph_id(self, graph_id: str):
@@ -1119,7 +1284,7 @@ class OasisProfileGenerator:
             if structured_bits:
                 parts.append("Structured profile: " + "; ".join(structured_bits) + ".")
 
-            return clean_text(" ".join(p for p in parts if p))
+            return clean_text(" ".join(p for p in parts if p))[:1600]
 
         with open(file_path, 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)

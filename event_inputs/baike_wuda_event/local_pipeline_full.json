@@ -1,0 +1,23 @@
+{
+  "files": [
+    "event_overview.md",
+    "event_timeline.txt",
+    "images/image_01.jpg",
+    "images/image_02.jpg",
+    "images/image_03.jpg",
+    "images/image_04.jpg",
+    "images/image_05.jpg",
+    "images/image_06.jpg",
+    "videos/video_01_official_response.mp4",
+    "videos/video_02_news_report.mp4",
+    "videos/video_03_student_clip.mp4",
+    "videos/video_04_followup_commentary.mp4"
+  ],
+  "project_name": "Wuhan University Event Multimodal",
+  "graph_name": "Wuhan University Event Graph",
+  "simulation_requirement": "模拟该事件中学校官方、涉事学生、校友、媒体、自媒体和公众在社交媒体上的传播、回应、争议扩散与关系演化。",
+  "additional_context": "video_01_official_response.mp4 为官方或权威回应片段；video_02_news_report.mp4 为媒体报道片段；video_03_student_clip.mp4 为现场或当事人视角传播片段；video_04_followup_commentary.mp4 为后续评论或二次传播片段。重点关注微博、短视频平台和媒体评论场景，优先抽取可发声主体而不是抽象概念。",
+  "light_mode": true,
+  "multimodal_use_remote_analysis": true,
+  "output": "pipeline_result_full.json"
+}

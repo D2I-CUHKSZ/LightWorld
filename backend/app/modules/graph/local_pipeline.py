@@ -86,7 +86,7 @@ class LocalGraphPipeline:
             sampled.append(chunks[idx])
         return sampled
 
-def run(
+    def run(
         self,
         opts: LocalPipelineOptions,
         progress_callback: Optional[Any] = None,
