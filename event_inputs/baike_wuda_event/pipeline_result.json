@@ -1,0 +1,449 @@
+{
+  "success": true,
+  "project_id": "proj_6f6e03f54c53",
+  "project_name": "Wuhan University Event Multimodal",
+  "files_count": 12,
+  "total_text_length": 15342,
+  "skipped": [],
+  "ontology": {
+    "entity_types": [
+      {
+        "name": "Student",
+        "description": "A currently enrolled university student who participates in campus discourse and social media eng...",
+        "attributes": [
+          {
+            "name": "student_id",
+            "type": "text",
+            "description": "Unique identifier assigned by the university"
+          },
+          {
+            "name": "enrollment_status",
+            "type": "text",
+            "description": "e.g., 'undergraduate', 'master_candidate', 'phd_candidate'"
+          },
+          {
+            "name": "affiliation_year",
+            "type": "text",
+            "description": "Year of enrollment or cohort, e.g., 'Class of 2022'"
+          }
+        ],
+        "examples": [
+          "杨某（武汉大学硕士生）",
+          "肖某某（武汉大学本科生）",
+          "2024届毕业生"
+        ]
+      },
+      {
+        "name": "University",
+        "description": "A degree-granting higher education institution with official authority and public accountability.",
+        "attributes": [
+          {
+            "name": "official_name",
+            "type": "text",
+            "description": "Full formal name, e.g., 'Wuhan University'"
+          },
+          {
+            "name": "location",
+            "type": "text",
+            "description": "City and province of primary campus"
+          },
+          {
+            "name": "accreditation_status",
+            "type": "text",
+            "description": "e.g., 'Ministry of Education key university'"
+          }
+        ],
+        "examples": [
+          "武汉大学",
+          "香港浸会大学",
+          "华东应用技术学院"
+        ]
+      },
+      {
+        "name": "MediaOutlet",
+        "description": "A professional news organization publishing verified reports across digital or traditional platfo...",
+        "attributes": [
+          {
+            "name": "platform_type",
+            "type": "text",
+            "description": "e.g., 'national_daily', 'digital_first', 'regional_broadcast'"
+          },
+          {
+            "name": "editorial_stance",
+            "type": "text",
+            "description": "e.g., 'independent', 'state_affiliated', 'public_service'"
+          }
+        ],
+        "examples": [
+          "澎湃新闻",
+          "界面新闻",
+          "新华社",
+          "潇湘晨报"
+        ]
+      },
+      {
+        "name": "SocialMediaAccount",
+        "description": "An active, identifiable social media profile used for public commentary or information disseminat...",
+        "attributes": [
+          {
+            "name": "platform",
+            "type": "text",
+            "description": "e.g., 'weibo', 'douyin', 'bilibili', 'xiaohongshu'"
+          },
+          {
+            "name": "account_type",
+            "type": "text",
+            "description": "e.g., 'verified_media', 'independent_blogger', 'alumni_group', 'student_org'"
+          }
+        ],
+        "examples": [
+          "@教育观察员V",
+          "武汉大学官方微博",
+          "校园观察局（抖音ID：campuswatch_2024）"
+        ]
+      },
+      {
+        "name": "Alumni",
+        "description": "A former student of a university who retains institutional affiliation and engages publicly as a ...",
+        "attributes": [
+          {
+            "name": "graduation_year",
+            "type": "text",
+            "description": "Year of degree completion"
+          },
+          {
+            "name": "degree_program",
+            "type": "text",
+            "description": "e.g., 'BA English', 'MSc Computer Science'"
+          }
+        ],
+        "examples": [
+          "武汉大学2019级校友",
+          "XX大学校友会",
+          "企业家校友"
+        ]
+      },
+      {
+        "name": "LegalProfessional",
+        "description": "A licensed legal practitioner representing parties in disputes, issuing public statements, or off...",
+        "attributes": [
+          {
+            "name": "bar_admission",
+            "type": "text",
+            "description": "Jurisdiction of legal practice license"
+          },
+          {
+            "name": "role_in_case",
+            "type": "text",
+            "description": "e.g., 'defense_counsel', 'plaintiff_attorney', 'independent_commentator'"
+          }
+        ],
+        "examples": [
+          "涉事男生代理律师",
+          "律师解读栏目专家",
+          "胡锡进（评论中以法律与公共伦理视角介入）"
+        ]
+      },
+      {
+        "name": "HealthcareProvider",
+        "description": "A licensed medical professional providing clinical assessment or testimony relevant to mental/phy...",
+        "attributes": [
+          {
+            "name": "specialty",
+            "type": "text",
+            "description": "e.g., 'dermatology', 'psychiatry', 'trauma_psychology'"
+          },
+          {
+            "name": "institutional_affiliation",
+            "type": "text",
+            "description": "Hospital or clinic where practicing"
+          }
+        ],
+        "examples": [
+          "涉事男生皮肤科医生",
+          "PTSD诊断医师",
+          "精神科专家（评论中援引）"
+        ]
+      },
+      {
+        "name": "GovernmentAgency",
+        "description": "A state administrative body with regulatory, investigative, or oversight authority over education...",
+        "attributes": [
+          {
+            "name": "jurisdiction_level",
+            "type": "text",
+            "description": "e.g., 'municipal_police', 'provincial_education_department', 'national_ministry'"
+          }
+        ],
+        "examples": [
+          "武汉警方",
+          "教育部",
+          "武汉中院",
+          "湖北省教育厅"
+        ]
+      },
+      {
+        "name": "Person",
+        "description": "Any natural person not covered by more specific entity types; serves as fallback for individuals ...",
+        "attributes": [
+          {
+            "name": "full_name",
+            "type": "text",
+            "description": "Legal or commonly used full name"
+          },
+          {
+            "name": "gender_pronoun",
+            "type": "text",
+            "description": "e.g., 'she/her', 'he/him', 'they/them'"
+          }
+        ],
+        "examples": [
+          "杨某媛",
+          "肖某某",
+          "网民甲",
+          "路人评论者"
+        ]
+      },
+      {
+        "name": "Organization",
+        "description": "Any formal or informal group, association, or entity not captured by more specific organizational...",
+        "attributes": [
+          {
+            "name": "org_name",
+            "type": "text",
+            "description": "Official or commonly recognized name"
+          },
+          {
+            "name": "formation_context",
+            "type": "text",
+            "description": "e.g., 'event_driven', 'alumni_network', 'student_initiated'"
+          }
+        ],
+        "examples": [
+          "校友联署小组",
+          "维权群",
+          "知网",
+          "智远教育",
+          "校园安保"
+        ]
+      }
+    ],
+    "edge_types": [
+      {
+        "name": "PUBLISHED_REPORT_ON",
+        "description": "Media outlet published a report covering the event or related actors.",
+        "source_targets": [
+          {
+            "source": "MediaOutlet",
+            "target": "Student"
+          },
+          {
+            "source": "MediaOutlet",
+            "target": "University"
+          },
+          {
+            "source": "MediaOutlet",
+            "target": "Alumni"
+          },
+          {
+            "source": "MediaOutlet",
+            "target": "LegalProfessional"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "RESPONDED_TO",
+        "description": "An entity issued an official or public statement addressing another entity's claim or action.",
+        "source_targets": [
+          {
+            "source": "University",
+            "target": "Student"
+          },
+          {
+            "source": "University",
+            "target": "Alumni"
+          },
+          {
+            "source": "GovernmentAgency",
+            "target": "University"
+          },
+          {
+            "source": "LegalProfessional",
+            "target": "Student"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "REPRESENTED",
+        "description": "A legal professional formally acts on behalf of a party in legal or public proceedings.",
+        "source_targets": [
+          {
+            "source": "LegalProfessional",
+            "target": "Student"
+          },
+          {
+            "source": "LegalProfessional",
+            "target": "Person"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "AFFILIATED_WITH",
+        "description": "An individual maintains formal or enduring institutional connection (e.g., enrollment, employment...",
+        "source_targets": [
+          {
+            "source": "Student",
+            "target": "University"
+          },
+          {
+            "source": "Alumni",
+            "target": "University"
+          },
+          {
+            "source": "HealthcareProvider",
+            "target": "Organization"
+          },
+          {
+            "source": "LegalProfessional",
+            "target": "Organization"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "COMMENTED_ON",
+        "description": "A social media account posted analysis, opinion, or critique about an event or actor.",
+        "source_targets": [
+          {
+            "source": "SocialMediaAccount",
+            "target": "University"
+          },
+          {
+            "source": "SocialMediaAccount",
+            "target": "Student"
+          },
+          {
+            "source": "SocialMediaAccount",
+            "target": "LegalProfessional"
+          },
+          {
+            "source": "SocialMediaAccount",
+            "target": "GovernmentAgency"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "SUPPORTED",
+        "description": "Expressed public endorsement, solidarity, or advocacy for another entity’s position or outcome.",
+        "source_targets": [
+          {
+            "source": "Alumni",
+            "target": "Student"
+          },
+          {
+            "source": "SocialMediaAccount",
+            "target": "Student"
+          },
+          {
+            "source": "MediaOutlet",
+            "target": "Alumni"
+          },
+          {
+            "source": "Person",
+            "target": "Student"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "OPPOSED",
+        "description": "Expressed public disagreement, criticism, or resistance toward another entity’s claim, action, or...",
+        "source_targets": [
+          {
+            "source": "Alumni",
+            "target": "University"
+          },
+          {
+            "source": "SocialMediaAccount",
+            "target": "University"
+          },
+          {
+            "source": "MediaOutlet",
+            "target": "LegalProfessional"
+          },
+          {
+            "source": "Person",
+            "target": "Student"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "PROVIDED_MEDICAL_TESTIMONY_FOR",
+        "description": "A healthcare provider supplied clinical evidence or diagnosis cited in public discourse or legal ...",
+        "source_targets": [
+          {
+            "source": "HealthcareProvider",
+            "target": "Student"
+          },
+          {
+            "source": "HealthcareProvider",
+            "target": "Person"
+          }
+        ],
+        "attributes": []
+      }
+    ]
+  },
+  "analysis_summary": "文本聚焦于高校性骚扰指控事件的全周期舆论演化，核心发声主体包括涉事学生、校方、媒体、校友、自媒体、法律与医疗专业人士、政府机构等。实体设计严格遵循‘可发声主体’原则，排除抽象概念（如‘舆论’‘情绪’），并构建8个具体类型+2个兜底类型（Person/Organization）的完整层次。所有类型均支持社交媒体互动建模，属性设计兼顾身份辨识（如student_id、graduation_year）、平台特征（platform、account_type）和角色功能（role_in_case、jurisdiction_level），为后续传播路径、立场演化与关系博弈模拟提供本体基础。",
+  "ingestion_summary": {
+    "generated_at": "2026-04-02T12:58:40.127731",
+    "file_count": 12,
+    "block_count": 29,
+    "modalities": [
+      "document",
+      "image",
+      "video"
+    ],
+    "block_type_counts": {
+      "text": 2,
+      "image": 6,
+      "video_segment": 21
+    },
+    "warnings": [
+      "视频片段 0 音频转写失败，继续仅使用画面描述",
+      "视频片段 1 音频转写失败，继续仅使用画面描述",
+      "视频片段 2 音频转写失败，继续仅使用画面描述",
+      "视频片段 3 音频转写失败，继续仅使用画面描述",
+      "视频片段 0 音频转写失败，继续仅使用画面描述",
+      "视频片段 1 音频转写失败，继续仅使用画面描述",
+      "视频片段 2 音频转写失败，继续仅使用画面描述",
+      "视频片段 3 音频转写失败，继续仅使用画面描述",
+      "视频片段 4 音频转写失败，继续仅使用画面描述",
+      "视频片段 5 音频转写失败，继续仅使用画面描述",
+      "视频片段 0 音频转写失败，继续仅使用画面描述",
+      "视频片段 1 音频转写失败，继续仅使用画面描述",
+      "视频片段 2 音频转写失败，继续仅使用画面描述",
+      "视频片段 0 音频转写失败，继续仅使用画面描述",
+      "视频片段 1 音频转写失败，继续仅使用画面描述",
+      "视频片段 2 音频转写失败，继续仅使用画面描述",
+      "视频片段 3 音频转写失败，继续仅使用画面描述",
+      "视频片段 4 音频转写失败，继续仅使用画面描述",
+      "视频片段 5 音频转写失败，继续仅使用画面描述",
+      "视频片段 6 音频转写失败，继续仅使用画面描述",
+      "视频片段 7 音频转写失败，继续仅使用画面描述"
+    ]
+  },
+  "graph": {
+    "graph_id": "mirofish_df7971358d154bf3",
+    "node_count": 101,
+    "edge_count": 131,
+    "chunk_count": 49,
+    "original_chunk_count": 49,
+    "light_mode": false
+  }
+}

@@ -44,10 +44,10 @@ dev = [
 ]
 
 [project.scripts]
-mirofish-api = "app.cli.api:main"
-mirofish-local-pipeline = "app.cli.local_pipeline:main"
-mirofish-parallel-sim = "app.cli.parallel_simulation:main"
-mirofish-full-run = "app.cli.full_run:main"
+mirofish-api = "app.run.api:main"
+mirofish-local-pipeline = "app.run.local_pipeline:main"
+mirofish-parallel-sim = "app.run.parallel_simulation:main"
+mirofish-full-run = "app.run.full_run:main"
 
 [build-system]
 requires = ["hatchling"]

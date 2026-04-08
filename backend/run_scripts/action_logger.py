@@ -181,22 +181,27 @@ class SimulationLogManager:
             self.reddit_logger = PlatformActionLogger("reddit", self.simulation_dir)
         return self.reddit_logger
     
-    def log(self, message: str, level: str = "info"):
+    def log(self, message: str, *args, level: str = "info"):
         """记录主日志"""
+        if args:
+            try:
+                message = message % args
+            except Exception:
+                message = " ".join([message, *[str(arg) for arg in args]])
         if self._main_logger:
             getattr(self._main_logger, level.lower(), self._main_logger.info)(message)
     
-    def info(self, message: str):
-        self.log(message, "info")
+    def info(self, message: str, *args):
+        self.log(message, *args, level="info")
     
-    def warning(self, message: str):
-        self.log(message, "warning")
+    def warning(self, message: str, *args):
+        self.log(message, *args, level="warning")
     
-    def error(self, message: str):
-        self.log(message, "error")
+    def error(self, message: str, *args):
+        self.log(message, *args, level="error")
     
-    def debug(self, message: str):
-        self.log(message, "debug")
+    def debug(self, message: str, *args):
+        self.log(message, *args, level="debug")
 
 
 # ============ 兼容旧接口 ============

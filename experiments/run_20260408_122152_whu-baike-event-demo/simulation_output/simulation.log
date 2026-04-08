@@ -1,0 +1,77 @@
+2026-04-08 12:45:33 - INFO - ============================================================
+2026-04-08 12:45:33 - INFO - OASIS 双平台并行模拟
+2026-04-08 12:45:33 - INFO - 配置文件: <repo-root>/output/simulations/sim_91e21a6aade3/simulation_config.json
+2026-04-08 12:45:33 - INFO - 模拟ID: sim_91e21a6aade3
+2026-04-08 12:45:33 - INFO - 等待命令模式: 禁用
+2026-04-08 12:45:33 - INFO - light模式: 禁用
+2026-04-08 12:45:33 - INFO - topology-aware: 启用
+2026-04-08 12:45:33 - INFO - cluster features: threshold=True, llm_keyword=False
+2026-04-08 12:45:33 - INFO - simplemem: 启用
+2026-04-08 12:45:33 - INFO - ============================================================
+2026-04-08 12:45:33 - INFO - 模拟参数:
+2026-04-08 12:45:33 - INFO -   - 总模拟时长: 24小时
+2026-04-08 12:45:33 - INFO -   - 每轮时间: 60分钟
+2026-04-08 12:45:33 - INFO -   - 配置总轮数: 24
+2026-04-08 12:45:33 - INFO -   - Agent数量: 65
+2026-04-08 12:45:33 - INFO - 日志结构:
+2026-04-08 12:45:33 - INFO -   - 主日志: simulation.log
+2026-04-08 12:45:33 - INFO -   - Twitter动作: twitter/actions.jsonl
+2026-04-08 12:45:33 - INFO -   - Reddit动作: reddit/actions.jsonl
+2026-04-08 12:45:33 - INFO - ============================================================
+2026-04-08 12:45:33 - INFO - [Twitter] 初始化...
+2026-04-08 12:45:35 - INFO - [Twitter] 已加载显式社交关系图: directed=47, undirected=43
+2026-04-08 12:45:35 - INFO - [Twitter] 已加载图谱关系先验: directed=47, undirected=43
+2026-04-08 12:45:35 - INFO - [Twitter] Topology-aware已启用: coordination=True, differentiation=True, units=42, avg_unit_size=1.55, light=False, top_pairs=79, cluster_mode=threshold_only, threshold_cluster_enabled=True, llm_keyword_cluster_enabled=False
+2026-04-08 12:45:35 - INFO - [Twitter] SimpleMem已启用: platform=twitter, agents=0, retrieval_topk=5, max_units_per_agent=120
+2026-04-08 12:45:35 - INFO - [Twitter] 已通过自定义 OASIS Platform 实例注入平台配置
+2026-04-08 12:45:35 - INFO - [Reddit] 初始化...
+2026-04-08 12:45:38 - INFO - [Reddit] 已加载显式社交关系图: directed=47, undirected=43
+2026-04-08 12:45:38 - INFO - [Reddit] 已加载图谱关系先验: directed=47, undirected=43
+2026-04-08 12:45:38 - INFO - [Reddit] Topology-aware已启用: coordination=True, differentiation=True, units=44, avg_unit_size=1.48, light=False, top_pairs=79, cluster_mode=threshold_only, threshold_cluster_enabled=True, llm_keyword_cluster_enabled=False
+2026-04-08 12:45:38 - INFO - [Reddit] SimpleMem已启用: platform=reddit, agents=0, retrieval_topk=5, max_units_per_agent=120
+2026-04-08 12:45:38 - INFO - [Reddit] 已通过自定义 OASIS Platform 实例注入平台配置
+2026-04-08 12:45:38 - INFO - [Twitter] 环境已启动
+2026-04-08 12:45:38 - INFO - [Twitter] 已注入初始社交关系: db_follow_edges=125
+2026-04-08 12:45:38 - INFO - [Reddit] 环境已启动
+2026-04-08 12:45:38 - INFO - [Reddit] 已注入初始社交关系: db_follow_edges=122
+2026-04-08 12:45:38 - INFO - [Twitter] 已发布 5 条初始帖子
+2026-04-08 12:45:45 - INFO - [Reddit] 已发布 5 条初始帖子
+2026-04-08 12:45:46 - INFO - [Twitter] 已执行定时事件帖子: round=7, count=1
+2026-04-08 12:45:46 - INFO - [Reddit] 已执行定时事件帖子: round=7, count=1
+2026-04-08 12:45:46 - INFO - [Twitter] 已执行定时评论/回复: round=9, count=1
+2026-04-08 12:45:46 - INFO - [Reddit] 已执行定时评论/回复: round=9, count=1
+2026-04-08 12:46:08 - INFO - [Twitter] Topology-aware 动态更新: 新增交互边=27, units=38
+2026-04-08 12:46:08 - INFO - [Twitter] 已注入初始社交关系: db_follow_edges=20
+2026-04-08 12:46:08 - INFO - [Twitter] 触发定时事件: hot_topics_update round=13, topics=7
+2026-04-08 12:46:09 - INFO - [Twitter] 已执行定时线程主帖: round=13, count=1
+2026-04-08 12:46:09 - INFO - [Twitter] 已执行定时评论/回复: round=13, count=1
+2026-04-08 12:46:14 - INFO - [Reddit] Topology-aware 动态更新: 新增交互边=40, units=42
+2026-04-08 12:46:14 - INFO - [Reddit] 已注入初始社交关系: db_follow_edges=20
+2026-04-08 12:46:14 - INFO - [Reddit] 触发定时事件: hot_topics_update round=13, topics=7
+2026-04-08 12:46:15 - INFO - [Reddit] 已执行定时线程主帖: round=13, count=1
+2026-04-08 12:46:15 - INFO - [Reddit] 已执行定时评论/回复: round=13, count=1
+2026-04-08 12:46:35 - INFO - [Twitter] Topology-aware 动态更新: 新增交互边=12, units=39
+2026-04-08 12:46:46 - INFO - [Reddit] Topology-aware 动态更新: 新增交互边=35, units=40
+2026-04-08 12:46:54 - INFO - [Twitter] 已注入初始社交关系: db_follow_edges=20
+2026-04-08 12:47:10 - INFO - [Reddit] 已注入初始社交关系: db_follow_edges=20
+2026-04-08 12:47:28 - INFO - [Twitter] Topology-aware 动态更新: 新增交互边=29, units=38
+2026-04-08 12:47:28 - INFO - [Twitter] Day 1, 19:00 - Round 20/24 (83.3%)
+2026-04-08 12:47:29 - INFO - [Reddit] Topology-aware 动态更新: 新增交互边=45, units=41
+2026-04-08 12:47:29 - INFO - [Reddit] Day 1, 19:00 - Round 20/24 (83.3%)
+2026-04-08 12:47:57 - INFO - [Reddit] Topology-aware 动态更新: 新增交互边=26, units=40
+2026-04-08 12:47:57 - INFO - [Reddit] 已注入初始社交关系: db_follow_edges=20
+2026-04-08 12:47:57 - INFO - [Reddit] 模拟循环完成! 耗时: 132.0秒, 总动作: 345
+2026-04-08 12:48:43 - INFO - [Twitter] Topology-aware 动态更新: 新增交互边=15, units=38
+2026-04-08 12:48:43 - INFO - [Twitter] 已注入初始社交关系: db_follow_edges=20
+2026-04-08 12:48:43 - INFO - [Twitter] 模拟循环完成! 耗时: 184.5秒, 总动作: 225
+2026-04-08 12:48:43 - INFO - ============================================================
+2026-04-08 12:48:43 - INFO - 模拟循环完成! 总耗时: 189.9秒
+2026-04-08 12:48:43 - INFO - [Twitter] 环境已关闭
+2026-04-08 12:48:43 - INFO - [Reddit] 环境已关闭
+2026-04-08 12:48:43 - INFO - ============================================================
+2026-04-08 12:48:43 - INFO - 全部完成!
+2026-04-08 12:48:43 - INFO - 日志文件:
+2026-04-08 12:48:43 - INFO -   - <repo-root>/output/simulations/sim_91e21a6aade3/simulation.log
+2026-04-08 12:48:43 - INFO -   - <repo-root>/output/simulations/sim_91e21a6aade3/twitter/actions.jsonl
+2026-04-08 12:48:43 - INFO -   - <repo-root>/output/simulations/sim_91e21a6aade3/reddit/actions.jsonl
+2026-04-08 12:48:43 - INFO - ============================================================

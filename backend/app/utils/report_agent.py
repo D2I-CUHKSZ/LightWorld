@@ -394,16 +394,23 @@ class ReportStatus(str, Enum):
     FAILED = "failed"
 
 
+class ReportMode(str, Enum):
+    PUBLIC = "public_report"
+    TECHNICAL = "technical_report"
+
+
 @dataclass
 class ReportSection:
     """报告章节"""
     title: str
     content: str = ""
+    description: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "title": self.title,
-            "content": self.content
+            "content": self.content,
+            "description": self.description,
         }
 
     def to_markdown(self, level: int = 2) -> str:
@@ -444,6 +451,7 @@ class Report:
     simulation_id: str
     graph_id: str
     simulation_requirement: str
+    report_mode: str
     status: ReportStatus
     outline: Optional[ReportOutline] = None
     markdown_content: str = ""
@@ -457,6 +465,7 @@ class Report:
             "simulation_id": self.simulation_id,
             "graph_id": self.graph_id,
             "simulation_requirement": self.simulation_requirement,
+            "report_mode": self.report_mode,
             "status": self.status.value,
             "outline": self.outline.to_dict() if self.outline else None,
             "markdown_content": self.markdown_content,
@@ -566,28 +575,36 @@ TOOL_DESC_REVIEW_SIMULATION_STATE = """\
 # ── 大纲规划 prompt ──
 
 PLAN_SYSTEM_PROMPT = """\
-你是一个「未来预测报告」的撰写专家，拥有对模拟世界的「上帝视角」——你可以洞察模拟中每一位Agent的行为、言论和互动。
+你是一个「社会模拟演化预测报告」的撰写专家，拥有对模拟世界的「上帝视角」——你可以洞察模拟中每一位Agent的行为、言论和互动。
 
 【核心理念】
 我们构建了一个模拟世界，并向其中注入了特定的「模拟需求」作为变量。模拟世界的演化结果，就是对未来可能发生情况的预测。你正在观察的不是"实验数据"，而是"未来的预演"。
 
 【你的任务】
-撰写一份「未来预测报告」，回答：
-1. 在我们设定的条件下，未来发生了什么？
-2. 各类Agent（人群）是如何反应和行动？
-3. 这个模拟揭示了哪些值得关注的未来趋势和风险？
+撰写一份「社会模拟演化预测报告」，回答：
+1. 过去发生了什么，哪些历史事件与触发点把局势带入当前模拟场景？
+2. 在模拟中，各类Agent（人群）是如何反应、扩散、协同、对抗并推动局势继续演化的？
+3. 基于这场模拟，未来接下来最可能朝哪些方向继续发展？
 
 【报告定位】
-- ✅ 这是一份基于模拟的未来预测报告，揭示"如果这样，未来会怎样"
-- ✅ 聚焦于预测结果：事件走向、群体反应、涌现现象、潜在风险
+- ✅ 这是一份基于模拟的社会演化预测报告，揭示"过去如何走到这里，以及接下来会怎样"
+- ✅ 聚焦于演化过程：事件起点、群体反应、关键转折、涌现现象、潜在风险、未来走向
 - ✅ 模拟世界中的Agent言行就是对未来人群行为的预测
 - ❌ 不是对现实世界现状的分析
 - ❌ 不是泛泛而谈的舆情综述
 
+【章节结构硬性要求】
+- 报告必须覆盖以下三个层面，缺一不可：
+  1. 过去事件回顾/演化起点
+  2. 模拟中的关键演化信号（平台差异、群体行为、关键Agent言行、结构变化）
+  3. 未来演化方向预测（下一阶段走向、分叉条件、风险或缓和因素）
+- 最后一章优先用于输出未来预测，不能只停留在现状总结
+- 如果需要增加第4章或第5章，也必须服务于以上三层主线
+
 【章节数量限制】
-- 最少2个章节，最多5个章节
+- 最少3个章节，最多5个章节
 - 不需要子章节，每个章节直接撰写完整内容
-- 内容要精炼，聚焦于核心预测发现
+- 内容要精炼，聚焦于核心演化发现与未来判断
 - 章节结构由你根据预测结果自主设计
 
 请输出JSON格式的报告大纲，格式如下：
@@ -602,7 +619,7 @@ PLAN_SYSTEM_PROMPT = """\
     ]
 }
 
-注意：sections数组最少2个，最多5个元素！"""
+注意：sections数组最少3个，最多5个元素！"""
 
 PLAN_USER_PROMPT_TEMPLATE = """\
 【预测场景设定】
@@ -621,24 +638,32 @@ PLAN_USER_PROMPT_TEMPLATE = """\
 {simulation_artifact_digest}
 
 请以「上帝视角」审视这个未来预演：
-1. 在我们设定的条件下，未来呈现出了什么样的状态？
-2. 各类人群（Agent）是如何反应和行动的？
-3. 这个模拟揭示了哪些值得关注的未来趋势？
+1. 过去发生了什么，哪些前置事件构成了后续演化的起点？
+2. 在我们设定的条件下，模拟中的各类人群（Agent）是如何反应和行动的？
+3. 这些模拟行为揭示了怎样的下一阶段演化方向？
 
 根据预测结果，设计最合适的报告章节结构。
 
-【再次提醒】报告章节数量：最少2个，最多5个，内容要精炼聚焦于核心预测发现。"""
+【强制要求】
+- 报告必须显式覆盖“过去事件回顾”“模拟关键演化信息”“未来演化方向预测”三部分
+- 最后一章最好直接回答：如果当前动能延续，接下来会怎么演化
+- 可以增加风险或干预点章节，但不要替代未来预测章节
+
+【再次提醒】报告章节数量：最少3个，最多5个，内容要精炼聚焦于核心预测发现。"""
 
 # ── 章节生成 prompt ──
 
 SECTION_SYSTEM_PROMPT_TEMPLATE = """\
-你是一个「未来预测报告」的撰写专家，正在撰写报告的一个章节。
+你是一个「社会模拟演化预测报告」的撰写专家，正在撰写报告的一个章节。
 
 报告标题: {report_title}
 报告摘要: {report_summary}
 预测场景（模拟需求）: {simulation_requirement}
 
 当前要撰写的章节: {section_title}
+章节规划说明: {section_description}
+章节写作焦点:
+{section_focus_guidance}
 
 运行后摘要（辅助线索，不可直接替代检索证据）:
 {simulation_artifact_digest}
@@ -651,12 +676,14 @@ SECTION_SYSTEM_PROMPT_TEMPLATE = """\
 模拟中Agent的行为和互动，就是对未来人群行为的预测。
 
 你的任务是：
+- 用一个清晰的社会演化视角来写，而不是散点式罗列事实
 - 揭示在设定条件下，未来发生了什么
+- 说明过去事件如何把局势带入当前模拟阶段
 - 预测各类人群（Agent）是如何反应和行动的
 - 发现值得关注的未来趋势、风险和机会
 
 ❌ 不要写成对现实世界现状的分析
-✅ 要聚焦于"未来会怎样"——模拟结果就是预测的未来
+✅ 要聚焦于"过去如何进入模拟、模拟如何演化、未来会怎样"——模拟结果就是预测的未来
 
 ═══════════════════════════════════════════════════════════════
 【最重要的规则 - 必须遵守】
@@ -686,6 +713,7 @@ SECTION_SYSTEM_PROMPT_TEMPLATE = """\
    - 报告内容必须反映模拟世界中的代表未来的模拟结果
    - 不要添加模拟中不存在的信息
    - 如果某方面信息不足，如实说明
+   - 如果你在做未来判断，要明确这是基于已观察到的模拟结果做出的推断
 
 ═══════════════════════════════════════════════════════════════
 【⚠️ 格式规范 - 极其重要！】
@@ -788,7 +816,8 @@ SECTION_SYSTEM_PROMPT_TEMPLATE = """\
    ```
 5. 保持与其他章节的逻辑连贯性
 6. 【避免重复】仔细阅读下方已完成的章节内容，不要重复描述相同的信息
-7. 【再次强调】不要添加任何标题！用**粗体**代替小节标题"""
+7. 【再次强调】不要添加任何标题！用**粗体**代替小节标题
+8. 【如果当前章节是预测章节】必须给出明确的后续演化判断，而不是只总结现状"""
 
 SECTION_USER_PROMPT_TEMPLATE = """\
 已完成的章节内容（请仔细阅读，避免重复）：
@@ -905,12 +934,32 @@ class ReportAgent:
     
     # 对话中的最大工具调用次数
     MAX_TOOL_CALLS_PER_CHAT = 2
+
+    HISTORY_SECTION_KEYWORDS = ("回顾", "背景", "起点", "前史", "过去", "来龙去脉", "源起")
+    EVOLUTION_SECTION_KEYWORDS = ("演化", "传播", "扩散", "行动", "信号", "群体", "平台", "模拟", "协同", "博弈")
+    FORECAST_SECTION_KEYWORDS = ("预测", "未来", "走向", "展望", "趋势", "情景", "分叉", "后续", "下一阶段")
+
+    @staticmethod
+    def _normalize_report_mode(report_mode: str) -> str:
+        value = str(report_mode or "").strip().lower()
+        if value == ReportMode.TECHNICAL.value:
+            return ReportMode.TECHNICAL.value
+        return ReportMode.PUBLIC.value
+
+    @property
+    def is_public_report(self) -> bool:
+        return self.report_mode == ReportMode.PUBLIC.value
+
+    @property
+    def is_technical_report(self) -> bool:
+        return self.report_mode == ReportMode.TECHNICAL.value
     
     def __init__(
         self, 
         graph_id: str,
         simulation_id: str,
         simulation_requirement: str,
+        report_mode: str = ReportMode.PUBLIC.value,
         llm_client: Optional[LLMClient] = None,
         zep_tools: Optional[ZepToolsService] = None
     ):
@@ -927,6 +976,7 @@ class ReportAgent:
         self.graph_id = graph_id
         self.simulation_id = simulation_id
         self.simulation_requirement = simulation_requirement
+        self.report_mode = self._normalize_report_mode(report_mode)
         
         self.llm = llm_client or LLMClient()
         self.zep_tools = zep_tools or ZepToolsService()
@@ -940,11 +990,14 @@ class ReportAgent:
         # 控制台日志记录器（在 generate_report 中初始化）
         self.console_logger: Optional[ReportConsoleLogger] = None
         
-        logger.info(f"ReportAgent 初始化完成: graph_id={graph_id}, simulation_id={simulation_id}")
+        logger.info(
+            f"ReportAgent 初始化完成: graph_id={graph_id}, simulation_id={simulation_id}, "
+            f"report_mode={self.report_mode}"
+        )
     
     def _define_tools(self) -> Dict[str, Dict[str, Any]]:
         """定义可用工具"""
-        return {
+        tools = {
             "insight_forge": {
                 "name": "insight_forge",
                 "description": TOOL_DESC_INSIGHT_FORGE,
@@ -976,15 +1029,17 @@ class ReportAgent:
                     "interview_topic": "采访主题或需求描述（如：'了解学生对宿舍甲醛事件的看法'）",
                     "max_agents": "最多采访的Agent数量（可选，默认5，最大10）"
                 }
-            },
-            "review_simulation_state": {
+            }
+        }
+        if self.is_technical_report:
+            tools["review_simulation_state"] = {
                 "name": "review_simulation_state",
                 "description": TOOL_DESC_REVIEW_SIMULATION_STATE,
                 "parameters": {
                     "focus": "想优先查看的角度（如：'动作分布'、'协同单元'、'影响力差异'、'记忆回收'），可选"
                 }
             }
-        }
+        return tools
 
     def _get_simulation_context(self) -> Dict[str, Any]:
         if self._simulation_context_cache is None:
@@ -992,6 +1047,7 @@ class ReportAgent:
                 graph_id=self.graph_id,
                 simulation_requirement=self.simulation_requirement,
                 simulation_id=self.simulation_id,
+                report_mode=self.report_mode,
             )
         return self._simulation_context_cache
     
@@ -1064,7 +1120,7 @@ class ReportAgent:
 
             elif tool_name == "review_simulation_state":
                 summary = self.zep_tools.get_simulation_artifact_summary(self.simulation_id)
-                return summary.to_text()
+                return summary.to_text(mode=self.report_mode)
             
             # ========== 向后兼容的旧工具（内部重定向到新工具） ==========
             
@@ -1103,22 +1159,13 @@ class ReportAgent:
             else:
                 return (
                     f"未知工具: {tool_name}。请使用以下工具之一: "
-                    "insight_forge, panorama_search, quick_search, interview_agents, review_simulation_state"
+                    + ", ".join(self.tools.keys())
                 )
                 
         except Exception as e:
             logger.error(f"工具执行失败: {tool_name}, 错误: {str(e)}")
             return f"工具执行失败: {str(e)}"
     
-    # 合法的工具名称集合，用于裸 JSON 兜底解析时校验
-    VALID_TOOL_NAMES = {
-        "insight_forge",
-        "panorama_search",
-        "quick_search",
-        "interview_agents",
-        "review_simulation_state",
-    }
-
     def _parse_tool_calls(self, response: str) -> List[Dict[str, Any]]:
         """
         从LLM响应中解析工具调用
@@ -1170,7 +1217,7 @@ class ReportAgent:
         """校验解析出的 JSON 是否是合法的工具调用"""
         # 支持 {"name": ..., "parameters": ...} 和 {"tool": ..., "params": ...} 两种键名
         tool_name = data.get("name") or data.get("tool")
-        if tool_name and tool_name in self.VALID_TOOL_NAMES:
+        if tool_name and tool_name in self.tools:
             # 统一键名为 name / parameters
             if "tool" in data:
                 data["name"] = data.pop("tool")
@@ -1188,6 +1235,162 @@ class ReportAgent:
             if params_desc:
                 desc_parts.append(f"  参数: {params_desc}")
         return "\n".join(desc_parts)
+
+    def _get_mode_prompt_block(self) -> str:
+        if self.is_public_report:
+            return """【写作模式：public_report】
+- 目标读者是普通公众、媒体读者和非技术决策者。
+- 正文禁止直接使用或解释以下术语：cluster、unit、PPR、ppr_centrality、topology、memory、retrieval、delta、agent memory。
+- 如果内部机制确实影响结论，必须翻译成大众语言，例如：
+  - unit/cluster -> 传播群体、协同行动群
+  - PPR/centrality -> 核心放大节点、关键传播枢纽
+  - memory retrieval -> 前期叙事被反复调用、旧说法持续影响后续讨论
+- 重点写“发生了什么、谁在推动、公众会怎么理解、风险在哪里”，不要写成技术复盘文档。
+- 可以引用模拟中的原话，但你自己的分析语言必须自然、通俗、面向大众。"""
+        return """【写作模式：technical_report】
+- 目标读者是研究人员、模型开发者和实验复盘人员。
+- 可以直接使用 unit、PPR、memory、retrieval、delta 等术语。
+- 允许在正文中解释结构信号、影响力差异和跨轮次记忆机制。"""
+
+    def _get_public_tool_guidance(self) -> str:
+        if self.is_public_report:
+            return (
+                "\n【公众版额外要求】\n"
+                "- 优先使用 insight_forge、panorama_search、quick_search、interview_agents。\n"
+                "- 不要为了写作而主动追求内部机制指标；即便看到技术信号，也要改写成自然语言。\n"
+            )
+        return ""
+
+    @staticmethod
+    def _contains_any_keyword(text: str, keywords: tuple[str, ...]) -> bool:
+        title = str(text or "").strip()
+        return any(keyword in title for keyword in keywords)
+
+    @classmethod
+    def _default_outline(cls) -> ReportOutline:
+        return ReportOutline(
+            title="社会模拟演化预测报告",
+            summary="基于历史事件与社会模拟结果，概括事件如何演化，并判断下一阶段最可能出现的走向与风险。",
+            sections=[
+                ReportSection(
+                    title="历史事件回顾与演化起点",
+                    description="概括过去已经发生的关键事件、核心冲突与触发点，解释为什么局势会进入当前模拟。"
+                ),
+                ReportSection(
+                    title="社会模拟中的关键演化信号",
+                    description="提炼模拟里最重要的人群反应、平台差异、关键Agent言行与扩散/协同机制。"
+                ),
+                ReportSection(
+                    title="未来演化方向与情景预测",
+                    description="基于前述历史与模拟信号，判断下一阶段最可能的演化路径、触发条件、风险与缓和因素。"
+                ),
+            ]
+        )
+
+    @classmethod
+    def _normalize_outline(cls, outline: ReportOutline) -> ReportOutline:
+        cleaned_sections: List[ReportSection] = []
+        seen_titles = set()
+        for section in outline.sections or []:
+            title = str(section.title or "").strip()
+            if not title or title in seen_titles:
+                continue
+            seen_titles.add(title)
+            cleaned_sections.append(
+                ReportSection(
+                    title=title,
+                    content=section.content,
+                    description=str(getattr(section, "description", "") or "").strip(),
+                )
+            )
+
+        default_outline = cls._default_outline()
+        if not cleaned_sections:
+            return default_outline
+
+        history_default, evolution_default, forecast_default = default_outline.sections
+        history_section = next(
+            (section for section in cleaned_sections if cls._contains_any_keyword(section.title, cls.HISTORY_SECTION_KEYWORDS)),
+            None,
+        )
+        evolution_section = next(
+            (section for section in cleaned_sections if cls._contains_any_keyword(section.title, cls.EVOLUTION_SECTION_KEYWORDS)),
+            None,
+        )
+        forecast_section = next(
+            (section for section in cleaned_sections if cls._contains_any_keyword(section.title, cls.FORECAST_SECTION_KEYWORDS)),
+            None,
+        )
+
+        normalized_sections: List[ReportSection] = []
+
+        def append_unique(section: ReportSection):
+            if all(id(existing) != id(section) for existing in normalized_sections):
+                normalized_sections.append(section)
+
+        append_unique(history_section or history_default)
+        append_unique(evolution_section or evolution_default)
+
+        reserved_ids = {id(section) for section in normalized_sections}
+        if forecast_section is not None:
+            reserved_ids.add(id(forecast_section))
+
+        extras = [
+            section for section in cleaned_sections
+            if id(section) not in reserved_ids
+        ]
+
+        normalized_sections.extend(extras[:2])
+        normalized_sections.append(
+            ReportSection(
+                title=str((forecast_section or forecast_default).title or forecast_default.title).strip() or forecast_default.title,
+                content=(forecast_section or forecast_default).content,
+                description=str(getattr((forecast_section or forecast_default), "description", "") or "").strip() or forecast_default.description,
+            )
+        )
+
+        title = str(outline.title or "").strip() or default_outline.title
+        summary = str(outline.summary or "").strip() or default_outline.summary
+        if "预测" not in title and "演化" not in title:
+            title = f"{title}：社会模拟演化预测报告"
+
+        return ReportOutline(
+            title=title,
+            summary=summary,
+            sections=normalized_sections[:5]
+        )
+
+    @classmethod
+    def _build_section_focus_guidance(
+        cls,
+        section: ReportSection,
+        section_index: int,
+        total_sections: int,
+    ) -> str:
+        title = str(section.title or "").strip()
+        lines = [
+            "- 优先围绕“事件如何演化”来组织材料，不要写成零散观点堆叠。",
+            "- 必须同时交代关键主体、关键动作以及这些动作如何改变后续局势。",
+        ]
+
+        if cls._contains_any_keyword(title, cls.HISTORY_SECTION_KEYWORDS) or section_index == 1:
+            lines.extend([
+                "- 本章优先总结过去已经发生的事件、冲突起点和触发点，为后续模拟演化建立时间起点。",
+                "- 不能只写背景介绍，还要说明这些前置事件为什么会引出后续舆论或社会反应。",
+            ])
+        elif cls._contains_any_keyword(title, cls.FORECAST_SECTION_KEYWORDS) or section_index == total_sections:
+            lines.extend([
+                "- 本章必须输出未来演化方向的判断，不能只停留在当前局势总结。",
+                "- 至少写清楚一个最可能路径，并尽量补充一到两个可能分叉、触发条件或缓和因素。",
+                "- 需要回答：哪些群体会继续放大、转向、对冲或降温，以及风险会如何累积或释放。",
+            ])
+        else:
+            lines.extend([
+                "- 本章优先提炼模拟中已经出现的关键演化信号，如平台差异、群体协同、立场迁移、影响力放大。",
+                "- 重点引用具有代表性的Agent原话或行为，体现LLM模拟出的关键社会反应。",
+            ])
+
+        return "\n".join(lines)
     
     def plan_outline(
         self, 
@@ -1218,7 +1421,7 @@ class ReportAgent:
         if progress_callback:
             progress_callback("planning", 30, "正在生成报告大纲...")
         
-        system_prompt = PLAN_SYSTEM_PROMPT
+        system_prompt = PLAN_SYSTEM_PROMPT + "\n\n" + self._get_mode_prompt_block()
         user_prompt = PLAN_USER_PROMPT_TEMPLATE.format(
             simulation_requirement=self.simulation_requirement,
             total_nodes=context.get('graph_statistics', {}).get('total_nodes', 0),
@@ -1248,33 +1451,25 @@ class ReportAgent:
             for section_data in response.get("sections", []):
                 sections.append(ReportSection(
                     title=section_data.get("title", ""),
-                    content=""
+                    content="",
+                    description=section_data.get("description", ""),
                 ))
             
-            outline = ReportOutline(
+            outline = self._normalize_outline(ReportOutline(
                 title=response.get("title", "模拟分析报告"),
                 summary=response.get("summary", ""),
                 sections=sections
-            )
+            ))
             
             if progress_callback:
                 progress_callback("planning", 100, "大纲规划完成")
             
-            logger.info(f"大纲规划完成: {len(sections)} 个章节")
+            logger.info(f"大纲规划完成: {len(outline.sections)} 个章节")
             return outline
             
         except Exception as e:
             logger.error(f"大纲规划失败: {str(e)}")
-            # 返回默认大纲（3个章节，作为fallback）
-            return ReportOutline(
-                title="未来预测报告",
-                summary="基于模拟预测的未来趋势与风险分析",
-                sections=[
-                    ReportSection(title="预测场景与核心发现"),
-                    ReportSection(title="人群行为预测分析"),
-                    ReportSection(title="趋势展望与风险提示")
-                ]
-            )
+            return self._default_outline()
     
     def _generate_section_react(
         self, 
@@ -1315,11 +1510,22 @@ class ReportAgent:
             report_summary=outline.summary,
             simulation_requirement=self.simulation_requirement,
             section_title=section.title,
+            section_description=section.description or "请围绕该章节在报告中的职责来组织内容。",
+            section_focus_guidance=self._build_section_focus_guidance(
+                section=section,
+                section_index=section_index,
+                total_sections=len(outline.sections),
+            ),
             tools_description=self._get_tools_description(),
             simulation_artifact_digest="\n".join(
                 f"- {line}" for line in (self._get_simulation_context().get("simulation_artifact_digest", []) or [])
             ) or "（暂无运行摘要）",
-        )
+        ) + "\n\n" + self._get_mode_prompt_block() + self._get_public_tool_guidance()
+        if self.is_public_report:
+            system_prompt = system_prompt.replace(
+                "- review_simulation_state: 快速查看运行后动作、协同、影响力与记忆信号，再决定下一步深挖方向\n",
+                "",
+            )
 
         # 构建用户prompt - 每个已完成章节各传入最大4000字
         if previous_sections:
@@ -1348,13 +1554,7 @@ class ReportAgent:
         min_tool_calls = 3  # 最少工具调用次数
         conflict_retries = 0  # 工具调用与Final Answer同时出现的连续冲突次数
         used_tools = set()  # 记录已调用过的工具名
-        all_tools = {
-            "insight_forge",
-            "panorama_search",
-            "quick_search",
-            "interview_agents",
-            "review_simulation_state",
-        }
+        all_tools = set(self.tools.keys())
 
         # 报告上下文，用于InsightForge的子问题生成
         artifact_digest = self._get_simulation_context().get("simulation_artifact_digest", []) or []
@@ -1640,6 +1840,7 @@ class ReportAgent:
             simulation_id=self.simulation_id,
             graph_id=self.graph_id,
             simulation_requirement=self.simulation_requirement,
+            report_mode=self.report_mode,
             status=ReportStatus.PENDING,
             created_at=datetime.now().isoformat()
         )
@@ -1877,7 +2078,7 @@ class ReportAgent:
             simulation_requirement=self.simulation_requirement,
             report_content=report_content if report_content else "（暂无报告）",
             tools_description=self._get_tools_description(),
-        )
+        ) + "\n\n" + self._get_mode_prompt_block()
 
         # 构建消息
         messages = [{"role": "system", "content": system_prompt}]
@@ -2539,7 +2740,8 @@ class ReportManager:
             for s in outline_data.get('sections', []):
                 sections.append(ReportSection(
                     title=s['title'],
-                    content=s.get('content', '')
+                    content=s.get('content', ''),
+                    description=s.get('description', '')
                 ))
             outline = ReportOutline(
                 title=outline_data['title'],
@@ -2560,6 +2762,7 @@ class ReportManager:
             simulation_id=data['simulation_id'],
             graph_id=data['graph_id'],
             simulation_requirement=data['simulation_requirement'],
+            report_mode=data.get('report_mode', ReportMode.PUBLIC.value),
             status=ReportStatus(data['status']),
             outline=outline,
             markdown_content=markdown_content,

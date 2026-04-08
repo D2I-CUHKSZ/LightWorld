@@ -1,0 +1,415 @@
+{
+  "success": true,
+  "project_id": "proj_17f12f355259",
+  "project_name": "WHU Baike Event Demo",
+  "files_count": 12,
+  "total_text_length": 17987,
+  "skipped": [],
+  "ontology": {
+    "entity_types": [
+      {
+        "name": "Student",
+        "description": "Enrolled student at a university, actively participating in academic and campus life.",
+        "attributes": [
+          {
+            "name": "student_id",
+            "type": "text",
+            "description": "University-issued student identification number"
+          },
+          {
+            "name": "enrollment_year",
+            "type": "text",
+            "description": "Year of enrollment (e.g., '2022')"
+          },
+          {
+            "name": "school",
+            "type": "text",
+            "description": "Affiliated school or college (e.g., 'School of Foreign Languages')"
+          }
+        ],
+        "examples": [
+          "杨某媛",
+          "肖某某",
+          "景容饮冰"
+        ]
+      },
+      {
+        "name": "University",
+        "description": "Degree-granting higher education institution with administrative authority over students and facu...",
+        "attributes": [
+          {
+            "name": "official_name",
+            "type": "text",
+            "description": "Full official name in Chinese and English"
+          },
+          {
+            "name": "campus_location",
+            "type": "text",
+            "description": "Primary physical location (e.g., 'Wuhan, Hubei')"
+          },
+          {
+            "name": "founding_year",
+            "type": "text",
+            "description": "Year of establishment"
+          }
+        ],
+        "examples": [
+          "武汉大学",
+          "香港浸会大学"
+        ]
+      },
+      {
+        "name": "MediaOutlet",
+        "description": "Formal news organization publishing verified reports across digital or broadcast platforms.",
+        "attributes": [
+          {
+            "name": "media_type",
+            "type": "text",
+            "description": "e.g., 'newspaper', 'online-news', 'TV-broadcast'"
+          },
+          {
+            "name": "jurisdiction",
+            "type": "text",
+            "description": "Geographic or regulatory scope (e.g., 'national', 'provincial')"
+          }
+        ],
+        "examples": [
+          "澎湃新闻",
+          "封面新闻",
+          "扬子晚报"
+        ]
+      },
+      {
+        "name": "Lawyer",
+        "description": "Licensed legal professional representing parties in civil or disciplinary proceedings.",
+        "attributes": [
+          {
+            "name": "bar_registration",
+            "type": "text",
+            "description": "Legal practice license number or jurisdiction"
+          },
+          {
+            "name": "specialization",
+            "type": "text",
+            "description": "Area of law (e.g., 'civil litigation', 'disciplinary defense')"
+          }
+        ],
+        "examples": [
+          "肖某某代理律师",
+          "杨某媛代理律师"
+        ]
+      },
+      {
+        "name": "MedicalProfessional",
+        "description": "Clinician or specialist providing diagnosis, treatment, or expert testimony on health conditions.",
+        "attributes": [
+          {
+            "name": "specialty",
+            "type": "text",
+            "description": "Clinical field (e.g., 'dermatology', 'psychiatry')"
+          },
+          {
+            "name": "affiliation",
+            "type": "text",
+            "description": "Institutional affiliation (e.g., 'Wuhan University Hospital')"
+          }
+        ],
+        "examples": [
+          "肖某某皮肤科医生",
+          "武汉市精神卫生中心医师"
+        ]
+      },
+      {
+        "name": "GovernmentAgency",
+        "description": "State body with regulatory, investigative, or judicial authority over public institutions or citi...",
+        "attributes": [
+          {
+            "name": "agency_type",
+            "type": "text",
+            "description": "e.g., 'police', 'court', 'education-bureau'"
+          },
+          {
+            "name": "jurisdiction_level",
+            "type": "text",
+            "description": "e.g., 'municipal', 'provincial', 'national'"
+          }
+        ],
+        "examples": [
+          "武汉警方",
+          "武汉中院",
+          "法院"
+        ]
+      },
+      {
+        "name": "Commentator",
+        "description": "Public-facing individual offering analysis or opinion via media, social platforms, or commentary ...",
+        "attributes": [
+          {
+            "name": "platform",
+            "type": "text",
+            "description": "Primary channel (e.g., 'WeMedia', 'TV show', 'Twitter')"
+          },
+          {
+            "name": "affiliation_status",
+            "type": "text",
+            "description": "e.g., 'independent', 'affiliated-with-media-outlet'"
+          }
+        ],
+        "examples": [
+          "胡锡进",
+          "潇湘晨报主编",
+          "老胡"
+        ]
+      },
+      {
+        "name": "SocialMediaAccount",
+        "description": "Verified or influential user account on Twitter, Reddit, Weibo, or similar platforms driving disc...",
+        "attributes": [
+          {
+            "name": "platform",
+            "type": "text",
+            "description": "e.g., 'Twitter', 'Reddit', 'Weibo'"
+          },
+          {
+            "name": "follower_count",
+            "type": "text",
+            "description": "Approximate audience size (e.g., '5244', '120000')"
+          }
+        ],
+        "examples": [
+          "景容饮冰（微信公众号）",
+          "武汉大学超话",
+          "众播 VIDEO"
+        ]
+      },
+      {
+        "name": "Person",
+        "description": "Any natural person not covered by more specific entity types; used for individuals without instit...",
+        "attributes": [
+          {
+            "name": "full_name",
+            "type": "text",
+            "description": "Legal or commonly used full name"
+          },
+          {
+            "name": "role",
+            "type": "text",
+            "description": "Informal role context (e.g., 'mother', 'grandfather', 'bystander')"
+          }
+        ],
+        "examples": [
+          "肖某某母亲",
+          "杨某媛爷爷",
+          "外公"
+        ]
+      },
+      {
+        "name": "Organization",
+        "description": "Any formal or informal group, association, or entity not captured by more specific types (e.g., N...",
+        "attributes": [
+          {
+            "name": "org_name",
+            "type": "text",
+            "description": "Official or commonly recognized name"
+          },
+          {
+            "name": "nature",
+            "type": "text",
+            "description": "e.g., 'alumni-group', 'fan-community', 'temporary-campaign-group'"
+          }
+        ],
+        "examples": [
+          "企业家校友群体",
+          "维权网友群",
+          "武汉大学校友会"
+        ]
+      }
+    ],
+    "edge_types": [
+      {
+        "name": "WORKS_FOR",
+        "description": "Employment or formal affiliation relationship between a Person and an Organization or University.",
+        "source_targets": [
+          {
+            "source": "Person",
+            "target": "Organization"
+          },
+          {
+            "source": "Person",
+            "target": "University"
+          },
+          {
+            "source": "Lawyer",
+            "target": "Organization"
+          },
+          {
+            "source": "MedicalProfessional",
+            "target": "Organization"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "STUDIES_AT",
+        "description": "Enrollment relationship between a Student and a University.",
+        "source_targets": [
+          {
+            "source": "Student",
+            "target": "University"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "REPORTS_ON",
+        "description": "A MediaOutlet publishes coverage about an event, person, or institution.",
+        "source_targets": [
+          {
+            "source": "MediaOutlet",
+            "target": "Student"
+          },
+          {
+            "source": "MediaOutlet",
+            "target": "University"
+          },
+          {
+            "source": "MediaOutlet",
+            "target": "GovernmentAgency"
+          },
+          {
+            "source": "MediaOutlet",
+            "target": "Lawyer"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "REPRESENTS",
+        "description": "A Lawyer provides legal representation for a Student or Person in a formal proceeding.",
+        "source_targets": [
+          {
+            "source": "Lawyer",
+            "target": "Student"
+          },
+          {
+            "source": "Lawyer",
+            "target": "Person"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "DIAGNOSES",
+        "description": "A MedicalProfessional provides clinical diagnosis or expert medical assessment related to a Perso...",
+        "source_targets": [
+          {
+            "source": "MedicalProfessional",
+            "target": "Person"
+          },
+          {
+            "source": "MedicalProfessional",
+            "target": "Student"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "ISSUES_STATEMENT",
+        "description": "An Organization, University, or GovernmentAgency issues an official public statement regarding an...",
+        "source_targets": [
+          {
+            "source": "University",
+            "target": "Student"
+          },
+          {
+            "source": "GovernmentAgency",
+            "target": "Student"
+          },
+          {
+            "source": "Organization",
+            "target": "Student"
+          },
+          {
+            "source": "University",
+            "target": "GovernmentAgency"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "COMMENTED_ON",
+        "description": "A Commentator publicly analyzes or opines on an event, person, or statement.",
+        "source_targets": [
+          {
+            "source": "Commentator",
+            "target": "Student"
+          },
+          {
+            "source": "Commentator",
+            "target": "University"
+          },
+          {
+            "source": "Commentator",
+            "target": "MediaOutlet"
+          },
+          {
+            "source": "Commentator",
+            "target": "GovernmentAgency"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "POSTED_ABOUT",
+        "description": "A SocialMediaAccount publishes content referencing or discussing a Student, University, or event.",
+        "source_targets": [
+          {
+            "source": "SocialMediaAccount",
+            "target": "Student"
+          },
+          {
+            "source": "SocialMediaAccount",
+            "target": "University"
+          },
+          {
+            "source": "SocialMediaAccount",
+            "target": "MediaOutlet"
+          }
+        ],
+        "attributes": []
+      }
+    ]
+  },
+  "analysis_summary": "文本围绕武汉大学图书馆性骚扰指控事件展开，涉及多方真实可发声主体：学生（杨某媛、肖某某）、高校（武汉大学、香港浸会大学）、媒体（澎湃新闻、封面新闻等）、法律与医疗专业人士、政府机构（法院、警方）、评论员（胡锡进等）、社交媒体账号及普通公众亲属。实体设计严格遵循‘可发声、可互动’原则，排除抽象概念；前8类为具体角色，后2类（Person/ Organization）作为兜底确保覆盖所有未归类个体与组织；关系类型聚焦社媒舆论模拟所需的核心互动：报道、代表、诊断、声明、评论、发帖等，支撑Twitter/Reddit平台上的传播链建模。",
+  "ingestion_summary": {
+    "generated_at": "2026-04-08T12:24:26.505026",
+    "file_count": 12,
+    "block_count": 29,
+    "modalities": [
+      "document",
+      "image",
+      "video"
+    ],
+    "block_type_counts": {
+      "text": 2,
+      "image": 6,
+      "video_segment": 21
+    },
+    "warnings": [
+      "视频片段 3 音频转写失败，继续仅使用画面描述"
+    ]
+  },
+  "graph": {
+    "graph_id": "mirofish_ebb8693de4024891",
+    "node_count": 75,
+    "edge_count": 102,
+    "chunk_count": 17,
+    "original_chunk_count": 17,
+    "light_mode": true
+  },
+  "light_summary": {
+    "graph_text_before": 17987,
+    "graph_text_after": 17987,
+    "ontology_per_doc_max_chars": 80000
+  }
+}

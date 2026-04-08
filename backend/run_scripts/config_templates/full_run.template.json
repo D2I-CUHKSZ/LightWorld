@@ -30,8 +30,9 @@
       },
       "topology_aware": {
         "enabled": true,
-        "threshold_cluster_enabled": false,
-        "llm_keyword_cluster_enabled": false
+        "threshold_cluster_enabled": true,
+        "llm_keyword_cluster_enabled": false,
+        "cluster_mode": "threshold_only"
       },
       "simplemem": {
         "enabled": true
@@ -48,6 +49,7 @@
   },
   "report": {
     "generate": false,
+    "mode": "public_report",
     "report_id": ""
   },
   "output_dir": ""

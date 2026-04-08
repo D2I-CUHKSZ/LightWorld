@@ -421,7 +421,42 @@ class SimulationArtifactSummary:
             "notes": self.notes,
         }
 
-    def to_digest_lines(self) -> List[str]:
+    def to_digest_lines(self, mode: str = "technical_report") -> List[str]:
+        if str(mode).strip().lower() == "public_report":
+            return self._to_public_digest_lines()
+        return self._to_technical_digest_lines()
+
+    def _to_public_digest_lines(self) -> List[str]:
+        lines: List[str] = []
+        if self.entity_prompt_count > 0:
+            lines.append("系统已整理出校方、学生、媒体、自媒体等多类角色画像，可支持多视角叙事。")
+
+        for platform, summary in self.action_summary.items():
+            total_actions = int(summary.get("total_actions", 0) or 0)
+            if total_actions <= 0:
+                continue
+            top_actions = [str(item.get("action_type", "") or "").upper() for item in (summary.get("top_action_types", []) or [])[:3]]
+            if platform == "twitter":
+                if any(action in {"QUOTE_POST", "REPOST"} for action in top_actions):
+                    lines.append("Twitter 端以引用、转发和二次加工为主，舆论扩散更快，情绪放大更明显。")
+                else:
+                    lines.append("Twitter 端以短平快互动为主，舆论节奏更偏即时扩散。")
+            elif platform == "reddit":
+                if any(action in {"SEARCH_POSTS", "CREATE_POST", "CREATE_COMMENT"} for action in top_actions):
+                    lines.append("Reddit 端更偏向检索资料、发长帖和结构化讨论，制度与证据议题更突出。")
+                else:
+                    lines.append("Reddit 端更偏向围绕事实材料展开持续讨论。")
+
+        if self.topology_summary:
+            lines.append("两平台都出现了较稳定的传播群体和核心放大节点，说明讨论并非零散发生，而是呈现出明显的群体协同。")
+
+        if self.memory_summary:
+            lines.append("前期叙事会在后续轮次被反复调用，说明舆情存在持续记忆效应，而不是一次性热度波动。")
+
+        lines.extend(self.notes[:3])
+        return lines[:8]
+
+    def _to_technical_digest_lines(self) -> List[str]:
         lines: List[str] = []
         if self.entity_prompt_count > 0:
             lines.append(f"实体语义蒸馏已完成，entity prompts 数量为 {self.entity_prompt_count}。")
@@ -470,7 +505,22 @@ class SimulationArtifactSummary:
         lines.extend(self.notes[:3])
         return lines[:10]
 
-    def to_text(self) -> str:
+    def to_text(self, mode: str = "technical_report") -> str:
+        if str(mode).strip().lower() == "public_report":
+            return self._to_public_text()
+        return self._to_technical_text()
+
+    def _to_public_text(self) -> str:
+        lines = [
+            "## 运行摘要（公众版）",
+            f"simulation_id: {self.simulation_id}",
+            "",
+        ]
+        for line in self._to_public_digest_lines():
+            lines.append(f"- {line}")
+        return "\n".join(lines)
+
+    def _to_technical_text(self) -> str:
         lines = [
             "## 模拟运行摘要",
             f"simulation_id: {self.simulation_id}",
@@ -1168,7 +1218,8 @@ class ZepToolsService:
         graph_id: str,
         simulation_requirement: str,
         simulation_id: str = "",
-        limit: int = 30
+        limit: int = 30,
+        report_mode: str = "technical_report",
     ) -> Dict[str, Any]:
         """
         获取模拟相关的上下文信息
@@ -1213,10 +1264,10 @@ class ZepToolsService:
         artifact_lines: List[str] = []
         if simulation_id:
             artifact_summary = self.get_simulation_artifact_summary(simulation_id)
-            artifact_lines = artifact_summary.to_digest_lines()
+            artifact_lines = artifact_summary.to_digest_lines(mode=report_mode)
 
         related_facts = list(search_result.facts)
-        if artifact_lines:
+        if artifact_lines and str(report_mode).strip().lower() == "technical_report":
             related_facts.extend([f"[运行信号] {line}" for line in artifact_lines])
         
         return {
@@ -1228,6 +1279,7 @@ class ZepToolsService:
             "simulation_id": simulation_id,
             "simulation_artifact_summary": artifact_summary.to_dict() if artifact_summary else {},
             "simulation_artifact_digest": artifact_lines,
+            "report_mode": report_mode,
         }
     
     # ========== 核心检索工具（优化后） ==========

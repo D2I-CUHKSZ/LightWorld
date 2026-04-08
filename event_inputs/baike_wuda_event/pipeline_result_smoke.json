@@ -1,0 +1,435 @@
+{
+  "success": true,
+  "project_id": "proj_54389ddce815",
+  "project_name": "Wuhan University Event Smoke",
+  "files_count": 4,
+  "total_text_length": 3891,
+  "skipped": [],
+  "ontology": {
+    "entity_types": [
+      {
+        "name": "Student",
+        "description": "在校学生，包括本科生、硕士生、博士生，具有学籍并在校内参与学习活动",
+        "attributes": [
+          {
+            "name": "student_id",
+            "type": "text",
+            "description": "学号或身份标识"
+          },
+          {
+            "name": "enrollment_year",
+            "type": "text",
+            "description": "入学年份"
+          },
+          {
+            "name": "degree_level",
+            "type": "text",
+            "description": "学位层次（如本科、硕士、博士）"
+          }
+        ],
+        "examples": [
+          "肖某某",
+          "杨某媛"
+        ]
+      },
+      {
+        "name": "University",
+        "description": "高等教育机构，具备法人资格并可发布官方通报、开展纪律处分与学术管理",
+        "attributes": [
+          {
+            "name": "official_name",
+            "type": "text",
+            "description": "官方全称"
+          },
+          {
+            "name": "location",
+            "type": "text",
+            "description": "所在城市/地区"
+          },
+          {
+            "name": "affiliation_type",
+            "type": "text",
+            "description": "隶属关系（如教育部直属、省属）"
+          }
+        ],
+        "examples": [
+          "武汉大学",
+          "香港浸会大学"
+        ]
+      },
+      {
+        "name": "MediaOutlet",
+        "description": "具有新闻采编与发布资质的媒体机构，包括报纸、电视台、新闻网站及主流新媒体平台",
+        "attributes": [
+          {
+            "name": "media_type",
+            "type": "text",
+            "description": "媒体类型（如报纸、电视、网络媒体）"
+          },
+          {
+            "name": "jurisdiction",
+            "type": "text",
+            "description": "主管单位或注册地"
+          },
+          {
+            "name": "coverage_focus",
+            "type": "text",
+            "description": "报道侧重领域（如时政、社会、教育）"
+          }
+        ],
+        "examples": [
+          "澎湃新闻",
+          "封面新闻",
+          "新华社"
+        ]
+      },
+      {
+        "name": "Lawyer",
+        "description": "持证执业律师，代表当事人参与诉讼、发表法律意见或接受媒体采访",
+        "attributes": [
+          {
+            "name": "bar_registration_number",
+            "type": "text",
+            "description": "律师执业证号"
+          },
+          {
+            "name": "law_firm",
+            "type": "text",
+            "description": "所属律师事务所"
+          },
+          {
+            "name": "representation_role",
+            "type": "text",
+            "description": "代理角色（如原告代理、被告代理、公益顾问）"
+          }
+        ],
+        "examples": [
+          "肖某某代理律师",
+          "杨某媛代理律师"
+        ]
+      },
+      {
+        "name": "MedicalProfessional",
+        "description": "持有执业资格的医务人员，就涉事方健康状况提供临床诊断或专业说明",
+        "attributes": [
+          {
+            "name": "specialty",
+            "type": "text",
+            "description": "专业科室（如皮肤科、精神科）"
+          },
+          {
+            "name": "institution",
+            "type": "text",
+            "description": "执业医疗机构"
+          },
+          {
+            "name": "certification_status",
+            "type": "text",
+            "description": "执业资质状态（如在册、暂停）"
+          }
+        ],
+        "examples": [
+          "肖某某皮肤科医生",
+          "PTSD诊断医师"
+        ]
+      },
+      {
+        "name": "GovernmentAgency",
+        "description": "依法行使公共管理职能的行政机关或司法机关，可介入调查、执法或宣判",
+        "attributes": [
+          {
+            "name": "agency_type",
+            "type": "text",
+            "description": "机构类型（如公安、法院、教育主管部门）"
+          },
+          {
+            "name": "jurisdiction_level",
+            "type": "text",
+            "description": "行政级别（如市级、省级、国家级）"
+          },
+          {
+            "name": "functional_scope",
+            "type": "text",
+            "description": "职责范围（如治安管理、司法审判、教育监管）"
+          }
+        ],
+        "examples": [
+          "武汉警方",
+          "武汉中院"
+        ]
+      },
+      {
+        "name": "AcademicResearcher",
+        "description": "高校或研究机构中从事教学科研工作的学者，常以专家身份参与社会事件评论与解读",
+        "attributes": [
+          {
+            "name": "academic_title",
+            "type": "text",
+            "description": "职称（如教授、副教授、研究员）"
+          },
+          {
+            "name": "discipline",
+            "type": "text",
+            "description": "学科领域（如法学、心理学、教育学）"
+          },
+          {
+            "name": "institutional_affiliation",
+            "type": "text",
+            "description": "所属高校或研究机构"
+          }
+        ],
+        "examples": [
+          "教授评武大事件",
+          "律师解读专家"
+        ]
+      },
+      {
+        "name": "PublicFigure",
+        "description": "具有广泛公众影响力并主动就社会议题发声的个体，如知名评论员、媒体人、企业家校友等",
+        "attributes": [
+          {
+            "name": "public_role",
+            "type": "text",
+            "description": "公众身份（如评论员、自媒体人、企业家）"
+          },
+          {
+            "name": "platform",
+            "type": "text",
+            "description": "主要发声平台（如微博、公众号、电视节目）"
+          },
+          {
+            "name": "influence_domain",
+            "type": "text",
+            "description": "影响领域（如舆论监督、性别议题、教育公平）"
+          }
+        ],
+        "examples": [
+          "胡锡进",
+          "雷军（躺枪关联）",
+          "企业家校友"
+        ]
+      },
+      {
+        "name": "Person",
+        "description": "自然人个体，未归入上述具体角色类型的普通参与者，如举报者亲属、网民、路人等",
+        "attributes": [
+          {
+            "name": "full_name",
+            "type": "text",
+            "description": "真实姓名或常用称呼"
+          },
+          {
+            "name": "role_in_event",
+            "type": "text",
+            "description": "在事件中的非制度性角色（如母亲、同学、爆料网友）"
+          },
+          {
+            "name": "geographic_origin",
+            "type": "text",
+            "description": "所在地或籍贯"
+          }
+        ],
+        "examples": [
+          "肖某某母亲",
+          "冒充同学的网民",
+          "杨某媛亲友"
+        ]
+      },
+      {
+        "name": "Organization",
+        "description": "除高校、媒体、律所、医院等已单列类型外的其他组织实体，如NGO、行业协会、临时工作组等",
+        "attributes": [
+          {
+            "name": "org_name",
+            "type": "text",
+            "description": "组织全称或通用简称"
+          },
+          {
+            "name": "establishment_purpose",
+            "type": "text",
+            "description": "设立目的或核心职能"
+          },
+          {
+            "name": "operational_status",
+            "type": "text",
+            "description": "运作状态（如常设、临时、已解散）"
+          }
+        ],
+        "examples": [
+          "武汉大学工作专班",
+          "知网运营方",
+          "校友会"
+        ]
+      }
+    ],
+    "edge_types": [
+      {
+        "name": "WORKS_FOR",
+        "description": "表示雇员与雇主之间的正式劳动关系",
+        "source_targets": [
+          {
+            "source": "Lawyer",
+            "target": "Organization"
+          },
+          {
+            "source": "MedicalProfessional",
+            "target": "Organization"
+          },
+          {
+            "source": "AcademicResearcher",
+            "target": "University"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "STUDIES_AT",
+        "description": "表示学生与其就读高校之间的学籍关系",
+        "source_targets": [
+          {
+            "source": "Student",
+            "target": "University"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "REPORTS_ON",
+        "description": "媒体机构对事件进行新闻报道或深度调查",
+        "source_targets": [
+          {
+            "source": "MediaOutlet",
+            "target": "Student"
+          },
+          {
+            "source": "MediaOutlet",
+            "target": "University"
+          },
+          {
+            "source": "MediaOutlet",
+            "target": "GovernmentAgency"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "REPRESENTS",
+        "description": "律师代表特定当事人参与法律程序或公开表态",
+        "source_targets": [
+          {
+            "source": "Lawyer",
+            "target": "Student"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "DIAGNOSES",
+        "description": "医务人员对当事人出具临床诊断结论",
+        "source_targets": [
+          {
+            "source": "MedicalProfessional",
+            "target": "Student"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "ISSUES_STATEMENT",
+        "description": "组织或个人就事件发布正式声明、通报或评论",
+        "source_targets": [
+          {
+            "source": "University",
+            "target": "Student"
+          },
+          {
+            "source": "GovernmentAgency",
+            "target": "Student"
+          },
+          {
+            "source": "PublicFigure",
+            "target": "Student"
+          },
+          {
+            "source": "Organization",
+            "target": "Student"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "RESPONDS_TO",
+        "description": "针对他人发言、报道或指控作出回应行为",
+        "source_targets": [
+          {
+            "source": "Student",
+            "target": "Student"
+          },
+          {
+            "source": "University",
+            "target": "MediaOutlet"
+          },
+          {
+            "source": "Person",
+            "target": "MediaOutlet"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "AFFILIATED_WITH",
+        "description": "非雇佣但存在制度性关联的关系，如校友、合作单位、监管对象",
+        "source_targets": [
+          {
+            "source": "Person",
+            "target": "University"
+          },
+          {
+            "source": "PublicFigure",
+            "target": "University"
+          },
+          {
+            "source": "Organization",
+            "target": "University"
+          }
+        ],
+        "attributes": []
+      }
+    ]
+  },
+  "analysis_summary": "文本围绕武汉大学图书馆性骚扰指控事件展开，核心发声主体包括涉事学生（肖某某、杨某媛）、高校（武汉大学、香港浸会大学）、媒体（澎湃新闻、新华社等）、司法机关（武汉中院、警方）、专业人士（律师、皮肤科/精神科医生）、评论者（教授、胡锡进等公众人物）及关联个体（母亲、校友、冒充者）。需建模其在社交媒体上的互动逻辑，重点体现信息传播链（媒体→公众→高校回应）、权威背书（法院判决、医生诊断）、角色冲突（学生vs学校、原告vs被告）和舆论放大效应（网暴、论文下架、校友发声）。兜底类型Person和Organization用于覆盖未明确归类的个体与临时组织。",
+  "ingestion_summary": {
+    "generated_at": "2026-04-02T13:16:30.800198",
+    "file_count": 4,
+    "block_count": 7,
+    "modalities": [
+      "document",
+      "image",
+      "video"
+    ],
+    "block_type_counts": {
+      "text": 2,
+      "image": 1,
+      "video_segment": 4
+    },
+    "warnings": [
+      "视频片段 0 音频转写失败，继续仅使用画面描述",
+      "视频片段 1 音频转写失败，继续仅使用画面描述",
+      "视频片段 2 音频转写失败，继续仅使用画面描述",
+      "视频片段 3 音频转写失败，继续仅使用画面描述"
+    ]
+  },
+  "graph": {
+    "graph_id": "mirofish_c967b631ac064e19",
+    "node_count": 40,
+    "edge_count": 52,
+    "chunk_count": 4,
+    "original_chunk_count": 4,
+    "light_mode": true
+  },
+  "light_summary": {
+    "graph_text_before": 3891,
+    "graph_text_after": 3891,
+    "ontology_per_doc_max_chars": 80000
+  }
+}

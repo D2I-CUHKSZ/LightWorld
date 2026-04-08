@@ -566,7 +566,7 @@ class SimulationManager:
                     total=3
                 )
             
-            # 注意：运行脚本保留在 backend/scripts/ 目录，不再复制到模拟目录
+            # 注意：运行脚本保留在 backend/run_scripts/ 目录，不再复制到模拟目录
             # 启动模拟时，simulation_runner 会从 scripts/ 目录运行脚本
             
             # 更新状态
@@ -639,7 +639,7 @@ class SimulationManager:
         """获取运行说明"""
         sim_dir = self._get_simulation_dir(simulation_id)
         config_path = os.path.join(sim_dir, "simulation_config.json")
-        scripts_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../scripts'))
+        scripts_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../run_scripts'))
         
         return {
             "simulation_dir": sim_dir,

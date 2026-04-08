@@ -26,6 +26,8 @@ from oasis import (
 )
 from oasis.social_agent import AgentGraph, SocialAgent
 from oasis.social_platform.config import UserInfo
+from oasis.social_platform.platform import Platform as OasisPlatform
+from oasis.social_platform.typing import RecsysType
 
 from .runtimes import SimpleMemRuntime, TopologyAwareRuntime, safe_float
 
@@ -92,6 +94,68 @@ class PlatformSimulation:
     env: Optional[Any] = None
     agent_graph: Optional[Any] = None
     total_actions: int = 0
+
+
+SUPPORTED_PLATFORM_CONFIG_FIELDS = {
+    "recsys_type",
+    "refresh_rec_post_count",
+    "max_rec_post_len",
+    "following_post_count",
+    "rec_prob",
+    "trend_num_days",
+    "trend_top_k",
+    "report_threshold",
+    "show_score",
+    "allow_self_rating",
+    "use_openai_embedding",
+}
+
+PLATFORM_CONSTRUCTOR_FIELDS = {
+    "recsys_type",
+    "refresh_rec_post_count",
+    "max_rec_post_len",
+    "following_post_count",
+    "show_score",
+    "allow_self_rating",
+    "use_openai_embedding",
+}
+
+LEGACY_PLATFORM_CONFIG_KEYS = {
+    "recency_weight",
+    "popularity_weight",
+    "relevance_weight",
+    "viral_threshold",
+    "echo_chamber_strength",
+}
+
+PLATFORM_CONFIG_DEFAULTS: Dict[str, Dict[str, Any]] = {
+    "twitter": {
+        "recsys_type": "twhin-bert",
+        "refresh_rec_post_count": 2,
+        "max_rec_post_len": 2,
+        "following_post_count": 3,
+        "rec_prob": 0.7,
+        "trend_num_days": 7,
+        "trend_top_k": 1,
+        "report_threshold": 2,
+        "show_score": False,
+        "allow_self_rating": True,
+        "use_openai_embedding": False,
+    },
+    "reddit": {
+        "recsys_type": "reddit",
+        "refresh_rec_post_count": 5,
+        "max_rec_post_len": 100,
+        "following_post_count": 3,
+        "rec_prob": 0.7,
+        "trend_num_days": 7,
+        "trend_top_k": 1,
+        "report_threshold": 2,
+        "show_score": True,
+        "allow_self_rating": True,
+        "use_openai_embedding": False,
+    },
+}
 
 
 def get_active_agents_for_round(
@@ -591,8 +655,40 @@ async def _apply_scheduled_events_for_round(
 
 def _extract_platform_config(config: Dict[str, Any], platform_name: str) -> Dict[str, Any]:
     raw = config.get(f"{platform_name}_config")
-    if isinstance(raw, dict):
-        return dict(raw)
+    if not isinstance(raw, dict) or not raw:
+        return {}
+
+    defaults = dict(PLATFORM_CONFIG_DEFAULTS.get(platform_name, {}))
+    explicit_native = False
+    for key, default_value in defaults.items():
+        if key not in raw or raw[key] is None:
+            continue
+        explicit_native = True
+        value = raw[key]
+        if isinstance(default_value, bool):
+            if isinstance(value, str):
+                defaults[key] = value.strip().lower() in {"1", "true", "yes", "y", "on"}
+            else:
+                defaults[key] = bool(value)
+        elif isinstance(default_value, int) and not isinstance(default_value, bool):
+            try:
+                defaults[key] = int(value)
+            except Exception:
+                defaults[key] = default_value
+        elif isinstance(default_value, float):
+            try:
+                defaults[key] = float(value)
+            except Exception:
+                defaults[key] = default_value
+        else:
+            defaults[key] = value
+
+    if explicit_native:
+        return defaults
+
+    # 兼容旧配置：旧字段并不被当前 OASIS 版本支持，回退到平台默认可调参数
+    if any(key in raw for key in LEGACY_PLATFORM_CONFIG_KEYS):
+        return defaults
     return {}
 
 
@@ -608,11 +704,19 @@ def _set_attr_if_exists(obj: Any, candidates: List[str], value: Any) -> Optional
     return None
 
 
+def _normalize_platform_attr_value(attr_name: str, value: Any) -> Any:
+    if attr_name == "recsys_type":
+        if isinstance(value, RecsysType):
+            return value
+        return RecsysType(value)
+    return value
+
+
 def _apply_platform_config_best_effort(env: Any, platform_cfg: Dict[str, Any], log_info: Callable[[str], None]) -> int:
     if not platform_cfg:
         return 0
 
-    roots = [env]
+    roots = []
     for attr in ["platform", "rec", "recommender", "recommendation", "recommendation_system"]:
         try:
             node = getattr(env, attr)
@@ -620,59 +724,39 @@ def _apply_platform_config_best_effort(env: Any, platform_cfg: Dict[str, Any], l
                 roots.append(node)
         except Exception:
             continue
-
-    key_map = {
-        "recency_weight": ["recency_weight", "time_weight", "recency"],
-        "popularity_weight": ["popularity_weight", "hotness_weight", "pop_weight"],
-        "relevance_weight": ["relevance_weight", "semantic_weight", "interest_weight"],
-        "viral_threshold": ["viral_threshold", "virality_threshold", "viral_trigger_threshold"],
-        "echo_chamber_strength": ["echo_chamber_strength", "echo_strength", "homophily_strength"],
-    }
+    roots.append(env)
 
     applied = 0
-    for cfg_key, attr_candidates in key_map.items():
+    for cfg_key in SUPPORTED_PLATFORM_CONFIG_FIELDS:
         if cfg_key not in platform_cfg:
             continue
         value = platform_cfg[cfg_key]
+        attr_candidates = [cfg_key]
         for root in roots:
-            attr = _set_attr_if_exists(root, attr_candidates, value)
+            normalized_value = _normalize_platform_attr_value(cfg_key, value)
+            attr = _set_attr_if_exists(root, attr_candidates, normalized_value)
             if attr:
                 applied += 1
                 break
 
-    # 若对象支持配置方法，尝试一次方法调用
-    method_candidates = [
-        ("set_recommendation_weights", {
-            "recency_weight": platform_cfg.get("recency_weight"),
-            "popularity_weight": platform_cfg.get("popularity_weight"),
-            "relevance_weight": platform_cfg.get("relevance_weight"),
-        }),
-        ("update_recommendation_config", platform_cfg),
-        ("set_recommendation_config", platform_cfg),
-    ]
-    for root in roots:
-        for method_name, payload in method_candidates:
-            method = getattr(root, method_name, None)
-            if not callable(method):
-                continue
-            try:
-                if isinstance(payload, dict) and method_name == "set_recommendation_weights":
-                    kwargs = {k: v for k, v in payload.items() if v is not None}
-                    if kwargs:
-                        method(**kwargs)
-                        applied += len(kwargs)
-                else:
-                    method(payload)
-                    applied += len(platform_cfg)
-                break
-            except Exception:
-                continue
-
     if applied > 0:
         log_info(f"已接通平台配置（best-effort）: applied={applied}")
     else:
-        log_info("平台配置未能映射到OASIS对象属性，继续使用平台默认参数")
+        log_info("平台配置未映射到OASIS对象属性，继续使用OASIS默认参数")
     return applied
+
+
+def _build_custom_platform(db_path: str, platform_cfg: Dict[str, Any]) -> OasisPlatform:
+    ctor_kwargs = {
+        key: value
+        for key, value in platform_cfg.items()
+        if key in PLATFORM_CONSTRUCTOR_FIELDS and value is not None
+    }
+    platform = OasisPlatform(db_path=db_path, **ctor_kwargs)
+    for key in ["rec_prob", "trend_num_days", "trend_top_k", "report_threshold"]:
+        if key in platform_cfg and platform_cfg[key] is not None and hasattr(platform, key):
+            setattr(platform, key, platform_cfg[key])
+    return platform
 
 
 def _create_env(
@@ -692,13 +776,17 @@ def _create_env(
     env = None
     if platform_cfg:
         try:
-            env = oasis.make(**kwargs, platform_config=platform_cfg)
-            log_info("已通过 oasis.make(platform_config=...) 传入平台配置")
-        except TypeError:
-            env = oasis.make(**kwargs)
-            _apply_platform_config_best_effort(env, platform_cfg, log_info)
+            custom_platform = _build_custom_platform(db_path=db_path, platform_cfg=platform_cfg)
+            env = oasis.make(
+                agent_graph=agent_graph,
+                platform=custom_platform,
+                database_path=db_path,
+                semaphore=30,
+            )
+            setattr(env, "_lightworld_platform_config_applied", True)
+            log_info("已通过自定义 OASIS Platform 实例注入平台配置")
         except Exception as e:
-            log_info(f"通过 make 注入平台配置失败，回退默认创建: {e}")
+            log_info(f"通过自定义 Platform 注入平台配置失败，回退默认创建: {e}")
             env = oasis.make(**kwargs)
             _apply_platform_config_best_effort(env, platform_cfg, log_info)
     else:
@@ -968,6 +1056,7 @@ async def run_platform_simulation(
     get_agent_names_fn: Callable[[Dict[str, Any]], Dict[int, str]],
     fetch_actions_fn: Callable[[str, int, Dict[int, str]], Tuple[List[Dict[str, Any]], int]],
     shutdown_event: Optional[Any] = None,
+    state_update_fn: Optional[Callable[[str, str, int, Optional[str]], None]] = None,
 ) -> PlatformSimulation:
     """按平台规格运行模拟。"""
     result = PlatformSimulation()
@@ -979,292 +1068,317 @@ async def run_platform_simulation(
             main_logger.info(f"[{tag}] {msg}")
         print(f"[{tag}] {msg}")
 
-    log_info("初始化...")
-    model = create_model_fn(config, use_boost=spec.use_boost_model)
+    def emit_state(status: str, current_round: int = 0, error: Optional[str] = None):
+        if not state_update_fn:
+            return
+        try:
+            state_update_fn(spec.name, status, current_round, error)
+        except Exception:
+            pass
 
-    profile_path = os.path.join(simulation_dir, spec.profile_filename)
-    if not os.path.exists(profile_path):
-        log_info(f"错误: Profile文件不存在: {profile_path}")
-        return result
+    last_completed_round = 0
+    stopped_early = False
 
-    result.agent_graph = await _build_agent_graph(spec, profile_path, model)
+    try:
+        log_info("初始化...")
+        model = create_model_fn(config, use_boost=spec.use_boost_model)
 
-    agent_names = get_agent_names_fn(config)
-    for agent_id, agent in result.agent_graph.get_agents():
-        if agent_id not in agent_names:
-            agent_names[agent_id] = getattr(agent, "name", f"Agent_{agent_id}")
+        profile_path = os.path.join(simulation_dir, spec.profile_filename)
+        if not os.path.exists(profile_path):
+            message = f"错误: Profile文件不存在: {profile_path}"
+            log_info(message)
+            emit_state("failed", last_completed_round, message)
+            return result
 
-    topology_runtime = TopologyAwareRuntime(
-        config=config,
-        simulation_dir=simulation_dir,
-        platform=spec.name,
-        logger=log_info,
-    )
-    simplemem_runtime = SimpleMemRuntime(
-        config=config,
-        simulation_dir=simulation_dir,
-        platform=spec.name,
-        topology_runtime=topology_runtime,
-        logger=log_info,
-    )
+        result.agent_graph = await _build_agent_graph(spec, profile_path, model)
 
-    db_path = os.path.join(simulation_dir, f"{spec.name}_simulation.db")
-    if os.path.exists(db_path):
-        os.remove(db_path)
+        agent_names = get_agent_names_fn(config)
+        for agent_id, agent in result.agent_graph.get_agents():
+            if agent_id not in agent_names:
+                agent_names[agent_id] = getattr(agent, "name", f"Agent_{agent_id}")
 
-    platform_cfg = _extract_platform_config(config, spec.name)
-    result.env = _create_env(
-        spec=spec,
-        agent_graph=result.agent_graph,
-        db_path=db_path,
-        platform_cfg=platform_cfg,
-        log_info=log_info,
-    )
-
-    await result.env.reset()
-    log_info("环境已启动")
-    if platform_cfg:
-        _apply_platform_config_best_effort(result.env, platform_cfg, log_info)
-
-    # 启动前同步一次“图谱关系 -> 初始社交关系”
-    await _sync_social_links_from_topology(
-        env=result.env,
-        db_path=db_path,
-        topology_runtime=topology_runtime,
-        agent_names=agent_names,
-        log_info=log_info,
-    )
-
-    if action_logger:
-        action_logger.log_simulation_start(config)
-
-    total_actions = 0
-    last_rowid = 0
-    topo_cfg = config.get("topology_aware", {}) or {}
-    social_link_sync_enabled = bool(topo_cfg.get("social_link_sync_enabled", True))
-    social_link_sync_interval = max(1, int(topo_cfg.get("social_link_sync_interval", 6)))
-    social_link_sync_max_total = max(
-        4,
-        int(topo_cfg.get("social_link_sync_max_total", max(8, len(agent_names) // 4)))
-    )
-
-    event_config = config.get("event_config", {})
-    initial_posts = event_config.get("initial_posts", [])
-    triggered_event_ids: set = set()
-
-    if action_logger:
-        action_logger.log_round_start(0, 0)
-
-    initial_action_count = 0
-    if initial_posts:
-        initial_actions: Dict[Any, Any] = {}
-        for post in initial_posts:
-            agent_id = post.get("poster_agent_id", 0)
-            content = post.get("content", "")
-            try:
-                agent = result.env.agent_graph.get_agent(agent_id)
-                action = ManualAction(
-                    action_type=ActionType.CREATE_POST,
-                    action_args={"content": content},
-                )
-                _append_initial_action(
-                    initial_actions=initial_actions,
-                    agent=agent,
-                    action=action,
-                    allow_multiple=spec.allow_multi_initial_posts_per_agent,
-                )
-                if action_logger:
-                    action_logger.log_action(
-                        round_num=0,
-                        agent_id=agent_id,
-                        agent_name=agent_names.get(agent_id, f"Agent_{agent_id}"),
-                        action_type="CREATE_POST",
-                        action_args={"content": content},
-                    )
-                    total_actions += 1
-                    initial_action_count += 1
-            except Exception:
-                pass
-
-        if initial_actions:
-            await result.env.step(initial_actions)
-            log_info(f"已发布 {len(initial_actions)} 条初始帖子")
-
-    if action_logger:
-        action_logger.log_round_end(0, initial_action_count)
-
-    topology_runtime.record_round_state(
-        round_num=0,
-        simulated_hour=0,
-        reason="post_initialization",
-        active_agent_ids=[],
-    )
-    simplemem_runtime.record_round_state(
-        round_num=0,
-        simulated_hour=0,
-        active_agent_ids=[],
-    )
-
-    time_config = config.get("time_config", {})
-    total_hours = time_config.get("total_simulation_hours", 72)
-    minutes_per_round = time_config.get("minutes_per_round", 30)
-    total_rounds = (total_hours * 60) // minutes_per_round
-
-    if max_rounds is not None and max_rounds > 0:
-        original_rounds = total_rounds
-        total_rounds = min(total_rounds, max_rounds)
-        if total_rounds < original_rounds:
-            log_info(f"轮数已截断: {original_rounds} -> {total_rounds} (max_rounds={max_rounds})")
-
-    start_time = datetime.now()
-
-    for round_num in range(total_rounds):
-        if shutdown_event and shutdown_event.is_set():
-            if main_logger:
-                main_logger.info(f"收到退出信号，在第 {round_num + 1} 轮停止模拟")
-            break
-
-        simulated_minutes = round_num * minutes_per_round
-        simulated_hour = (simulated_minutes // 60) % 24
-        simulated_day = simulated_minutes // (60 * 24) + 1
-
-        active_agents = get_active_agents_for_round(
-            result.env,
-            config,
-            simulated_hour,
-            round_num,
+        topology_runtime = TopologyAwareRuntime(
+            config=config,
+            simulation_dir=simulation_dir,
+            platform=spec.name,
+            logger=log_info,
+        )
+        simplemem_runtime = SimpleMemRuntime(
+            config=config,
+            simulation_dir=simulation_dir,
+            platform=spec.name,
             topology_runtime=topology_runtime,
+            logger=log_info,
         )
 
-        if action_logger:
-            action_logger.log_round_start(round_num + 1, simulated_hour)
+        db_path = os.path.join(simulation_dir, f"{spec.name}_simulation.db")
+        if os.path.exists(db_path):
+            os.remove(db_path)
 
-        scheduled_action_count = await _apply_scheduled_events_for_round(
+        platform_cfg = _extract_platform_config(config, spec.name)
+        result.env = _create_env(
             spec=spec,
-            env=result.env,
-            config=config,
+            agent_graph=result.agent_graph,
             db_path=db_path,
-            event_config=event_config,
-            round_num=round_num + 1,
-            minutes_per_round=minutes_per_round,
-            triggered_event_ids=triggered_event_ids,
+            platform_cfg=platform_cfg,
             log_info=log_info,
         )
 
-        if not active_agents:
-            if action_logger:
-                action_logger.log_round_end(round_num + 1, scheduled_action_count)
-            if scheduled_action_count > 0:
-                actual_actions, last_rowid = fetch_actions_fn(db_path, last_rowid, agent_names)
-                for action_data in actual_actions:
+        await result.env.reset()
+        log_info("环境已启动")
+        emit_state("running", 0)
+        if platform_cfg and not getattr(result.env, "_lightworld_platform_config_applied", False):
+            _apply_platform_config_best_effort(result.env, platform_cfg, log_info)
+
+        # 启动前同步一次“图谱关系 -> 初始社交关系”
+        await _sync_social_links_from_topology(
+            env=result.env,
+            db_path=db_path,
+            topology_runtime=topology_runtime,
+            agent_names=agent_names,
+            log_info=log_info,
+        )
+
+        if action_logger:
+            action_logger.log_simulation_start(config)
+
+        total_actions = 0
+        last_rowid = 0
+        topo_cfg = config.get("topology_aware", {}) or {}
+        social_link_sync_enabled = bool(topo_cfg.get("social_link_sync_enabled", True))
+        social_link_sync_interval = max(1, int(topo_cfg.get("social_link_sync_interval", 6)))
+        social_link_sync_max_total = max(
+            4,
+            int(topo_cfg.get("social_link_sync_max_total", max(8, len(agent_names) // 4)))
+        )
+
+        event_config = config.get("event_config", {})
+        initial_posts = event_config.get("initial_posts", [])
+        triggered_event_ids: set = set()
+
+        if action_logger:
+            action_logger.log_round_start(0, 0)
+
+        initial_action_count = 0
+        if initial_posts:
+            initial_actions: Dict[Any, Any] = {}
+            for post in initial_posts:
+                agent_id = post.get("poster_agent_id", 0)
+                content = post.get("content", "")
+                try:
+                    agent = result.env.agent_graph.get_agent(agent_id)
+                    action = ManualAction(
+                        action_type=ActionType.CREATE_POST,
+                        action_args={"content": content},
+                    )
+                    _append_initial_action(
+                        initial_actions=initial_actions,
+                        agent=agent,
+                        action=action,
+                        allow_multiple=spec.allow_multi_initial_posts_per_agent,
+                    )
                     if action_logger:
                         action_logger.log_action(
-                            round_num=round_num + 1,
-                            agent_id=action_data["agent_id"],
-                            agent_name=action_data["agent_name"],
-                            action_type=action_data["action_type"],
-                            action_args=action_data["action_args"],
+                            round_num=0,
+                            agent_id=agent_id,
+                            agent_name=agent_names.get(agent_id, f"Agent_{agent_id}"),
+                            action_type="CREATE_POST",
+                            action_args={"content": content},
                         )
                         total_actions += 1
+                        initial_action_count += 1
+                except Exception:
+                    pass
 
-                topology_runtime.ingest_round_actions(
-                    round_num=round_num + 1,
-                    actions=actual_actions,
-                )
-                simplemem_runtime.ingest_round_actions(
+            if initial_actions:
+                await result.env.step(initial_actions)
+                log_info(f"已发布 {len(initial_actions)} 条初始帖子")
+
+        if action_logger:
+            action_logger.log_round_end(0, initial_action_count)
+
+        topology_runtime.record_round_state(
+            round_num=0,
+            simulated_hour=0,
+            reason="post_initialization",
+            active_agent_ids=[],
+        )
+        simplemem_runtime.record_round_state(
+            round_num=0,
+            simulated_hour=0,
+            active_agent_ids=[],
+        )
+
+        time_config = config.get("time_config", {})
+        total_hours = time_config.get("total_simulation_hours", 72)
+        minutes_per_round = time_config.get("minutes_per_round", 30)
+        total_rounds = (total_hours * 60) // minutes_per_round
+
+        if max_rounds is not None and max_rounds > 0:
+            original_rounds = total_rounds
+            total_rounds = min(total_rounds, max_rounds)
+            if total_rounds < original_rounds:
+                log_info(f"轮数已截断: {original_rounds} -> {total_rounds} (max_rounds={max_rounds})")
+
+        start_time = datetime.now()
+
+        for round_num in range(total_rounds):
+            if shutdown_event and shutdown_event.is_set():
+                if main_logger:
+                    main_logger.info(f"收到退出信号，在第 {round_num + 1} 轮停止模拟")
+                stopped_early = True
+                break
+
+            simulated_minutes = round_num * minutes_per_round
+            simulated_hour = (simulated_minutes // 60) % 24
+            simulated_day = simulated_minutes // (60 * 24) + 1
+
+            active_agents = get_active_agents_for_round(
+                result.env,
+                config,
+                simulated_hour,
+                round_num,
+                topology_runtime=topology_runtime,
+            )
+
+            if action_logger:
+                action_logger.log_round_start(round_num + 1, simulated_hour)
+
+            scheduled_action_count = await _apply_scheduled_events_for_round(
+                spec=spec,
+                env=result.env,
+                config=config,
+                db_path=db_path,
+                event_config=event_config,
+                round_num=round_num + 1,
+                minutes_per_round=minutes_per_round,
+                triggered_event_ids=triggered_event_ids,
+                log_info=log_info,
+            )
+
+            if not active_agents:
+                if action_logger:
+                    action_logger.log_round_end(round_num + 1, scheduled_action_count)
+                if scheduled_action_count > 0:
+                    actual_actions, last_rowid = fetch_actions_fn(db_path, last_rowid, agent_names)
+                    for action_data in actual_actions:
+                        if action_logger:
+                            action_logger.log_action(
+                                round_num=round_num + 1,
+                                agent_id=action_data["agent_id"],
+                                agent_name=action_data["agent_name"],
+                                action_type=action_data["action_type"],
+                                action_args=action_data["action_args"],
+                            )
+                            total_actions += 1
+
+                    topology_runtime.ingest_round_actions(
+                        round_num=round_num + 1,
+                        actions=actual_actions,
+                    )
+                    simplemem_runtime.ingest_round_actions(
+                        round_num=round_num + 1,
+                        simulated_hour=simulated_hour,
+                        actions=actual_actions,
+                    )
+                topology_runtime.record_round_state(
                     round_num=round_num + 1,
                     simulated_hour=simulated_hour,
-                    actions=actual_actions,
+                    reason="round_idle",
+                    active_agent_ids=[],
                 )
+                simplemem_runtime.record_round_state(
+                    round_num=round_num + 1,
+                    simulated_hour=simulated_hour,
+                    active_agent_ids=[],
+                )
+                last_completed_round = round_num + 1
+                emit_state("running", last_completed_round)
+                continue
+
+            actions: Dict[Any, Any] = {}
+            for active_agent_id, agent in active_agents:
+                memory_context = simplemem_runtime.build_memory_context(
+                    agent_id=active_agent_id,
+                    current_round=round_num + 1,
+                )
+                simplemem_runtime.inject_context_into_agent(agent, memory_context)
+                actions[agent] = LLMAction()
+            await result.env.step(actions)
+
+            actual_actions, last_rowid = fetch_actions_fn(db_path, last_rowid, agent_names)
+
+            round_action_count = 0
+            for action_data in actual_actions:
+                if action_logger:
+                    action_logger.log_action(
+                        round_num=round_num + 1,
+                        agent_id=action_data["agent_id"],
+                        agent_name=action_data["agent_name"],
+                        action_type=action_data["action_type"],
+                        action_args=action_data["action_args"],
+                    )
+                    total_actions += 1
+                    round_action_count += 1
+
+            round_action_count += scheduled_action_count
+
+            topology_runtime.ingest_round_actions(
+                round_num=round_num + 1,
+                actions=actual_actions,
+            )
+
+            if social_link_sync_enabled and ((round_num + 1) % social_link_sync_interval == 0):
+                # 用最新拓扑结果增量同步弱曝光关系，让 topology-aware 结果进入平台曝光层
+                await _sync_social_links_from_topology(
+                    env=result.env,
+                    db_path=db_path,
+                    topology_runtime=topology_runtime,
+                    agent_names=agent_names,
+                    log_info=log_info,
+                    max_per_agent=1,
+                    max_total=social_link_sync_max_total,
+                    manual_fallback_max_pairs=8,
+                )
+
+            simplemem_runtime.ingest_round_actions(
+                round_num=round_num + 1,
+                simulated_hour=simulated_hour,
+                actions=actual_actions,
+            )
             topology_runtime.record_round_state(
                 round_num=round_num + 1,
                 simulated_hour=simulated_hour,
-                reason="round_idle",
-                active_agent_ids=[],
+                reason="round_complete",
+                active_agent_ids=[aid for aid, _ in active_agents],
             )
             simplemem_runtime.record_round_state(
                 round_num=round_num + 1,
                 simulated_hour=simulated_hour,
-                active_agent_ids=[],
+                active_agent_ids=[aid for aid, _ in active_agents],
             )
-            continue
+            last_completed_round = round_num + 1
+            emit_state("running", last_completed_round)
 
-        actions: Dict[Any, Any] = {}
-        for active_agent_id, agent in active_agents:
-            memory_context = simplemem_runtime.build_memory_context(
-                agent_id=active_agent_id,
-                current_round=round_num + 1,
-            )
-            simplemem_runtime.inject_context_into_agent(agent, memory_context)
-            actions[agent] = LLMAction()
-        await result.env.step(actions)
-
-        actual_actions, last_rowid = fetch_actions_fn(db_path, last_rowid, agent_names)
-
-        round_action_count = 0
-        for action_data in actual_actions:
             if action_logger:
-                action_logger.log_action(
-                    round_num=round_num + 1,
-                    agent_id=action_data["agent_id"],
-                    agent_name=action_data["agent_name"],
-                    action_type=action_data["action_type"],
-                    action_args=action_data["action_args"],
+                action_logger.log_round_end(round_num + 1, round_action_count)
+
+            if (round_num + 1) % 20 == 0:
+                progress = (round_num + 1) / total_rounds * 100
+                log_info(
+                    f"Day {simulated_day}, {simulated_hour:02d}:00 - "
+                    f"Round {round_num + 1}/{total_rounds} ({progress:.1f}%)"
                 )
-                total_actions += 1
-                round_action_count += 1
-
-        round_action_count += scheduled_action_count
-
-        topology_runtime.ingest_round_actions(
-            round_num=round_num + 1,
-            actions=actual_actions,
-        )
-
-        if social_link_sync_enabled and ((round_num + 1) % social_link_sync_interval == 0):
-            # 用最新拓扑结果增量同步弱曝光关系，让 topology-aware 结果进入平台曝光层
-            await _sync_social_links_from_topology(
-                env=result.env,
-                db_path=db_path,
-                topology_runtime=topology_runtime,
-                agent_names=agent_names,
-                log_info=log_info,
-                max_per_agent=1,
-                max_total=social_link_sync_max_total,
-                manual_fallback_max_pairs=8,
-            )
-
-        simplemem_runtime.ingest_round_actions(
-            round_num=round_num + 1,
-            simulated_hour=simulated_hour,
-            actions=actual_actions,
-        )
-        topology_runtime.record_round_state(
-            round_num=round_num + 1,
-            simulated_hour=simulated_hour,
-            reason="round_complete",
-            active_agent_ids=[aid for aid, _ in active_agents],
-        )
-        simplemem_runtime.record_round_state(
-            round_num=round_num + 1,
-            simulated_hour=simulated_hour,
-            active_agent_ids=[aid for aid, _ in active_agents],
-        )
 
         if action_logger:
-            action_logger.log_round_end(round_num + 1, round_action_count)
+            action_logger.log_simulation_end(total_rounds, total_actions)
 
-        if (round_num + 1) % 20 == 0:
-            progress = (round_num + 1) / total_rounds * 100
-            log_info(
-                f"Day {simulated_day}, {simulated_hour:02d}:00 - "
-                f"Round {round_num + 1}/{total_rounds} ({progress:.1f}%)"
-            )
-
-    if action_logger:
-        action_logger.log_simulation_end(total_rounds, total_actions)
-
-    result.total_actions = total_actions
-    elapsed = (datetime.now() - start_time).total_seconds()
-    log_info(f"模拟循环完成! 耗时: {elapsed:.1f}秒, 总动作: {total_actions}")
-    return result
+        result.total_actions = total_actions
+        elapsed = (datetime.now() - start_time).total_seconds()
+        final_status = "stopped" if stopped_early else "completed"
+        emit_state(final_status, last_completed_round)
+        log_info(f"模拟循环完成! 耗时: {elapsed:.1f}秒, 总动作: {total_actions}")
+        return result
+    except Exception as e:
+        emit_state("failed", last_completed_round, str(e))
+        raise

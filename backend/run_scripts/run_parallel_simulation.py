@@ -188,6 +188,72 @@ from app.modules.simulation.cluster_flags import normalize_topology_cluster_conf
 IPC_COMMANDS_DIR = "ipc_commands"
 IPC_RESPONSES_DIR = "ipc_responses"
 ENV_STATUS_FILE = "env_status.json"
+SIMULATION_STATE_FILE = "state.json"
+
+_STATE_UNSET = object()
+
+
+def _read_json_file(path: str) -> Dict[str, Any]:
+    if not os.path.exists(path):
+        return {}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def _write_json_file(path: str, payload: Dict[str, Any]):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
+
+
+def _derive_simulation_status(selected_platforms: List[str], platform_statuses: Dict[str, str], fallback: str = "ready") -> str:
+    statuses = [platform_statuses.get(platform, "not_started") for platform in selected_platforms]
+    if not statuses:
+        return fallback
+    if any(status == "failed" for status in statuses):
+        return "failed"
+    if any(status in {"starting", "running"} for status in statuses):
+        return "running"
+    if all(status == "completed" for status in statuses):
+        return "completed"
+    if all(status in {"completed", "stopped"} for status in statuses):
+        return "stopped"
+    return fallback
+
+
+def _update_simulation_state_file(
+    simulation_dir: str,
+    selected_platforms: List[str],
+    platform_statuses: Dict[str, str],
+    platform_rounds: Dict[str, int],
+    error: Any = _STATE_UNSET,
+):
+    state_path = os.path.join(simulation_dir, SIMULATION_STATE_FILE)
+    if not os.path.exists(state_path):
+        return
+
+    state = _read_json_file(state_path)
+    if not state:
+        return
+
+    state["status"] = _derive_simulation_status(
+        selected_platforms=selected_platforms,
+        platform_statuses=platform_statuses,
+        fallback=str(state.get("status", "ready") or "ready"),
+    )
+    state["current_round"] = max((int(platform_rounds.get(platform, 0) or 0) for platform in selected_platforms), default=0)
+    state["twitter_status"] = platform_statuses.get("twitter", str(state.get("twitter_status", "not_started") or "not_started"))
+    state["reddit_status"] = platform_statuses.get("reddit", str(state.get("reddit_status", "not_started") or "not_started"))
+    if error is not _STATE_UNSET:
+        state["error"] = error
+    elif state["status"] in {"running", "completed", "stopped"}:
+        state["error"] = None
+    state["updated_at"] = datetime.now().isoformat()
+    _write_json_file(state_path, state)
 
 class CommandType:
     """命令类型常量"""
@@ -1202,6 +1268,35 @@ async def main():
     wait_for_commands = not args.no_wait
     status_handler = ParallelIPCHandler(simulation_dir=simulation_dir)
     status_handler.update_status("starting")
+    selected_platforms = (
+        ["twitter"] if args.twitter_only else
+        ["reddit"] if args.reddit_only else
+        ["twitter", "reddit"]
+    )
+    platform_statuses = {
+        "twitter": "disabled" if "twitter" not in selected_platforms else "starting",
+        "reddit": "disabled" if "reddit" not in selected_platforms else "starting",
+    }
+    platform_rounds = {"twitter": 0, "reddit": 0}
+
+    def on_platform_state(platform: str, status: str, current_round: int = 0, error: Optional[str] = None):
+        platform_statuses[platform] = status
+        platform_rounds[platform] = max(platform_rounds.get(platform, 0), int(current_round or 0))
+        _update_simulation_state_file(
+            simulation_dir=simulation_dir,
+            selected_platforms=selected_platforms,
+            platform_statuses=platform_statuses,
+            platform_rounds=platform_rounds,
+            error=error if status == "failed" else _STATE_UNSET,
+        )
+
+    _update_simulation_state_file(
+        simulation_dir=simulation_dir,
+        selected_platforms=selected_platforms,
+        platform_statuses=platform_statuses,
+        platform_rounds=platform_rounds,
+        error=None,
+    )
 
     # CLI 覆盖配置（不修改原配置文件）
     if args.light_mode:
@@ -1224,6 +1319,15 @@ async def main():
         topo_cfg = normalize_topology_cluster_config(config)
     except ValueError as exc:
         print(f"Configuration error: {exc}")
+        for platform in selected_platforms:
+            platform_statuses[platform] = "failed"
+        _update_simulation_state_file(
+            simulation_dir=simulation_dir,
+            selected_platforms=selected_platforms,
+            platform_statuses=platform_statuses,
+            platform_rounds=platform_rounds,
+            error=str(exc),
+        )
         status_handler.update_status("failed")
         sys.exit(2)
     
@@ -1277,36 +1381,9 @@ async def main():
     twitter_result: Optional[PlatformSimulation] = None
     reddit_result: Optional[PlatformSimulation] = None
     
-    if args.twitter_only:
-        twitter_result = await run_platform_simulation(
-            spec=TWITTER_SPEC,
-            config=config,
-            simulation_dir=simulation_dir,
-            action_logger=twitter_logger,
-            main_logger=log_manager,
-            max_rounds=args.max_rounds,
-            create_model_fn=create_model,
-            get_agent_names_fn=get_agent_names_from_config,
-            fetch_actions_fn=fetch_new_actions_from_db,
-            shutdown_event=_shutdown_event,
-        )
-    elif args.reddit_only:
-        reddit_result = await run_platform_simulation(
-            spec=REDDIT_SPEC,
-            config=config,
-            simulation_dir=simulation_dir,
-            action_logger=reddit_logger,
-            main_logger=log_manager,
-            max_rounds=args.max_rounds,
-            create_model_fn=create_model,
-            get_agent_names_fn=get_agent_names_from_config,
-            fetch_actions_fn=fetch_new_actions_from_db,
-            shutdown_event=_shutdown_event,
-        )
-    else:
-        # 并行运行（每个平台使用独立的日志记录器）
-        results = await asyncio.gather(
-            run_platform_simulation(
+    try:
+        if args.twitter_only:
+            twitter_result = await run_platform_simulation(
                 spec=TWITTER_SPEC,
                 config=config,
                 simulation_dir=simulation_dir,
@@ -1317,8 +1394,10 @@ async def main():
                 get_agent_names_fn=get_agent_names_from_config,
                 fetch_actions_fn=fetch_new_actions_from_db,
                 shutdown_event=_shutdown_event,
-            ),
-            run_platform_simulation(
+                state_update_fn=on_platform_state,
+            )
+        elif args.reddit_only:
+            reddit_result = await run_platform_simulation(
                 spec=REDDIT_SPEC,
                 config=config,
                 simulation_dir=simulation_dir,
@@ -1329,9 +1408,52 @@ async def main():
                 get_agent_names_fn=get_agent_names_from_config,
                 fetch_actions_fn=fetch_new_actions_from_db,
                 shutdown_event=_shutdown_event,
-            ),
+                state_update_fn=on_platform_state,
+            )
+        else:
+            # 并行运行（每个平台使用独立的日志记录器）
+            results = await asyncio.gather(
+                run_platform_simulation(
+                    spec=TWITTER_SPEC,
+                    config=config,
+                    simulation_dir=simulation_dir,
+                    action_logger=twitter_logger,
+                    main_logger=log_manager,
+                    max_rounds=args.max_rounds,
+                    create_model_fn=create_model,
+                    get_agent_names_fn=get_agent_names_from_config,
+                    fetch_actions_fn=fetch_new_actions_from_db,
+                    shutdown_event=_shutdown_event,
+                    state_update_fn=on_platform_state,
+                ),
+                run_platform_simulation(
+                    spec=REDDIT_SPEC,
+                    config=config,
+                    simulation_dir=simulation_dir,
+                    action_logger=reddit_logger,
+                    main_logger=log_manager,
+                    max_rounds=args.max_rounds,
+                    create_model_fn=create_model,
+                    get_agent_names_fn=get_agent_names_from_config,
+                    fetch_actions_fn=fetch_new_actions_from_db,
+                    shutdown_event=_shutdown_event,
+                    state_update_fn=on_platform_state,
+                ),
+            )
+            twitter_result, reddit_result = results
+    except Exception as exc:
+        for platform in selected_platforms:
+            if platform_statuses.get(platform) in {"starting", "running"}:
+                platform_statuses[platform] = "failed"
+        _update_simulation_state_file(
+            simulation_dir=simulation_dir,
+            selected_platforms=selected_platforms,
+            platform_statuses=platform_statuses,
+            platform_rounds=platform_rounds,
+            error=str(exc),
         )
-        twitter_result, reddit_result = results
+        status_handler.update_status("failed")
+        raise
     
     total_elapsed = (datetime.now() - start_time).total_seconds()
     log_manager.info("=" * 60)

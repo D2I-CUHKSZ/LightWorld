@@ -244,7 +244,7 @@ def _check_simulation_prepared(simulation_id: str) -> tuple:
     1. state.json 存在且 status 为 "ready"
     2. 必要文件存在：reddit_profiles.json, twitter_profiles.csv, simulation_config.json
     
-    注意：运行脚本(run_*.py)保留在 backend/scripts/ 目录，不再复制到模拟目录
+    注意：运行脚本(run_*.py)保留在 backend/run_scripts/ 目录，不再复制到模拟目录
     
     Args:
         simulation_id: 模拟ID
@@ -261,7 +261,7 @@ def _check_simulation_prepared(simulation_id: str) -> tuple:
     if not os.path.exists(simulation_dir):
         return False, {"reason": "模拟目录不存在"}
     
-    # 必要文件列表（不包括脚本，脚本位于 backend/scripts/）
+    # 必要文件列表（不包括脚本，脚本位于 backend/run_scripts/）
     required_files = [
         "state.json",
         "simulation_config.json",
@@ -1317,7 +1317,7 @@ def download_simulation_config(simulation_id: str):
 @simulation_bp.route('/script/<script_name>/download', methods=['GET'])
 def download_simulation_script(script_name: str):
     """
-    下载模拟运行脚本文件（通用脚本，位于 backend/scripts/）
+    下载模拟运行脚本文件（通用脚本，位于 backend/run_scripts/）
     
     script_name可选值：
         - run_twitter_simulation.py
@@ -1326,8 +1326,8 @@ def download_simulation_script(script_name: str):
         - action_logger.py
     """
     try:
-        # 脚本位于 backend/scripts/ 目录
-        scripts_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../scripts'))
+        # 脚本位于 backend/run_scripts/ 目录
+        scripts_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../run_scripts'))
         
         # 验证脚本名称
         allowed_scripts = [

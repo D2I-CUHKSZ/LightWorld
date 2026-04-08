@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-04-08T12:24:26.505026",
+  "file_count": 12,
+  "block_count": 29,
+  "modalities": [
+    "document",
+    "image",
+    "video"
+  ],
+  "block_type_counts": {
+    "text": 2,
+    "image": 6,
+    "video_segment": 21
+  },
+  "warnings": [
+    "视频片段 3 音频转写失败，继续仅使用画面描述"
+  ]
+}

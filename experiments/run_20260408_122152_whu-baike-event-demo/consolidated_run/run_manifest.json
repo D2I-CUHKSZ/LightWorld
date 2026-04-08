@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-04-08T13:00:50.897651",
+  "config_path": "<repo-root>/multimodal_inputs/baike_wuda_event/full_run.config.json",
+  "run_dir": "<repo-root>/backend/uploads/full_runs/run_20260408_122152_whu-baike-event-demo",
+  "project_id": "proj_17f12f355259",
+  "graph_id": "mirofish_ebb8693de4024891",
+  "simulation_id": "sim_91e21a6aade3",
+  "report_id": "report_0b00682ac0c9",
+  "artifacts": {
+    "pipeline_result": "<repo-root>/backend/uploads/full_runs/run_20260408_122152_whu-baike-event-demo/pipeline_result.json",
+    "prepare_state": "<repo-root>/backend/uploads/full_runs/run_20260408_122152_whu-baike-event-demo/prepare_state.json",
+    "final_simulation_config": "<repo-root>/backend/uploads/full_runs/run_20260408_122152_whu-baike-event-demo/simulation_config.final.json",
+    "report_meta": "<repo-root>/backend/uploads/full_runs/run_20260408_122152_whu-baike-event-demo/report_meta.json",
+    "project_dir": "<repo-root>/backend/input2graph/projects/proj_17f12f355259",
+    "simulation_dir": "<repo-root>/output/simulations/sim_91e21a6aade3",
+    "report_dir": "<repo-root>/output/reports/report_0b00682ac0c9",
+    "full_report": "<repo-root>/output/reports/report_0b00682ac0c9/full_report.md"
+  },
+  "consolidated_view": {
+    "guide": "<repo-root>/backend/uploads/full_runs/run_20260408_122152_whu-baike-event-demo/00_artifacts_guide.md",
+    "project_artifacts_dir": "<repo-root>/backend/uploads/full_runs/run_20260408_122152_whu-baike-event-demo/01_project_artifacts",
+    "simulation_artifacts_dir": "<repo-root>/backend/uploads/full_runs/run_20260408_122152_whu-baike-event-demo/02_simulation_artifacts",
+    "report_artifacts_dir": "<repo-root>/backend/uploads/full_runs/run_20260408_122152_whu-baike-event-demo/03_report_artifacts"
+  }
+}

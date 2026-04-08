@@ -1,0 +1,1420 @@
+{
+  "simulation_id": "sim_91e21a6aade3",
+  "graph_id": "mirofish_ebb8693de4024891",
+  "generated_at": "2026-04-08T12:45:26.724218",
+  "node_count": 65,
+  "edge_count": 47,
+  "nodes": [
+    {
+      "agent_id": 0,
+      "entity_uuid": "a45a3bf9-9358-40bb-8529-4fde074c6891",
+      "entity_name": "930老友记",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 1,
+      "entity_uuid": "e3ce722d-f2e7-490c-bf3c-36ae1032e8f3",
+      "entity_name": "X同学",
+      "entity_type": "Student"
+    },
+    {
+      "agent_id": 2,
+      "entity_uuid": "72fa21c9-593b-4e4b-a2ac-b40238cdf1d4",
+      "entity_name": "YY",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 3,
+      "entity_uuid": "18710628-dc46-4c76-b400-732dc9036517",
+      "entity_name": "今日头条",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 4,
+      "entity_uuid": "cc879e2d-5287-4c67-9e1c-5b7552cc0cbc",
+      "entity_name": "凤凰网",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 5,
+      "entity_uuid": "88e438bb-1bdd-4294-809f-b1b94b523638",
+      "entity_name": "刘迪",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 6,
+      "entity_uuid": "72db3a94-f070-4a7d-b49d-3ec351755df4",
+      "entity_name": "医学专家",
+      "entity_type": "MedicalProfessional"
+    },
+    {
+      "agent_id": 7,
+      "entity_uuid": "17a40f38-bd8a-42fa-a58c-dc1d02f7e952",
+      "entity_name": "南方都市报",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 8,
+      "entity_uuid": "57ba1c98-33c2-4e11-836b-cbfa7354e500",
+      "entity_name": "四川观天下",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 9,
+      "entity_uuid": "cd7407b9-715d-4ed9-bbd9-6d56651a675c",
+      "entity_name": "四川观察",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 10,
+      "entity_uuid": "8140c80e-a54e-423a-ab63-432bcbf82f3f",
+      "entity_name": "四川观察主播 徐英伦",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 11,
+      "entity_uuid": "b5b5e1c2-3ae5-41dd-8b95-bf75823360e0",
+      "entity_name": "天津广播",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 12,
+      "entity_uuid": "6d85d982-e1b3-48ef-9e85-6637a902baae",
+      "entity_name": "封面新闻",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 13,
+      "entity_uuid": "5a844ae5-e65f-4380-a940-c2ad7ff23969",
+      "entity_name": "张平文",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 14,
+      "entity_uuid": "f5c5653c-4c74-4a65-a5db-e629b6e19e07",
+      "entity_name": "微博",
+      "entity_type": "SocialMediaAccount"
+    },
+    {
+      "agent_id": 15,
+      "entity_uuid": "b205fd6c-9fb5-4992-a5d9-70918f498f09",
+      "entity_name": "扬子晚报",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 16,
+      "entity_uuid": "d1418c32-9473-4a0a-9ef6-f86c3e23ca77",
+      "entity_name": "新京报",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 17,
+      "entity_uuid": "36ea558d-a4e0-4648-a6cb-0c9c512e0766",
+      "entity_name": "新华社",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 18,
+      "entity_uuid": "4bf16ad9-d162-4b34-8976-6859d6543794",
+      "entity_name": "景容饮冰",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 19,
+      "entity_uuid": "de68d509-d37a-4cc9-aa7f-399ead0d9f50",
+      "entity_name": "杨景媛",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 20,
+      "entity_uuid": "00928300-3cef-44f2-89e0-3f9f3903b276",
+      "entity_name": "杨某",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 21,
+      "entity_uuid": "5c946a38-2583-4565-ae4d-f7c4a33f44d3",
+      "entity_name": "杨某媛",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 22,
+      "entity_uuid": "6603c372-4d7f-44c5-9b0f-c0cba6943b8c",
+      "entity_name": "极目新闻",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 23,
+      "entity_uuid": "c9de27e1-eaea-476c-a063-bb3ef013e41b",
+      "entity_name": "武大图书馆事件肖同学",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 24,
+      "entity_uuid": "9cfe4643-60d3-400b-9f21-8f2dd8e87b45",
+      "entity_name": "武大性骚扰事件涉事男方",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 25,
+      "entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "entity_name": "武汉大学",
+      "entity_type": "University"
+    },
+    {
+      "agent_id": 26,
+      "entity_uuid": "b0513802-1a0a-4d3b-812f-16f4f54b401d",
+      "entity_name": "汤姆",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 27,
+      "entity_uuid": "fa9030f6-baca-42f4-9d63-54b525a0e1f7",
+      "entity_name": "浸会大学",
+      "entity_type": "University"
+    },
+    {
+      "agent_id": 28,
+      "entity_uuid": "37955e5c-c10c-46c7-bcc6-9cf31edadc07",
+      "entity_name": "涉事女生",
+      "entity_type": "Student"
+    },
+    {
+      "agent_id": 29,
+      "entity_uuid": "726ad2bf-7eaa-4df9-8d43-e27a66cbc37a",
+      "entity_name": "涉事男生代理律师",
+      "entity_type": "Lawyer"
+    },
+    {
+      "agent_id": 30,
+      "entity_uuid": "43c6768b-5865-464b-9ee6-495f8def2632",
+      "entity_name": "涉事男生母亲",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 31,
+      "entity_uuid": "b19661b4-ad29-4d45-8bc4-e7677847a51b",
+      "entity_name": "涉事男生皮肤科医生",
+      "entity_type": "MedicalProfessional"
+    },
+    {
+      "agent_id": 32,
+      "entity_uuid": "eb2938da-beec-4aef-b5f8-0aa68e35b9ea",
+      "entity_name": "潇湘晨报",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 33,
+      "entity_uuid": "1ba9f58c-c183-4e2e-b5ba-2cb934c02dac",
+      "entity_name": "澎湃新闻",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 34,
+      "entity_uuid": "f6333399-3b8d-44e4-9906-aef46f3f9e4d",
+      "entity_name": "男性发言者",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 35,
+      "entity_uuid": "ed80f7b8-f6c6-4655-9193-d100a4388faf",
+      "entity_name": "界面新闻",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 36,
+      "entity_uuid": "b25b1b13-1076-4cde-8e1a-ff4e3b978339",
+      "entity_name": "百家号",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 37,
+      "entity_uuid": "0c726ebc-33ce-4c81-b490-e23826c8bf91",
+      "entity_name": "第一财经",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 38,
+      "entity_uuid": "ef42ad47-f32a-49e8-b880-d3d213d9afef",
+      "entity_name": "经济观察报",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 39,
+      "entity_uuid": "ebfb2b4a-7f43-4383-a92b-72c49e577b04",
+      "entity_name": "网民",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 40,
+      "entity_uuid": "fd74a17b-a424-451b-92d0-ea92f0dabbbf",
+      "entity_name": "羊城派",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 41,
+      "entity_uuid": "f00d7d1d-db44-4545-88e9-62293cc8a7c1",
+      "entity_name": "肖方",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 42,
+      "entity_uuid": "1007492a-5931-468d-81ec-ac3e65985cec",
+      "entity_name": "肖某某",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 43,
+      "entity_uuid": "07623a85-4396-47ab-9068-b5096720c10e",
+      "entity_name": "肖某瑫",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 44,
+      "entity_uuid": "b477955c-2af1-4d05-ae2a-1c9b34c794ab",
+      "entity_name": "胡锡进",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 45,
+      "entity_uuid": "029deff2-eefd-4458-9ce3-affaab23dac0",
+      "entity_name": "观察者网",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 46,
+      "entity_uuid": "fe2ebf4a-3404-49da-9aae-afbe525240e3",
+      "entity_name": "辅导员",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 47,
+      "entity_uuid": "5ff6b1b7-e944-4157-a225-b91e2319c285",
+      "entity_name": "雷军",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 48,
+      "entity_uuid": "8d4f7423-c5a4-4560-8f5b-926f79ca2428",
+      "entity_name": "风声",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 49,
+      "entity_uuid": "64f36ffd-696a-4601-93e8-f15b1654b9e5",
+      "entity_name": "香港浸会大学",
+      "entity_type": "University"
+    },
+    {
+      "agent_id": 50,
+      "entity_uuid": "d81657c7-d1b1-4ee0-a145-f6b9d70d5b80",
+      "entity_name": "齐鲁壹点",
+      "entity_type": "MediaOutlet"
+    },
+    {
+      "agent_id": 51,
+      "entity_uuid": "synthetic_campus_observer_dd9ba3bca3c7",
+      "entity_name": "围观学生01",
+      "entity_type": "Student"
+    },
+    {
+      "agent_id": 52,
+      "entity_uuid": "synthetic_fact_checker_1b456e2dfa36",
+      "entity_name": "求证型网友02",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 53,
+      "entity_uuid": "synthetic_emotional_bystander_e1d56e51718d",
+      "entity_name": "情绪型路人03",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 54,
+      "entity_uuid": "synthetic_alumni_like_c30be6149768",
+      "entity_name": "校友观察者04",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 55,
+      "entity_uuid": "synthetic_parent_view_8638082a9645",
+      "entity_name": "家长视角用户05",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 56,
+      "entity_uuid": "synthetic_amplifier_5a25952e9c71",
+      "entity_name": "吃瓜转发用户06",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 57,
+      "entity_uuid": "synthetic_campus_observer_448ccc83950b",
+      "entity_name": "围观学生07",
+      "entity_type": "Student"
+    },
+    {
+      "agent_id": 58,
+      "entity_uuid": "synthetic_fact_checker_fef168468671",
+      "entity_name": "求证型网友08",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 59,
+      "entity_uuid": "synthetic_emotional_bystander_717067f952a9",
+      "entity_name": "情绪型路人09",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 60,
+      "entity_uuid": "synthetic_alumni_like_29d2869d6b41",
+      "entity_name": "校友观察者10",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 61,
+      "entity_uuid": "synthetic_parent_view_23256f476c47",
+      "entity_name": "家长视角用户11",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 62,
+      "entity_uuid": "synthetic_amplifier_555723c14c01",
+      "entity_name": "吃瓜转发用户12",
+      "entity_type": "Person"
+    },
+    {
+      "agent_id": 63,
+      "entity_uuid": "synthetic_campus_observer_8e09764c0154",
+      "entity_name": "围观学生13",
+      "entity_type": "Student"
+    },
+    {
+      "agent_id": 64,
+      "entity_uuid": "synthetic_fact_checker_cd1c484db3b0",
+      "entity_name": "求证型网友14",
+      "entity_type": "Person"
+    }
+  ],
+  "edges": [
+    {
+      "source_agent_id": 20,
+      "target_agent_id": 42,
+      "source_entity_uuid": "00928300-3cef-44f2-89e0-3f9f3903b276",
+      "target_entity_uuid": "1007492a-5931-468d-81ec-ac3e65985cec",
+      "source_entity_name": "杨某",
+      "target_entity_name": "肖某某",
+      "facts": [
+        "评论员认为如果杨某在法院判决后继续嘲讽肖某某的帖子是真的，那么杨某做出道歉就更加有必要",
+        "Yang Mou took a video of Xiao Moumou after the alleged incident.",
+        "Yang Mou accused Xiao Moumou of performing lewd actions, specifically rubbing his hand against his crotch, while they were studying in the library.",
+        "The court dismissed 杨某's accusation against 肖某某.",
+        "杨某 made an accusation of sexual harassment against 肖某某.",
+        "女生杨某某起诉男生肖某某性骚扰一案"
+      ],
+      "relation_names": [
+        "SHOULD_APOLOGIZE_TO",
+        "RECORDED_EVENT_INVOLVING",
+        "ACCUSED",
+        "RECEIVES_JUDGMENT_FROM_COURT",
+        "MADE_ACCUSATION_AGAINST",
+        "ALLEGED_HARASSER_IN_CASE_INVOLVING"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.15,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.65,
+      "interaction_prior": 0.33,
+      "relation_fact": "评论员认为如果杨某在法院判决后继续嘲讽肖某某的帖子是真的，那么杨某做出道歉就更加有必要 | Yang Mou took a video of Xiao Moumou after the alleged incident. | Yang Mou accused Xiao Moumou of performing lewd actions, specifically rubbing his hand against his crotch, while they were studying in the library. | The court dismissed 杨某's accusation against 肖某某. | 杨某 made an accusation of sexual harassment against 肖某某.",
+      "relation_name": "SHOULD_APOLOGIZE_TO,RECORDED_EVENT_INVOLVING,ACCUSED,RECEIVES_JUDGMENT_FROM_COURT"
+    },
+    {
+      "source_agent_id": 0,
+      "target_agent_id": 42,
+      "source_entity_uuid": "a45a3bf9-9358-40bb-8529-4fde074c6891",
+      "target_entity_uuid": "1007492a-5931-468d-81ec-ac3e65985cec",
+      "source_entity_name": "930老友记",
+      "target_entity_name": "肖某某",
+      "facts": [
+        "胡锡进 stated on 930老友记 that Wuhan University should apologize to Xiao Moumou on 2025-07-31."
+      ],
+      "relation_names": [
+        "COMMENTED_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "胡锡进 stated on 930老友记 that Wuhan University should apologize to Xiao Moumou on 2025-07-31.",
+      "relation_name": "COMMENTED_ON"
+    },
+    {
+      "source_agent_id": 3,
+      "target_agent_id": 24,
+      "source_entity_uuid": "18710628-dc46-4c76-b400-732dc9036517",
+      "target_entity_uuid": "9cfe4643-60d3-400b-9f21-8f2dd8e87b45",
+      "source_entity_name": "今日头条",
+      "target_entity_name": "武大性骚扰事件涉事男方",
+      "facts": [
+        "今日头条在2025-08-26报道了武大性骚扰事件涉事男方首度发声，声称系隔裤挠痒并已就网暴起诉。"
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "今日头条在2025-08-26报道了武大性骚扰事件涉事男方首度发声，声称系隔裤挠痒并已就网暴起诉。",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 4,
+      "target_agent_id": 23,
+      "source_entity_uuid": "cc879e2d-5287-4c67-9e1c-5b7552cc0cbc",
+      "target_entity_uuid": "c9de27e1-eaea-476c-a063-bb3ef013e41b",
+      "source_entity_name": "凤凰网",
+      "target_entity_name": "武大图书馆事件肖同学",
+      "facts": [
+        "凤凰网在2025-08-21报道了武大图书馆事件中肖同学的处分公告被隐藏且仅在校内网可见的情况。"
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "凤凰网在2025-08-21报道了武大图书馆事件中肖同学的处分公告被隐藏且仅在校内网可见的情况。",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 7,
+      "target_agent_id": 24,
+      "source_entity_uuid": "17a40f38-bd8a-42fa-a58c-dc1d02f7e952",
+      "target_entity_uuid": "9cfe4643-60d3-400b-9f21-8f2dd8e87b45",
+      "source_entity_name": "南方都市报",
+      "target_entity_name": "武大性骚扰事件涉事男方",
+      "facts": [
+        "南方都市报在2025-08-26报道了武大性骚扰事件涉事男方首度发声，声称系隔裤挠痒并已就网暴起诉。"
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "南方都市报在2025-08-26报道了武大性骚扰事件涉事男方首度发声，声称系隔裤挠痒并已就网暴起诉。",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 9,
+      "target_agent_id": 12,
+      "source_entity_uuid": "cd7407b9-715d-4ed9-bbd9-6d56651a675c",
+      "target_entity_uuid": "6d85d982-e1b3-48ef-9e85-6637a902baae",
+      "source_entity_name": "四川观察",
+      "target_entity_name": "封面新闻",
+      "facts": [
+        "四川观察报道了封面新闻关于武汉大学性骚扰事件一审宣判的消息。"
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "四川观察报道了封面新闻关于武汉大学性骚扰事件一审宣判的消息。",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 9,
+      "target_agent_id": 20,
+      "source_entity_uuid": "cd7407b9-715d-4ed9-bbd9-6d56651a675c",
+      "target_entity_uuid": "00928300-3cef-44f2-89e0-3f9f3903b276",
+      "source_entity_name": "四川观察",
+      "target_entity_name": "杨某",
+      "facts": [
+        "四川观察报道了女生杨某被网暴的困扰，与武汉大学图书馆性骚扰事件一审判决相关联。"
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "四川观察报道了女生杨某被网暴的困扰，与武汉大学图书馆性骚扰事件一审判决相关联。",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 9,
+      "target_agent_id": 25,
+      "source_entity_uuid": "cd7407b9-715d-4ed9-bbd9-6d56651a675c",
+      "target_entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "source_entity_name": "四川观察",
+      "target_entity_name": "武汉大学",
+      "facts": [
+        "四川观察主播报道了武汉大学图书馆性骚扰事件的一审宣判结果。"
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "四川观察主播报道了武汉大学图书馆性骚扰事件的一审宣判结果。",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 9,
+      "target_agent_id": 42,
+      "source_entity_uuid": "cd7407b9-715d-4ed9-bbd9-6d56651a675c",
+      "target_entity_uuid": "1007492a-5931-468d-81ec-ac3e65985cec",
+      "source_entity_name": "四川观察",
+      "target_entity_name": "肖某某",
+      "facts": [
+        "四川观察报道了法院认定男生肖某某未对特定对象实施性骚扰的判决结果。"
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "四川观察报道了法院认定男生肖某某未对特定对象实施性骚扰的判决结果。",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 11,
+      "target_agent_id": 21,
+      "source_entity_uuid": "b5b5e1c2-3ae5-41dd-8b95-bf75823360e0",
+      "target_entity_uuid": "5c946a38-2583-4565-ae4d-f7c4a33f44d3",
+      "source_entity_name": "天津广播",
+      "target_entity_name": "杨某媛",
+      "facts": [
+        "天津广播 reported that Yang Mouyuan was suspected not to be a doctoral student at Hong Kong Baptist University on 2025-08-08."
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "天津广播 reported that Yang Mouyuan was suspected not to be a doctoral student at Hong Kong Baptist University on 2025-08-08.",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 12,
+      "target_agent_id": 9,
+      "source_entity_uuid": "6d85d982-e1b3-48ef-9e85-6637a902baae",
+      "target_entity_uuid": "cd7407b9-715d-4ed9-bbd9-6d56651a675c",
+      "source_entity_name": "封面新闻",
+      "target_entity_name": "四川观察",
+      "facts": [
+        "封面新闻是四川观察新闻报道的来源之一，由汤姆编辑和YY审校。"
+      ],
+      "relation_names": [
+        "WORKS_FOR"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "封面新闻是四川观察新闻报道的来源之一，由汤姆编辑和YY审校。",
+      "relation_name": "WORKS_FOR"
+    },
+    {
+      "source_agent_id": 15,
+      "target_agent_id": 20,
+      "source_entity_uuid": "b205fd6c-9fb5-4992-a5d9-70918f498f09",
+      "target_entity_uuid": "00928300-3cef-44f2-89e0-3f9f3903b276",
+      "source_entity_name": "扬子晚报",
+      "target_entity_name": "杨某",
+      "facts": [
+        "扬子晚报报道了女生杨某某指控男生性骚扰一事的最新进展"
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "扬子晚报报道了女生杨某某指控男生性骚扰一事的最新进展",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 15,
+      "target_agent_id": 25,
+      "source_entity_uuid": "b205fd6c-9fb5-4992-a5d9-70918f498f09",
+      "target_entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "source_entity_name": "扬子晚报",
+      "target_entity_name": "武汉大学",
+      "facts": [
+        "扬子晚报 reported Wuhan University's response to the court dismissing the sexual harassment accusation, noting the previous disciplinary notice remained on their official website on 2025-07-31."
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "扬子晚报 reported Wuhan University's response to the court dismissing the sexual harassment accusation, noting the previous disciplinary notice remained on their official website on 2025-07-31.",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 16,
+      "target_agent_id": 20,
+      "source_entity_uuid": "d1418c32-9473-4a0a-9ef6-f86c3e23ca77",
+      "target_entity_uuid": "00928300-3cef-44f2-89e0-3f9f3903b276",
+      "source_entity_name": "新京报",
+      "target_entity_name": "杨某",
+      "facts": [
+        "新京报 reported Wuhan University announced a comprehensive investigation and review of Yang Mou's degree thesis on 2025-08-01."
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "新京报 reported Wuhan University announced a comprehensive investigation and review of Yang Mou's degree thesis on 2025-08-01.",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 16,
+      "target_agent_id": 25,
+      "source_entity_uuid": "d1418c32-9473-4a0a-9ef6-f86c3e23ca77",
+      "target_entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "source_entity_name": "新京报",
+      "target_entity_name": "武汉大学",
+      "facts": [
+        "新京报 reported Wuhan University announced a comprehensive investigation and review of the disciplinary action against Xiao Moumou and Yang Mou's thesis on 2025-08-01."
+      ],
+      "relation_names": [
+        "ISSUES_STATEMENT"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "新京报 reported Wuhan University announced a comprehensive investigation and review of the disciplinary action against Xiao Moumou and Yang Mou's thesis on 2025-08-01.",
+      "relation_name": "ISSUES_STATEMENT"
+    },
+    {
+      "source_agent_id": 16,
+      "target_agent_id": 42,
+      "source_entity_uuid": "d1418c32-9473-4a0a-9ef6-f86c3e23ca77",
+      "target_entity_uuid": "1007492a-5931-468d-81ec-ac3e65985cec",
+      "source_entity_name": "新京报",
+      "target_entity_name": "肖某某",
+      "facts": [
+        "新京报 reported Wuhan University announced a comprehensive investigation and review of the disciplinary action against Xiao Moumou on 2025-08-01."
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "新京报 reported Wuhan University announced a comprehensive investigation and review of the disciplinary action against Xiao Moumou on 2025-08-01.",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 17,
+      "target_agent_id": 20,
+      "source_entity_uuid": "36ea558d-a4e0-4648-a6cb-0c9c512e0766",
+      "target_entity_uuid": "00928300-3cef-44f2-89e0-3f9f3903b276",
+      "source_entity_name": "新华社",
+      "target_entity_name": "杨某",
+      "facts": [
+        "新华社 reported Wuhan University announced a comprehensive investigation and review of Yang Mou's degree thesis on 2025-08-01."
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "新华社 reported Wuhan University announced a comprehensive investigation and review of Yang Mou's degree thesis on 2025-08-01.",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 17,
+      "target_agent_id": 25,
+      "source_entity_uuid": "36ea558d-a4e0-4648-a6cb-0c9c512e0766",
+      "target_entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "source_entity_name": "新华社",
+      "target_entity_name": "武汉大学",
+      "facts": [
+        "新华社 reported Wuhan University announced a comprehensive investigation and review of the disciplinary action against Xiao Moumou and Yang Mou's thesis on 2025-08-01."
+      ],
+      "relation_names": [
+        "ISSUES_STATEMENT"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "新华社 reported Wuhan University announced a comprehensive investigation and review of the disciplinary action against Xiao Moumou and Yang Mou's thesis on 2025-08-01.",
+      "relation_name": "ISSUES_STATEMENT"
+    },
+    {
+      "source_agent_id": 17,
+      "target_agent_id": 42,
+      "source_entity_uuid": "36ea558d-a4e0-4648-a6cb-0c9c512e0766",
+      "target_entity_uuid": "1007492a-5931-468d-81ec-ac3e65985cec",
+      "source_entity_name": "新华社",
+      "target_entity_name": "肖某某",
+      "facts": [
+        "新华社 reported Wuhan University announced a comprehensive investigation and review of the disciplinary action against Xiao Moumou on 2025-08-01.",
+        "新华社在2025-09-20报道了武大撤销肖某某记过处分的消息。"
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "新华社 reported Wuhan University announced a comprehensive investigation and review of the disciplinary action against Xiao Moumou on 2025-08-01. | 新华社在2025-09-20报道了武大撤销肖某某记过处分的消息。",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 18,
+      "target_agent_id": 25,
+      "source_entity_uuid": "4bf16ad9-d162-4b34-8976-6859d6543794",
+      "target_entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "source_entity_name": "景容饮冰",
+      "target_entity_name": "武汉大学",
+      "facts": [
+        "景容饮冰将性骚扰事件的证据同步给了武汉大学校长信箱。"
+      ],
+      "relation_names": [
+        "REPORTED_TO"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "景容饮冰将性骚扰事件的证据同步给了武汉大学校长信箱。",
+      "relation_name": "REPORTED_TO"
+    },
+    {
+      "source_agent_id": 25,
+      "target_agent_id": 42,
+      "source_entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "target_entity_uuid": "1007492a-5931-468d-81ec-ac3e65985cec",
+      "source_entity_name": "武汉大学",
+      "target_entity_name": "肖某某",
+      "facts": [
+        "武汉大学在当时舆论压力下轻率地对肖某某做出了记过处分，评论员认为这是非常不对的",
+        "武汉大学在二零二二年十月十三日左右发布通报，给予了肖某某记过处分。",
+        "肖某某在武汉大学图书馆自习时发生了相关事件。",
+        "武汉大学在2025-09-20发布了关于肖某某情况的通报。",
+        "武汉大学对肖某某作出的记过处分应当被撤销",
+        "Wuhan University issued a situation report regarding the investigation into 肖某某's disciplinary action.",
+        "Xiao Moumou was involved in an incident at Wuhan University that went to court.",
+        "学校对涉及肖某某的事件做出了处理结果。",
+        "作为组织，武汉大学应当向肖某某作出道歉"
+      ],
+      "relation_names": [
+        "COMMENTED_ON",
+        "ISSUES_STATEMENT",
+        "STUDIES_AT",
+        "ISSUES_DISCIPLINARY_ACTION",
+        "ASSOCIATED_WITH"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "武汉大学在当时舆论压力下轻率地对肖某某做出了记过处分，评论员认为这是非常不对的 | 武汉大学在二零二二年十月十三日左右发布通报，给予了肖某某记过处分。 | 肖某某在武汉大学图书馆自习时发生了相关事件。 | 武汉大学在2025-09-20发布了关于肖某某情况的通报。 | 武汉大学对肖某某作出的记过处分应当被撤销",
+      "relation_name": "COMMENTED_ON,ISSUES_STATEMENT,STUDIES_AT,ISSUES_DISCIPLINARY_ACTION"
+    },
+    {
+      "source_agent_id": 32,
+      "target_agent_id": 25,
+      "source_entity_uuid": "eb2938da-beec-4aef-b5f8-0aa68e35b9ea",
+      "target_entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "source_entity_name": "潇湘晨报",
+      "target_entity_name": "武汉大学",
+      "facts": [
+        "潇湘晨报 featured a main editor's attitude piece on 2025-08-02 about Wuhan University moving from 'waiting for superior arrangement' to 'comprehensive investigation and review'.",
+        "潇湘晨报 featured a main editor's attitude piece on the Wuhan University Library sexual harassment case on 2025-07-30, cautioning against gender opposition as a public opinion stance."
+      ],
+      "relation_names": [
+        "COMMENTED_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "潇湘晨报 featured a main editor's attitude piece on 2025-08-02 about Wuhan University moving from 'waiting for superior arrangement' to 'comprehensive investigation and review'. | 潇湘晨报 featured a main editor's attitude piece on the Wuhan University Library sexual harassment case on 2025-07-30, cautioning against gender opposition as a public opinion stance.",
+      "relation_name": "COMMENTED_ON"
+    },
+    {
+      "source_agent_id": 33,
+      "target_agent_id": 21,
+      "source_entity_uuid": "1ba9f58c-c183-4e2e-b5ba-2cb934c02dac",
+      "target_entity_uuid": "5c946a38-2583-4565-ae4d-f7c4a33f44d3",
+      "source_entity_name": "澎湃新闻",
+      "target_entity_name": "杨某媛",
+      "facts": [
+        "澎湃新闻在2025-08-16就相关事件发表了评论，呼吁全面调查复核。",
+        "澎湃新闻在2025-09-11呼吁知网公开说明武大杨某媛论文下架后再上架的原因。"
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "澎湃新闻在2025-08-16就相关事件发表了评论，呼吁全面调查复核。 | 澎湃新闻在2025-09-11呼吁知网公开说明武大杨某媛论文下架后再上架的原因。",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 35,
+      "target_agent_id": 43,
+      "source_entity_uuid": "ed80f7b8-f6c6-4655-9193-d100a4388faf",
+      "target_entity_uuid": "07623a85-4396-47ab-9068-b5096720c10e",
+      "source_entity_name": "界面新闻",
+      "target_entity_name": "肖某瑫",
+      "facts": [
+        "界面新闻在2025-09-20报道武汉大学回应了网传肖某瑫“遭遇网暴致学业中断、爷爷去世”为不实信息。"
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "界面新闻在2025-09-20报道武汉大学回应了网传肖某瑫“遭遇网暴致学业中断、爷爷去世”为不实信息。",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 37,
+      "target_agent_id": 21,
+      "source_entity_uuid": "0c726ebc-33ce-4c81-b490-e23826c8bf91",
+      "target_entity_uuid": "5c946a38-2583-4565-ae4d-f7c4a33f44d3",
+      "source_entity_name": "第一财经",
+      "target_entity_name": "杨某媛",
+      "facts": [
+        "第一财经在2025-09-10报道了武汉大学杨某媛论文突然下架，知网回应了此事。",
+        "第一财经在2025-09-10报道了知网恢复展示武汉大学杨某媛的论文。"
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "第一财经在2025-09-10报道了武汉大学杨某媛论文突然下架，知网回应了此事。 | 第一财经在2025-09-10报道了知网恢复展示武汉大学杨某媛的论文。",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 37,
+      "target_agent_id": 25,
+      "source_entity_uuid": "0c726ebc-33ce-4c81-b490-e23826c8bf91",
+      "target_entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "source_entity_name": "第一财经",
+      "target_entity_name": "武汉大学",
+      "facts": [
+        "第一财经在2025-08-23对“有事找警察”的现象发表了评论。"
+      ],
+      "relation_names": [
+        "COMMENTED_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "第一财经在2025-08-23对“有事找警察”的现象发表了评论。",
+      "relation_name": "COMMENTED_ON"
+    },
+    {
+      "source_agent_id": 38,
+      "target_agent_id": 13,
+      "source_entity_uuid": "ef42ad47-f32a-49e8-b880-d3d213d9afef",
+      "target_entity_uuid": "5a844ae5-e65f-4380-a940-c2ad7ff23969",
+      "source_entity_name": "经济观察报",
+      "target_entity_name": "张平文",
+      "facts": [
+        "经济观察报 reported that Wuhan University President Zhang Pingwen was handling the incident where the student's sexual harassment accusation was dismissed on 2025-07-31."
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "经济观察报 reported that Wuhan University President Zhang Pingwen was handling the incident where the student's sexual harassment accusation was dismissed on 2025-07-31.",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 40,
+      "target_agent_id": 25,
+      "source_entity_uuid": "fd74a17b-a424-451b-92d0-ea92f0dabbbf",
+      "target_entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "source_entity_name": "羊城派",
+      "target_entity_name": "武汉大学",
+      "facts": [
+        "羊城派 published a commentary on Wuhan University's response, suggesting it was poorly timed, on 2025-08-01."
+      ],
+      "relation_names": [
+        "COMMENTED_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "羊城派 published a commentary on Wuhan University's response, suggesting it was poorly timed, on 2025-08-01.",
+      "relation_name": "COMMENTED_ON"
+    },
+    {
+      "source_agent_id": 44,
+      "target_agent_id": 20,
+      "source_entity_uuid": "b477955c-2af1-4d05-ae2a-1c9b34c794ab",
+      "target_entity_uuid": "00928300-3cef-44f2-89e0-3f9f3903b276",
+      "source_entity_name": "胡锡进",
+      "target_entity_name": "杨某",
+      "facts": [
+        "胡锡进希望事件在杨某改变态度后结束"
+      ],
+      "relation_names": [
+        "COMMENTED_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "胡锡进希望事件在杨某改变态度后结束",
+      "relation_name": "COMMENTED_ON"
+    },
+    {
+      "source_agent_id": 44,
+      "target_agent_id": 25,
+      "source_entity_uuid": "b477955c-2af1-4d05-ae2a-1c9b34c794ab",
+      "target_entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "source_entity_name": "胡锡进",
+      "target_entity_name": "武汉大学",
+      "facts": [
+        "一位被称为“老胡”的评论员呼吁公众理性看待涉及武汉大学的事件，并希望事件按照法律和道德处理，避免情绪化为“男女对立”。"
+      ],
+      "relation_names": [
+        "COMMENTED_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "一位被称为“老胡”的评论员呼吁公众理性看待涉及武汉大学的事件，并希望事件按照法律和道德处理，避免情绪化为“男女对立”。",
+      "relation_name": "COMMENTED_ON"
+    },
+    {
+      "source_agent_id": 44,
+      "target_agent_id": 42,
+      "source_entity_uuid": "b477955c-2af1-4d05-ae2a-1c9b34c794ab",
+      "target_entity_uuid": "1007492a-5931-468d-81ec-ac3e65985cec",
+      "source_entity_name": "胡锡进",
+      "target_entity_name": "肖某某",
+      "facts": [
+        "胡锡进认为肖某某之前受到的伤害显然更大"
+      ],
+      "relation_names": [
+        "COMMENTED_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "胡锡进认为肖某某之前受到的伤害显然更大",
+      "relation_name": "COMMENTED_ON"
+    },
+    {
+      "source_agent_id": 45,
+      "target_agent_id": 21,
+      "source_entity_uuid": "029deff2-eefd-4458-9ce3-affaab23dac0",
+      "target_entity_uuid": "5c946a38-2583-4565-ae4d-f7c4a33f44d3",
+      "source_entity_name": "观察者网",
+      "target_entity_name": "杨某媛",
+      "facts": [
+        "观察者网在2025-09-20报道武汉中院驳回了杨某媛的上诉。"
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "观察者网在2025-09-20报道武汉中院驳回了杨某媛的上诉。",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 45,
+      "target_agent_id": 25,
+      "source_entity_uuid": "029deff2-eefd-4458-9ce3-affaab23dac0",
+      "target_entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "source_entity_name": "观察者网",
+      "target_entity_name": "武汉大学",
+      "facts": [
+        "观察者网 reported that Wuhan University had still not deleted the disciplinary notice against Xiao Moumou on 2025-08-01."
+      ],
+      "relation_names": [
+        "REPORTS_ON"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "观察者网 reported that Wuhan University had still not deleted the disciplinary notice against Xiao Moumou on 2025-08-01.",
+      "relation_name": "REPORTS_ON"
+    },
+    {
+      "source_agent_id": 45,
+      "target_agent_id": 49,
+      "source_entity_uuid": "029deff2-eefd-4458-9ce3-affaab23dac0",
+      "target_entity_uuid": "64f36ffd-696a-4601-93e8-f15b1654b9e5",
+      "source_entity_name": "观察者网",
+      "target_entity_name": "香港浸会大学",
+      "facts": [
+        "观察者网 reported Hong Kong Baptist University stated it would handle any violation of the code of conduct according to established disciplinary procedures on 2025-08-03."
+      ],
+      "relation_names": [
+        "ISSUES_STATEMENT"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "观察者网 reported Hong Kong Baptist University stated it would handle any violation of the code of conduct according to established disciplinary procedures on 2025-08-03.",
+      "relation_name": "ISSUES_STATEMENT"
+    },
+    {
+      "source_agent_id": 50,
+      "target_agent_id": 49,
+      "source_entity_uuid": "d81657c7-d1b1-4ee0-a145-f6b9d70d5b80",
+      "target_entity_uuid": "64f36ffd-696a-4601-93e8-f15b1654b9e5",
+      "source_entity_name": "齐鲁壹点",
+      "target_entity_name": "香港浸会大学",
+      "facts": [
+        "齐鲁壹点 reported Hong Kong Baptist University responded to the WuDa Library female student's complaint against the male student's sexual harassment case on 2025-08-03."
+      ],
+      "relation_names": [
+        "ISSUES_STATEMENT"
+      ],
+      "exposure_weight": 0.35,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.1225,
+      "relation_fact": "齐鲁壹点 reported Hong Kong Baptist University responded to the WuDa Library female student's complaint against the male student's sexual harassment case on 2025-08-03.",
+      "relation_name": "ISSUES_STATEMENT"
+    },
+    {
+      "source_agent_id": 1,
+      "target_agent_id": 18,
+      "source_entity_uuid": "e3ce722d-f2e7-490c-bf3c-36ae1032e8f3",
+      "target_entity_uuid": "4bf16ad9-d162-4b34-8976-6859d6543794",
+      "source_entity_name": "X同学",
+      "target_entity_name": "景容饮冰",
+      "facts": [
+        "X同学在2023年7月11日与景容饮冰对峙后写了道歉信，但景容饮冰不认可其有效性。"
+      ],
+      "relation_names": [
+        "ISSUED_APOLOGY_TO"
+      ],
+      "exposure_weight": 0.1,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.035,
+      "relation_fact": "X同学在2023年7月11日与景容饮冰对峙后写了道歉信，但景容饮冰不认可其有效性。",
+      "relation_name": "ISSUED_APOLOGY_TO"
+    },
+    {
+      "source_agent_id": 5,
+      "target_agent_id": 1,
+      "source_entity_uuid": "88e438bb-1bdd-4294-809f-b1b94b523638",
+      "target_entity_uuid": "e3ce722d-f2e7-490c-bf3c-36ae1032e8f3",
+      "source_entity_name": "刘迪",
+      "target_entity_name": "X同学",
+      "facts": [
+        "刘迪是X同学的辅导员。"
+      ],
+      "relation_names": [
+        "IS_COUNSELOR_FOR"
+      ],
+      "exposure_weight": 0.1,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.035,
+      "relation_fact": "刘迪是X同学的辅导员。",
+      "relation_name": "IS_COUNSELOR_FOR"
+    },
+    {
+      "source_agent_id": 6,
+      "target_agent_id": 42,
+      "source_entity_uuid": "72db3a94-f070-4a7d-b49d-3ec351755df4",
+      "target_entity_uuid": "1007492a-5931-468d-81ec-ac3e65985cec",
+      "source_entity_name": "医学专家",
+      "target_entity_name": "肖某某",
+      "facts": [
+        "医学专家论证肖某某（或其代理方）的行为不符合自慰特征。"
+      ],
+      "relation_names": [
+        "DIAGNOSES"
+      ],
+      "exposure_weight": 0.1,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.035,
+      "relation_fact": "医学专家论证肖某某（或其代理方）的行为不符合自慰特征。",
+      "relation_name": "DIAGNOSES"
+    },
+    {
+      "source_agent_id": 14,
+      "target_agent_id": 42,
+      "source_entity_uuid": "f5c5653c-4c74-4a65-a5db-e629b6e19e07",
+      "target_entity_uuid": "1007492a-5931-468d-81ec-ac3e65985cec",
+      "source_entity_name": "微博",
+      "target_entity_name": "肖某某",
+      "facts": [
+        "有网民冒充肖某某的同学在微博上发帖，导致两名违规用户被关闭账号，相关信息于2025-08-26发布。"
+      ],
+      "relation_names": [
+        "POSTED_ABOUT"
+      ],
+      "exposure_weight": 0.1,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.035,
+      "relation_fact": "有网民冒充肖某某的同学在微博上发帖，导致两名违规用户被关闭账号，相关信息于2025-08-26发布。",
+      "relation_name": "POSTED_ABOUT"
+    },
+    {
+      "source_agent_id": 18,
+      "target_agent_id": 1,
+      "source_entity_uuid": "4bf16ad9-d162-4b34-8976-6859d6543794",
+      "target_entity_uuid": "e3ce722d-f2e7-490c-bf3c-36ae1032e8f3",
+      "source_entity_name": "景容饮冰",
+      "target_entity_name": "X同学",
+      "facts": [
+        "景容饮冰指控X同学在2023年7月11日傍晚在武汉大学文理学部图书馆北门走廊实施了性骚扰行为。"
+      ],
+      "relation_names": [
+        "ACCUSED_OF"
+      ],
+      "exposure_weight": 0.1,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.035,
+      "relation_fact": "景容饮冰指控X同学在2023年7月11日傍晚在武汉大学文理学部图书馆北门走廊实施了性骚扰行为。",
+      "relation_name": "ACCUSED_OF"
+    },
+    {
+      "source_agent_id": 20,
+      "target_agent_id": 25,
+      "source_entity_uuid": "00928300-3cef-44f2-89e0-3f9f3903b276",
+      "target_entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "source_entity_name": "杨某",
+      "target_entity_name": "武汉大学",
+      "facts": [
+        "杨某 was a student at Wuhan University at the time of the incident."
+      ],
+      "relation_names": [
+        "STUDIES_AT"
+      ],
+      "exposure_weight": 0.1,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.035,
+      "relation_fact": "杨某 was a student at Wuhan University at the time of the incident.",
+      "relation_name": "STUDIES_AT"
+    },
+    {
+      "source_agent_id": 20,
+      "target_agent_id": 39,
+      "source_entity_uuid": "00928300-3cef-44f2-89e0-3f9f3903b276",
+      "target_entity_uuid": "ebfb2b4a-7f43-4383-a92b-72c49e577b04",
+      "source_entity_name": "杨某",
+      "target_entity_name": "网民",
+      "facts": [
+        "杨某遭受了来自网民的网络暴力和辱骂，导致其精神崩溃"
+      ],
+      "relation_names": [
+        "SUBJECT_TO_ONLINE_HARASSMENT"
+      ],
+      "exposure_weight": 0.1,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.035,
+      "relation_fact": "杨某遭受了来自网民的网络暴力和辱骂，导致其精神崩溃",
+      "relation_name": "SUBJECT_TO_ONLINE_HARASSMENT"
+    },
+    {
+      "source_agent_id": 25,
+      "target_agent_id": 19,
+      "source_entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "target_entity_uuid": "de68d509-d37a-4cc9-aa7f-399ead0d9f50",
+      "source_entity_name": "武汉大学",
+      "target_entity_name": "杨景媛",
+      "facts": [
+        "Wuhan University upheld the granting of the master's degree to 杨景媛."
+      ],
+      "relation_names": [
+        "ISSUES_STATEMENT"
+      ],
+      "exposure_weight": 0.1,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.035,
+      "relation_fact": "Wuhan University upheld the granting of the master's degree to 杨景媛.",
+      "relation_name": "ISSUES_STATEMENT"
+    },
+    {
+      "source_agent_id": 25,
+      "target_agent_id": 43,
+      "source_entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "target_entity_uuid": "07623a85-4396-47ab-9068-b5096720c10e",
+      "source_entity_name": "武汉大学",
+      "target_entity_name": "肖某瑫",
+      "facts": [
+        "Wuhan University revoked the demerit sanction against 肖某瑫."
+      ],
+      "relation_names": [
+        "REMOVED_SANCTION_FROM"
+      ],
+      "exposure_weight": 0.1,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.035,
+      "relation_fact": "Wuhan University revoked the demerit sanction against 肖某瑫.",
+      "relation_name": "REMOVED_SANCTION_FROM"
+    },
+    {
+      "source_agent_id": 30,
+      "target_agent_id": 42,
+      "source_entity_uuid": "43c6768b-5865-464b-9ee6-495f8def2632",
+      "target_entity_uuid": "1007492a-5931-468d-81ec-ac3e65985cec",
+      "source_entity_name": "涉事男生母亲",
+      "target_entity_name": "肖某某",
+      "facts": [
+        "The mother of the accused boy provided medical records suggesting he was scratching due to severe eczema, not self-gratification."
+      ],
+      "relation_names": [
+        "PROVIDES_EVIDENCE_FOR"
+      ],
+      "exposure_weight": 0.1,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.035,
+      "relation_fact": "The mother of the accused boy provided medical records suggesting he was scratching due to severe eczema, not self-gratification.",
+      "relation_name": "PROVIDES_EVIDENCE_FOR"
+    },
+    {
+      "source_agent_id": 42,
+      "target_agent_id": 20,
+      "source_entity_uuid": "1007492a-5931-468d-81ec-ac3e65985cec",
+      "target_entity_uuid": "00928300-3cef-44f2-89e0-3f9f3903b276",
+      "source_entity_name": "肖某某",
+      "target_entity_name": "杨某",
+      "facts": [
+        "肖某某和杨某都承受了网络暴力的后果。",
+        "肖某某被指控在武汉大学图书馆对杨某实施了不当行为（被描述为“下流的事”）。",
+        "The court ruled that 肖某某 could not be determined to have committed sexual harassment against 杨某."
+      ],
+      "relation_names": [
+        "INVOLVED_IN_SAME_INCIDENT",
+        "ALLEGEDLY_HARASSED",
+        "RECEIVES_JUDGMENT_FROM_COURT"
+      ],
+      "exposure_weight": 0.1,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.035,
+      "relation_fact": "肖某某和杨某都承受了网络暴力的后果。 | 肖某某被指控在武汉大学图书馆对杨某实施了不当行为（被描述为“下流的事”）。 | The court ruled that 肖某某 could not be determined to have committed sexual harassment against 杨某.",
+      "relation_name": "INVOLVED_IN_SAME_INCIDENT,ALLEGEDLY_HARASSED,RECEIVES_JUDGMENT_FROM_COURT"
+    },
+    {
+      "source_agent_id": 42,
+      "target_agent_id": 25,
+      "source_entity_uuid": "1007492a-5931-468d-81ec-ac3e65985cec",
+      "target_entity_uuid": "f9c12b2a-dcb2-4777-860d-a5f4b62056f2",
+      "source_entity_name": "肖某某",
+      "target_entity_name": "武汉大学",
+      "facts": [
+        "肖某某 was a student at Wuhan University.",
+        "An official disciplinary action (记过处分) was issued against Xiao Moumou on the 3rd."
+      ],
+      "relation_names": [
+        "STUDIES_AT",
+        "ISSUES_STATEMENT"
+      ],
+      "exposure_weight": 0.1,
+      "trust_weight": 0.0,
+      "hostility_weight": 0.0,
+      "alliance_weight": 0.0,
+      "interaction_prior": 0.035,
+      "relation_fact": "肖某某 was a student at Wuhan University. | An official disciplinary action (记过处分) was issued against Xiao Moumou on the 3rd.",
+      "relation_name": "STUDIES_AT,ISSUES_STATEMENT"
+    }
+  ]
+}

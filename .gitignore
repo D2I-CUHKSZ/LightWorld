@@ -2,3 +2,22 @@
 .env
 backend/.env
 backend/app/setting/settings_local.py
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local logs
+log/
+backend/log/
+backend/logs/
+
+# Generated runtime artifacts kept locally
+backend/uploads/
+output/
+backend/input2graph/projects/
+
+# Local databases
+*.db

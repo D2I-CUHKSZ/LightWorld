@@ -128,19 +128,19 @@ class EventConfig:
 
 @dataclass
 class PlatformConfig:
-    """平台特定配置"""
+    """平台特定配置（对齐当前 OASIS Platform 支持的参数）"""
     platform: str  # twitter or reddit
-    
-    # 推荐算法权重
-    recency_weight: float = 0.4  # 时间新鲜度
-    popularity_weight: float = 0.3  # 热度
-    relevance_weight: float = 0.3  # 相关性
-    
-    # 病毒传播阈值（达到多少互动后触发扩散）
-    viral_threshold: int = 10
-    
-    # 回声室效应强度（相似观点聚集程度）
-    echo_chamber_strength: float = 0.5
+    recsys_type: str = "reddit"
+    refresh_rec_post_count: int = 1
+    max_rec_post_len: int = 2
+    following_post_count: int = 3
+    rec_prob: float = 0.7
+    trend_num_days: int = 7
+    trend_top_k: int = 1
+    report_threshold: int = 2
+    show_score: bool = False
+    allow_self_rating: bool = True
+    use_openai_embedding: bool = False
 
 
 @dataclass
@@ -421,21 +421,33 @@ class SimulationConfigGenerator:
         if enable_twitter:
             twitter_config = PlatformConfig(
                 platform="twitter",
-                recency_weight=0.4,
-                popularity_weight=0.3,
-                relevance_weight=0.3,
-                viral_threshold=10,
-                echo_chamber_strength=0.5
+                recsys_type="twhin-bert",
+                refresh_rec_post_count=2,
+                max_rec_post_len=2,
+                following_post_count=3,
+                rec_prob=0.7,
+                trend_num_days=7,
+                trend_top_k=1,
+                report_threshold=2,
+                show_score=False,
+                allow_self_rating=True,
+                use_openai_embedding=False,
             )
         
         if enable_reddit:
             reddit_config = PlatformConfig(
                 platform="reddit",
-                recency_weight=0.3,
-                popularity_weight=0.4,
-                relevance_weight=0.3,
-                viral_threshold=15,
-                echo_chamber_strength=0.6
+                recsys_type="reddit",
+                refresh_rec_post_count=5,
+                max_rec_post_len=100,
+                following_post_count=3,
+                rec_prob=0.7,
+                trend_num_days=7,
+                trend_top_k=1,
+                report_threshold=2,
+                show_score=True,
+                allow_self_rating=True,
+                use_openai_embedding=False,
             )
         
         # 构建最终参数

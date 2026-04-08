@@ -32,6 +32,10 @@ BACKEND_DIR = Path(__file__).resolve().parents[2]
 PROJECT_ROOT = BACKEND_DIR.parent
 FULL_RUNS_DIR = BACKEND_DIR / "uploads" / "full_runs"
 LATEST_MANIFEST_PATH = FULL_RUNS_DIR / "latest.json"
+PROJECTS_ROOT = Path(Config.UPLOAD_FOLDER) / "projects"
+SIMULATIONS_ROOT = Path(Config.OASIS_SIMULATION_DATA_DIR)
+REPORTS_ROOT = Path(Config.REPORTS_DIR)
+PARALLEL_SIM_SCRIPT = BACKEND_DIR / "run_scripts" / "run_parallel_simulation.py"
 
 
 def parse_args() -> argparse.Namespace:
@@ -189,6 +193,18 @@ def remove_path(path: Path):
         shutil.rmtree(path)
 
 
+def get_project_dir(project_id: str) -> Path:
+    return (PROJECTS_ROOT / project_id).resolve()
+
+
+def get_simulation_dir(simulation_id: str) -> Path:
+    return (SIMULATIONS_ROOT / simulation_id).resolve()
+
+
+def get_report_dir(report_id: str) -> Path:
+    return (REPORTS_ROOT / report_id).resolve()
+
+
 def expose_artifact(target: Path, exposed_path: Path) -> str:
     if not target.exists():
         return ""
@@ -277,16 +293,14 @@ def apply_simulation_config_overrides(simulation_dir: Path, run_dir: Path, confi
 
     normalize_topology_cluster_config(current_config)
     write_json(config_path, current_config)
-
     write_json(run_dir / "simulation_config.final.json", current_config)
 
 
 def run_parallel_simulation(simulation_dir: Path, config: Dict[str, Any]):
     run_cfg = config.get("run", {}) or {}
-    script_path = BACKEND_DIR / "scripts" / "run_parallel_simulation.py"
     cmd = [
         sys.executable,
-        str(script_path),
+        str(PARALLEL_SIM_SCRIPT),
         "--config",
         str(simulation_dir / "simulation_config.json"),
     ]
@@ -325,10 +339,12 @@ def maybe_generate_report(config: Dict[str, Any], prepare_state: Dict[str, Any],
         raise ValueError(f"项目不存在: {prepare_state['project_id']}")
 
     report_id = str(report_cfg.get("report_id", "") or "").strip() or None
+    report_mode = str(report_cfg.get("mode", "public_report") or "public_report")
     agent = ReportAgent(
         graph_id=str(prepare_state["graph_id"]),
         simulation_id=str(prepare_state["simulation_id"]),
         simulation_requirement=project.simulation_requirement or str(config.get("simulation_requirement", "")),
+        report_mode=report_mode,
     )
 
     def progress(stage: str, percent: int, message: str):
@@ -353,8 +369,8 @@ def create_consolidated_view(
 ) -> Dict[str, str]:
     project_id = str(prepare_state["project_id"])
     simulation_id = str(prepare_state["simulation_id"])
-    project_dir = (BACKEND_DIR / "uploads" / "projects" / project_id).resolve()
-    simulation_dir = (BACKEND_DIR / "uploads" / "simulations" / simulation_id).resolve()
+    project_dir = get_project_dir(project_id)
+    simulation_dir = get_simulation_dir(simulation_id)
 
     project_view_dir = run_dir / "01_project_artifacts"
     simulation_view_dir = run_dir / "02_simulation_artifacts"
@@ -407,7 +423,7 @@ def create_consolidated_view(
     report_lines = ["## 03_report_artifacts", ""]
     if report_meta and str(report_meta.get("report_id", "") or "").strip():
         report_id = str(report_meta["report_id"])
-        report_dir = (BACKEND_DIR / "uploads" / "reports" / report_id).resolve()
+        report_dir = get_report_dir(report_id)
         report_links = {
             "report_workspace": report_dir,
             "report_metadata.json": report_dir / "meta.json",
@@ -480,8 +496,8 @@ def build_manifest(
 ) -> Dict[str, Any]:
     simulation_id = str(prepare_state["simulation_id"])
     project_id = str(prepare_state["project_id"])
-    simulation_dir = (BACKEND_DIR / "uploads" / "simulations" / simulation_id).resolve()
-    project_dir = (BACKEND_DIR / "uploads" / "projects" / project_id).resolve()
+    simulation_dir = get_simulation_dir(simulation_id)
+    project_dir = get_project_dir(project_id)
 
     report_id = ""
     report_dir = ""
@@ -489,7 +505,7 @@ def build_manifest(
     if report_meta:
         report_id = str(report_meta.get("report_id", "") or "")
         if report_id:
-            report_dir = str((BACKEND_DIR / "uploads" / "reports" / report_id).resolve())
+            report_dir = str(get_report_dir(report_id))
         full_report_path = str(report_meta.get("full_report_path", "") or "")
 
     manifest = {
@@ -544,7 +560,7 @@ def main() -> int:
     write_json(run_dir / "pipeline_result.json", pipeline_result)
 
     prepare_state = prepare_simulation_assets(pipeline_result, config, run_dir)
-    simulation_dir = BACKEND_DIR / "uploads" / "simulations" / str(prepare_state["simulation_id"])
+    simulation_dir = get_simulation_dir(str(prepare_state["simulation_id"]))
     apply_simulation_config_overrides(simulation_dir, run_dir, config)
     run_parallel_simulation(simulation_dir, config)
 

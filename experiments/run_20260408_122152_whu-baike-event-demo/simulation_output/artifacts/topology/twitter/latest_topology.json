@@ -1,0 +1,1327 @@
+{
+  "platform": "twitter",
+  "generated_at": "2026-04-08T12:48:43.285321",
+  "round": 24,
+  "simulated_hour": 23,
+  "reason": "round_complete",
+  "enabled": true,
+  "coordination_enabled": true,
+  "differentiation_enabled": true,
+  "agent_count": 65,
+  "active_agent_ids": [
+    45,
+    16,
+    48,
+    15
+  ],
+  "active_agent_names": [
+    "观察者网",
+    "新京报",
+    "风声",
+    "扬子晚报"
+  ],
+  "unit_count": 38,
+  "unit_size_distribution": [
+    5,
+    5,
+    3,
+    3,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "avg_unit_size": 1.7105,
+  "largest_unit_size": 5,
+  "singleton_units": 19,
+  "largest_units": [
+    {
+      "unit_id": 1,
+      "size": 5,
+      "representative_agent_id": 25,
+      "representative_agent_name": "武汉大学",
+      "members": [
+        {
+          "agent_id": 15,
+          "agent_name": "扬子晚报",
+          "importance": 1.714014,
+          "ppr_centrality": 0.015635,
+          "neighbor_influence": -0.019146,
+          "keywords": [
+            "司法裁定",
+            "媒体报导",
+            "学生纪律处分",
+            "性骚扰指控",
+            "扬子晚报",
+            "据扬子晚报消息",
+            "校园舆情",
+            "武汉大学"
+          ]
+        },
+        {
+          "agent_id": 25,
+          "agent_name": "武汉大学",
+          "importance": 1.950726,
+          "ppr_centrality": 0.022724,
+          "neighbor_influence": -0.057402,
+          "keywords": [
+            "图书馆性骚扰事件",
+            "学位授予",
+            "杨景媛",
+            "武汉大学",
+            "纪律处分复核",
+            "肖某某",
+            "舆情回应",
+            "高校问责机制"
+          ]
+        },
+        {
+          "agent_id": 32,
+          "agent_name": "潇湘晨报",
+          "importance": 1.562712,
+          "ppr_centrality": 0.014183,
+          "neighbor_influence": -0.14963,
+          "keywords": [
+            "媒体评论",
+            "性别对立",
+            "性骚扰事件",
+            "武汉大学",
+            "武汉大学图书馆事件",
+            "潇湘晨报",
+            "舆论引导",
+            "高校舆情"
+          ]
+        },
+        {
+          "agent_id": 33,
+          "agent_name": "澎湃新闻",
+          "importance": 1.698137,
+          "ppr_centrality": 0.017798,
+          "neighbor_influence": -0.071836,
+          "keywords": [
+            "在线新闻",
+            "学术诚信",
+            "杨某媛",
+            "武大论文事件",
+            "澎湃新闻",
+            "知网争议",
+            "舆论监督",
+            "马上评｜全面调查复核"
+          ]
+        },
+        {
+          "agent_id": 37,
+          "agent_name": "第一财经",
+          "importance": 1.702602,
+          "ppr_centrality": 0.017774,
+          "neighbor_influence": -0.087712,
+          "keywords": [
+            "媒体评论",
+            "学术舆情",
+            "杨某媛",
+            "武汉大学",
+            "知网",
+            "第一财经",
+            "论文下架",
+            "高校学术治理"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": 0,
+      "size": 5,
+      "representative_agent_id": 20,
+      "representative_agent_name": "杨某",
+      "members": [
+        {
+          "agent_id": 18,
+          "agent_name": "景容饮冰",
+          "importance": 1.072278,
+          "ppr_centrality": 0.01569,
+          "neighbor_influence": 0.460183,
+          "keywords": [
+            "图书馆北门走廊",
+            "学生举报人",
+            "拒绝道歉信",
+            "景容饮冰",
+            "校园性别暴力",
+            "校长信箱举报",
+            "武汉大学性骚扰事件",
+            "视频证据"
+          ]
+        },
+        {
+          "agent_id": 19,
+          "agent_name": "杨景媛",
+          "importance": 1.010629,
+          "ppr_centrality": 0.014855,
+          "neighbor_influence": 0.682831,
+          "keywords": [
+            "学位复核",
+            "学生维权",
+            "性骚扰指控",
+            "杨景媛",
+            "校园性别议题",
+            "武汉大学",
+            "武汉大学硕士学位",
+            "涉事女生"
+          ]
+        },
+        {
+          "agent_id": 20,
+          "agent_name": "杨某",
+          "importance": 1.079426,
+          "ppr_centrality": 0.017682,
+          "neighbor_influence": 0.265875,
+          "keywords": [
+            "创伤后应激障碍",
+            "性骚扰指控",
+            "杨某",
+            "武汉大学图书馆",
+            "法院驳回",
+            "硕士学位授予",
+            "网络暴力",
+            "肖某某"
+          ]
+        },
+        {
+          "agent_id": 21,
+          "agent_name": "杨某媛",
+          "importance": 0.839273,
+          "ppr_centrality": 0.014854,
+          "neighbor_influence": 0.695209,
+          "keywords": [
+            "媒体监督",
+            "学术诚信",
+            "杨某媛",
+            "武汉大学",
+            "知网",
+            "硕士学位",
+            "舆情事件",
+            "论文下架"
+          ]
+        },
+        {
+          "agent_id": 28,
+          "agent_name": "涉事女生",
+          "importance": 0.920704,
+          "ppr_centrality": 0.01485,
+          "neighbor_influence": 0.675339,
+          "keywords": [
+            "事件回应",
+            "学生主体",
+            "武汉大学",
+            "涉事女生",
+            "涉事女生是事件",
+            "涉事方",
+            "舆情事件",
+            "高校舆情"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": 3,
+      "size": 3,
+      "representative_agent_id": 24,
+      "representative_agent_name": "武大性骚扰事件涉事男方",
+      "members": [
+        {
+          "agent_id": 24,
+          "agent_name": "武大性骚扰事件涉事男方",
+          "importance": 1.133795,
+          "ppr_centrality": 0.01481,
+          "neighbor_influence": -0.651977,
+          "keywords": [
+            "今日头条",
+            "南方都市报",
+            "性骚扰事件",
+            "杨某媛",
+            "武大性骚扰事件涉事男方",
+            "武汉大学",
+            "涉事男方",
+            "隔裤挠痒"
+          ]
+        },
+        {
+          "agent_id": 34,
+          "agent_name": "男性发言者",
+          "importance": 0.877708,
+          "ppr_centrality": 0.014809,
+          "neighbor_influence": -0.578321,
+          "keywords": [
+            "一位男性发言者评论",
+            "性别对立",
+            "武汉大学图书馆事件",
+            "男性发言者",
+            "立是加剧舆情",
+            "舆情降温",
+            "舆论策略",
+            "釜底抽薪"
+          ]
+        },
+        {
+          "agent_id": 43,
+          "agent_name": "肖某瑫",
+          "importance": 0.783312,
+          "ppr_centrality": 0.016672,
+          "neighbor_influence": -0.611102,
+          "keywords": [
+            "学业中断",
+            "武汉大学",
+            "爷爷去世",
+            "界面新闻",
+            "网暴谣言",
+            "肖某某",
+            "肖某瑫",
+            "记过处分撤销"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": 2,
+      "size": 3,
+      "representative_agent_id": 58,
+      "representative_agent_name": "求证型网友08",
+      "members": [
+        {
+          "agent_id": 51,
+          "agent_name": "围观学生01",
+          "importance": 0.743325,
+          "ppr_centrality": 0.016208,
+          "neighbor_influence": -0.168476,
+          "keywords": [
+            "信息求证",
+            "同伴影响",
+            "围观学生01",
+            "学生围观者",
+            "校园讨论",
+            "武汉大学",
+            "热门帖带动",
+            "舆情跟帖"
+          ]
+        },
+        {
+          "agent_id": 57,
+          "agent_name": "围观学生07",
+          "importance": 0.780282,
+          "ppr_centrality": 0.014871,
+          "neighbor_influence": -0.100817,
+          "keywords": [
+            "同伴影响",
+            "围观学生07",
+            "学生围观者",
+            "校园讨论",
+            "武汉大学",
+            "求证行为",
+            "热门帖带动",
+            "舆情跟帖"
+          ]
+        },
+        {
+          "agent_id": 58,
+          "agent_name": "求证型网友08",
+          "importance": 0.863788,
+          "ppr_centrality": 0.014871,
+          "neighbor_influence": -0.216478,
+          "keywords": [
+            "事实核查",
+            "并在",
+            "截图验证",
+            "时间线分析",
+            "求证型网友",
+            "求证型网友08",
+            "老友记",
+            "证据链追问"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": 18,
+      "size": 2,
+      "representative_agent_id": 0,
+      "representative_agent_name": "930老友记",
+      "members": [
+        {
+          "agent_id": 0,
+          "agent_name": "930老友记",
+          "importance": 1.936969,
+          "ppr_centrality": 0.018438,
+          "neighbor_influence": -0.079888,
+          "keywords": [
+            "930老友记",
+            "媒体评论",
+            "广播谈话节目",
+            "武汉大学",
+            "肖某某",
+            "胡锡进",
+            "舆情事件",
+            "道歉诉求"
+          ]
+        },
+        {
+          "agent_id": 4,
+          "agent_name": "凤凰网",
+          "importance": 1.817159,
+          "ppr_centrality": 0.01475,
+          "neighbor_influence": -0.131236,
+          "keywords": [
+            "凤凰网",
+            "在线新闻平台",
+            "媒体监督",
+            "校内信息屏蔽",
+            "武大图书馆事件",
+            "武大图书馆事件肖同学",
+            "肖同学",
+            "高校舆情"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": 17,
+      "size": 2,
+      "representative_agent_id": 1,
+      "representative_agent_name": "X同学",
+      "members": [
+        {
+          "agent_id": 1,
+          "agent_name": "X同学",
+          "importance": 1.115464,
+          "ppr_centrality": 0.01525,
+          "neighbor_influence": -0.233099,
+          "keywords": [
+            "x同学",
+            "外国语学院",
+            "学生行为失范",
+            "性骚扰指控",
+            "景容饮冰",
+            "校园舆情",
+            "武汉大学",
+            "道歉信争议"
+          ]
+        },
+        {
+          "agent_id": 14,
+          "agent_name": "微博",
+          "importance": 0.992914,
+          "ppr_centrality": 0.018481,
+          "neighbor_influence": -0.209794,
+          "keywords": [
+            "微博",
+            "微博平台",
+            "武大肖某某",
+            "社交平台治理",
+            "网络谣言",
+            "舆情传播",
+            "账号封禁",
+            "身份冒充"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": 16,
+      "size": 2,
+      "representative_agent_id": 12,
+      "representative_agent_name": "封面新闻",
+      "members": [
+        {
+          "agent_id": 2,
+          "agent_name": "YY",
+          "importance": 1.065384,
+          "ppr_centrality": 0.014494,
+          "neighbor_influence": -0.190993,
+          "keywords": [
+            "yy是封面新闻的审校",
+            "内容审核",
+            "媒体把关",
+            "审校",
+            "封面新闻",
+            "新闻编辑",
+            "新闻质量",
+            "编辑职责"
+          ]
+        },
+        {
+          "agent_id": 12,
+          "agent_name": "封面新闻",
+          "importance": 1.454017,
+          "ppr_centrality": 0.014828,
+          "neighbor_influence": -0.062787,
+          "keywords": [
+            "一审宣判",
+            "四川观察",
+            "媒体信源",
+            "封面新闻",
+            "性骚扰司法回应",
+            "来源",
+            "校园舆情",
+            "武汉大学性骚扰事件"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": 15,
+      "size": 2,
+      "representative_agent_id": 3,
+      "representative_agent_name": "今日头条",
+      "members": [
+        {
+          "agent_id": 3,
+          "agent_name": "今日头条",
+          "importance": 1.809366,
+          "ppr_centrality": 0.016065,
+          "neighbor_influence": 0.068821,
+          "keywords": [
+            "今日头条",
+            "在线新闻平台",
+            "女生精神崩溃",
+            "媒体角色",
+            "武大性骚扰事件报道",
+            "网暴治理",
+            "网络舆情传播",
+            "高校性骚扰议题"
+          ]
+        },
+        {
+          "agent_id": 23,
+          "agent_name": "武大图书馆事件肖同学",
+          "importance": 1.781186,
+          "ppr_centrality": 0.014587,
+          "neighbor_influence": 0.070386,
+          "keywords": [
+            "处分撤销",
+            "媒体传播",
+            "校内通报",
+            "武大图书馆事件肖同学",
+            "武汉大学图书馆",
+            "网暴谣言",
+            "肖某某",
+            "舆情回应"
+          ]
+        }
+      ]
+    }
+  ],
+  "top_pairs": [
+    {
+      "source_agent_id": 0,
+      "source_agent_name": "930老友记",
+      "target_agent_id": 2,
+      "target_agent_name": "YY",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 0,
+      "source_agent_name": "930老友记",
+      "target_agent_id": 25,
+      "target_agent_name": "武汉大学",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 0,
+      "source_agent_name": "930老友记",
+      "target_agent_id": 7,
+      "target_agent_name": "南方都市报",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 0,
+      "source_agent_name": "930老友记",
+      "target_agent_id": 37,
+      "target_agent_name": "第一财经",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 0,
+      "source_agent_name": "930老友记",
+      "target_agent_id": 45,
+      "target_agent_name": "观察者网",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 7,
+      "source_agent_name": "南方都市报",
+      "target_agent_id": 15,
+      "target_agent_name": "扬子晚报",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 0,
+      "source_agent_name": "930老友记",
+      "target_agent_id": 4,
+      "target_agent_name": "凤凰网",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 7,
+      "source_agent_name": "南方都市报",
+      "target_agent_id": 11,
+      "target_agent_name": "天津广播",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 0,
+      "source_agent_name": "930老友记",
+      "target_agent_id": 11,
+      "target_agent_name": "天津广播",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 0,
+      "source_agent_name": "930老友记",
+      "target_agent_id": 10,
+      "target_agent_name": "四川观察主播 徐英伦",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 7,
+      "source_agent_name": "南方都市报",
+      "target_agent_id": 10,
+      "target_agent_name": "四川观察主播 徐英伦",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 10,
+      "source_agent_name": "四川观察主播 徐英伦",
+      "target_agent_id": 25,
+      "target_agent_name": "武汉大学",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 0,
+      "source_agent_name": "930老友记",
+      "target_agent_id": 36,
+      "target_agent_name": "百家号",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 3,
+      "source_agent_name": "今日头条",
+      "target_agent_id": 23,
+      "target_agent_name": "武大图书馆事件肖同学",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 0,
+      "source_agent_name": "930老友记",
+      "target_agent_id": 22,
+      "target_agent_name": "极目新闻",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 22,
+      "source_agent_name": "极目新闻",
+      "target_agent_id": 25,
+      "target_agent_name": "武汉大学",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 7,
+      "source_agent_name": "南方都市报",
+      "target_agent_id": 40,
+      "target_agent_name": "羊城派",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 25,
+      "source_agent_name": "武汉大学",
+      "target_agent_id": 45,
+      "target_agent_name": "观察者网",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 7,
+      "source_agent_name": "南方都市报",
+      "target_agent_id": 33,
+      "target_agent_name": "澎湃新闻",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 3,
+      "source_agent_name": "今日头条",
+      "target_agent_id": 6,
+      "target_agent_name": "医学专家",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 3,
+      "source_agent_name": "今日头条",
+      "target_agent_id": 25,
+      "target_agent_name": "武汉大学",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 9,
+      "source_agent_name": "四川观察",
+      "target_agent_id": 25,
+      "target_agent_name": "武汉大学",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 0,
+      "source_agent_name": "930老友记",
+      "target_agent_id": 12,
+      "target_agent_name": "封面新闻",
+      "distance": 0.0
+    },
+    {
+      "source_agent_id": 25,
+      "source_agent_name": "武汉大学",
+      "target_agent_id": 35,
+      "target_agent_name": "界面新闻",
+      "distance": 0.0
+    }
+  ],
+  "top_central_agents": [
+    {
+      "agent_id": 25,
+      "agent_name": "武汉大学",
+      "unit_id": 1,
+      "importance": 1.950726,
+      "ppr_centrality": 0.022724,
+      "neighbor_influence": -0.057402,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 33,
+          "target_agent_name": "澎湃新闻",
+          "weight": 0.006114,
+          "target_unit_id": 1
+        },
+        {
+          "target_agent_id": 15,
+          "target_agent_name": "扬子晚报",
+          "weight": 0.005583,
+          "target_unit_id": 1
+        },
+        {
+          "target_agent_id": 12,
+          "target_agent_name": "封面新闻",
+          "weight": 0.005532,
+          "target_unit_id": 16
+        },
+        {
+          "target_agent_id": 0,
+          "target_agent_name": "930老友记",
+          "weight": 0.005471,
+          "target_unit_id": 18
+        },
+        {
+          "target_agent_id": 3,
+          "target_agent_name": "今日头条",
+          "weight": 0.005454,
+          "target_unit_id": 15
+        }
+      ]
+    },
+    {
+      "agent_id": 14,
+      "agent_name": "微博",
+      "unit_id": 17,
+      "importance": 0.992914,
+      "ppr_centrality": 0.018481,
+      "neighbor_influence": -0.209794,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 51,
+          "target_agent_name": "围观学生01",
+          "weight": 0.014875,
+          "target_unit_id": 2
+        },
+        {
+          "target_agent_id": 63,
+          "target_agent_name": "围观学生13",
+          "weight": 0.014809,
+          "target_unit_id": 4
+        },
+        {
+          "target_agent_id": 16,
+          "target_agent_name": "新京报",
+          "weight": 0.014299,
+          "target_unit_id": 11
+        },
+        {
+          "target_agent_id": 35,
+          "target_agent_name": "界面新闻",
+          "weight": 0.014299,
+          "target_unit_id": 8
+        },
+        {
+          "target_agent_id": 60,
+          "target_agent_name": "校友观察者10",
+          "weight": 0.014256,
+          "target_unit_id": 20
+        }
+      ]
+    },
+    {
+      "agent_id": 0,
+      "agent_name": "930老友记",
+      "unit_id": 18,
+      "importance": 1.936969,
+      "ppr_centrality": 0.018438,
+      "neighbor_influence": -0.079888,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 7,
+          "target_agent_name": "南方都市报",
+          "weight": 0.009951,
+          "target_unit_id": 13
+        },
+        {
+          "target_agent_id": 33,
+          "target_agent_name": "澎湃新闻",
+          "weight": 0.009247,
+          "target_unit_id": 1
+        },
+        {
+          "target_agent_id": 2,
+          "target_agent_name": "YY",
+          "weight": 0.009184,
+          "target_unit_id": 16
+        },
+        {
+          "target_agent_id": 40,
+          "target_agent_name": "羊城派",
+          "weight": 0.008986,
+          "target_unit_id": 28
+        },
+        {
+          "target_agent_id": 4,
+          "target_agent_name": "凤凰网",
+          "weight": 0.008807,
+          "target_unit_id": 18
+        }
+      ]
+    },
+    {
+      "agent_id": 7,
+      "agent_name": "南方都市报",
+      "unit_id": 13,
+      "importance": 1.869275,
+      "ppr_centrality": 0.018309,
+      "neighbor_influence": -0.108313,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 0,
+          "target_agent_name": "930老友记",
+          "weight": 0.011461,
+          "target_unit_id": 18
+        },
+        {
+          "target_agent_id": 62,
+          "target_agent_name": "吃瓜转发用户12",
+          "weight": 0.010716,
+          "target_unit_id": 5
+        },
+        {
+          "target_agent_id": 37,
+          "target_agent_name": "第一财经",
+          "weight": 0.010524,
+          "target_unit_id": 1
+        },
+        {
+          "target_agent_id": 45,
+          "target_agent_name": "观察者网",
+          "weight": 0.010481,
+          "target_unit_id": 25
+        },
+        {
+          "target_agent_id": 33,
+          "target_agent_name": "澎湃新闻",
+          "weight": 0.010464,
+          "target_unit_id": 1
+        }
+      ]
+    },
+    {
+      "agent_id": 33,
+      "agent_name": "澎湃新闻",
+      "unit_id": 1,
+      "importance": 1.698137,
+      "ppr_centrality": 0.017798,
+      "neighbor_influence": -0.071836,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 7,
+          "target_agent_name": "南方都市报",
+          "weight": 0.009007,
+          "target_unit_id": 13
+        },
+        {
+          "target_agent_id": 45,
+          "target_agent_name": "观察者网",
+          "weight": 0.008032,
+          "target_unit_id": 25
+        },
+        {
+          "target_agent_id": 25,
+          "target_agent_name": "武汉大学",
+          "weight": 0.007914,
+          "target_unit_id": 1
+        },
+        {
+          "target_agent_id": 8,
+          "target_agent_name": "四川观天下",
+          "weight": 0.007868,
+          "target_unit_id": 12
+        },
+        {
+          "target_agent_id": 9,
+          "target_agent_name": "四川观察",
+          "weight": 0.007854,
+          "target_unit_id": 36
+        }
+      ]
+    },
+    {
+      "agent_id": 37,
+      "agent_name": "第一财经",
+      "unit_id": 1,
+      "importance": 1.702602,
+      "ppr_centrality": 0.017774,
+      "neighbor_influence": -0.087712,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 16,
+          "target_agent_name": "新京报",
+          "weight": 0.008936,
+          "target_unit_id": 11
+        },
+        {
+          "target_agent_id": 38,
+          "target_agent_name": "经济观察报",
+          "weight": 0.008868,
+          "target_unit_id": 8
+        },
+        {
+          "target_agent_id": 25,
+          "target_agent_name": "武汉大学",
+          "weight": 0.008755,
+          "target_unit_id": 1
+        },
+        {
+          "target_agent_id": 7,
+          "target_agent_name": "南方都市报",
+          "weight": 0.008556,
+          "target_unit_id": 13
+        },
+        {
+          "target_agent_id": 45,
+          "target_agent_name": "观察者网",
+          "weight": 0.008435,
+          "target_unit_id": 25
+        }
+      ]
+    },
+    {
+      "agent_id": 20,
+      "agent_name": "杨某",
+      "unit_id": 0,
+      "importance": 1.079426,
+      "ppr_centrality": 0.017682,
+      "neighbor_influence": 0.265875,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 18,
+          "target_agent_name": "景容饮冰",
+          "weight": 0.016089,
+          "target_unit_id": 0
+        },
+        {
+          "target_agent_id": 21,
+          "target_agent_name": "杨某媛",
+          "weight": 0.015824,
+          "target_unit_id": 0
+        },
+        {
+          "target_agent_id": 19,
+          "target_agent_name": "杨景媛",
+          "weight": 0.015685,
+          "target_unit_id": 0
+        },
+        {
+          "target_agent_id": 28,
+          "target_agent_name": "涉事女生",
+          "weight": 0.01563,
+          "target_unit_id": 0
+        },
+        {
+          "target_agent_id": 25,
+          "target_agent_name": "武汉大学",
+          "weight": 0.01477,
+          "target_unit_id": 1
+        }
+      ]
+    },
+    {
+      "agent_id": 38,
+      "agent_name": "经济观察报",
+      "unit_id": 8,
+      "importance": 1.578096,
+      "ppr_centrality": 0.016743,
+      "neighbor_influence": -0.053243,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 37,
+          "target_agent_name": "第一财经",
+          "weight": 0.028435,
+          "target_unit_id": 1
+        },
+        {
+          "target_agent_id": 47,
+          "target_agent_name": "雷军",
+          "weight": 0.026009,
+          "target_unit_id": 10
+        },
+        {
+          "target_agent_id": 35,
+          "target_agent_name": "界面新闻",
+          "weight": 0.025739,
+          "target_unit_id": 8
+        },
+        {
+          "target_agent_id": 32,
+          "target_agent_name": "潇湘晨报",
+          "weight": 0.025739,
+          "target_unit_id": 1
+        },
+        {
+          "target_agent_id": 13,
+          "target_agent_name": "张平文",
+          "weight": 0.025703,
+          "target_unit_id": 34
+        }
+      ]
+    },
+    {
+      "agent_id": 43,
+      "agent_name": "肖某瑫",
+      "unit_id": 3,
+      "importance": 0.783312,
+      "ppr_centrality": 0.016672,
+      "neighbor_influence": -0.611102,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 24,
+          "target_agent_name": "武大性骚扰事件涉事男方",
+          "weight": 0.034784,
+          "target_unit_id": 3
+        },
+        {
+          "target_agent_id": 34,
+          "target_agent_name": "男性发言者",
+          "weight": 0.034748,
+          "target_unit_id": 3
+        },
+        {
+          "target_agent_id": 42,
+          "target_agent_name": "肖某某",
+          "weight": 0.034266,
+          "target_unit_id": 9
+        },
+        {
+          "target_agent_id": 30,
+          "target_agent_name": "涉事男生母亲",
+          "weight": 0.032912,
+          "target_unit_id": 9
+        },
+        {
+          "target_agent_id": 55,
+          "target_agent_name": "家长视角用户05",
+          "weight": 0.000734,
+          "target_unit_id": 6
+        }
+      ]
+    },
+    {
+      "agent_id": 45,
+      "agent_name": "观察者网",
+      "unit_id": 25,
+      "importance": 1.825874,
+      "ppr_centrality": 0.016288,
+      "neighbor_influence": -0.064255,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 50,
+          "target_agent_name": "齐鲁壹点",
+          "weight": 0.012015,
+          "target_unit_id": 12
+        },
+        {
+          "target_agent_id": 25,
+          "target_agent_name": "武汉大学",
+          "weight": 0.011648,
+          "target_unit_id": 1
+        },
+        {
+          "target_agent_id": 33,
+          "target_agent_name": "澎湃新闻",
+          "weight": 0.01149,
+          "target_unit_id": 1
+        },
+        {
+          "target_agent_id": 37,
+          "target_agent_name": "第一财经",
+          "weight": 0.011411,
+          "target_unit_id": 1
+        },
+        {
+          "target_agent_id": 7,
+          "target_agent_name": "南方都市报",
+          "weight": 0.011283,
+          "target_unit_id": 13
+        }
+      ]
+    },
+    {
+      "agent_id": 55,
+      "agent_name": "家长视角用户05",
+      "unit_id": 6,
+      "importance": 0.585847,
+      "ppr_centrality": 0.016251,
+      "neighbor_influence": -0.567143,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 1,
+          "target_agent_name": "X同学",
+          "weight": 0.043181,
+          "target_unit_id": 17
+        },
+        {
+          "target_agent_id": 42,
+          "target_agent_name": "肖某某",
+          "weight": 0.043126,
+          "target_unit_id": 9
+        },
+        {
+          "target_agent_id": 54,
+          "target_agent_name": "校友观察者04",
+          "weight": 0.042971,
+          "target_unit_id": 6
+        },
+        {
+          "target_agent_id": 14,
+          "target_agent_name": "微博",
+          "weight": 0.003036,
+          "target_unit_id": 17
+        },
+        {
+          "target_agent_id": 5,
+          "target_agent_name": "刘迪",
+          "weight": 0.002125,
+          "target_unit_id": 14
+        }
+      ]
+    },
+    {
+      "agent_id": 51,
+      "agent_name": "围观学生01",
+      "unit_id": 2,
+      "importance": 0.743325,
+      "ppr_centrality": 0.016208,
+      "neighbor_influence": -0.168476,
+      "top_outgoing_ppr": [
+        {
+          "target_agent_id": 52,
+          "target_agent_name": "求证型网友02",
+          "weight": 0.028497,
+          "target_unit_id": 21
+        },
+        {
+          "target_agent_id": 58,
+          "target_agent_name": "求证型网友08",
+          "weight": 0.028119,
+          "target_unit_id": 2
+        },
+        {
+          "target_agent_id": 57,
+          "target_agent_name": "围观学生07",
+          "weight": 0.028055,
+          "target_unit_id": 2
+        },
+        {
+          "target_agent_id": 14,
+          "target_agent_name": "微博",
+          "weight": 0.026775,
+          "target_unit_id": 17
+        },
+        {
+          "target_agent_id": 63,
+          "target_agent_name": "围观学生13",
+          "weight": 0.026299,
+          "target_unit_id": 4
+        }
+      ]
+    }
+  ],
+  "top_asymmetric_pairs": [
+    {
+      "dominant_source_agent_id": 44,
+      "dominant_source_agent_name": "胡锡进",
+      "dominant_target_agent_id": 25,
+      "dominant_target_agent_name": "武汉大学",
+      "dominant_weight": 0.1275,
+      "reverse_weight": 0.0051,
+      "delta": 0.1224,
+      "source_unit_id": 26,
+      "target_unit_id": 1
+    },
+    {
+      "dominant_source_agent_id": 60,
+      "dominant_source_agent_name": "校友观察者10",
+      "dominant_target_agent_id": 14,
+      "dominant_target_agent_name": "微博",
+      "dominant_weight": 0.128306,
+      "reverse_weight": 0.014256,
+      "delta": 0.11405,
+      "source_unit_id": 20,
+      "target_unit_id": 17
+    },
+    {
+      "dominant_source_agent_id": 39,
+      "dominant_source_agent_name": "网民",
+      "dominant_target_agent_id": 20,
+      "dominant_target_agent_name": "杨某",
+      "dominant_weight": 0.1275,
+      "reverse_weight": 0.014167,
+      "delta": 0.113333,
+      "source_unit_id": 29,
+      "target_unit_id": 0
+    },
+    {
+      "dominant_source_agent_id": 13,
+      "dominant_source_agent_name": "张平文",
+      "dominant_target_agent_id": 38,
+      "dominant_target_agent_name": "经济观察报",
+      "dominant_weight": 0.128515,
+      "reverse_weight": 0.025703,
+      "delta": 0.102812,
+      "source_unit_id": 34,
+      "target_unit_id": 8
+    },
+    {
+      "dominant_source_agent_id": 54,
+      "dominant_source_agent_name": "校友观察者04",
+      "dominant_target_agent_id": 55,
+      "dominant_target_agent_name": "家长视角用户05",
+      "dominant_weight": 0.128912,
+      "reverse_weight": 0.042971,
+      "delta": 0.085941,
+      "source_unit_id": 6,
+      "target_unit_id": 6
+    },
+    {
+      "dominant_source_agent_id": 61,
+      "dominant_source_agent_name": "家长视角用户11",
+      "dominant_target_agent_id": 63,
+      "dominant_target_agent_name": "围观学生13",
+      "dominant_weight": 0.128757,
+      "reverse_weight": 0.042919,
+      "delta": 0.085838,
+      "source_unit_id": 4,
+      "target_unit_id": 4
+    },
+    {
+      "dominant_source_agent_id": 56,
+      "dominant_source_agent_name": "吃瓜转发用户06",
+      "dominant_target_agent_id": 7,
+      "dominant_target_agent_name": "南方都市报",
+      "dominant_weight": 0.066938,
+      "reverse_weight": 0.010303,
+      "delta": 0.056635,
+      "source_unit_id": 5,
+      "target_unit_id": 13
+    },
+    {
+      "dominant_source_agent_id": 11,
+      "dominant_source_agent_name": "天津广播",
+      "dominant_target_agent_id": 0,
+      "dominant_target_agent_name": "930老友记",
+      "dominant_weight": 0.064486,
+      "reverse_weight": 0.008598,
+      "delta": 0.055888,
+      "source_unit_id": 13,
+      "target_unit_id": 18
+    },
+    {
+      "dominant_source_agent_id": 49,
+      "dominant_source_agent_name": "香港浸会大学",
+      "dominant_target_agent_id": 45,
+      "dominant_target_agent_name": "观察者网",
+      "dominant_weight": 0.065116,
+      "reverse_weight": 0.010853,
+      "delta": 0.054263,
+      "source_unit_id": 22,
+      "target_unit_id": 25
+    },
+    {
+      "dominant_source_agent_id": 11,
+      "dominant_source_agent_name": "天津广播",
+      "dominant_target_agent_id": 7,
+      "dominant_target_agent_name": "南方都市报",
+      "dominant_weight": 0.06375,
+      "reverse_weight": 0.009906,
+      "delta": 0.053844,
+      "source_unit_id": 13,
+      "target_unit_id": 13
+    },
+    {
+      "dominant_source_agent_id": 30,
+      "dominant_source_agent_name": "涉事男生母亲",
+      "dominant_target_agent_id": 42,
+      "dominant_target_agent_name": "肖某某",
+      "dominant_weight": 0.066141,
+      "reverse_weight": 0.018897,
+      "delta": 0.047243,
+      "source_unit_id": 9,
+      "target_unit_id": 9
+    },
+    {
+      "dominant_source_agent_id": 49,
+      "dominant_source_agent_name": "香港浸会大学",
+      "dominant_target_agent_id": 50,
+      "dominant_target_agent_name": "齐鲁壹点",
+      "dominant_weight": 0.064859,
+      "reverse_weight": 0.018442,
+      "delta": 0.046417,
+      "source_unit_id": 22,
+      "target_unit_id": 12
+    }
+  ]
+}

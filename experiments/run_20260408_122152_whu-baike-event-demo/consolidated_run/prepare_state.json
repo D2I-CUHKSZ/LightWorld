@@ -1,0 +1,27 @@
+{
+  "simulation_id": "sim_91e21a6aade3",
+  "project_id": "proj_17f12f355259",
+  "graph_id": "mirofish_ebb8693de4024891",
+  "enable_twitter": true,
+  "enable_reddit": true,
+  "status": "ready",
+  "entities_count": 65,
+  "profiles_count": 65,
+  "entity_types": [
+    "Lawyer",
+    "MediaOutlet",
+    "MedicalProfessional",
+    "Person",
+    "SocialMediaAccount",
+    "Student",
+    "University"
+  ],
+  "config_generated": true,
+  "config_reasoning": "时间配置: 事件为持续发酵型高校舆情，时间跨度从2023年曝光至2025年9月终局通报，需覆盖长周期演化；主体含大量在校学生（高峰延至23点）、媒体机构（全天但采编集中于工作时段）、校方及律师等专业主体（严格遵循工作日9-18点响应）；微博/Reddit中文用户以国内作息为主，晚间19-23点为信息消费与情绪表达高峰，且该事件多次冲上热搜（如2025-08-02雷军躺枪），深夜仍有热议；凌晨0-5点设为极低活跃区间符合现实；早间6-8点为通勤阅读时段，小幅回升；工作时段9-18点媒体发稿、校方回应、律师声明集中发布，故设为中高活跃带；峰值延长至23点因学生群体夜间社交活跃、Reddit中文圈跨时区讨论及舆情反转节点（如9月20日通报多在晚间发布）常引发次生传播。 | 事件配置: 初始帖子严格按社会传播结构覆盖：University发布权威通报；MediaOutlet执行媒体核查（含细节矛盾）；Student表达在场情绪与身份焦虑；另一MediaOutlet提供立场相反的评论；Person以第三方视角切入学术治理新切口。Scheduled_events设计强化演化逻辑：MediaOutlet注入医学专业新信源推动议题升维；Person以法律条款精准质疑媒体观点，制造认知冲突；Student发起树洞线程，将个体困惑转化为集体考据行动；hot_topics_update及时替换过气标签，引入‘倡议书真伪’‘时间线’等更具操作性的争议焦点，符合舆情从情绪宣泄转向事实博弈的演化规律。所有poster_type均来自可用实体类型，无虚构或模糊归类。 | Agent配置: 成功生成 65 个 | 初始帖子分配: 5 个帖子已分配发布者",
+  "current_round": 0,
+  "twitter_status": "not_started",
+  "reddit_status": "not_started",
+  "created_at": "2026-04-08T12:35:10.531834",
+  "updated_at": "2026-04-08T12:45:26.742143",
+  "error": null
+}
