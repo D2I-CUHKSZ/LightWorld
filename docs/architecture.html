@@ -35,32 +35,66 @@
 
     <section class="section reveal">
       <div class="container">
-        <div class="section-header">
-          <div class="section-label">End-to-End Flow</div>
-          <h2 class="section-title">Main pipeline</h2>
-          <p class="section-desc">
-            The current repository structure can be read as one continuous chain,
-            not a disconnected collection of scripts.
-          </p>
-        </div>
-        <div class="architecture-board">
-          <div class="architecture-row">
-            <div class="architecture-box">
-              <h3>1. Multi-modal ingestion</h3>
-              <p>Parse documents, images, and videos into structured event context.</p>
+        <div class="system-cockpit">
+          <article class="signal-board signal-board-large">
+            <div class="board-topline">
+              <span class="board-tag">Runtime Cockpit</span>
+              <span class="board-tag">Repository-Backed</span>
             </div>
-            <div class="architecture-box">
-              <h3>2. Ontology and graph</h3>
-              <p>Generate entity types, edge types, graph chunks, and graph IDs.</p>
+            <h2 class="board-title">A compact view of the running system</h2>
+            <p class="board-desc">
+              LightWorld can already be explained as a coherent runtime system:
+              multi-modal inputs are transformed into graph-aware runtime
+              artifacts, then scheduled through topology-aware simulation and
+              summarized as inspectable outputs.
+            </p>
+            <div class="command-chip-row">
+              <span class="command-chip">PDF / text / image / video</span>
+              <span class="command-chip">graph construction</span>
+              <span class="command-chip">unit scheduling</span>
+              <span class="command-chip">report artifacts</span>
             </div>
-            <div class="architecture-box">
-              <h3>3. Simulation preparation</h3>
-              <p>Build entity prompts, platform profiles, social relation graph, and config.</p>
+            <div class="board-list">
+              <div class="board-list-row">
+                <span>Input layer</span>
+                <strong>document, image, video, graph signal</strong>
+              </div>
+              <div class="board-list-row">
+                <span>Preparation layer</span>
+                <strong>ontology, graph IDs, prompts, relation graph</strong>
+              </div>
+              <div class="board-list-row">
+                <span>Runtime layer</span>
+                <strong>topology-driven units with lightweight memory</strong>
+              </div>
+              <div class="board-list-row">
+                <span>Output layer</span>
+                <strong>summaries, traces, topology evidence, reports</strong>
+              </div>
             </div>
-            <div class="architecture-box">
-              <h3>4. Runtime and report</h3>
-              <p>Run platform simulation, collect artifacts, and generate reports.</p>
-            </div>
+          </article>
+
+          <div class="status-grid">
+            <article class="status-card">
+              <span class="status-label">Modalities</span>
+              <strong>4</strong>
+              <p>Text, images, videos, and graph context enter the same workflow.</p>
+            </article>
+            <article class="status-card">
+              <span class="status-label">Scheduling Unit</span>
+              <strong>29</strong>
+              <p>Representative topology units were compiled in the WHU experiment.</p>
+            </article>
+            <article class="status-card">
+              <span class="status-label">Memory Mode</span>
+              <strong>Incremental</strong>
+              <p>Useful state is written selectively instead of replaying full history.</p>
+            </article>
+            <article class="status-card">
+              <span class="status-label">Influence Model</span>
+              <strong>Directed PPR</strong>
+              <p>Influence is estimated asymmetrically rather than by symmetric links.</p>
+            </article>
           </div>
         </div>
       </div>
@@ -69,38 +103,45 @@
     <section class="section section-alt reveal">
       <div class="container">
         <div class="section-header">
-          <div class="section-label">Runtime Design</div>
-          <h2 class="section-title">What makes the runtime distinctive</h2>
+          <div class="section-label">End-to-End Flow</div>
+          <h2 class="section-title">Main pipeline</h2>
+          <p class="section-desc">
+            The current repository structure can be read as one continuous chain,
+            not a disconnected collection of scripts.
+          </p>
         </div>
-        <div class="feature-grid">
-          <article class="feature-card">
-            <h3>Multi-modal first</h3>
-            <p>
-              Images and videos are not treated as optional decoration. They are
-              part of the event package that feeds the simulation pipeline.
-            </p>
+        <div class="pipeline-shell">
+          <article class="pipeline-stage">
+            <div class="stage-index">01</div>
+            <h3>Multi-modal ingestion</h3>
+            <p>Parse documents, images, and videos into structured event context.</p>
+            <div class="stage-meta">event pages · media frames · raw descriptions</div>
           </article>
-          <article class="feature-card">
-            <h3>SimpleMem-style memory</h3>
-            <p>
-              Memory is stored incrementally and retrieved selectively, which is
-              more scalable than replaying the full conversation history.
-            </p>
+          <article class="pipeline-stage">
+            <div class="stage-index">02</div>
+            <h3>Ontology and graph</h3>
+            <p>Generate entity types, edge types, graph chunks, and graph IDs.</p>
+            <div class="stage-meta">schema build · relation typing · graph identity</div>
           </article>
-          <article class="feature-card">
-            <h3>Topology-aware unit scheduling</h3>
-            <p>
-              The runtime works on representative units and neighborhoods to
-              reduce unnecessary activation cost.
-            </p>
+          <article class="pipeline-stage">
+            <div class="stage-index">03</div>
+            <h3>Simulation preparation</h3>
+            <p>Build entity prompts, platform profiles, social relation graph, and config.</p>
+            <div class="stage-meta">prompt packaging · platform profiles · runtime config</div>
           </article>
-          <article class="feature-card">
-            <h3>PPR-driven asymmetry</h3>
-            <p>
-              Personalized PageRank is used to estimate directed influence rather
-              than assuming balanced pairwise effects.
-            </p>
+          <article class="pipeline-stage">
+            <div class="stage-index">04</div>
+            <h3>Runtime and report</h3>
+            <p>Run platform simulation, collect artifacts, and generate reports.</p>
+            <div class="stage-meta">action traces · memory writes · summary output</div>
           </article>
+        </div>
+        <div class="pipeline-footnote insight-box">
+          <p>
+            The important point is continuity: input parsing, graph build,
+            simulation preparation, runtime artifacts, and reports already exist
+            in one repository path instead of as disconnected demos.
+          </p>
         </div>
       </div>
     </section>
@@ -108,10 +149,77 @@
     <section class="section reveal">
       <div class="container">
         <div class="section-header">
+          <div class="section-label">Runtime Design</div>
+          <h2 class="section-title">What makes the runtime distinctive</h2>
+        </div>
+        <div class="runtime-board">
+          <div class="feature-grid runtime-feature-grid">
+            <article class="feature-card">
+              <h3>Multi-modal first</h3>
+              <p>
+                Images and videos are not treated as optional decoration. They are
+                part of the event package that feeds the simulation pipeline.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>SimpleMem-style memory</h3>
+              <p>
+                Memory is stored incrementally and retrieved selectively, which is
+                more scalable than replaying the full conversation history.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>Topology-aware unit scheduling</h3>
+              <p>
+                The runtime works on representative units and neighborhoods to
+                reduce unnecessary activation cost.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>PPR-driven asymmetry</h3>
+              <p>
+                Personalized PageRank is used to estimate directed influence rather
+                than assuming balanced pairwise effects.
+              </p>
+            </article>
+          </div>
+          <article class="signal-board runtime-note">
+            <div class="board-topline">
+              <span class="board-tag">Design Reading</span>
+            </div>
+            <h3 class="board-title">Why this design matters</h3>
+            <p class="board-desc">
+              The system is not only expressive. It is trying to stay efficient:
+              smaller active units, lighter memory writes, and directional
+              influence estimation all reduce waste while keeping outputs easier
+              to interpret.
+            </p>
+            <div class="board-list">
+              <div class="board-list-row">
+                <span>Efficiency</span>
+                <strong>avoid activating every agent in every round</strong>
+              </div>
+              <div class="board-list-row">
+                <span>Interpretability</span>
+                <strong>make directed effects visible in a readable way</strong>
+              </div>
+              <div class="board-list-row">
+                <span>Practicality</span>
+                <strong>surface artifacts that can be inspected outside the runtime</strong>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt reveal">
+      <div class="container">
+        <div class="section-header">
           <div class="section-label">Repository Entry Points</div>
           <h2 class="section-title">Current commands and boundaries</h2>
         </div>
-        <div class="deployment-grid">
+        <div class="operations-grid">
           <article class="code-card">
             <h3>Backend entry points</h3>
             <div class="code-block">
@@ -122,18 +230,77 @@ uv run lightworld-parallel-sim --config /abs/path/to/simulation_config.json
 uv run lightworld-full-run --config /abs/path/to/full_run.config.json</code>
             </div>
           </article>
-          <article class="deployment-card">
-            <h3>Deployment boundary</h3>
-            <p>
-              GitHub Pages can host the project website and example pages. The
-              actual Flask backend and simulation services still need their own
-              runtime environment if you want an online interactive product.
+          <div class="operations-stack">
+            <article class="deployment-card">
+              <h3>Deployment boundary</h3>
+              <p>
+                GitHub Pages can host the project website and example pages. The
+                actual Flask backend and simulation services still need their own
+                runtime environment if you want an online interactive product.
+              </p>
+              <ul class="plain-list">
+                <li>Static project website: GitHub Pages</li>
+                <li>Interactive API service: separate backend deployment</li>
+                <li>Current Pages site: project presentation, guide, and examples</li>
+              </ul>
+            </article>
+            <article class="deployment-card">
+              <h3>Current public role</h3>
+              <p>
+                The site works best as a project front end: it explains the
+                system, shows the workflow, and surfaces experiment evidence
+                without pretending the backend is already public and hosted.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Artifacts</div>
+          <h2 class="section-title">Visible outputs from the current system</h2>
+          <p class="section-desc">
+            The architecture is easier to trust when the repository can point to
+            concrete intermediate artifacts.
+          </p>
+        </div>
+        <div class="artifact-board">
+          <article class="signal-board artifact-highlight">
+            <div class="board-topline">
+              <span class="board-tag">Inspectability</span>
+              <span class="board-tag">Traceable Outputs</span>
+            </div>
+            <h3 class="board-title">What reviewers can inspect right now</h3>
+            <p class="board-desc">
+              The repository already exposes intermediate files that make the
+              system easier to evaluate. That is stronger than showing only a
+              final screenshot or a benchmark claim.
             </p>
-            <ul class="plain-list">
-              <li>Static project website: GitHub Pages</li>
-              <li>Interactive API service: separate backend deployment</li>
-              <li>Current Pages site: project presentation, guide, and examples</li>
-            </ul>
+            <div class="command-chip-row">
+              <span class="command-chip">entity prompts</span>
+              <span class="command-chip">relation graph</span>
+              <span class="command-chip">simulation config</span>
+              <span class="command-chip">experiment summary</span>
+            </div>
+          </article>
+          <article class="feature-card">
+            <h3>entity_prompts.json</h3>
+            <p>Semantic prompt outputs and keyword-oriented entity descriptions.</p>
+          </article>
+          <article class="feature-card">
+            <h3>social_relation_graph.json</h3>
+            <p>Explicit agent-agent relation graph compiled for simulation runtime.</p>
+          </article>
+          <article class="feature-card">
+            <h3>topology snapshots</h3>
+            <p>Unit structure, PPR centrality, and asymmetric influence traces.</p>
+          </article>
+          <article class="feature-card">
+            <h3>experiment_summary.json</h3>
+            <p>Readable summary of the end-to-end WHU scaled experiment.</p>
           </article>
         </div>
       </div>

@@ -26,18 +26,66 @@
     <nav id="main-nav"></nav>
 
     <section class="hero">
-      <div class="hero-inner">
-        <div class="hero-badge">Lightweight · Multi-Modal · Topology-Aware</div>
-        <h1>LightWorld: A Lightweight Multi-Modal Social Simulation Engine</h1>
-        <p class="hero-abstract">
-          LightWorld turns documents, images, videos, and graph signals into a
-          runnable simulation pipeline. It is designed for public-event analysis,
-          brand reputation scenarios, and social influence experiments where both
-          runtime efficiency and interpretability matter.
-        </p>
-        <div class="hero-actions">
-          <a href="examples.html" class="btn-primary">View Example</a>
-          <a href="guide.html" class="btn-outline">Read User Guide</a>
+      <div class="hero-inner hero-layout">
+        <div class="hero-copy">
+          <div class="hero-badge">Lightweight · Multi-Modal · Topology-Aware</div>
+          <h1>LightWorld: A Lightweight Multi-Modal Social Simulation Engine</h1>
+          <p class="hero-abstract">
+            LightWorld turns documents, images, videos, and graph signals into a
+            runnable simulation pipeline. It is designed for public-event analysis,
+            brand reputation scenarios, and social influence experiments where both
+            runtime efficiency and interpretability matter.
+          </p>
+          <div class="hero-actions">
+            <a href="examples.html" class="btn-primary">View Example</a>
+            <a href="guide.html" class="btn-outline">Read User Guide</a>
+          </div>
+          <div class="hero-chips">
+            <span>Graph + Text + Image + Video</span>
+            <span>SimpleMem-style Memory</span>
+            <span>PPR-based Asymmetric Influence</span>
+          </div>
+        </div>
+
+        <div class="hero-panel-shell">
+          <div class="hero-terminal-panel">
+            <div class="terminal-topline">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="code-block hero-console">
+              <code>[runtime]
+mode = topology-aware
+memory = lightweight incremental state
+influence = directed via PPR
+
+[artifacts]
+entity_prompts.json
+social_relation_graph.json
+simulation_config.json
+experiment_summary.json</code>
+            </div>
+          </div>
+
+          <div class="hero-stat-grid">
+            <div class="metric-box hero-stat-box">
+              <strong>31</strong>
+              <span>entities in the WHU experiment</span>
+            </div>
+            <div class="metric-box hero-stat-box">
+              <strong>29</strong>
+              <span>topology units compiled</span>
+            </div>
+            <div class="metric-box hero-stat-box">
+              <strong>564</strong>
+              <span>actions recorded across platforms</span>
+            </div>
+            <div class="metric-box hero-stat-box">
+              <strong>0.129 → 0.043</strong>
+              <span>readable asymmetric influence example</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -76,6 +124,37 @@
               <li>Influence propagation studies</li>
               <li>Multi-source social signal simulation</li>
             </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt reveal">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Signal Snapshot</div>
+          <h2 class="section-title">Evidence that this is more than a concept page</h2>
+          <p class="section-desc">
+            The repository already contains experiment outputs that can be shown
+            as concrete signals instead of vague capability claims.
+          </p>
+        </div>
+        <div class="metric-grid">
+          <div class="metric-box">
+            <strong>20,833</strong>
+            <span>characters processed in the WHU experiment input</span>
+          </div>
+          <div class="metric-box">
+            <strong>50</strong>
+            <span>Twitter memory writes recorded</span>
+          </div>
+          <div class="metric-box">
+            <strong>245</strong>
+            <span>Reddit memory writes recorded</span>
+          </div>
+          <div class="metric-box">
+            <strong>4</strong>
+            <span>input modalities handled by the project site narrative</span>
           </div>
         </div>
       </div>
@@ -160,6 +239,14 @@
               final reports for inspection.
             </p>
           </article>
+        </div>
+        <div class="insight-box home-insight">
+          <p>
+            The current public site should not pretend to be a hosted product.
+            Its strongest role right now is to explain the system, surface
+            evidence from existing experiments, and prepare for a future public
+            interactive demo.
+          </p>
         </div>
       </div>
     </section>

@@ -34,6 +34,73 @@
 
     <section class="section reveal">
       <div class="container">
+        <div class="experiment-shell">
+          <article class="signal-board signal-board-large">
+            <div class="board-topline">
+              <span class="board-tag">Experiment Dashboard</span>
+              <span class="board-tag">WHU Case</span>
+            </div>
+            <h2 class="board-title">A readable public-facing case study</h2>
+            <p class="board-desc">
+              The Wuhan University reputation simulation is the clearest current
+              example for a public site because it already includes media
+              materials, graph-ready outputs, runtime traces, and a result that
+              non-experts can still understand.
+            </p>
+            <div class="command-chip-row">
+              <span class="command-chip">public reputation</span>
+              <span class="command-chip">multi-platform</span>
+              <span class="command-chip">memory traces</span>
+              <span class="command-chip">directed influence</span>
+            </div>
+            <div class="board-list">
+              <div class="board-list-row">
+                <span>Input package</span>
+                <strong>PDF + images + videos</strong>
+              </div>
+              <div class="board-list-row">
+                <span>Entity scale</span>
+                <strong>31 profiles generated for the simulation</strong>
+              </div>
+              <div class="board-list-row">
+                <span>Runtime granularity</span>
+                <strong>29 topology units compiled</strong>
+              </div>
+              <div class="board-list-row">
+                <span>Readable takeaway</span>
+                <strong>directional influence can be shown concretely</strong>
+              </div>
+            </div>
+          </article>
+
+          <div class="status-grid">
+            <article class="status-card">
+              <span class="status-label">Input Volume</span>
+              <strong>20,833</strong>
+              <p>Characters processed in the current experiment package.</p>
+            </article>
+            <article class="status-card">
+              <span class="status-label">Total Actions</span>
+              <strong>564</strong>
+              <p>Cross-platform actions recorded over the run.</p>
+            </article>
+            <article class="status-card">
+              <span class="status-label">Memory Writes</span>
+              <strong>295</strong>
+              <p>Selective memory updates captured for the runtime.</p>
+            </article>
+            <article class="status-card">
+              <span class="status-label">Asymmetry</span>
+              <strong>0.129 → 0.043</strong>
+              <p>A readable directional influence difference in one pair.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt reveal">
+      <div class="container">
         <div class="tabs">
           <button class="tab-button active" data-tab-target="tab-whu">WHU Simulation</button>
           <button class="tab-button" data-tab-target="tab-pipeline">Pipeline Example</button>
@@ -48,85 +115,186 @@
             <span><strong>Topology units</strong> 29</span>
           </div>
 
-          <div class="demo-grid">
-            <div class="tab-panel-inner">
+          <div class="example-dashboard">
+            <article class="gallery-board">
+              <div class="panel-topline">
+                <span class="panel-tag">Media Package</span>
+                <span class="panel-tag">Repository Asset</span>
+              </div>
               <h3>Input material</h3>
               <p>
                 The current repository already includes event images, preview
                 video frames, page data, and a complete experiment summary.
               </p>
-              <div class="image-grid" style="margin-top: 18px;">
+              <div class="image-grid gallery-grid">
                 <img src="./assets/event/image_01.jpg" alt="WHU event image 1" />
                 <img src="./assets/event/news_frame.jpg" alt="WHU event news frame" />
                 <img src="./assets/event/image_03.jpg" alt="WHU event image 2" />
                 <img src="./assets/event/commentary_frame.jpg" alt="WHU event commentary frame" />
               </div>
-              <div class="metric-grid">
-                <div class="metric-box">
-                  <strong>20,833</strong>
-                  <span>input characters</span>
-                </div>
-                <div class="metric-box">
-                  <strong>31</strong>
-                  <span>profiles generated</span>
-                </div>
-                <div class="metric-box">
-                  <strong>564</strong>
-                  <span>total actions</span>
-                </div>
-                <div class="metric-box">
-                  <strong>295</strong>
-                  <span>memory writes</span>
-                </div>
+              <div class="gallery-caption-grid">
+                <div class="gallery-caption">event photo</div>
+                <div class="gallery-caption">news frame</div>
+                <div class="gallery-caption">scene detail</div>
+                <div class="gallery-caption">commentary frame</div>
               </div>
-            </div>
+            </article>
 
-            <div class="tab-panel-inner">
-              <h3>What this experiment shows</h3>
-              <p>
-                This case is useful because the results are readable even without
-                deep internal context. It shows the main LightWorld ideas in one
-                place: multimodal ingestion, topology-aware scheduling, memory,
-                and asymmetric influence.
-              </p>
-              <ul class="bullet-list">
-                <li>Twitter actions recorded: 292</li>
-                <li>Reddit actions recorded: 272</li>
-                <li>Twitter memory writes: 50</li>
-                <li>Reddit memory writes: 245</li>
-              </ul>
-              <div class="insight-box">
+            <div class="dashboard-stack">
+              <article class="signal-board runtime-signal-panel">
+                <div class="panel-topline">
+                  <span class="panel-tag">Signal Summary</span>
+                </div>
+                <h3>What this experiment shows</h3>
                 <p>
-                  One readable PPR result: in the WHU experiment, the directed
-                  influence from <strong>self-media platform → school side</strong>
-                  is about <strong>0.129</strong>, while the reverse direction is
-                  about <strong>0.043</strong>. That is the kind of asymmetry the
-                  project wants to make visible.
+                  This case is useful because the results are readable even without
+                  deep internal context. It shows the main LightWorld ideas in one
+                  place: multimodal ingestion, topology-aware scheduling, memory,
+                  and asymmetric influence.
                 </p>
-              </div>
+                <div class="platform-grid">
+                  <div class="platform-card">
+                    <span class="platform-name">Twitter</span>
+                    <strong>292</strong>
+                    <p>actions recorded</p>
+                    <span class="platform-foot">50 memory writes</span>
+                  </div>
+                  <div class="platform-card">
+                    <span class="platform-name">Reddit</span>
+                    <strong>272</strong>
+                    <p>actions recorded</p>
+                    <span class="platform-foot">245 memory writes</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="comparison-board">
+                <div class="panel-topline">
+                  <span class="panel-tag">Influence Reading</span>
+                </div>
+                <h3>Directional asymmetry</h3>
+                <div class="comparison-row">
+                  <div class="comparison-head">
+                    <span>self-media platform → school side</span>
+                    <strong>0.129</strong>
+                  </div>
+                  <div class="comparison-track">
+                    <span class="comparison-fill comparison-fill-high"></span>
+                  </div>
+                </div>
+                <div class="comparison-row">
+                  <div class="comparison-head">
+                    <span>school side → self-media platform</span>
+                    <strong>0.043</strong>
+                  </div>
+                  <div class="comparison-track">
+                    <span class="comparison-fill comparison-fill-low"></span>
+                  </div>
+                </div>
+                <div class="insight-box comparison-note">
+                  <p>
+                    One readable PPR result: the influence is not symmetric. That
+                    is exactly the kind of relationship LightWorld wants to make
+                    visible in a public-facing experiment page.
+                  </p>
+                </div>
+              </article>
             </div>
+          </div>
+
+          <div class="metric-grid example-metric-grid">
+            <div class="metric-box">
+              <strong>292</strong>
+              <span>Twitter actions</span>
+            </div>
+            <div class="metric-box">
+              <strong>272</strong>
+              <span>Reddit actions</span>
+            </div>
+            <div class="metric-box">
+              <strong>50</strong>
+              <span>Twitter memory writes</span>
+            </div>
+            <div class="metric-box">
+              <strong>245</strong>
+              <span>Reddit memory writes</span>
+            </div>
+          </div>
+
+          <div class="feature-grid example-evidence-grid">
+            <article class="feature-card">
+              <div class="card-pill">A</div>
+              <h3>Runtime evidence</h3>
+              <p>
+                The repository records actions, memory writes, and topology
+                artifacts rather than exposing only a final narrative summary.
+              </p>
+            </article>
+            <article class="feature-card">
+              <div class="card-pill">B</div>
+              <h3>Readable result</h3>
+              <p>
+                The WHU case is understandable to a public audience: who affects
+                whom, how many entities were modeled, and what artifacts were produced.
+              </p>
+            </article>
+            <article class="feature-card">
+              <div class="card-pill">C</div>
+              <h3>Artifacts available now</h3>
+              <p>
+                `experiment_summary.json`, `simulation_config.json`,
+                `entity_prompts.json`, and topology snapshots already exist in
+                the repository.
+              </p>
+            </article>
+            <article class="feature-card">
+              <div class="card-pill">D</div>
+              <h3>Why this example matters</h3>
+              <p>
+                It demonstrates the project’s intended value without requiring a
+                public online backend or hidden private benchmark.
+              </p>
+            </article>
           </div>
         </div>
 
         <div class="tab-panel" id="tab-pipeline">
-          <div class="tab-panel-inner placeholder-card">
-            <h3>Pipeline example</h3>
-            <p>
-              Reserved for a future page showing one complete input-to-graph
-              workflow with screenshots or structured output samples.
-            </p>
-            <span class="placeholder-note">Placeholder</span>
+          <div class="placeholder-stack">
+            <div class="tab-panel-inner placeholder-card">
+              <h3>Pipeline example</h3>
+              <p>
+                Reserved for a future page showing one complete input-to-graph
+                workflow with screenshots or structured output samples.
+              </p>
+              <span class="placeholder-note">Placeholder</span>
+            </div>
+            <div class="tab-panel-inner placeholder-card">
+              <h3>Suggested future content</h3>
+              <p>
+                A strong next addition here would be one visual sequence from
+                raw input package to graph snapshot to simulation config.
+              </p>
+            </div>
           </div>
         </div>
 
         <div class="tab-panel" id="tab-demo">
-          <div class="tab-panel-inner placeholder-card">
-            <h3>Public interactive demo</h3>
-            <p>
-              Reserved for a hosted public demo once the backend service and a
-              browser-facing frontend are ready to be deployed together.
-            </p>
-            <span class="placeholder-note">Placeholder</span>
+          <div class="placeholder-stack">
+            <div class="tab-panel-inner placeholder-card">
+              <h3>Public interactive demo</h3>
+              <p>
+                Reserved for a hosted public demo once the backend service and a
+                browser-facing frontend are ready to be deployed together.
+              </p>
+              <span class="placeholder-note">Placeholder</span>
+            </div>
+            <div class="tab-panel-inner placeholder-card">
+              <h3>Planned public-facing value</h3>
+              <p>
+                This area can later host upload controls, run status, graph
+                snapshots, and report exports once the backend is deployed.
+              </p>
+            </div>
           </div>
         </div>
       </div>
