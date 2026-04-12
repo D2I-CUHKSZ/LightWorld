@@ -1,275 +1,229 @@
 <div align="center">
 
+<img src="https://capsule-render.vercel.app/api?type=waving&height=220&text=LightWorld&fontAlign=50&fontAlignY=38&desc=A%20lightweight%20multi-modal%20social%20simulation%20engine&descAlign=50&descAlignY=60&fontColor=ffffff&color=0:08111f,45:0f766e,100:38bdf8" width="100%" alt="LightWorld banner" />
 
-<img src="https://capsule-render.vercel.app/api?type=venom&height=250&text=LIGHTWORLD&fontColor=00ffcc&stroke=00ffcc&color=0:050505,50:0f1115,100:000000&animation=fadeIn&fontAlignY=38&desc=Lightweight%20Omni-Modal%20Emergent%20Social%20Simulation%20Engine&descAlignY=60" width="100%" />
+# LightWorld
 
-# `L I G H T W O R L D`
+**A lightweight multi-modal social simulation engine for public-event analysis, topology-aware runtime scheduling, memory-efficient execution, and report generation.**
 
-### Matrix / Cyberpunk Protocol
+[![Project Site](https://img.shields.io/badge/Project%20Site-GitHub%20Pages-0f766e?style=for-the-badge&logo=githubpages&logoColor=white)](https://jaylzhou.github.io/LightWorld/)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-2563eb?style=for-the-badge&logo=python&logoColor=white)](backend/pyproject.toml)
+[![License](https://img.shields.io/badge/License-AGPL--3.0-111827?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
+[![Backend](https://img.shields.io/badge/Backend-Flask-16a34a?style=for-the-badge&logo=flask&logoColor=white)](backend/app/run/api.py)
+[![Inputs](https://img.shields.io/badge/Inputs-Text%20%7C%20Image%20%7C%20Video%20%7C%20Graph-f97316?style=for-the-badge)](#what-lightworld-does)
 
-**Lightweight · Omni-Modal · Emergent Social Simulation & Prediction Engine**
-
-[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL%203.0-050505.svg?style=for-the-badge&logo=opensourceinitiative&logoColor=00ffcc)](https://opensource.org/licenses/AGPL-3.0)
-[![Python](https://img.shields.io/badge/Python-3.10%2B-050505.svg?style=for-the-badge&logo=python&logoColor=00ffcc)](#-quick-start--boot-protocol)
-[![Omni-Modal](https://img.shields.io/badge/Inputs-Graph%20%7C%20Text%20%7C%20Image%20%7C%20Video-050505.svg?style=for-the-badge&logo=graphql&logoColor=00ffcc)](#-matrix-architecture)
-[![Concurrency](https://img.shields.io/badge/Agent%20Scale-100k%2B-050505.svg?style=for-the-badge&logo=apachespark&logoColor=00ffcc)](#-core-capabilities)
-[![Live Site](https://img.shields.io/badge/Live%20Site-GitHub%20Pages-0f766e?style=for-the-badge&logo=githubpages&logoColor=white)](https://jaylzhou.github.io/LightWorld/)
-
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=19&duration=2300&pause=650&color=00FFCC&center=true&vCenter=true&width=980&lines=Booting+distributed+agent+civilization...;Injecting+real-world+signals+into+sandbox+physics...;Forecasting+collective+trajectories+before+they+happen..." alt="typing-banner" />
-
-*"In minimalist code, we simulate the reflection of the entire world."*
-
-[English](#) · [简体中文](#) · [Project Whitepaper](#) · [Video Demo](#)
-
-Project Site: https://jaylzhou.github.io/LightWorld/
+[Project Site](https://jaylzhou.github.io/LightWorld/) ·
+[Architecture](https://jaylzhou.github.io/LightWorld/architecture.html) ·
+[User Guide](https://jaylzhou.github.io/LightWorld/guide.html) ·
+[Examples](https://jaylzhou.github.io/LightWorld/examples.html)
 
 </div>
 
 ---
 
-## `> system.dashboard`
+## What LightWorld Does
 
-| Channel         | Status | Throughput   | Note                              |
-| --------------- | ------ | ------------ | --------------------------------- |
-| Graph Ingestion | ONLINE | 98%          | topology + influence edges        |
-| Text Stream     | ONLINE | 82%          | news, posts, narratives           |
-| Image Parser    | ONLINE | 91%          | meme semantics + visual sentiment |
-| Video Tracker   | ONLINE | 76%          | event timeline + motion cues      |
-| Swarm Runtime   | ACTIVE | 100k+ agents | debate, clustering, polarization  |
+LightWorld turns real-world event materials into an inspectable social simulation pipeline. It ingests documents, images, videos, and graph signals, compiles them into ontology and relation artifacts, prepares platform-ready agent profiles, runs Twitter/Reddit-style OASIS simulations, and generates reports that can be inspected after the run.
 
-```bash
-$ lightworld --init matrix
-> [SYSTEM] Booting Light Engine... [OK]
-> [DATA] Graph/Text/Image/Video streams attached... [OK]
-> [AGENT] 100,000 autonomous agents online... [OK]
-> [STATUS] Simulation ACTIVE. Predicting trajectory shifts...
-┌───────────────────────── LIGHTWORLD RUNTIME MATRIX ─────────────────────────┐
-│ Attention Heatmap   ████████████░░░░  72%                                   │
-│ Narrative Volatility █████████████░░░  79%                                   │
-│ Polarization Index   ██████████░░░░░░  63%                                   │
-│ Intervention Window  ███████████████░  91%                                   │
-└───────────────────────────────────────────────────────────────────────────────┘
+```text
+event materials
+  -> multimodal ingestion
+  -> ontology and graph build
+  -> entity prompts and platform profiles
+  -> topology-aware simulation runtime
+  -> memory traces, action logs, reports
 ```
 
----
+It is designed for scenarios where the question is not only "what does the model answer?", but also "which entities were modeled, who influenced whom, what actions happened, and which artifacts can we inspect afterward?"
 
-## 👁️‍🗨️ Concept: `LIGHT + WORLD`
+## Why It Is Different
 
-Current AI agent systems often face three bottlenecks:
+| Layer | What it adds | Why it matters |
+| --- | --- | --- |
+| Multi-modal ingestion | PDF, text, image, and video inputs | Events are not forced into text-only context. |
+| Graph construction | Ontology, entities, edges, and graph IDs | Simulation state is grounded in structured event context. |
+| Lightweight memory | SimpleMem-style incremental state | The runtime keeps useful traces without replaying everything. |
+| Topology-aware scheduling | Representative units and neighborhood activation | The simulation avoids blindly activating every agent every round. |
+| Directed influence | PPR-based asymmetric influence signals | Influence can be read as directional instead of symmetric. |
+| Report generation | Structured run artifacts and public reports | Outputs are inspectable beyond the final narrative. |
 
-- **Token Waste**: repeated heavyweight context and expensive monolithic calls.
-- **Zero Sharing**: isolated execution with limited experiential transfer.
-- **Text-Only Blindness**: weak grounding in visual and dynamic reality.
+## Repository Snapshot
 
-**lightworld** breaks this deadlock through two design axes:
+The public site currently presents one concrete case study from the repository: a Wuhan University reputation simulation experiment. These numbers are used as readable signals, not as benchmark claims.
 
-- **⚡ LIGHT (Minimalist & Lightweight)**  
-  Experience sharing + dynamic context compression reduce concurrent simulation cost by orders of magnitude.
+| Signal | Value |
+| --- | ---: |
+| Input characters processed | 20,833 |
+| Simulation entities | 31 |
+| Topology units compiled | 29 |
+| Total recorded actions | 564 |
+| Twitter actions | 292 |
+| Reddit actions | 272 |
+| Memory writes | 295 |
+| Example asymmetric influence | 0.129 vs 0.043 |
 
-- **🌍 WORLD (Real-World Mapping)**  
-  Native ingestion for **Graph (social topology)**, **Text (public narratives)**, **Image (visual sentiment)**, and **Video (event dynamics)**.
+<p align="center">
+  <img src="docs/assets/event/image_01.jpg" width="23%" alt="WHU event image 1" />
+  <img src="docs/assets/event/news_frame.jpg" width="23%" alt="WHU news frame" />
+  <img src="docs/assets/event/image_03.jpg" width="23%" alt="WHU event image 2" />
+  <img src="docs/assets/event/commentary_frame.jpg" width="23%" alt="WHU commentary frame" />
+</p>
 
----
-
-## 🧬 Core Capabilities
-
-<details>
-<summary><b>🕸️ Multi-Source Graph Injection</b></summary>
-<br>
-Import social topology (e.g., X/Twitter) as first-class simulation physics. The engine reconstructs implicit power networks from follows, reposts, and likes to model KOLs, bot swarms, and peripheral groups.
-</details>
-
-
-<details>
-<summary><b>🎬 Omni-Modal Sensory Input</b></summary>
-<br>
-Agents ingest not just text reports, but also videos and memes. Visual sentiment and event cues are injected directly into decision and emotion update modules.
-</details>
-
-
-<details>
-<summary><b>🧠 Self-Evolving Swarm Intelligence</b></summary>
-<br>
-20+ social actions (follow, repost, debate, block, coalition, etc.) produce emergent phenomena such as echo chambers, cascades, and polarization.
-</details>
-
-
-<details>
-<summary><b>📈 Temporal What-If Forecaster</b></summary>
-<br>
-Inject shocks at runtime (debunk release, node failure, policy intervention) and measure trajectory divergence across demographics over time.
-</details>
-
-
----
-
-## 🧱 Matrix Architecture
-
-*Dynamic data flow and system architecture:*
+## System Architecture
 
 ```mermaid
-graph TD
-    %% 强制使用明亮清爽的默认主题，文字清晰可见
-    %%{init: {'theme': 'default', 'themeVariables': { 'fontFamily': 'sans-serif'}}}%%
-
-    %% 定义明亮高对比度的样式类
-    classDef input fill:#ffffff,stroke:#d0d7de,stroke-width:2px,color:#24292f,rx:8,ry:8;
-    classDef core fill:#e6f0ff,stroke:#0969da,stroke-width:3px,color:#0969da,shadow:true;
-    classDef swarm fill:#f3fdf8,stroke:#1a7f37,stroke-width:2px,color:#116329,stroke-dasharray: 4 4,rx:20,ry:20;
-    classDef kg fill:#fff8f2,stroke:#bf8700,stroke-width:2px,color:#9a6700,rx:5,ry:5;
-    classDef output fill:#f6f8fa,stroke:#8250df,stroke-width:2px,color:#6639ba,rx:8,ry:8;
-
-    %% 1. 现实世界数据源
-    subgraph Reality [🌍 Real-World Data Sources]
-        direction LR
-        G[🕸️ Graph<br>Twitter-X]:::input
-        T[📜 Text<br>News/Blogs]:::input
-        I[👁️ Image<br>Memes/Pics]:::input
-        V[🎬 Video<br>Events/Streams]:::input
-    end
-
-    %% 2. 核心大模型融合引擎
-    M(((🧠 Multi-Modal<br>Fusion Engine))):::core
-
-    %% 3. 数字沙盒世界 (明亮的浅蓝灰背景)
-    subgraph Sandbox [🏛️ LightWorld Sandbox Environment]
-        K[(🌐 Dynamic<br>Knowledge Graph)]:::kg
-        
-        A1(🤖 Agent Swarm Alpha):::swarm
-        A2(🤖 Agent Swarm Beta):::swarm
-        A3(🤖 Agent Swarm Gamma):::swarm
-        
-        %% 智能体与知识图谱的交互
-        A1 <==> K
-        A2 <==> K
-        A3 <==> K
-        
-        %% 智能体之间的社会关系网络
-        A1 <-.->|Debate / Block| A2
-        A2 <-.->|Influence| A3
-        A3 <-.->|Coalition| A1
-    end
-
-    %% 4. 输出预测报告
-    O{{📊 Temporal Prediction Report}}:::output
-
-    %% ================= 连线逻辑 =================
-    G --> M
-    T --> M
-    I --> M
-    V --> M
-    
-    M ==>|Ontology Compilation| K
-    M ==>|Persona Initialization| A1
-    M ==>|Persona Initialization| A2
-    M ==>|Persona Initialization| A3
-    
-    Sandbox ==> O
-
-    %% ================= 子图美化 =================
-    %% 外部虚线框
-    style Reality fill:transparent,stroke:#d0d7de,stroke-width:2px,stroke-dasharray: 5 5,rx:10,ry:10
-    %% 沙盒区域使用非常柔和的浅色底（#f3f6f9），完全不黑了
-    style Sandbox fill:#f3f6f9,stroke:#c0d3e6,stroke-width:2px,rx:10,ry:10
+flowchart LR
+    A["Inputs<br/>PDF / text / image / video"] --> B["Multimodal ingestion"]
+    B --> C["Ontology generation"]
+    C --> D["Zep semantic graph"]
+    D --> E["Entity prompts"]
+    D --> F["Social relation graph"]
+    E --> G["OASIS profiles"]
+    F --> H["Topology-aware runtime"]
+    G --> H
+    H --> I["Twitter / Reddit simulations"]
+    I --> J["Action logs and SimpleMem traces"]
+    J --> K["Report agent"]
+    K --> L["Experiment report"]
 ```
 
----
+LightWorld keeps the static project site and the backend runtime deliberately separate. GitHub Pages hosts the project narrative, guide, architecture, and example pages; the Flask backend and long-running simulations must be run in a local or separately deployed runtime environment.
 
-## ⚙️ Action Space Snapshot
+## Quick Start
 
-| Layer       | Representative Actions                       | Emergent Effect          |
-| ----------- | -------------------------------------------- | ------------------------ |
-| Information | read, summarize, amplify, suppress           | narrative drift          |
-| Social      | follow, mention, debate, block, cluster      | faction formation        |
-| Cognitive   | update memory, adjust bias, confidence decay | belief polarization      |
-| Strategic   | coordinate campaign, react to intervention   | cascade or stabilization |
-
----
-
-## 🧪 Scenario Injection Examples
-
-- **Deepfake Shock**: inject high-intensity visual rumor at `t=3`.
-- **Debunk Counterwave**: release correction narrative at `t=9`.
-- **Node Failure**: disable key financial/information hub at runtime.
-- **Policy Intervention**: increase moderation threshold for a target cluster.
-
----
-
-## 📦 Quick Start | Boot Protocol
+### 1. Clone the repository
 
 ```bash
-# 1) Clone
 git clone https://github.com/JayLZhou/LightWorld.git
 cd LightWorld
-
-# 2) Configure local secrets
-cp .env.example .env
-# Fill in at least: LLM_API_KEY and ZEP_API_KEY
-
-# 3) Install backend dependencies
-cd backend
-uv sync
-
-# 4) Start the API service
-uv run lightworld-api
 ```
 
-### Common Commands
+### 2. Configure secrets
 
 ```bash
-# Backend API
+cp .env.example .env
+```
+
+Set at least:
+
+```bash
+LLM_API_KEY=your_key
+ZEP_API_KEY=your_key
+```
+
+Optional defaults are already present in `.env.example`:
+
+```bash
+LLM_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+LLM_MODEL_NAME=qwen-plus
+```
+
+### 3. Install backend dependencies
+
+```bash
+cd backend
+uv sync
+```
+
+### 4. Start the API service
+
+```bash
+uv run lightworld-api
+```
+
+By default, the Flask service reads `FLASK_HOST`, `FLASK_PORT`, and `FLASK_DEBUG` from the environment, with port `5001` as the default backend port.
+
+### 5. Run the included end-to-end sample
+
+```bash
+cd backend
+uv run lightworld-full-run \
+  --config ../multimodal_inputs/baike_wuda_event/full_run.config.json
+```
+
+If you want a non-interactive topology clustering choice, pass one of the supported cluster modes:
+
+```bash
+uv run lightworld-full-run \
+  --config ../multimodal_inputs/baike_wuda_event/full_run.config.json \
+  --cluster-method threshold
+```
+
+## Command Palette
+
+```bash
+# Start the Flask backend.
 cd backend
 uv run lightworld-api
 
-# Local multimodal pipeline
-cd backend
-uv run lightworld-local-pipeline --config /abs/path/to/local_pipeline.json
+# Build a local multimodal graph pipeline.
+uv run lightworld-local-pipeline --config ../multimodal_inputs/baike_wuda_event/local_pipeline_full.json
 
-# Parallel simulation
-cd backend
+# Run a prepared simulation config.
 uv run lightworld-parallel-sim --config /abs/path/to/simulation_config.json
 
-# Full end-to-end run
-cd backend
-uv run lightworld-full-run --config /abs/path/to/full_run.config.json
+# Run ingestion, preparation, simulation, and optional report generation.
+uv run lightworld-full-run --config ../multimodal_inputs/baike_wuda_event/full_run.config.json
 ```
 
-### Required Environment Variables
+## Repository Layout
 
-The repository is safe to publish without secrets. After cloning, create a root `.env` from `.env.example` and set:
+```text
+LightWorld/
+  backend/
+    app/
+      application/        # end-to-end orchestration services
+      modules/graph/      # local multimodal graph pipeline
+      modules/simulation/ # topology-aware runtime and platform runners
+      run/                # CLI entry points exposed by pyproject scripts
+      utils/              # ingestion, graph, profile, config, and report helpers
+    run_scripts/          # compatibility and platform-specific runners
+    input2graph/          # sample graph and experiment artifacts
+  docs/                   # GitHub Pages project site
+  multimodal_inputs/      # WHU multimodal demo package
+  event_inputs/           # extracted event pipeline outputs
+```
 
-- `LLM_API_KEY`
-- `ZEP_API_KEY`
+## Generated Artifacts
 
-Optional overrides already supported:
+A full run can expose a consolidated run directory with links or copies to the important artifacts:
 
-- `LLM_BASE_URL`
-- `LLM_MODEL_NAME`
-- `MULTIMODAL_AUDIO_API_KEY`
-- `MULTIMODAL_AUDIO_BASE_URL`
+| Stage | Representative artifacts |
+| --- | --- |
+| Project build | `project.json`, `extracted_text.txt`, `parsed_content.json`, `source_manifest.json` |
+| Simulation prep | `entity_prompts.json`, `entity_graph_snapshot.json`, `social_relation_graph.json`, `simulation_config.json` |
+| Platform runtime | `twitter_profiles.csv`, `reddit_profiles.json`, `twitter_actions.jsonl`, `reddit_actions.jsonl` |
+| Memory and topology | `simplemem_twitter.json`, `simplemem_reddit.json`, topology snapshots and traces |
+| Reporting | `full_report.md`, `outline.json`, `agent_log.jsonl`, `console_log.txt` |
 
-The app loads env vars from repository-root `.env` first, then `backend/.env` as a compatibility fallback.
+## Current Status
 
----
+LightWorld is currently best understood as a repository-backed research and prototype system:
 
-## 🏆 Hall of Inspiration & Acknowledgments
+| Ready now | Not claimed yet |
+| --- | --- |
+| Static GitHub Pages project site | Hosted public interactive backend |
+| Backend API and CLI entry points | Fully managed cloud deployment |
+| Multimodal WHU demo inputs | General-purpose benchmark suite |
+| End-to-end local full-run service | Polished browser upload-and-run product |
+| Experiment artifacts and summaries | Public video walkthrough |
 
-**lightworld** stands on the work of pioneering open-source teams:
+## Development Notes
 
-- 🐟 **[MiroFish](https://github.com/666ghj/MiroFish) (by @666ghj)**  
-  *"The micro-laboratory for predicting everything."* Foundational digital-sandbox interaction ideas and graph-memory mechanisms.
-- 🏝️ **[OASIS](https://github.com/camel-ai/oasis) (by CAMEL-AI)**  
-  *"The lawgiver of million-agent societies."* Core inspiration for large-scale social-action architecture.
+```bash
+cd backend
+uv sync --group dev
+uv run pytest
+```
 
----
+The repository also includes targeted test scripts under `backend/test_scripts/` for individual pipeline modules.
 
-## 🛣️ Roadmap Signal
+## License
 
-- [ ] Public benchmark scenarios (financial rumor / election narrative / crisis communication)
-- [ ] Plug-in adapters for Reddit, Discord, and newswire feeds
-- [ ] Reproducible evaluation suite for intervention policy tests
-- [ ] End-to-end offline million-agent deployment tutorial
+LightWorld is released under the [GNU Affero General Public License v3.0](LICENSE).
 
 <div align="center">
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:050505,100:00ffcc&height=120&section=footer" width="100%" />
+
+<img src="https://capsule-render.vercel.app/api?type=waving&height=120&section=footer&color=0:38bdf8,50:0f766e,100:08111f" width="100%" alt="LightWorld footer" />
+
 </div>
