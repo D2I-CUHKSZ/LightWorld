@@ -3,7 +3,7 @@
   const ctaText = document.body.getAttribute("data-nav-cta-text") || "GitHub Repo";
   const ctaHref =
     document.body.getAttribute("data-nav-cta-href") ||
-    "https://github.com/JayLZhou/LightWorld";
+    "https://github.com/d2i-cuhksz/LightWorld";
   const ctaTarget = document.body.getAttribute("data-nav-cta-target") || "";
 
   function activeClass(name) {
