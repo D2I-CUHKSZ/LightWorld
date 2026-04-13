@@ -21,6 +21,7 @@ output/
 experiments/run_*/
 data/generated/*
 !data/generated/.gitkeep
+event_inputs/
 runs/
 tmp/*
 !tmp/.gitkeep
@@ -33,6 +34,7 @@ tmp/*
 .idea/
 *.swp
 *.swo
+.codex
 
 # macOS
 .DS_Store
