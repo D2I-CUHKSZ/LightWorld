@@ -165,7 +165,7 @@ class FullRunService:
         return LocalPipelineOptions(
             files=files,
             simulation_requirement=str(config.get("simulation_requirement", "") or "").strip(),
-            project_name=str(config.get("project_name", "LightWorld Local Run") or "LightWorld Local Run"),
+            project_name=str(config.get("project_name", "MicroWorld Local Run") or "MicroWorld Local Run"),
             additional_context=str(config.get("additional_context", "") or ""),
             graph_name=str(config.get("graph_name", "") or ""),
             chunk_size=int(pipeline_cfg.get("chunk_size", Config.DEFAULT_CHUNK_SIZE)),

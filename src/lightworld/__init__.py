@@ -30,7 +30,7 @@ def create_app(config_class=Config):
 
     if should_log_startup:
         logger.info("=" * 50)
-        logger.info("LightWorld Backend starting...")
+        logger.info("MicroWorld Backend starting...")
         logger.info("=" * 50)
 
 
@@ -65,9 +65,9 @@ def create_app(config_class=Config):
 
     @app.route('/health')
     def health():
-        return {'status': 'ok', 'service': 'LightWorld Backend'}
+        return {'status': 'ok', 'service': 'MicroWorld Backend'}
 
     if should_log_startup:
-        logger.info("LightWorld Backend startup complete")
+        logger.info("MicroWorld Backend startup complete")
 
     return app

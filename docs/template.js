@@ -33,8 +33,8 @@
       <nav>
         <div class="nav-inner">
           <a href="index.html" class="nav-brand">
-            <span class="nav-logo">LW</span>
-            LightWorld
+            <span class="nav-logo">MW</span>
+            MicroWorld
           </a>
           <ul class="nav-links">
             <li><a href="index.html"${activeClass("home")}><span class="nav-link-inner">${icon("home")}<span>Home</span></span></a></li>
@@ -53,7 +53,7 @@
     footer.outerHTML = `
       <footer>
         <div class="footer-inner">
-          <div class="footer-brand">LightWorld</div>
+          <div class="footer-brand">MicroWorld</div>
           <p class="footer-desc">
             A lightweight multi-modal social simulation engine for event analysis,
             topology-aware runtime scheduling, memory-efficient execution, and
@@ -61,8 +61,8 @@
           </p>
           <hr class="footer-divider" />
           <div class="footer-bottom">
-            <p>GitHub Pages project site for the LightWorld repository.</p>
-            <p>2026 LightWorld Project</p>
+            <p>GitHub Pages project site for the MicroWorld repository.</p>
+            <p>2026 MicroWorld Project</p>
           </div>
         </div>
       </footer>

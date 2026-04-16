@@ -8,7 +8,7 @@ from lightworld.simulation.cluster_cli import (
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="LightWorld full pipeline runner")
+    parser = argparse.ArgumentParser(description="MicroWorld full pipeline runner")
     parser.add_argument("--config", required=True, help="Path to full-run config (JSON)")
     parser.add_argument(
         "--cluster-method",

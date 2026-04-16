@@ -1,11 +1,11 @@
 [project]
-name = "lightworld"
+name = "microworld"
 version = "0.1.0"
-description = "LightWorld - A lightweight multi-modal social simulation engine"
+description = "MicroWorld - A lightweight multi-modal social simulation engine"
 requires-python = ">=3.11"
 license = { text = "AGPL-3.0" }
 authors = [
-    { name = "LightWorld Team" }
+    { name = "MicroWorld Team" }
 ]
 
 dependencies = [

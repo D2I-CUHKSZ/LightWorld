@@ -199,7 +199,7 @@ class LocalGraphPipeline:
             ProjectManager.save_project(project)
 
             log_step("Starting graph construction (synchronous)")
-            graph_name = opts.graph_name or project.name or "LightWorld Graph"
+            graph_name = opts.graph_name or project.name or "MicroWorld Graph"
             builder = GraphBuilderService(api_key=self.zep_api_key)
 
             chunk_size = opts.chunk_size

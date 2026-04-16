@@ -45,7 +45,7 @@ class GraphBuilderService:
         self,
         text: str,
         ontology: Dict[str, Any],
-        graph_name: str = "LightWorld Graph",
+        graph_name: str = "MicroWorld Graph",
         chunk_size: int = 500,
         chunk_overlap: int = 50,
         batch_size: int = 3
@@ -166,7 +166,7 @@ class GraphBuilderService:
         self.client.graph.create(
             graph_id=graph_id,
             name=name,
-            description="LightWorld Social Simulation Graph"
+            description="MicroWorld Social Simulation Graph"
         )
 
         return graph_id

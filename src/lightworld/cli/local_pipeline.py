@@ -12,7 +12,7 @@ from lightworld.graph.local_graph_pipeline import LocalGraphPipeline, LocalPipel
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="LightWorld local multimodal ingest: text/image/video -> evidence chunks -> ontology -> graph"
+        description="MicroWorld local multimodal ingest: text/image/video -> evidence chunks -> ontology -> graph"
     )
     parser.add_argument("--config", default="", help="Load local pipeline options from a JSON config file")
     parser.add_argument(

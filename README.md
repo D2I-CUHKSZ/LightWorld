@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=220&text=LightWorld&fontAlign=50&fontAlignY=38&desc=A%20lightweight%20multi-modal%20social%20simulation%20engine&descAlign=50&descAlignY=60&fontColor=ffffff&color=0:08111f,45:0f766e,100:38bdf8" width="100%" alt="LightWorld banner" />
+<img src="https://capsule-render.vercel.app/api?type=waving&height=220&text=MicroWorld&fontAlign=50&fontAlignY=38&desc=A%20lightweight%20multi-modal%20social%20simulation%20engine&descAlign=50&descAlignY=60&fontColor=ffffff&color=0:08111f,45:0f766e,100:38bdf8" width="100%" alt="MicroWorld banner" />
 
-# LightWorld
+# MicroWorld
 
 **A lightweight multi-modal social simulation engine for public-event analysis, topology-aware runtime scheduling, memory-efficient execution, and report generation.**
 
@@ -21,9 +21,9 @@
 
 ---
 
-## What LightWorld Does
+## What MicroWorld Does
 
-LightWorld turns real-world event materials into an inspectable social simulation pipeline. It ingests documents, images, videos, and graph signals, compiles them into ontology and relation artifacts, prepares platform-ready agent profiles, runs Twitter/Reddit-style OASIS simulations, and generates reports that can be inspected after the run.
+MicroWorld turns real-world event materials into an inspectable social simulation pipeline. It ingests documents, images, videos, and graph signals, compiles them into ontology and relation artifacts, prepares platform-ready agent profiles, runs Twitter/Reddit-style OASIS simulations, and generates reports that can be inspected after the run.
 
 ```text
 event materials
@@ -49,7 +49,7 @@ It is designed for scenarios where the question is not only "what does the model
 
 ## Repository Snapshot
 
-The public site now presents the LK-99 room-temperature-superconductor news cycle as the main public-facing example while still showing the full LightWorld pipeline:
+The public site now presents the LK-99 room-temperature-superconductor news cycle as the main public-facing example while still showing the full MicroWorld pipeline:
 
 | Public-facing signal | What it means |
 | --- | --- |
@@ -105,7 +105,7 @@ The simplified view is:
 - `Topology-aware runtime` is guided by `PPR-based directional influence` and a `lightweight memory` module rather than a full-history replay design.
 - Final outputs keep both the high-level report and the detailed simulation artifacts.
 
-LightWorld keeps the static project site and the backend runtime deliberately separate. GitHub Pages hosts the project narrative, guide, architecture, and example pages; the Flask backend and long-running simulations must be run in a local or separately deployed runtime environment.
+MicroWorld keeps the static project site and the backend runtime deliberately separate. GitHub Pages hosts the project narrative, guide, architecture, and example pages; the Flask backend and long-running simulations must be run in a local or separately deployed runtime environment.
 
 ## Quick Start
 
@@ -185,8 +185,8 @@ Minimal example:
 
 ```json
 {
-  "project_name": "My LightWorld Run",
-  "graph_name": "My LightWorld Graph",
+  "project_name": "My MicroWorld Run",
+  "graph_name": "My MicroWorld Graph",
   "simulation_requirement": "Build entities, relations, and a two-platform social simulation from the input materials.",
   "files": [
     "/abs/path/to/event.md",
@@ -251,7 +251,7 @@ uv run lightworld-full-run --config /abs/path/to/lightworld-run.json
 ## Repository Layout
 
 ```text
-LightWorld/
+MicroWorld/
   pyproject.toml              # project metadata, dependencies, CLI entry points
   src/
     lightworld/               # the main importable Python package
@@ -294,7 +294,7 @@ A full run can expose a consolidated run directory with links or copies to the i
 
 ## Current Status
 
-LightWorld is currently best understood as a repository-backed research and prototype system:
+MicroWorld is currently best understood as a repository-backed research and prototype system:
 
 | Ready now | Not claimed yet |
 | --- | --- |
@@ -315,10 +315,10 @@ Tests are organized under `tests/unit/` for unit tests and `tests/integration/` 
 
 ## License
 
-LightWorld is released under the [GNU Affero General Public License v3.0](LICENSE).
+MicroWorld is released under the [GNU Affero General Public License v3.0](LICENSE).
 
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=120&section=footer&color=0:38bdf8,50:0f766e,100:08111f" width="100%" alt="LightWorld footer" />
+<img src="https://capsule-render.vercel.app/api?type=waving&height=120&section=footer&color=0:38bdf8,50:0f766e,100:08111f" width="100%" alt="MicroWorld footer" />
 
 </div>
