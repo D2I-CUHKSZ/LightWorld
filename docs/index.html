@@ -56,15 +56,15 @@
           <div class="hero-chips">
             <span>
               <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path><circle cx="12" cy="12" r="8"></circle></svg>
-              <span>Graph + Text + Image + Video</span>
+              <span>Text + Image + Video + Graph</span>
             </span>
             <span>
               <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10H7z"></path><path d="M4 10h3"></path><path d="M17 10h3"></path><path d="M10 4v3"></path><path d="M10 17v3"></path></svg>
-              <span>SimpleMem-style Memory</span>
+              <span>Incremental Memory</span>
             </span>
             <span>
               <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16V8"></path><path d="M10 20V4"></path><path d="M16 14V10"></path><path d="M20 18V6"></path></svg>
-              <span>Directional Influence Modeling</span>
+              <span>PPR-based Influence</span>
             </span>
           </div>
         </div>
@@ -76,18 +76,10 @@
               <span></span>
               <span></span>
             </div>
-            <div class="code-block hero-console">
-              <code>[runtime]
-mode = topology-aware
-memory = lightweight incremental state
-influence = directed via PPR
-
-[artifacts]
-entity_prompts.json
-social_relation_graph.json
-simulation_config.json
-experiment_summary.json</code>
+            <div class="paper-image-frame hero-paper-image">
+              <img src="./assets/intro.png" alt="TopoSim paper overview figure about structure-coupled agent behavior and influence" />
             </div>
+            <p class="paper-image-caption">Paper figure: topology changes how agents update and whom they follow.</p>
           </div>
 
           <div class="hero-stat-grid">
@@ -112,14 +104,105 @@ experiment_summary.json</code>
       </div>
     </section>
 
+    <section class="section section-alt reveal">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Highlights</div>
+          <h2 class="section-title">Key Features</h2>
+          <p class="section-desc">
+            MicroWorld combines multimodal grounding with lightweight execution
+            and topology-aware simulation mechanisms in both clustering and
+            influence estimation.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="card-pill">01</div>
+            <h3 class="title-with-icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path><circle cx="12" cy="12" r="8"></circle></svg><span>Multi-modal Inputs</span></h3>
+            <p>Text, image, video, and graph signals enter one simulation workflow.</p>
+          </article>
+          <article class="feature-card">
+            <div class="card-pill">02</div>
+            <h3 class="title-with-icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10H7z"></path><path d="M4 10h3"></path><path d="M17 10h3"></path><path d="M10 4v3"></path><path d="M10 17v3"></path></svg><span>Lightweight Runtime</span></h3>
+            <p>Incremental memory and compact runtime artifacts reduce unnecessary overhead.</p>
+          </article>
+          <article class="feature-card">
+            <div class="card-pill">03</div>
+            <h3 class="title-with-icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h4v4H5z"></path><path d="M15 5h4v4h-4z"></path><path d="M10 15h4v4h-4z"></path><path d="M9 7h6"></path><path d="M12 9v6"></path></svg><span>Dual Cluster Modes</span></h3>
+            <p>Topology-aware simulation supports both threshold and LLM-keyword cluster drivers.</p>
+          </article>
+          <article class="feature-card">
+            <div class="card-pill">04</div>
+            <h3 class="title-with-icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18 10 12l4 4 6-8"></path><path d="M20 8v5h-5"></path></svg><span>PPR-driven Influence</span></h3>
+            <p>Directional influence is derived from topology instead of uniform pairwise assumptions.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Paper Evidence</div>
+          <h2 class="section-title">Trajectory consistency in ECS-50</h2>
+          <p class="section-desc">
+            In the ECS-50 simulation, agents with similar opinion trajectories
+            also begin from highly consistent states. Intra-group variance stays
+            far below population-level variance, which exposes stable structural
+            regularities in the update process.
+          </p>
+        </div>
+        <div class="two-col-grid">
+          <article class="signal-board signal-board-large">
+            <div class="board-topline">
+              <span class="board-tag">Trajectory Analysis</span>
+              <span class="board-tag">ECS-50</span>
+            </div>
+            <div class="paper-image-frame background-paper-image">
+              <img src="./assets/background.png" alt="Consistency analysis of opinion update trajectories in ECS-50 simulation" />
+            </div>
+            <p class="paper-image-caption">
+              Group-level trends, individual trajectories inside a representative group, and group proportions all indicate strong regularities in opinion updates.
+            </p>
+          </article>
+          <article class="signal-board signal-board-large">
+            <div class="board-topline">
+              <span class="board-tag">Consistency Reading</span>
+              <span class="board-tag">Implication</span>
+            </div>
+            <h3 class="board-title title-with-icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18 10 12l4 4 6-8"></path><path d="M20 8v5h-5"></path></svg><span>Key reading</span></h3>
+            <p class="board-desc">
+              Agents with similar opinion trajectories also start from similar
+              initial states, so the grouping reflects real structure rather
+              than random overlap.
+            </p>
+            <div class="board-list">
+              <div class="board-list-row">
+                <span>Trajectory groups</span>
+                <strong>Opinion updates cluster into stable evolution patterns.</strong>
+              </div>
+              <div class="board-list-row">
+                <span>Variance signal</span>
+                <strong>Intra-group variance stays far below the full population.</strong>
+              </div>
+              <div class="board-list-row">
+                <span>Implication</span>
+                <strong>These regularities support topology-aware updates for better fidelity and efficiency.</strong>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section reveal">
       <div class="container">
         <div class="section-header">
           <div class="section-label">Project Overview</div>
-          <h2 class="section-title">What the project does</h2>
+          <h2 class="section-title">End-to-end workflow</h2>
           <p class="section-desc">
-            MicroWorld connects the full workflow from multimodal event input to
-            graph construction, simulation, and final reporting.
+            The repository covers the full path from multimodal input to graph
+            construction, topology-aware simulation, and report output.
           </p>
         </div>
         <div class="two-col-grid">
@@ -154,10 +237,10 @@ experiment_summary.json</code>
       <div class="container">
         <div class="section-header">
           <div class="section-label">Signal Snapshot</div>
-          <h2 class="section-title">What the demo includes</h2>
+          <h2 class="section-title">Current demo coverage</h2>
           <p class="section-desc">
-            The current site showcases an LK-99 example that covers multimodal
-            input, simulation, and report generation in one workflow.
+            The current site uses the LK-99 case to show how one workflow links
+            multimodal input, simulation, and report generation.
           </p>
         </div>
         <div class="metric-grid">
@@ -213,7 +296,7 @@ experiment_summary.json</code>
                 <figcaption>Public explanations translate a technical claim into shareable language.</figcaption>
               </figure>
               <figure class="story-image-card">
-                <img src="./assets/lk99/pic3.png" alt="Conceptual levitation image used as public-facing visual anchor" />
+                <img src="./assets/lk99/pic3.png" alt="Conceptual levitation image used as a widely shared visual anchor" />
                 <figcaption>The topic naturally attracts imagination, hype, and speculative framing.</figcaption>
               </figure>
               <figure class="story-image-card">
@@ -244,65 +327,16 @@ experiment_summary.json</code>
 
             <article class="comparison-board">
               <div class="panel-topline">
-                <span class="panel-tag">Project Framing</span>
+                <span class="panel-tag">Case Fit</span>
               </div>
-              <h3>Why this example helps</h3>
+              <h3>LK-99 as a good fit</h3>
               <div class="insight-box comparison-note">
                 <p>
-                  The visuals make it easy to connect the raw event materials,
-                  the simulation process, and the final report in one example.
+                  A multimodal event with fast amplification, visible role differences, and a clear correction cycle.
                 </p>
               </div>
             </article>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-alt reveal">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-label">Strengths</div>
-          <h2 class="section-title">Key advantages</h2>
-          <p class="section-desc">
-            The value of MicroWorld is not just feature count. It comes from a
-            more practical runtime design.
-          </p>
-        </div>
-        <div class="feature-grid">
-          <article class="feature-card">
-            <div class="card-pill">01</div>
-            <h3>Multi-modal input</h3>
-            <p>
-              Text, images, videos, and graph context can enter the same
-              pipeline instead of being flattened into text-only input.
-            </p>
-          </article>
-          <article class="feature-card">
-            <div class="card-pill">02</div>
-            <h3>Lightweight memory</h3>
-            <p>
-              Incremental memory keeps useful state without carrying a full
-              history into every runtime step.
-            </p>
-          </article>
-          <article class="feature-card">
-            <div class="card-pill">03</div>
-            <h3>Topology-driven units</h3>
-            <p>
-              The runtime activates representative units instead of blindly
-              scheduling every agent in every round.
-            </p>
-          </article>
-          <article class="feature-card">
-            <div class="card-pill">04</div>
-            <h3>Directional influence</h3>
-            <p>
-              Influence is directional. The runtime can represent who tends to
-              move a discussion and who mainly reacts to it, instead of assuming
-              every interaction is balanced.
-            </p>
-          </article>
         </div>
       </div>
     </section>
@@ -313,8 +347,7 @@ experiment_summary.json</code>
           <div class="section-label">System View</div>
           <h2 class="section-title">How it works</h2>
           <p class="section-desc">
-            The current project can already be explained through three compact
-            layers.
+            The project can be summarized in three connected layers.
           </p>
         </div>
         <div class="overview-grid">
@@ -342,8 +375,7 @@ experiment_summary.json</code>
         </div>
         <div class="insight-box home-insight">
           <p>
-            The site gives a quick view of the workflow, the example, and the
-            main ways to run the project.
+            The site focuses on the end-to-end path from input package to simulation artifacts.
           </p>
         </div>
       </div>
