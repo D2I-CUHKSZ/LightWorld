@@ -83,7 +83,7 @@
             <article class="status-card">
               <span class="status-label">Public Example</span>
               <strong>LK-99</strong>
-              <p>A science-news example is used on the public site instead of a higher-risk campus dispute.</p>
+              <p>The architecture page uses the LK-99 demo as a concrete walkthrough.</p>
             </article>
             <article class="status-card">
               <span class="status-label">Memory Mode</span>
@@ -345,15 +345,15 @@
 
           <article class="signal-board diagram-panel diagram-panel-wide">
             <div class="board-topline">
-              <span class="board-tag">Deployment Boundary</span>
-              <span class="board-tag">What Runs Where</span>
+              <span class="board-tag">Project Views</span>
+              <span class="board-tag">Website and Runtime</span>
             </div>
-            <h3 class="board-title">Static front end and active backend are intentionally separate</h3>
+            <h3 class="board-title">Two ways to explore the project</h3>
             <div class="deployment-map">
               <article class="deployment-node">
-                <span class="diagram-layer-kicker">Public Surface</span>
-                <strong>GitHub Pages front end</strong>
-                <p>Hosts the project story, architecture diagrams, guide, and example pages.</p>
+                <span class="diagram-layer-kicker">Website</span>
+                <strong>Project pages</strong>
+                <p>Overview, architecture diagrams, user guide, and example pages.</p>
                 <div class="command-chip-row">
                   <span class="command-chip">index.html</span>
                   <span class="command-chip">architecture.html</span>
@@ -361,12 +361,12 @@
                 </div>
               </article>
               <div class="deployment-divider">
-                <span>runtime boundary</span>
+                <span>run locally</span>
               </div>
               <article class="deployment-node">
-                <span class="diagram-layer-kicker">Execution Surface</span>
-                <strong>Python backend and simulation runtime</strong>
-                <p>Runs locally or on separate infrastructure for ingestion, graph build, simulation, and reporting.</p>
+                <span class="diagram-layer-kicker">Runtime</span>
+                <strong>Python workflow</strong>
+                <p>Commands for ingestion, graph building, simulation, and report generation.</p>
                 <div class="command-chip-row">
                   <span class="command-chip">lightworld-api</span>
                   <span class="command-chip">lightworld-local-pipeline</span>
@@ -383,7 +383,7 @@
       <div class="container">
         <div class="section-header">
           <div class="section-label">Repository Entry Points</div>
-          <h2 class="section-title">Current commands and boundaries</h2>
+          <h2 class="section-title">Main commands</h2>
         </div>
         <div class="operations-grid">
           <article class="code-card">
@@ -398,24 +398,22 @@ uv run lightworld-full-run --config /abs/path/to/full_run.config.json</code>
           </article>
           <div class="operations-stack">
             <article class="deployment-card">
-              <h3>Deployment boundary</h3>
+              <h3>Project website</h3>
               <p>
-                GitHub Pages can host the project website and example pages. The
-                actual Flask backend and simulation services still need their own
-                runtime environment if you want an online interactive product.
+                Use the website to understand the workflow, browse examples, and
+                read the architecture and guide pages.
               </p>
               <ul class="plain-list">
-                <li>Static project website: GitHub Pages</li>
-                <li>Interactive API service: separate backend deployment</li>
-                <li>Current Pages site: project presentation, guide, and examples</li>
+                <li>Project overview</li>
+                <li>Architecture diagrams</li>
+                <li>Example pages</li>
               </ul>
             </article>
             <article class="deployment-card">
-              <h3>Current public role</h3>
+              <h3>Local runtime</h3>
               <p>
-                The site works best as a project front end: it explains the
-                system, shows the workflow, and surfaces experiment evidence
-                without pretending the backend is already public and hosted.
+                Use the Python commands to run ingestion, simulation, and report
+                generation on your own machine.
               </p>
             </article>
           </div>
@@ -439,11 +437,10 @@ uv run lightworld-full-run --config /abs/path/to/full_run.config.json</code>
               <span class="board-tag">Inspectability</span>
               <span class="board-tag">Traceable Outputs</span>
             </div>
-            <h3 class="board-title">What reviewers can inspect right now</h3>
+            <h3 class="board-title">What the project outputs</h3>
             <p class="board-desc">
-              The repository already exposes intermediate files that make the
-              system easier to evaluate. That is stronger than showing only a
-              final screenshot or a benchmark claim.
+              LightWorld produces both the final analysis report and the
+              intermediate files that show how the simulation was built and run.
             </p>
             <div class="command-chip-row">
               <span class="command-chip">entity prompts</span>

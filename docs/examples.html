@@ -23,11 +23,10 @@
     <section class="subpage-hero">
       <div class="container">
         <div class="section-label">Examples</div>
-        <h1 class="subpage-title">Representative examples and placeholders</h1>
+        <h1 class="subpage-title">Representative example</h1>
         <p class="subpage-desc">
-          The repository currently uses the LK-99 room-temperature-superconductor
-          news cycle as its main public-facing example because it is easier to
-          present safely while still showing a full social-simulation workflow.
+          The current site uses the LK-99 news cycle to show multimodal input,
+          cross-platform simulation, and report generation in one example.
         </p>
       </div>
     </section>
@@ -40,18 +39,17 @@
               <span class="board-tag">Experiment Dashboard</span>
               <span class="board-tag">LK-99 Case</span>
             </div>
-            <h2 class="board-title">A readable public-facing case study</h2>
+            <h2 class="board-title">LK-99 case overview</h2>
             <p class="board-desc">
-              The LK-99 example is better suited for a public project site. It
-              still includes text, videos, graph-ready outputs, runtime traces,
-              and a clear narrative arc, but it avoids the higher reputational
-              and privacy risks of a campus dispute case.
+              This example combines article-style text, videos, structured
+              outputs, and a clear progression from claim to debate to
+              correction.
             </p>
             <div class="command-chip-row">
-              <span class="command-chip">science news cycle</span>
+              <span class="command-chip">multimodal input</span>
               <span class="command-chip">multi-platform</span>
-              <span class="command-chip">memory traces</span>
-              <span class="command-chip">hype to debunking</span>
+              <span class="command-chip">report output</span>
+              <span class="command-chip">claim to correction</span>
             </div>
             <div class="board-list">
               <div class="board-list-row">
@@ -85,14 +83,14 @@
               <p>The example begins with excitement and gradually shifts toward verification.</p>
             </article>
             <article class="status-card">
-              <span class="status-label">Public Value</span>
-              <strong>Lower presentation risk</strong>
-              <p>The case can be shown in public without centering a live personal dispute.</p>
+              <span class="status-label">Output View</span>
+              <strong>Report + details</strong>
+              <p>Each run keeps the final report together with the simulation records.</p>
             </article>
             <article class="status-card">
               <span class="status-label">Output Style</span>
               <strong>Inspectable</strong>
-              <p>Reviewers can still inspect prompts, traces, and reports behind the story.</p>
+              <p>Prompts, traces, reports, and graph artifacts remain available after the run.</p>
             </article>
           </div>
         </div>
@@ -129,7 +127,7 @@
               </p>
               <div class="lk99-gallery-grid">
                 <figure class="story-image-card">
-                  <img src="./assets/lk99/pic1.png" alt="LK-99 discussion screenshot with levitation-style clip" />
+                  <img src="./assets/lk99/pic4.png" alt="Research figure strip showing LK-99 sample details and synthesis information" />
                   <figcaption>Launch claim: short clips and screenshots create immediate public attention.</figcaption>
                 </figure>
                 <figure class="story-image-card">
@@ -141,8 +139,8 @@
                   <figcaption>Public translation: the event gets reframed into memorable, widely shared visuals.</figcaption>
                 </figure>
                 <figure class="story-image-card">
-                  <img src="./assets/lk99/pic4.png" alt="Research figure strip showing LK-99 sample details and synthesis information" />
-                  <figcaption>Disillusion phase: attention shifts toward process details, materials, and evidence quality.</figcaption>
+                  <img src="./assets/lk99/pic1.png" alt="LK-99 discussion screenshot with levitation-style clip" />
+                  <figcaption>As more research groups joined the discussion, skepticism gradually began to surface.</figcaption>
                 </figure>
               </div>
             </article>
@@ -154,10 +152,9 @@
                 </div>
                 <h3>What this experiment shows</h3>
                 <p>
-                  This case is useful because the result is easy to explain:
-                  people react very differently when a scientific breakthrough is
-                  still exciting, when replication becomes contested, and when a
-                  more evidence-based consensus starts to form.
+                  The same event can look very different across audiences:
+                  excitement spreads quickly, evidence is debated, and the tone
+                  changes again once more technical discussion appears.
                 </p>
                 <div class="platform-grid">
                   <div class="platform-card">
@@ -179,13 +176,12 @@
                 <div class="panel-topline">
                   <span class="panel-tag">Influence Reading</span>
                 </div>
-                <h3>Directional influence in plain language</h3>
+                <h3>Different roles in one event</h3>
                 <div class="insight-box comparison-note">
                   <p>
-                    The interesting public-facing point is not a raw score. It
-                    is that influence is often one-way: some actors set the
-                    framing, while others mostly react, reinterpret, or
-                    amplify. LightWorld tries to make that asymmetry readable.
+                    Some actors spread excitement quickly, while others slow the
+                    story down with checking, interpretation, or correction. The
+                    simulation tries to make those different roles visible.
                   </p>
                 </div>
               </article>
@@ -194,10 +190,8 @@
 
           <div class="insight-box lk99-image-note">
             <p>
-              Using images on the example page makes the project easier to
-              explain: users can immediately see that LightWorld consumes a real
-              event package with media fragments, not just a text prompt or an
-              abstract benchmark.
+              The images help visitors quickly understand the source material
+              that feeds the simulation.
             </p>
           </div>
 
@@ -216,17 +210,17 @@
             </div>
             <div class="metric-box">
               <strong>Traceable outputs</strong>
-              <span>artifacts stay available after the simulation ends</span>
+              <span>report and simulation details stay available after the run</span>
             </div>
           </div>
 
           <div class="feature-grid example-evidence-grid">
             <article class="feature-card">
               <div class="card-pill">A</div>
-              <h3>Runtime evidence</h3>
+              <h3>Detailed process</h3>
               <p>
-                The repository records actions, memory writes, and topology
-                artifacts rather than exposing only a final narrative summary.
+                The run keeps platform actions, memory updates, and topology
+                traces instead of only a final summary.
               </p>
             </article>
             <article class="feature-card">
@@ -240,19 +234,18 @@
             </article>
             <article class="feature-card">
               <div class="card-pill">C</div>
-              <h3>Artifacts available now</h3>
+              <h3>Available outputs</h3>
               <p>
-                `experiment_summary.json`, `simulation_config.json`,
-                `entity_prompts.json`, and topology snapshots already exist in
-                the repository.
+                The project keeps prompts, graphs, configs, summaries, and
+                topology snapshots for review.
               </p>
             </article>
             <article class="feature-card">
               <div class="card-pill">D</div>
-              <h3>Why this example matters</h3>
+              <h3>Why this example works</h3>
               <p>
-                It demonstrates the project’s intended value without centering a
-                sensitive personal controversy or requiring a public online backend.
+                It shows multimodal input, simulation behavior, and final
+                reporting in one compact case.
               </p>
             </article>
           </div>
