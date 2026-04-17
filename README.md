@@ -23,12 +23,12 @@
 
 🎯 **Why MicroWorld?** It is built for cases where *the final report is not enough on its own*. The project keeps the graph 📊, prompts 💬, simulation inputs 🎬, action traces 👣, memory states 🧠, and report outputs 📑 tied to the same run.
 
-## System Architecture
+## 🏛️ System Architectur
 
 <p align="center">
   <img src="Architecture.png" width="100%" alt="MicroWorld system architecture" />
 </p>
-## 🏛️ System Architecture
+
 
 MicroWorld is organized around four key stages:
 
