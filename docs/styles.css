@@ -170,6 +170,10 @@ nav {
   color: var(--text);
 }
 
+.nav-brand > .nav-logo-image {
+  display: none !important;
+}
+
 .nav-links {
   list-style: none;
   display: flex;
