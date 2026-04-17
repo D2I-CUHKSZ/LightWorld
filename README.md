@@ -27,18 +27,6 @@ It is built for cases where the final report is not enough on its own. The proje
   <img src="Architecture.png" width="100%" alt="MicroWorld system architecture" />
 </p>
 
-<p align="center">
-  <img src="docs/assets/feature_token_savings_bar.png" width="100%" alt="Cluster-based coordination reduces token usage" />
-</p>
-
-Cluster-based coordination reduces redundant inference and cuts token usage substantially, with larger gains on denser or larger workloads.
-
-<p align="center">
-  <img src="docs/assets/feature_ppr_similarity_bar.png" width="100%" alt="PPR-guided influence improves simulation accuracy" />
-</p>
-
-PPR-guided influence keeps the simulated discussion trajectory closer to the reference trend, improving simulation accuracy over the baseline.
-
 MicroWorld is organized around four stages:
 
 1. **Ingestion and graph build**: convert event materials into ontology, entities, and relations.
@@ -50,7 +38,21 @@ MicroWorld is organized around four stages:
 
 - **Multi-modal event ingestion** for text, image, and video inputs, without forcing the pipeline into a text-only workflow.
 - **Two topology clustering modes**: a threshold-based mode and an LLM-keyword-driven mode.
+
+<p align="center">
+  <img src="docs/assets/feature_token_savings_bar.png" width="100%" alt="Cluster-based coordination reduces token usage" />
+</p>
+
+Cluster-based coordination reduces redundant inference and cuts token usage substantially, with larger gains on denser or larger workloads.
+
 - **PPR-guided directional influence** for agent activation and information flow.
+
+<p align="center">
+  <img src="docs/assets/feature_ppr_similarity_bar.png" width="100%" alt="PPR-guided influence improves simulation accuracy" />
+</p>
+
+PPR-guided influence keeps the simulated discussion trajectory closer to the reference trend, improving simulation accuracy over the baseline.
+
 - **Lightweight memory** that preserves useful state without requiring full-history replay.
 - **Inspectable outputs** across graph building, simulation preparation, runtime traces, and reporting.
 
