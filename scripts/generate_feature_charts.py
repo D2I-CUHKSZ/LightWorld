@@ -96,24 +96,8 @@ def save_token_chart(data: dict) -> None:
             path_effects=[pe.withStroke(linewidth=0)],
         )
 
-    fig.text(
-        0.06,
-        0.94,
-        "Cluster-based Coordination Reduces Token Usage",
-        fontsize=22,
-        fontweight="bold",
-        color=COLORS["navy"],
-    )
-    fig.text(
-        0.06,
-        0.89,
-        "The topology-aware cluster update strategy removes redundant inference and scales better on larger workloads.",
-        fontsize=11.5,
-        color=COLORS["slate"],
-    )
-
     out = ASSET_DIR / "feature_token_savings_bar.png"
-    fig.tight_layout(rect=(0.03, 0.06, 0.98, 0.86))
+    fig.tight_layout(rect=(0.03, 0.06, 0.98, 0.98))
     fig.savefig(out, dpi=200, bbox_inches="tight")
     plt.close(fig)
 
@@ -162,33 +146,8 @@ def save_similarity_chart(data: dict) -> None:
             fontweight="bold",
         )
 
-    delta = mean_values["PPR-guided RD"] - mean_values["Baseline"]
-    fig.text(
-        0.06,
-        0.94,
-        "PPR-guided Influence Improves Simulation Accuracy",
-        fontsize=22,
-        fontweight="bold",
-        color=COLORS["navy"],
-    )
-    fig.text(
-        0.06,
-        0.89,
-        "With topology-aware influence weighting, the simulated trajectory stays closer to the reference trend over time.",
-        fontsize=11.5,
-        color=COLORS["slate"],
-    )
-    fig.text(
-        0.06,
-        0.83,
-        f"Improvement over baseline: +{delta * 100:.1f} percentage points",
-        fontsize=12,
-        color=COLORS["blue"],
-        fontweight="bold",
-    )
-
     out = ASSET_DIR / "feature_ppr_similarity_bar.png"
-    fig.tight_layout(rect=(0.03, 0.06, 0.98, 0.8))
+    fig.tight_layout(rect=(0.03, 0.06, 0.98, 0.98))
     fig.savefig(out, dpi=200, bbox_inches="tight")
     plt.close(fig)
 
