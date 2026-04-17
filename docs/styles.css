@@ -160,20 +160,14 @@ nav {
   gap: 10px;
   font-weight: 700;
   color: var(--text);
+  flex-shrink: 0;
 }
 
-.nav-logo {
-  width: 34px;
-  height: 34px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #0d1a1d, #1f3f48 50%, #2dd4bf);
-  color: #fff;
-  font-size: 0.8rem;
-  font-weight: 700;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 0 24px rgba(45, 212, 191, 0.15);
+.nav-logo-image {
+  display: block;
+  width: 172px;
+  height: auto;
+  filter: drop-shadow(0 6px 18px rgba(34, 197, 94, 0.16));
 }
 
 .nav-links {
@@ -1982,6 +1976,10 @@ footer {
     height: auto;
     padding: 14px 16px;
     flex-wrap: wrap;
+  }
+
+  .nav-logo-image {
+    width: 148px;
   }
 
   .nav-links {

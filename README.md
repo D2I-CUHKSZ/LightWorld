@@ -2,6 +2,8 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&height=220&text=MicroWorld&fontAlign=50&fontAlignY=38&desc=Multi-modal%20event%20analysis%20and%20social%20simulation&descAlign=50&descAlignY=60&fontColor=ffffff&color=0:08111f,45:0f766e,100:38bdf8" width="100%" alt="MicroWorld banner" />
 
+<img src="LOGO.png" width="260" alt="MicroWorld logo" />
+
 # MicroWorld
 
 **A lightweight system for turning event materials into structured graphs, agent populations, and inspectable social simulations.**

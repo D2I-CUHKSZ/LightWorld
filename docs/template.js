@@ -32,9 +32,8 @@
     nav.outerHTML = `
       <nav>
         <div class="nav-inner">
-          <a href="index.html" class="nav-brand">
-            <span class="nav-logo">MW</span>
-            MicroWorld
+          <a href="index.html" class="nav-brand" aria-label="MicroWorld home">
+            <img class="nav-logo-image" src="./assets/logo.png" alt="MicroWorld logo" />
           </a>
           <ul class="nav-links">
             <li><a href="index.html"${activeClass("home")}><span class="nav-link-inner">${icon("home")}<span>Home</span></span></a></li>
