@@ -145,8 +145,57 @@
             </div>
             <h3 class="title-with-icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h4v4H5z"></path><path d="M15 5h4v4h-4z"></path><path d="M10 15h4v4h-4z"></path><path d="M9 7h6"></path><path d="M12 9v6"></path></svg><span>Cluster-based token reduction</span></h3>
             <p class="feature-proof-desc">Topology-aware coordination removes redundant updates and cuts token usage sharply as the workload grows.</p>
-            <div class="paper-image-frame feature-proof-image">
-              <img src="./assets/feature_token_savings_bar.png" alt="Cluster-based coordination reduces token usage across ECS, FDE-LLM, and OASIS" />
+            <div class="chart-panel token-chart-panel" aria-label="Cluster-based coordination token reduction across benchmarks">
+              <div class="chart-grid chart-grid-token" aria-hidden="true"></div>
+              <div class="token-chart-rows">
+                <div class="token-chart-row" style="--value: 91.7">
+                  <div class="token-row-head">
+                    <span class="token-row-label">OASIS</span>
+                    <strong class="token-row-value">91.7%</strong>
+                  </div>
+                  <div class="token-row-track">
+                    <span class="token-row-fill"></span>
+                  </div>
+                  <span class="token-row-meta">4.53M -> 376.7K</span>
+                </div>
+                <div class="token-chart-row" style="--value: 77.3">
+                  <div class="token-row-head">
+                    <span class="token-row-label">ECS-500</span>
+                    <strong class="token-row-value">77.3%</strong>
+                  </div>
+                  <div class="token-row-track">
+                    <span class="token-row-fill"></span>
+                  </div>
+                  <span class="token-row-meta">3.28M -> 743.8K</span>
+                </div>
+                <div class="token-chart-row" style="--value: 52.23">
+                  <div class="token-row-head">
+                    <span class="token-row-label">FDE-LLM</span>
+                    <strong class="token-row-value">52.23%</strong>
+                  </div>
+                  <div class="token-row-track">
+                    <span class="token-row-fill"></span>
+                  </div>
+                  <span class="token-row-meta">286.5K -> 136.7K</span>
+                </div>
+                <div class="token-chart-row" style="--value: 43">
+                  <div class="token-row-head">
+                    <span class="token-row-label">ECS-50</span>
+                    <strong class="token-row-value">43.0%</strong>
+                  </div>
+                  <div class="token-row-track">
+                    <span class="token-row-fill"></span>
+                  </div>
+                  <span class="token-row-meta">320.2K -> 185.6K</span>
+                </div>
+              </div>
+              <div class="chart-axis token-chart-axis" aria-hidden="true">
+                <span>0%</span>
+                <span>25%</span>
+                <span>50%</span>
+                <span>75%</span>
+                <span>100%</span>
+              </div>
             </div>
           </article>
           <article class="feature-proof-card">
@@ -156,8 +205,51 @@
             </div>
             <h3 class="title-with-icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18 10 12l4 4 6-8"></path><path d="M20 8v5h-5"></path></svg><span>PPR-guided trajectory fidelity</span></h3>
             <p class="feature-proof-desc">PPR-based influence weighting keeps the simulation trajectory closer to the reference trend than the baseline run.</p>
-            <div class="paper-image-frame feature-proof-image">
-              <img src="./assets/feature_ppr_similarity_bar.png" alt="PPR-guided influence improves simulation accuracy over the baseline" />
+            <div class="chart-panel fidelity-chart-panel" aria-label="PPR-guided influence improves simulation trajectory fidelity over the baseline">
+              <div class="chart-grid chart-grid-fidelity" aria-hidden="true"></div>
+              <div class="fidelity-summary-grid">
+                <div class="fidelity-summary-card">
+                  <span class="fidelity-summary-label">Baseline</span>
+                  <strong class="fidelity-summary-value">82.5%</strong>
+                </div>
+                <div class="fidelity-summary-card">
+                  <span class="fidelity-summary-label">PPR-guided</span>
+                  <strong class="fidelity-summary-value">93.1%</strong>
+                </div>
+                <div class="fidelity-summary-card fidelity-summary-card-accent">
+                  <span class="fidelity-summary-label">Gain</span>
+                  <strong class="fidelity-summary-value">+10.6 pts</strong>
+                </div>
+              </div>
+              <div class="fidelity-chart-body">
+                <div class="fidelity-chart-row" style="--value: 93.1">
+                  <div class="fidelity-row-head">
+                    <span class="fidelity-row-label">PPR-guided influence</span>
+                    <strong class="fidelity-row-value">93.1%</strong>
+                  </div>
+                  <div class="fidelity-row-track">
+                    <span class="fidelity-row-fill fidelity-row-fill-primary"></span>
+                  </div>
+                </div>
+                <div class="fidelity-chart-row" style="--value: 82.5">
+                  <div class="fidelity-row-head">
+                    <span class="fidelity-row-label">Baseline influence</span>
+                    <strong class="fidelity-row-value">82.5%</strong>
+                  </div>
+                  <div class="fidelity-row-track">
+                    <span class="fidelity-row-fill fidelity-row-fill-secondary"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="chart-axis fidelity-chart-axis" aria-hidden="true">
+                <span>50%</span>
+                <span>60%</span>
+                <span>70%</span>
+                <span>80%</span>
+                <span>90%</span>
+                <span>100%</span>
+              </div>
+              <div class="fidelity-delta-pill">Closer alignment across the full simulated trajectory</div>
             </div>
           </article>
         </div>
