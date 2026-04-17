@@ -82,7 +82,8 @@ The public example uses the LK-99 room-temperature-superconductor news cycle. It
   <img src="docs/assets/lk99/pic2.png" width="48%" alt="LK-99 annotated frame" />
   <img src="docs/assets/lk99/pic4.png" width="48%" alt="LK-99 materials figure strip" />
 </p>
-## 🚀 Quick Start
+
+## 🚀Quick Start
 
 ### 1️⃣ Clone the repository
 
