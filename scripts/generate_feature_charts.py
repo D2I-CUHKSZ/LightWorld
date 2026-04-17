@@ -5,8 +5,8 @@ import os
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FuncFormatter
 from matplotlib import patheffects as pe
+from matplotlib.ticker import FuncFormatter
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -17,15 +17,20 @@ DATA_PATH = ASSET_DIR / "feature_chart_data.json"
 COLORS = {
     "navy": "#0f172a",
     "slate": "#475569",
-    "grid": "#dbe4ee",
+    "grid": "#d7e3f4",
     "blue": "#2563eb",
     "blue_soft": "#93c5fd",
-    "teal": "#0f766e",
-    "teal_soft": "#99f6e4",
+    "orange": "#f97316",
+    "orange_soft": "#fdba74",
     "ink": "#111827",
-    "white": "#f3f8f6",
-    "bg": "#eaf3f0",
+    "white": "#f7fbff",
+    "bg": "#eef6fb",
+    "track": "#dbeafe",
 }
+
+
+plt.rcParams["font.family"] = ["Inter", "DejaVu Sans", "sans-serif"]
+plt.rcParams["axes.unicode_minus"] = False
 
 
 def load_data() -> dict:
@@ -41,12 +46,12 @@ def format_tokens(value: int) -> str:
 
 
 def base_figure():
-    fig, ax = plt.subplots(figsize=(12, 5.8), dpi=200)
+    fig, ax = plt.subplots(figsize=(10.8, 4.8), dpi=200)
     fig.patch.set_facecolor(COLORS["white"])
     ax.set_facecolor(COLORS["bg"])
     for spine in ax.spines.values():
         spine.set_visible(False)
-    ax.grid(axis="x", color=COLORS["grid"], linewidth=1)
+    ax.grid(axis="x", color=COLORS["grid"], linewidth=1.1)
     ax.set_axisbelow(True)
     return fig, ax
 
@@ -66,12 +71,14 @@ def save_token_chart(data: dict) -> None:
     ]
 
     fig, ax = base_figure()
-    bars = ax.barh(labels, values, color=COLORS["teal"], height=0.58)
+    ax.barh(labels, [100] * len(labels), color=COLORS["track"], height=0.66)
+    bar_colors = [COLORS["orange"], COLORS["blue"], COLORS["blue"], COLORS["blue_soft"]]
+    bars = ax.barh(labels, values, color=bar_colors, height=0.66)
     ax.invert_yaxis()
     ax.set_xlim(0, 100)
-    ax.set_xlabel("Token reduction (%)", fontsize=12, color=COLORS["slate"])
-    ax.tick_params(axis="x", labelsize=11, colors=COLORS["slate"])
-    ax.tick_params(axis="y", labelsize=12, colors=COLORS["ink"], length=0)
+    ax.set_xlabel("Token reduction (%)", fontsize=14, color=COLORS["slate"], labelpad=8)
+    ax.tick_params(axis="x", labelsize=12, colors=COLORS["slate"])
+    ax.tick_params(axis="y", labelsize=16, colors=COLORS["ink"], length=0)
 
     for bar, value, detail in zip(bars, values, details):
         y = bar.get_y() + bar.get_height() / 2
@@ -81,7 +88,7 @@ def save_token_chart(data: dict) -> None:
             f"{value:.2f}%",
             va="center",
             ha="left",
-            fontsize=12,
+            fontsize=14,
             color=COLORS["navy"],
             fontweight="bold",
         )
@@ -91,8 +98,8 @@ def save_token_chart(data: dict) -> None:
             detail,
             va="center",
             ha="right",
-            fontsize=10.5,
-            color=COLORS["white"],
+            fontsize=12,
+            color="#f8fbff",
             path_effects=[pe.withStroke(linewidth=0)],
         )
 
@@ -118,19 +125,20 @@ def save_similarity_chart(data: dict) -> None:
     widths = [value - baseline_floor for value in values]
 
     fig, ax = base_figure()
+    ax.barh(labels, [1.0 - baseline_floor] * len(labels), left=baseline_floor, color=COLORS["track"], height=0.72)
     bars = ax.barh(
         labels,
         widths,
-        color=[COLORS["blue"], COLORS["blue_soft"]],
-        height=0.58,
+        color=[COLORS["orange"], COLORS["blue"]],
+        height=0.72,
         left=baseline_floor,
     )
     ax.invert_yaxis()
     ax.set_xlim(baseline_floor, 1.0)
     ax.xaxis.set_major_formatter(FuncFormatter(lambda x, _: f"{x * 100:.0f}%"))
-    ax.set_xlabel("Mean alignment to reference trajectory (%)", fontsize=12, color=COLORS["slate"])
-    ax.tick_params(axis="x", labelsize=11, colors=COLORS["slate"])
-    ax.tick_params(axis="y", labelsize=12, colors=COLORS["ink"], length=0)
+    ax.set_xlabel("Mean alignment to reference trajectory (%)", fontsize=14, color=COLORS["slate"], labelpad=8)
+    ax.tick_params(axis="x", labelsize=12, colors=COLORS["slate"])
+    ax.tick_params(axis="y", labelsize=16, colors=COLORS["ink"], length=0)
 
     for bar, value in zip(bars, values):
         y = bar.get_y() + bar.get_height() / 2
@@ -141,7 +149,7 @@ def save_similarity_chart(data: dict) -> None:
             f"{value * 100:.1f}%",
             va="center",
             ha="left",
-            fontsize=12,
+            fontsize=15,
             color=COLORS["navy"],
             fontweight="bold",
         )

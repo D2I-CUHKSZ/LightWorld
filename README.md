@@ -45,34 +45,18 @@ MicroWorld is organized around four stages:
 <table>
   <tr>
     <td width="50%" valign="top" align="center">
-      <img src="https://img.shields.io/badge/Dual%20Cluster%20Modes-Efficiency-2563eb?style=for-the-badge&labelColor=0f172a" alt="Dual Cluster Modes Efficiency" />
-      <br />
-      <br />
-      <strong>Cluster-based Token Reduction</strong>
-      <br />
-      <sub>Topology-aware coordination</sub>
-      <br />
-      <br />
       <img src="docs/assets/feature_token_savings_bar.png" width="100%" alt="Cluster-based coordination reduces token usage" />
     </td>
     <td width="50%" valign="top" align="center">
-      <img src="https://img.shields.io/badge/PPR--guided%20Influence-Accuracy-f97316?style=for-the-badge&labelColor=0f172a" alt="PPR-guided Influence Accuracy" />
-      <br />
-      <br />
-      <strong>PPR-guided Trajectory Fidelity</strong>
-      <br />
-      <sub>Topology-aware influence weighting</sub>
-      <br />
-      <br />
       <img src="docs/assets/feature_ppr_similarity_bar.png" width="100%" alt="PPR-guided influence improves simulation accuracy" />
     </td>
   </tr>
   <tr>
-    <td valign="top" align="left">
-      <sub><strong>Cluster-based coordination</strong> removes redundant updates and cuts token usage sharply as the workload grows.</sub>
+    <td valign="top" align="center">
+      <sub>Removes redundant updates and cuts token usage sharply as workloads grow.</sub>
     </td>
-    <td valign="top" align="left">
-      <sub><strong>PPR-guided influence</strong> keeps the simulation trajectory closer to the reference trend than the baseline run.</sub>
+    <td valign="top" align="center">
+      <sub>Keeps the simulation trajectory closer to the reference trend than the baseline run.</sub>
     </td>
   </tr>
 </table>
