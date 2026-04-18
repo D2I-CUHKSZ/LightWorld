@@ -973,7 +973,7 @@ nav {
 }
 
 .token-row-fill-actual {
-  width: calc(var(--actual) * 1%);
+  width: var(--actual);
   background: linear-gradient(90deg, #1d4ed8 0%, #2563eb 52%, #38bdf8 100%);
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.35) inset,
@@ -982,7 +982,7 @@ nav {
 }
 
 .token-row-fill-saved {
-  width: calc(var(--saved) * 1%);
+  width: var(--saved);
   background: linear-gradient(90deg, #fed7aa 0%, #fdba74 48%, #fb923c 100%);
   box-shadow:
     inset 1px 0 0 rgba(255, 255, 255, 0.75),
