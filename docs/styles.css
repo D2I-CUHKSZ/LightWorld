@@ -1414,36 +1414,19 @@ body[data-page="architecture"] .system-cockpit .board-list-row strong {
   color: var(--text-secondary);
 }
 
-.status-illustration {
+.status-media {
   margin-top: auto;
-  padding-top: 16px;
-  opacity: 0.9;
+  padding-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
-.status-illustration svg {
-  display: block;
-  width: 100%;
+.status-media img {
+  width: min(104px, 48%);
   height: auto;
-  stroke-width: 2.1;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  fill: none;
-}
-
-.status-illustration-input svg {
-  stroke: rgba(217, 119, 6, 0.32);
-}
-
-.status-illustration-runtime svg {
-  stroke: rgba(180, 83, 9, 0.34);
-}
-
-.status-illustration-demo svg {
-  stroke: rgba(234, 88, 12, 0.32);
-}
-
-.status-illustration-output svg {
-  stroke: rgba(146, 64, 14, 0.3);
+  object-fit: contain;
+  filter: drop-shadow(0 10px 18px rgba(120, 53, 15, 0.08));
 }
 
 .pipeline-shell {
