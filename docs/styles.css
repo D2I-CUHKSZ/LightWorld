@@ -1366,23 +1366,23 @@ body[data-page="architecture"] .system-cockpit .board-list-row strong {
 .status-card {
   display: flex;
   flex-direction: column;
-  padding: 18px;
-  min-height: 124px;
+  padding: 16px 16px 18px;
+  min-height: 0;
 }
 
 .status-visual {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  min-height: 92px;
-  margin-bottom: 14px;
+  min-height: 146px;
+  margin: 2px 0 12px;
 }
 
 .status-visual img {
   display: block;
   width: auto;
   max-width: 100%;
-  max-height: 92px;
+  max-height: 140px;
   object-fit: contain;
   filter: drop-shadow(0 10px 18px rgba(120, 53, 15, 0.08));
 }
@@ -1420,15 +1420,17 @@ body[data-page="architecture"] .system-cockpit .board-list-row strong {
 
 .status-card strong {
   display: block;
-  margin-bottom: 10px;
-  font-size: 1.55rem;
-  line-height: 1.05;
-  letter-spacing: -0.04em;
+  margin-bottom: 8px;
+  font-size: 1.08rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .status-card p {
   margin: 0;
   color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.55;
 }
 
 .pipeline-shell {
