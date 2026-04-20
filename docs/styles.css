@@ -1370,6 +1370,23 @@ body[data-page="architecture"] .system-cockpit .board-list-row strong {
   min-height: 124px;
 }
 
+.status-visual {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 92px;
+  margin-bottom: 14px;
+}
+
+.status-visual img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 92px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 18px rgba(120, 53, 15, 0.08));
+}
+
 .status-label {
   display: inline-block;
   margin-bottom: 8px;
@@ -1399,20 +1416,6 @@ body[data-page="architecture"] .system-cockpit .board-list-row strong {
   width: 1rem;
   height: 1rem;
   color: var(--primary);
-}
-
-.status-icon-image {
-  width: 60px;
-  height: 60px;
-  padding: 6px;
-  border-radius: 18px;
-}
-
-.status-icon-image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
 }
 
 .status-card strong {
