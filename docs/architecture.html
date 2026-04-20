@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260429" />
+    <link rel="stylesheet" href="./styles.css?v=20260501" />
   </head>
   <body
     data-page="architecture"
@@ -35,7 +35,7 @@
 
     <section class="section reveal">
       <div class="container">
-        <div class="system-cockpit">
+        <div class="system-cockpit architecture-cockpit">
           <article class="signal-board signal-board-large">
             <div class="board-topline">
               <span class="board-tag">Runtime Cockpit</span>
@@ -76,27 +76,41 @@
               </div>
             </div>
           </article>
-
-          <div class="status-grid">
-            <article class="status-card">
-              <div class="status-visual" aria-hidden="true"><img src="./assets/architecture-status/multimodal-ref.png" alt="" /></div>
-              <strong>Multimodal</strong>
-              <p>Text, image, video, and graph signals in one workflow.</p>
+          <div class="architecture-contribution-grid">
+            <article class="architecture-contribution-card">
+              <div class="architecture-contribution-media">
+                <img src="./assets/readme-contributions/multimodal-ingestion.png" alt="Multi-modal event ingestion" />
+              </div>
+              <strong>Multi-modal Event Ingestion</strong>
+              <p>Handles text, image, and video inputs in one unified workflow.</p>
             </article>
-            <article class="status-card">
-              <div class="status-visual" aria-hidden="true"><img src="./assets/architecture-status/topology-ref.png" alt="" /></div>
-              <strong>Topology-aware</strong>
-              <p>Representative units and directed influence keep runtime structured.</p>
+            <article class="architecture-contribution-card">
+              <div class="architecture-contribution-media">
+                <img src="./assets/readme-contributions/topology-clustering.png" alt="Two topology clustering modes" />
+              </div>
+              <strong>Two Topology Clustering Modes</strong>
+              <p>Supports both threshold-based and LLM-keyword-driven clustering.</p>
             </article>
-            <article class="status-card">
-              <div class="status-visual" aria-hidden="true"><img src="./assets/architecture-status/lk99-ref.png" alt="" /></div>
-              <strong>LK-99</strong>
-              <p>A public case from claim and hype to replication and correction.</p>
+            <article class="architecture-contribution-card">
+              <div class="architecture-contribution-media">
+                <img src="./assets/readme-contributions/ppr-influence.png" alt="PPR-guided directional influence" />
+              </div>
+              <strong>PPR-guided Directional Influence</strong>
+              <p>Models activation and information flow with topology-aware influence.</p>
             </article>
-            <article class="status-card">
-              <div class="status-visual" aria-hidden="true"><img src="./assets/architecture-status/traceable-ref.png" alt="" /></div>
-              <strong>Traceable</strong>
-              <p>Configs, topology traces, and reports remain readable after each run.</p>
+            <article class="architecture-contribution-card">
+              <div class="architecture-contribution-media">
+                <img src="./assets/readme-contributions/lightweight-memory.png" alt="Lightweight memory" />
+              </div>
+              <strong>Lightweight Memory</strong>
+              <p>Preserves useful state incrementally without full-history replay.</p>
+            </article>
+            <article class="architecture-contribution-card">
+              <div class="architecture-contribution-media">
+                <img src="./assets/readme-contributions/inspectable-outputs.png" alt="Inspectable outputs" />
+              </div>
+              <strong>Inspectable Outputs</strong>
+              <p>Keeps graph artifacts, traces, configs, and reports available for inspection.</p>
             </article>
           </div>
         </div>
