@@ -305,6 +305,18 @@ MicroWorld is built on top of prior open-source efforts. We would like to thank 
 
 ---
 
+## 🎵 Citation
+If this repository is useful for your work, please cite our survey project.
+
+```bibtex
+@article{agentskills2026,
+  title   = {Topology-Aware LLM-Driven Social Simulation: A Unified Framework for Efficient and Realistic Agent Dynamics},
+  author  = {Anonymous},
+  year    = {2026},
+  note    = {Manuscript in preparation}
+}
+```
+
 ## License
 
 MicroWorld is released under the [GNU Affero General Public License v3.0](LICENSE).
