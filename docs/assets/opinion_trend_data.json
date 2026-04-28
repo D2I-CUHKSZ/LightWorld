@@ -1,0 +1,343 @@
+{
+  "source_run": "run_20260414_101546_lk-99-hype-and-disillusion-demo",
+  "twitter": [
+    {
+      "hour": 0,
+      "claim": 3,
+      "amplifier": 3,
+      "verification": 6,
+      "observer": 3
+    },
+    {
+      "hour": 1,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 2,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 3,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 4,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 5,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 6,
+      "claim": 3,
+      "amplifier": 3,
+      "verification": 9,
+      "observer": 3
+    },
+    {
+      "hour": 7,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 8,
+      "claim": 0,
+      "amplifier": 2,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 9,
+      "claim": 2,
+      "amplifier": 0,
+      "verification": 2,
+      "observer": 0
+    },
+    {
+      "hour": 10,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 4,
+      "observer": 0
+    },
+    {
+      "hour": 11,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 4,
+      "observer": 0
+    },
+    {
+      "hour": 12,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 9,
+      "observer": 0
+    },
+    {
+      "hour": 13,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 3,
+      "observer": 0
+    },
+    {
+      "hour": 14,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 2,
+      "observer": 0
+    },
+    {
+      "hour": 15,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 16,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 2,
+      "observer": 0
+    },
+    {
+      "hour": 17,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 18,
+      "claim": 0,
+      "amplifier": 6,
+      "verification": 2,
+      "observer": 0
+    },
+    {
+      "hour": 19,
+      "claim": 0,
+      "amplifier": 7,
+      "verification": 6,
+      "observer": 8
+    },
+    {
+      "hour": 20,
+      "claim": 0,
+      "amplifier": 2,
+      "verification": 2,
+      "observer": 8
+    },
+    {
+      "hour": 21,
+      "claim": 0,
+      "amplifier": 4,
+      "verification": 2,
+      "observer": 8
+    },
+    {
+      "hour": 22,
+      "claim": 0,
+      "amplifier": 1,
+      "verification": 1,
+      "observer": 1
+    },
+    {
+      "hour": 23,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    }
+  ],
+  "reddit": [
+    {
+      "hour": 0,
+      "claim": 3,
+      "amplifier": 3,
+      "verification": 6,
+      "observer": 3
+    },
+    {
+      "hour": 1,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 2,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 3,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 4,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 5,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 6,
+      "claim": 3,
+      "amplifier": 3,
+      "verification": 9,
+      "observer": 3
+    },
+    {
+      "hour": 7,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 8,
+      "claim": 0,
+      "amplifier": 2,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 9,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 10,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 3,
+      "observer": 0
+    },
+    {
+      "hour": 11,
+      "claim": 5,
+      "amplifier": 0,
+      "verification": 4,
+      "observer": 0
+    },
+    {
+      "hour": 12,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 9,
+      "observer": 0
+    },
+    {
+      "hour": 13,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 3,
+      "observer": 0
+    },
+    {
+      "hour": 14,
+      "claim": 1,
+      "amplifier": 0,
+      "verification": 8,
+      "observer": 0
+    },
+    {
+      "hour": 15,
+      "claim": 4,
+      "amplifier": 0,
+      "verification": 5,
+      "observer": 0
+    },
+    {
+      "hour": 16,
+      "claim": 2,
+      "amplifier": 0,
+      "verification": 5,
+      "observer": 0
+    },
+    {
+      "hour": 17,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    },
+    {
+      "hour": 18,
+      "claim": 0,
+      "amplifier": 7,
+      "verification": 5,
+      "observer": 0
+    },
+    {
+      "hour": 19,
+      "claim": 0,
+      "amplifier": 6,
+      "verification": 18,
+      "observer": 17
+    },
+    {
+      "hour": 20,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 4,
+      "observer": 1
+    },
+    {
+      "hour": 21,
+      "claim": 0,
+      "amplifier": 6,
+      "verification": 5,
+      "observer": 5
+    },
+    {
+      "hour": 22,
+      "claim": 0,
+      "amplifier": 1,
+      "verification": 2,
+      "observer": 5
+    },
+    {
+      "hour": 23,
+      "claim": 0,
+      "amplifier": 0,
+      "verification": 0,
+      "observer": 0
+    }
+  ]
+}

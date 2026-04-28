@@ -11,7 +11,9 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260501" />
+    <link rel="stylesheet" href="./styles.css?v=20260504" />
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script src="./opinion-chart.js?v=20260504" defer></script>
   </head>
   <body
     data-page="examples"
@@ -111,6 +113,33 @@
             <span><strong>Narrative</strong> Hype, replication, correction</span>
             <span><strong>Audience</strong> Experts, media, and the general public</span>
           </div>
+
+          <article class="signal-board opinion-trend-board reveal">
+            <div class="panel-topline">
+              <span class="panel-tag">Opinion Trend</span>
+              <span class="panel-tag">Simulation Output</span>
+            </div>
+            <h3 class="title-with-icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18 10 12l4 4 6-8"></path></svg><span>Discussion role evolution</span></h3>
+            <p class="opinion-trend-desc">
+              Weighted activity by role across 24 simulated hours, showing how
+              the claim, amplification, verification, and public interpretation
+              evolved.
+            </p>
+            <div class="opinion-chart-grid">
+              <section class="opinion-chart-card" aria-labelledby="opinion-chart-twitter-title">
+                <div class="platform-name" id="opinion-chart-twitter-title">Twitter</div>
+                <div id="chart-twitter" class="opinion-chart-panel" aria-label="Twitter opinion trend chart"></div>
+              </section>
+              <section class="opinion-chart-card" aria-labelledby="opinion-chart-reddit-title">
+                <div class="platform-name" id="opinion-chart-reddit-title">Reddit</div>
+                <div id="chart-reddit" class="opinion-chart-panel" aria-label="Reddit opinion trend chart"></div>
+              </section>
+            </div>
+            <div class="opinion-trend-meta">
+              <span>Weighted action score</span>
+              <span>post ×3 · comment / quote ×2 · repost / reaction ×1</span>
+            </div>
+          </article>
 
           <div class="example-dashboard">
             <article class="gallery-board">
@@ -278,5 +307,20 @@
 
     <script src="template.js?v=20260421"></script>
     <script src="app.js?v=20260417"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        fetch("./assets/opinion_trend_data.json")
+          .then((response) => response.json())
+          .then((data) => {
+            if (window.initOpinionChart) {
+              window.initOpinionChart("chart-twitter", "twitter", data);
+              window.initOpinionChart("chart-reddit", "reddit", data);
+            }
+          })
+          .catch((error) => {
+            console.error("Failed to load opinion trend data", error);
+          });
+      });
+    </script>
   </body>
 </html>

@@ -1903,6 +1903,50 @@ body[data-page="architecture"] .system-cockpit .board-list-row strong {
   font-family: var(--mono);
 }
 
+.opinion-trend-board {
+  margin: 20px 0;
+}
+
+.opinion-trend-desc {
+  margin: 0;
+  max-width: 68ch;
+}
+
+.opinion-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.opinion-chart-card {
+  padding: 14px 14px 10px;
+  border-radius: 18px;
+  border: 1px solid rgba(251, 191, 36, 0.22);
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.96), rgba(255, 247, 237, 0.9));
+  box-shadow: 0 10px 24px rgba(120, 53, 15, 0.07);
+}
+
+.opinion-chart-card .platform-name {
+  margin-bottom: 10px;
+}
+
+.opinion-chart-panel {
+  width: 100%;
+  height: 300px;
+}
+
+.opinion-trend-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-family: var(--mono);
+}
+
 .comparison-row + .comparison-row {
   margin-top: 18px;
 }
@@ -2264,6 +2308,7 @@ footer {
   .overview-grid,
   .landing-grid,
   .architecture-row,
+  .opinion-chart-grid,
   .metric-grid,
   .pipeline-shell,
   .placeholder-stack,
@@ -2329,6 +2374,7 @@ footer {
   .overview-grid,
   .landing-grid,
   .architecture-row,
+  .opinion-chart-grid,
   .lk99-gallery-grid,
   .image-grid,
   .metric-grid,
