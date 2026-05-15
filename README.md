@@ -306,7 +306,7 @@ MicroWorld is built on top of prior open-source efforts. We would like to thank 
 ---
 
 ## 🎵 Citation
-If this repository is useful for your work, please cite our survey project.
+If this repository is useful for your work, please cite our project.
 
 ```bibtex
 @article{xu2026topology,
